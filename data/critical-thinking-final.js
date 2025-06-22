@@ -28,43 +28,43 @@ window.criticalThinkingFinalQuestions = {
     }
   ],
 
-  "Causal Arguments": [
-    { question: "What principle says simpler explanations are usually better?", answer: "Occam's Razor.", points: 100 },
-    { question: "Define the post hoc fallacy.", answer: "Assuming that because one event follows another, the first caused the second.", points: 200 },
-    { question: "What is the difference between correlation and causation?", answer: "Correlation is when events occur together; causation is when one event produces another.", points: 300 },
-    { question: "What is a necessary condition?", answer: "A condition without which an event cannot occur.", points: 400 },
-    { question: "What is a sufficient condition?", answer: "A condition that guarantees an event will occur.", points: 500 }
+  "Chapter 9: A Little Categorical Logic": [
+    { question: "What is categorical logic?", answer: "A form of logic dealing with categorical statements about groups or categories.", points: 100 },
+    { question: "What are the four standard forms of categorical statements?", answer: "Universal affirmative (A), universal negative (E), particular affirmative (I), particular negative (O).", points: 200 },
+    { question: "Define a universal affirmative (A) statement.", answer: "A statement claiming all members of one category are included in another (All S are P).", points: 300 },
+    { question: "What is a particular negative (O) statement?", answer: "A statement claiming at least one member of a category is not included in another (Some S are not P).", points: 400 },
+    { question: "What does it mean if two statements are contradictory?", answer: "They cannot both be true or both be false simultaneously.", points: 500 }
   ],
 
-  "Inference to the Best Explanation": [
-    { question: "What is inference to the best explanation?", answer: "Choosing the hypothesis that best explains the evidence.", points: 100 },
-    { question: "Define explanatory power.", answer: "The extent to which a hypothesis explains the relevant evidence.", points: 200 },
-    { question: "What quality of a hypothesis refers to fitting well with existing knowledge?", answer: "Conservatism.", points: 300 },
-    { question: "What does testability require of a hypothesis?", answer: "It must be capable of being tested and potentially falsified.", points: 400 },
-    { question: "What does simplicity in a hypothesis mean?", answer: "Making fewer assumptions or being less complicated.", points: 500 }
+  "Chapter 10: A Little Propositional Logic": [
+    { question: "What is propositional logic?", answer: "Logic dealing with statements connected by logical operators.", points: 100 },
+    { question: "What is a conjunction in propositional logic?", answer: "A compound statement joined by 'and,' symbolized as p & q.", points: 200 },
+    { question: "Define a conditional statement.", answer: "An 'if-then' statement, symbolized as p → q.", points: 300 },
+    { question: "What is a truth table?", answer: "A diagram listing all possible truth values of a proposition or set of propositions.", points: 400 },
+    { question: "What does it mean for propositions to be logically equivalent?", answer: "They always share the same truth value in every possible scenario.", points: 500 }
   ],
 
-  "Judging Scientific Theories": [
-    { question: "What makes a scientific theory fruitful?", answer: "It successfully predicts new phenomena and opens new research lines.", points: 100 },
-    { question: "What does it mean for a theory to be falsifiable?", answer: "It can be shown wrong through observation or experiment.", points: 200 },
-    { question: "What distinguishes science from pseudoscience?", answer: "Science is testable and falsifiable, whereas pseudoscience typically is not.", points: 300 },
-    { question: "Define scope in evaluating scientific theories.", answer: "The range or diversity of phenomena a theory can explain.", points: 400 },
-    { question: "What does consistency mean for a scientific theory?", answer: "The theory does not contradict itself or established facts.", points: 500 }
+  "Chapter 11: Inductive Reasoning": [
+    { question: "What is inductive reasoning?", answer: "Reasoning where premises support a conclusion with probability rather than certainty.", points: 100 },
+    { question: "Define enumerative induction.", answer: "Generalizing about a population based on a sample of that population.", points: 200 },
+    { question: "What makes an inductive argument 'strong'?", answer: "Its premises provide probable support for its conclusion.", points: 300 },
+    { question: "What is analogical induction?", answer: "Arguing from similarity between things that what's true of one is likely true of another.", points: 400 },
+    { question: "Define causal induction.", answer: "Inferring cause-and-effect relationships based on observed patterns.", points: 500 }
   ],
 
-  "Moral Arguments": [
-    { question: "What is a moral statement?", answer: "A claim asserting that an action is right or wrong or something is good or bad.", points: 100 },
-    { question: "Define moral relativism.", answer: "The view that moral standards depend on cultural or individual preferences.", points: 200 },
-    { question: "What is the is–ought fallacy?", answer: "Drawing moral conclusions solely from factual premises.", points: 300 },
-    { question: "Explain consequentialism.", answer: "An approach that judges actions morally by their outcomes or consequences.", points: 400 },
-    { question: "What characterizes a deontological ethical theory?", answer: "It evaluates actions based on rules and duties rather than outcomes.", points: 500 }
+  "Chapter 12: Finding, Evaluating & Using Sources": [
+    { question: "What is a primary source?", answer: "Original material or firsthand evidence.", points: 100 },
+    { question: "What distinguishes a scholarly source from a popular source?", answer: "Scholarly sources are peer-reviewed and authoritative; popular sources are aimed at general audiences.", points: 200 },
+    { question: "Define 'bias' in evaluating sources.", answer: "A prejudiced viewpoint that affects the objectivity or fairness of information.", points: 300 },
+    { question: "What are indicators of source reliability?", answer: "Authority, accuracy, objectivity, currency, and coverage.", points: 400 },
+    { question: "What is plagiarism?", answer: "Presenting someone else's words or ideas as your own without proper attribution.", points: 500 }
   ],
 
-  "Legal Reasoning": [
-    { question: "What does the term 'precedent' mean in law?", answer: "A legal decision that guides future rulings on similar cases.", points: 100 },
-    { question: "What is statutory interpretation?", answer: "Determining the meaning of laws enacted by legislatures.", points: 200 },
-    { question: "What principle is expressed by stare decisis?", answer: "Courts should follow established precedents.", points: 300 },
-    { question: "Explain the difference between textualism and intentionalism in interpreting statutes.", answer: "Textualism relies on the statute's plain words, while intentionalism looks to the lawmakers' intent.", points: 400 },
-    { question: "When might a court overturn precedent?", answer: "If the prior decision is outdated, unworkable, or conflicts with constitutional principles.", points: 500 }
+  "Chapter 13: Writing Argumentative Essays": [
+    { question: "What is a thesis statement?", answer: "A concise summary of the main point or claim of an essay.", points: 100 },
+    { question: "What are the essential parts of an argumentative essay?", answer: "Introduction, thesis, supporting arguments, counterarguments, and conclusion.", points: 200 },
+    { question: "Why should an argumentative essay address counterarguments?", answer: "It strengthens credibility by showing awareness of opposing views.", points: 300 },
+    { question: "What is meant by 'logical organization' in essays?", answer: "Presenting ideas in a clear, coherent, and structured manner.", points: 400 },
+    { question: "Define revision in essay writing.", answer: "The process of reviewing, modifying, and improving an essay’s content and organization.", points: 500 }
   ]
 };
