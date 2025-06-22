@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Philosophy Flashcards</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav id="top-nav">
+    <button onclick="location.href='index.html'">Back</button>
+  </nav>
+  <div class="container">
+    <h1>Flashcards</h1>
+    <div>
+      <label for="course-select">Course:</label>
+      <select id="course-select">
+        <option value="">--Select--</option>
+        <option value="introPhilosophy">Intro to Philosophy</option>
+        <option value="criticalThinking">Critical Thinking</option>
+        <option value="ethics">Ethics</option>
+      </select>
+      <label for="category-select">Category:</label>
+      <select id="category-select" disabled>
+        <option value="all">All</option>
+      </select>
+    </div>
+
+    <div id="flashcard" class="hidden">
+      <p id="flashcard-question"></p>
+      <p id="flashcard-answer" class="hidden"></p>
+      <button id="show-answer">Show Answer</button>
+      <button id="next-card">Next Card</button>
+    </div>
+  </div>
+
+  <script src="data/ethics.js"></script>
+  <script src="data/ethics-final.js"></script>
+  <script src="data/critical-thinking.js"></script>
+  <script src="data/critical-thinking-midterm.js"></script>
+  <script src="data/critical-thinking-final.js"></script>
+  <script src="data/intro-philosophy.js"></script>
+  <script src="data/intro-philosophy-final.js"></script>
+  <script src="flashcards.js"></script>
+</body>
+</html>

@@ -9,6 +9,7 @@ This repository contains a lightweight browser game that lets you review philoso
 - Modal dialog for answering each question
 - Scoreboard with support for single player or multiplayer teams
 - Single-player mode lets you enter your name, displayed next to your score
+- Simple flashcards page for quick review
 
 ## Getting Started
 
@@ -17,6 +18,8 @@ You can play the game directly from the hosted GitHub Pages site:
 ```
 https://maxaeon.github.io/jeopardy/
 ```
+To study individual questions without the board, open `flashcards.html`. Choose a course and category, then use the buttons to show answers and move to the next card.
+
 
 
 ## Project Structure

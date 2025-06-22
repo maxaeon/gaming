@@ -1,0 +1,96 @@
+// Aggregate question sets into a single object keyed by course
+function buildFlashcards() {
+  const courses = ['introPhilosophy', 'criticalThinking', 'ethics'];
+  const flashcards = {};
+
+  courses.forEach(course => {
+    flashcards[course] = {};
+    const variants = [
+      `${course}Questions`,
+      `${course}MidtermQuestions`,
+      `${course}FinalQuestions`
+    ];
+    variants.forEach(name => {
+      const data = window[name];
+      if (data) {
+        Object.keys(data).forEach(cat => {
+          if (!flashcards[course][cat]) flashcards[course][cat] = [];
+          flashcards[course][cat] = flashcards[course][cat].concat(data[cat]);
+        });
+      }
+    });
+  });
+  return flashcards;
+}
+
+const flashcards = buildFlashcards();
+let currentCards = [];
+let cardIndex = 0;
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+function populateCategories(course) {
+  const catSelect = document.getElementById('category-select');
+  catSelect.innerHTML = '';
+  if (!course || !flashcards[course]) {
+    catSelect.disabled = true;
+    return;
+  }
+  const cats = Object.keys(flashcards[course]);
+  catSelect.appendChild(new Option('All', 'all'));
+  cats.forEach(cat => catSelect.appendChild(new Option(cat, cat)));
+  catSelect.disabled = false;
+}
+
+function loadCards(course, category = 'all') {
+  if (!flashcards[course]) return;
+  const allCards = category === 'all'
+    ? Object.values(flashcards[course]).flat()
+    : (flashcards[course][category] || []);
+  currentCards = allCards.slice();
+  shuffle(currentCards);
+  cardIndex = 0;
+  document.getElementById('flashcard').classList.remove('hidden');
+  loadCard();
+}
+
+function loadCard() {
+  if (!currentCards.length) {
+    document.getElementById('flashcard-question').innerText = 'No cards available.';
+    document.getElementById('flashcard-answer').classList.add('hidden');
+    return;
+  }
+  const card = currentCards[cardIndex];
+  document.getElementById('flashcard-question').innerText = card.question;
+  document.getElementById('flashcard-answer').innerText = card.answer;
+  document.getElementById('flashcard-answer').classList.add('hidden');
+}
+
+function showAnswer() {
+  document.getElementById('flashcard-answer').classList.remove('hidden');
+}
+
+function nextCard() {
+  if (!currentCards.length) return;
+  cardIndex = (cardIndex + 1) % currentCards.length;
+  loadCard();
+}
+
+document.getElementById('course-select').addEventListener('change', e => {
+  const course = e.target.value;
+  populateCategories(course);
+  if (course) loadCards(course);
+});
+
+document.getElementById('category-select').addEventListener('change', e => {
+  const course = document.getElementById('course-select').value;
+  if (course) loadCards(course, e.target.value);
+});
+
+document.getElementById('show-answer').addEventListener('click', showAnswer);
+document.getElementById('next-card').addEventListener('click', nextCard);
