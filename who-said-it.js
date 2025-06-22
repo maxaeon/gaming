@@ -23,19 +23,44 @@ const philosopherQuotes = [
 
 let currentQuote = null;
 
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+function buildOptions(correct) {
+  const names = [...new Set(philosopherQuotes.map(q => q.philosopher))];
+  const others = names.filter(n => n !== correct);
+  shuffle(others);
+  const options = others.slice(0, 3).concat(correct);
+  shuffle(options);
+  return options;
+}
+
 function showRandomQuote() {
   const idx = Math.floor(Math.random() * philosopherQuotes.length);
   currentQuote = philosopherQuotes[idx];
   document.getElementById('quote-text').innerText = '"' + currentQuote.quote + '"';
-  document.getElementById('quote-answer').value = '';
+
+  const optionsDiv = document.getElementById('quote-options');
+  optionsDiv.innerHTML = '';
+  buildOptions(currentQuote.philosopher).forEach(name => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerText = name;
+    btn.onclick = () => submitGuess(name);
+    optionsDiv.appendChild(btn);
+  });
+
   document.getElementById('quote-feedback').classList.add('hidden');
   document.getElementById('quote-next').classList.add('hidden');
 }
 
-document.getElementById('quote-submit').addEventListener('click', () => {
-  const guess = document.getElementById('quote-answer').value.trim();
+function submitGuess(name) {
   const feedback = document.getElementById('quote-feedback');
-  if (guess.toLowerCase() === currentQuote.philosopher.toLowerCase()) {
+  if (name === currentQuote.philosopher) {
     feedback.innerText = 'Correct!';
     feedback.style.color = '#4caf50';
   } else {
@@ -44,7 +69,7 @@ document.getElementById('quote-submit').addEventListener('click', () => {
   }
   feedback.classList.remove('hidden');
   document.getElementById('quote-next').classList.remove('hidden');
-});
+}
 
 document.getElementById('quote-next').addEventListener('click', showRandomQuote);
 
