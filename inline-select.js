@@ -21,6 +21,8 @@ const singleNameInput = document.getElementById('single-name');
 const multiModal = document.getElementById('multi-modal');
 const playerCount = document.getElementById('player-count');
 const nameFields = document.getElementById('name-fields');
+const quitModal = document.getElementById('quit-modal');
+let pendingAction = null;
 
 function showModeModal(topic, exam) {
   selectedTopic = topic;
@@ -70,13 +72,17 @@ document.querySelectorAll('#topic-selector .exam-dropdown button').forEach(examB
   examBtn.addEventListener('click', () => {
     const examType = examBtn.dataset.exam;
     const topic = examBtn.closest('.course').querySelector('.topic-btn').dataset.topic;
-    showModeModal(topic, examType);
+    const action = () => { goHome(); showModeModal(topic, examType); };
+    if (!document.getElementById('jeopardy-board').classList.contains('hidden')) {
+      pendingAction = action;
+      quitModal.classList.remove('hidden');
+    } else {
+      action();
+    }
   });
 });
 
 // Home button returns to topic selection
-
-const quitModal = document.getElementById('quit-modal');
 
 function goHome() {
   document.getElementById('jeopardy-board').classList.add('hidden');
@@ -90,6 +96,7 @@ function goHome() {
 
 document.getElementById('home-btn').addEventListener('click', () => {
   if (!document.getElementById('jeopardy-board').classList.contains('hidden')) {
+    pendingAction = goHome;
     quitModal.classList.remove('hidden');
   } else {
     goHome();
@@ -98,7 +105,13 @@ document.getElementById('home-btn').addEventListener('click', () => {
 
 document.getElementById('quit-yes').onclick = () => {
   quitModal.classList.add('hidden');
-  goHome();
+  if (pendingAction) {
+    const action = pendingAction;
+    pendingAction = null;
+    action();
+  } else {
+    goHome();
+  }
 };
 
 document.getElementById('quit-no').onclick = () => {
