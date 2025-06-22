@@ -1,54 +1,143 @@
 // Final exam questions for the Ethics course
-// Applied topics have been grouped into Healthcare-Related and Other categories
+// Updated with the full set of review topics
 window.ethicsFinalQuestions = {
   "Nonconsequentialism": [
-    { question: "What is the main principle behind Kant's categorical imperative?", answer: "Act only according to maxims that could be universal laws.", points: 200 },
-    { question: "How do nonconsequentialists evaluate the morality of an action?", answer: "By considering if the action conforms to moral duties or principles, not outcomes.", points: 200 },
-    { question: "Explain Kant's concept of treating humanity as an end, not merely as a means.", answer: "Never use others merely for personal goals; respect their intrinsic dignity.", points: 300 },
-    { question: "What distinguishes a perfect from an imperfect duty in Kantian ethics?", answer: "Perfect duties must always be followed; imperfect duties are more flexible.", points: 300 },
-    { question: "What is a 'good will' according to Kant?", answer: "A will guided purely by duty and adherence to the categorical imperative.", points: 200 }
+    {
+      question: "According to Kant, what distinguishes a morally right action?",
+      answer: "It is done from duty and conforms to the categorical imperative.",
+      points: 100
+    },
+    {
+      question: "What is the first formulation of Kant's categorical imperative?",
+      answer: "Act only according to that maxim through which you can at the same time will that it become a universal law.",
+      points: 200
+    },
+    {
+      question: "Name one criticism of Kantian ethics.",
+      answer: "It can be too rigid and ignore consequences or conflicting duties.",
+      points: 300
+    },
+    {
+      question: "What is the difference between perfect and imperfect duties?",
+      answer: "Perfect duties are strict (e.g., don’t lie); imperfect duties are more flexible (e.g., help others).",
+      points: 400
+    },
+    {
+      question: "How does Kant's respect-for-persons principle ground human rights?",
+      answer: "By requiring that we never treat rational beings merely as a means but always also as ends.",
+      points: 500
+    }
   ],
 
   "Feminist Ethics": [
-    { question: "What is the main criticism feminist ethics raises against traditional ethical theories?", answer: "They neglect personal relationships, context, and emotional care.", points: 200 },
-    { question: "What is care ethics?", answer: "An ethical theory emphasizing relationships, empathy, and care in moral decisions.", points: 200 },
-    { question: "According to feminist ethics, why is impartiality problematic?", answer: "It ignores important personal contexts and the value of relationships.", points: 300 },
-    { question: "Who is often credited with formulating care ethics?", answer: "Carol Gilligan.", points: 100 },
-    { question: "What role does emotion play in feminist care ethics?", answer: "Emotions are essential for moral understanding and caring relationships.", points: 200 }
+    {
+      question: "What virtue do care ethicists emphasize over abstract justice?",
+      answer: "Care and relational responsiveness.",
+      points: 100
+    },
+    {
+      question: "According to Gilligan, what is the 'voice of care'?",
+      answer: "A moral voice focused on maintaining relationships and responsibility.",
+      points: 200
+    },
+    {
+      question: "What is a common critique feminist ethics makes of traditional moral theories?",
+      answer: "They undervalue women's moral experiences and private life concerns.",
+      points: 300
+    },
+    {
+      question: "Name one key figure in feminist care ethics.",
+      answer: "Carol Gilligan or Nel Noddings.",
+      points: 400
+    },
+    {
+      question: "How does ethics of care challenge the impartiality ideal?",
+      answer: "By privileging attention to particular needs in context over abstract consistency.",
+      points: 500
+    }
   ],
 
   "Virtue Ethics": [
-    { question: "Define a virtue according to Aristotle.", answer: "A stable disposition to act rightly, leading to human flourishing.", points: 200 },
-    { question: "What is Aristotle's doctrine of the mean?", answer: "Virtue lies in moderation between extremes of excess and deficiency.", points: 200 },
-    { question: "How do virtue ethicists assess the morality of actions?", answer: "By considering if they reflect good character and virtues.", points: 200 },
-    { question: "Why is habituation important in virtue ethics?", answer: "Virtues are developed through consistent practice and habit.", points: 300 },
-    { question: "What is eudaimonia in virtue ethics?", answer: "Human flourishing or living a fulfilling and virtuous life.", points: 200 }
+    {
+      question: "What is the goal of moral virtue according to Aristotle?",
+      answer: "Eudaimonia or human flourishing.",
+      points: 100
+    },
+    {
+      question: "Define phronesis (practical wisdom).",
+      answer: "The intellectual virtue that enables us to deliberate well about how to live virtuously.",
+      points: 200
+    },
+    {
+      question: "Name the four cardinal virtues Aristotle lists.",
+      answer: "Wisdom, courage, justice, temperance.",
+      points: 300
+    },
+    {
+      question: "How do virtue ethicists assess moral action differently from deontologists or consequentialists?",
+      answer: "By focusing on the actor’s character, not just rules or outcomes.",
+      points: 400
+    },
+    {
+      question: "Why do virtue ethicists value emotions in moral life?",
+      answer: "Because virtues involve rightly ordered feelings, not just deliberate choice.",
+      points: 500
+    }
   ],
 
-  // Combination of abortion, health care ethics, and physician-assisted suicide
-  "Healthcare-Related Topics": [
-    { question: "What is the central moral question in the abortion debate?", answer: "Whether and when a fetus has moral rights, particularly the right to life.", points: 200 },
-    { question: "What is the conservative position on abortion?", answer: "Abortion is usually morally impermissible because the fetus has a right to life.", points: 200 },
-    { question: "What is the primary ethical issue in debates about health care distribution?", answer: "Whether access to health care is a moral right or privilege.", points: 200 },
-    { question: "Define distributive justice in health care.", answer: "Fair allocation of health care resources among individuals and groups.", points: 200 },
-    { question: "What is physician-assisted suicide?", answer: "A doctor helps a terminally ill patient to voluntarily end their life.", points: 200 },
-    { question: "What is a common ethical argument supporting physician-assisted suicide?", answer: "Respect for patient autonomy and relief of unbearable suffering.", points: 200 },
-    { question: "What is Judith Jarvis Thomson's famous thought experiment related to abortion?", answer: "The violinist analogy.", points: 200 }
+  "Healthcare & Applied Topics": [
+    {
+      question: "What is the main ethical objection to abortion from a nonconsequentialist perspective?",
+      answer: "That it violates a fetus’s right to life as an end-in-itself.",
+      points: 100
+    },
+    {
+      question: "Describe one utilitarian justification for universal healthcare.",
+      answer: "It maximizes overall well-being by ensuring widespread access to treatment.",
+      points: 200
+    },
+    {
+      question: "What is a Kantian objection to physician-assisted suicide?",
+      answer: "It treats persons as a means to end suffering rather than respecting their moral law.",
+      points: 300
+    },
+    {
+      question: "How might virtue ethics assess drug use differently than rule-based ethics?",
+      answer: "By asking whether drug use develops virtues or vices in character.",
+      points: 400
+    },
+    {
+      question: "What is a rights-based argument against private gun ownership?",
+      answer: "That extensive gun rights may threaten others’ right to security and life.",
+      points: 500
+    }
   ],
 
-  // Remaining applied ethics questions grouped together
   "Other Applied Topics": [
-    { question: "What ethical considerations are central in debates over drug legalization?", answer: "Balancing personal autonomy and potential harm to individuals and society.", points: 200 },
-    { question: "What ethical principle is frequently invoked in debates over gun control?", answer: "The balance between individual rights and public safety.", points: 200 },
-    { question: "What is a major ethical argument supporting open borders?", answer: "The right to freedom of movement and opportunities for improving lives.", points: 200 },
-    { question: "What is a common ethical argument against open borders?", answer: "The right of nations to protect their economic resources and security.", points: 200 },
-    { question: "What is the central concern of global economic justice?", answer: "Fair distribution of wealth and opportunities globally.", points: 200 },
-    { question: "What ethical theory strongly supports global redistribution of wealth?", answer: "Utilitarianism, emphasizing overall global happiness and welfare.", points: 200 },
-    { question: "What ethical principle justifies affirmative action policies?", answer: "Correcting historical injustices and promoting equality.", points: 200 },
-    { question: "Define institutional racism.", answer: "Systemic policies and structures that disadvantage racial groups.", points: 200 },
-    { question: "What principle supports sexual autonomy in ethical debates?", answer: "The principle of individual autonomy and consent.", points: 200 },
-    { question: "Why is equality central to arguments supporting LGBTQ+ rights?", answer: "Ensuring all individuals have equal rights and freedom from discrimination.", points: 200 },
-    { question: "What does the principle of autonomy entail in applied ethics?", answer: "Respecting individuals' freedom to make their own choices.", points: 200 },
-    { question: "What is paternalism in ethics?", answer: "Interfering with a person's autonomy for their own good.", points: 200 }
+    {
+      question: "Give one ethical concern about open borders from a global justice perspective.",
+      answer: "Open borders may demand resources that exceed what fair share allows.",
+      points: 100
+    },
+    {
+      question: "What is an affirmative action defense from a social justice viewpoint?",
+      answer: "It promotes equality by correcting systemic disadvantages for oppressed groups.",
+      points: 200
+    },
+    {
+      question: "What moral issue arises with immigration enforcement?",
+      answer: "Balancing state rights with individuals' rights to seek better life opportunities.",
+      points: 300
+    },
+    {
+      question: "How might feminist ethics approach LGBTQ+ rights?",
+      answer: "By emphasizing contexts of care, personal autonomy, and combating systemic oppression.",
+      points: 400
+    },
+    {
+      question: "What ethical issue does racial profiling in policing raise?",
+      answer: "It treats individuals as means and undermines justice and respect.",
+      points: 500
+    }
   ]
 };
