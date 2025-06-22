@@ -1,4 +1,4 @@
-const ethicsQuestions = {
+window.ethicsQuestions = {
   "Chapter 1: Ethics & Moral Reasoning": [
     {
       question: "What is normative ethics?",

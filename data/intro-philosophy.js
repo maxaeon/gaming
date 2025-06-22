@@ -1,4 +1,4 @@
-const introPhilosophyQuestions = {
+window.introPhilosophyQuestions = {
   "Chapter 1": [
     { question: "What does metaphysics study?", answer: "The nature of reality.", points: 100 },
     { question: "Define epistemology.", answer: "The study of knowledge.", points: 200 }
