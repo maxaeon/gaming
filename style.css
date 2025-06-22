@@ -203,3 +203,20 @@ button {
   padding: 2px 6px;
   font-size: 14px;
 }
+
+/* Feedback styles for awarding answers */
+#modal-content {
+  transition: background-color 0.4s, opacity 0.4s;
+}
+
+.answer-correct {
+  background-color: #2e7d32;
+  color: #fff;
+  opacity: 0;
+}
+
+.answer-wrong {
+  background-color: #c62828;
+  color: #fff;
+  opacity: 0;
+}

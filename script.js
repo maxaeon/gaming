@@ -115,15 +115,25 @@ function showQuestion(questionObj, cell) {
     cancelBtn.classList.add('hidden');
     awardControls.classList.remove('hidden');
 
+    const modalContent = document.getElementById('modal-content');
+
     awardYes.onclick = () => {
       const current = players[currentPlayerIndex];
       current.score += questionObj.points;
       updateScoreboard();
-      closeQuestionModal();
+      modalContent.classList.add('answer-correct');
+      setTimeout(() => {
+        modalContent.classList.remove('answer-correct');
+        closeQuestionModal();
+      }, 400);
     };
 
     awardNo.onclick = () => {
-      closeQuestionModal();
+      modalContent.classList.add('answer-wrong');
+      setTimeout(() => {
+        modalContent.classList.remove('answer-wrong');
+        closeQuestionModal();
+      }, 400);
     };
   };
 
