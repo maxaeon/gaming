@@ -7,7 +7,7 @@ This repository contains a lightweight browser game that lets you review philoso
 - Multiple topics including Ethics, Critical Thinking, and Intro to Philosophy
 - Dynamic board built from question data files
 - Modal dialog for answering each question
-- Scoreboard with support for single player, multiplayer or a bot opponent
+- Scoreboard with support for single player or multiplayer teams
 
 ## Getting Started
 
