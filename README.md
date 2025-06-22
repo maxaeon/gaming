@@ -8,6 +8,7 @@ This repository contains a lightweight browser game that lets you review philoso
 - Dynamic board built from question data files
 - Modal dialog for answering each question
 - Scoreboard with support for single player or multiplayer teams
+- Single-player mode lets you enter your name, displayed next to your score
 
 ## Getting Started
 

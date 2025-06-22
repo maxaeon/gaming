@@ -1,5 +1,5 @@
 window.ethicsQuestions = {
-  "Chapter 1: Ethics & Moral Reasoning": [
+  "Ethics & Moral Reasoning": [
     {
       question: "What is normative ethics?",
       answer: "The study of principles, rules, or theories guiding our actions and judgments.",
@@ -26,7 +26,7 @@ window.ethicsQuestions = {
       points: 500
     }
   ],
-  "Chapter 2: Subjectivism, Relativism, and Emotivism": [
+  "Subjectivism, Relativism, and Emotivism": [
     {
       question: "What does cultural relativism claim?",
       answer: "Morality is relative to specific cultures; no universal moral standards exist.",
@@ -53,7 +53,7 @@ window.ethicsQuestions = {
       points: 500
     }
   ],
-  "Chapter 3: Evaluating Moral Arguments": [
+  "Evaluating Moral Arguments": [
     {
       question: "What is a moral argument?",
       answer: "An argument that contains at least one moral premise and one non-moral premise.",
@@ -80,7 +80,7 @@ window.ethicsQuestions = {
       points: 500
     }
   ],
-  "Chapter 4: Moral Theories": [
+  "Moral Theories": [
     {
       question: "What is consequentialism?",
       answer: "The view that morality is based solely on the consequences of actions.",
@@ -107,7 +107,7 @@ window.ethicsQuestions = {
       points: 500
     }
   ],
-  "Chapter 5: Consequentialist Theories (Utilitarianism)": [
+  "Consequentialist Theories (Utilitarianism)": [
     {
       question: "Define utilitarianism.",
       answer: "The ethical theory stating the right action maximizes overall happiness or utility.",
