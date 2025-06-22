@@ -4,9 +4,37 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #121212;
+  padding: 10px 0;
+  text-align: center;
+  z-index: 1000;
+}
+
+#top-nav button {
+  background-color: #9c27b0;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin: 0 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+#top-nav button:hover {
+  transform: translateY(-4px);
+  background-color: #7b1fa2;
+}
+
 .container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 80px auto 0;
   padding: 20px;
   text-align: center;
 }
@@ -15,8 +43,8 @@ body {
   background-color: #9c27b0;
   color: white;
   border: none;
-  padding: 12px 20px;
-  margin: 10px;
+  padding: 10px 16px;
+  margin: 0 8px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
@@ -96,3 +124,9 @@ button {
 #submit-answer { background: #8e24aa; color: white; }
 #override-btn { background: #b00020; color: white; }
 #close-modal, #restart-btn { background: #ba68c8; color: black; }
+
+.copyright {
+  margin: 40px 0;
+  text-align: center;
+  color: #ffffff;
+}
