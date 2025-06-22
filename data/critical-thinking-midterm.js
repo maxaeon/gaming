@@ -1,4 +1,4 @@
-const criticalThinkingMidtermQuestions = {
+window.criticalThinkingMidtermQuestions = {
   "Chapter 1 - Introduction": [
     { question: "What is critical thinking?", answer: "The systematic evaluation or formulation of beliefs or statements by rational standards.", points: 100 },
     { question: "Name one obstacle to effective critical thinking.", answer: "Egocentrism, confirmation bias, or sociocentrism.", points: 100 },

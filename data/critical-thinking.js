@@ -1,2 +1,2 @@
 // Placeholder for future Critical Thinking questions
-const criticalThinkingQuestions = {};
+window.criticalThinkingQuestions = {};
