@@ -1,5 +1,6 @@
 let currentQuestions = {};
 let remainingQuestions = 0;
+let totalQuestions = 0;
 let players = [];
 let currentPlayerIndex = 0;
 let maxPossibleScore = 0;
@@ -54,6 +55,7 @@ function buildBoard() {
   const categories = Object.keys(currentQuestions);
   board.style.gridTemplateColumns = `repeat(${categories.length}, 1fr)`;
   remainingQuestions = 0;
+  totalQuestions = 0;
   maxPossibleScore = 0;
 
   // header row
@@ -74,6 +76,7 @@ function buildBoard() {
       if (q) {
         cell.onclick = () => showQuestion(q, cell);
         remainingQuestions++;
+        totalQuestions++;
         maxPossibleScore += q.points;
       } else {
         cell.classList.add('hidden');
@@ -81,6 +84,12 @@ function buildBoard() {
       board.appendChild(cell);
     });
   });
+
+  const progressEl = document.getElementById('progress');
+  if (progressEl) {
+    progressEl.style.width = '0%';
+    progressEl.classList.remove('hidden');
+  }
 }
 
 function showQuestion(questionObj, cell) {
@@ -150,6 +159,12 @@ function closeQuestionModal() {
   document.getElementById('submitted-answer').classList.add('hidden');
   document.getElementById('award-controls').classList.add('hidden');
   remainingQuestions--;
+  const progressEl = document.getElementById('progress');
+  if (progressEl && totalQuestions > 0) {
+    const answered = totalQuestions - remainingQuestions;
+    const percent = (answered / totalQuestions) * 100;
+    progressEl.style.width = `${percent}%`;
+  }
   nextPlayer();
 
   if (remainingQuestions === 0) {

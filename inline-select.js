@@ -37,6 +37,7 @@ function startSelectedGame(mode, names = []) {
   document.getElementById('topic-selector').classList.add('hidden');
   document.getElementById('jeopardy-board').classList.remove('hidden');
   document.getElementById('scoreboard').classList.remove('hidden');
+  document.getElementById('progress').classList.remove('hidden');
   loadQuestions(selectedTopic, selectedExam);
 }
 
@@ -90,6 +91,7 @@ function goHome() {
   document.getElementById('question-modal').classList.add('hidden');
   document.getElementById('celebration-modal').classList.add('hidden');
   document.getElementById('scoreboard').classList.add('hidden');
+  document.getElementById('progress').classList.add('hidden');
   document.querySelectorAll('#topic-selector .exam-dropdown').forEach(dd => dd.classList.add('hidden'));
   document.getElementById('instructions').scrollIntoView();
 }
