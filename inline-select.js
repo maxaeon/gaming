@@ -52,7 +52,6 @@ playerCount.addEventListener('input', updateNameFields);
 updateNameFields();
 
 document.getElementById('single-mode').onclick = () => startSelectedGame('single');
-document.getElementById('bot-mode').onclick = () => startSelectedGame('bot');
 document.getElementById('multi-mode').onclick = () => {
   modeModal.classList.add('hidden');
   multiModal.classList.remove('hidden');
@@ -81,6 +80,7 @@ function goHome() {
   document.getElementById('question-modal').classList.add('hidden');
   document.getElementById('celebration-modal').classList.add('hidden');
   document.getElementById('scoreboard').classList.add('hidden');
+  document.querySelectorAll('#topic-selector .exam-dropdown').forEach(dd => dd.classList.add('hidden'));
   document.getElementById('instructions').scrollIntoView();
 }
 

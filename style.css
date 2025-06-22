@@ -172,19 +172,19 @@ button {
   font-weight: bold;
 }
 
-#bot-controls {
+#award-controls {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 10px;
 }
 
-#bot-controls button {
+#award-controls button {
   margin-top: 0;
 }
 
 #submit-answer { background: #8e24aa; color: white; }
-#close-modal, #restart-btn { background: #ba68c8; color: black; }
+#cancel-btn, #restart-btn { background: #ba68c8; color: black; }
 
 .site-footer {
   margin: 40px 0 10px 0;
