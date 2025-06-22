@@ -12,7 +12,7 @@ body {
 }
 
 #topic-selector button {
-  background-color: #6200ee;
+  background-color: #9c27b0;
   color: white;
   border: none;
   padding: 12px 20px;
@@ -25,7 +25,7 @@ body {
 
 #topic-selector button:hover {
   transform: translateY(-4px);
-  background-color: #3700b3;
+  background-color: #7b1fa2;
 }
 
 #jeopardy-board {
@@ -36,7 +36,7 @@ body {
 }
 
 .jeopardy-cell {
-  background-color: #03dac6;
+  background-color: #ce93d8;
   color: #000;
   padding: 20px;
   border-radius: 6px;
@@ -88,6 +88,6 @@ button {
   font-weight: bold;
 }
 
-#submit-answer { background: #018786; color: white; }
+#submit-answer { background: #8e24aa; color: white; }
 #override-btn { background: #b00020; color: white; }
-#close-modal, #restart-btn { background: #03dac6; color: black; }
+#close-modal, #restart-btn { background: #ba68c8; color: black; }
