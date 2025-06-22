@@ -81,6 +81,7 @@ function goHome() {
   document.getElementById('question-modal').classList.add('hidden');
   document.getElementById('celebration-modal').classList.add('hidden');
   document.getElementById('scoreboard').classList.add('hidden');
+  document.getElementById('instructions').scrollIntoView();
 }
 
 document.getElementById('home-btn').addEventListener('click', () => {
