@@ -38,6 +38,7 @@ function startSelectedGame(mode, names = []) {
   document.getElementById('jeopardy-board').classList.remove('hidden');
   document.getElementById('scoreboard').classList.remove('hidden');
   document.getElementById('progress').classList.remove('hidden');
+  document.getElementById('quote-game').classList.add('hidden');
   loadQuestions(selectedTopic, selectedExam);
 }
 
@@ -92,6 +93,8 @@ function goHome() {
   document.getElementById('celebration-modal').classList.add('hidden');
   document.getElementById('scoreboard').classList.add('hidden');
   document.getElementById('progress').classList.add('hidden');
+  document.getElementById('quote-game').classList.remove('hidden');
+  if (typeof showRandomQuote === 'function') showRandomQuote();
   document.querySelectorAll('#topic-selector .exam-dropdown').forEach(dd => dd.classList.add('hidden'));
   document.getElementById('instructions').scrollIntoView();
 }
