@@ -37,6 +37,15 @@
     <h1>Philosophy Review Jeopardy</h1>
     <p id="instructions">Select a topic above to start a new game. Choose an exam type and game mode to challenge yourself or play with friends.</p>
 
+    <div id="quote-game">
+      <h2>Who said it?</h2>
+      <p id="quote-text"></p>
+      <input type="text" id="quote-answer" placeholder="Enter philosopher" autocomplete="off">
+      <button id="quote-submit">Guess</button>
+      <div id="quote-feedback" class="hidden"></div>
+      <button id="quote-next" class="hidden">Next Quote</button>
+    </div>
+
     <!-- Jeopardy Board and Modals -->
     <div id="jeopardy-board" class="hidden"></div>
     <div id="scoreboard" class="hidden"></div>
@@ -105,5 +114,6 @@
   <script src="data/intro-philosophy-final.js"></script>
   <script src="script.js"></script>
   <script src="inline-select.js"></script>
+  <script src="who-said-it.js"></script>
 </body>
 </html>
