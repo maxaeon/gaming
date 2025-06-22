@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fallacy Detective</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav id="top-nav">
+    <button onclick="location.href='index.html'">Back</button>
+  </nav>
+  <div class="container">
+    <h1>Fallacy Detective</h1>
+    <div id="fallacy-game" class="hidden">
+      <p id="fallacy-statement"></p>
+      <div id="fallacy-options" class="mc-options"></div>
+      <div id="fallacy-feedback" class="hidden"></div>
+      <button id="fallacy-next" class="hidden">Next</button>
+    </div>
+    <button id="start-fallacy">Start Game</button>
+    <h2>Fallacy Definitions</h2>
+    <ul id="fallacy-def-list"></ul>
+  </div>
+  <script src="data/fallacies.js"></script>
+  <script src="fallacy-game.js"></script>
+  <script>
+    // populate definitions list
+    const list = document.getElementById('fallacy-def-list');
+    Object.entries(fallacyDefinitions).forEach(([name, def]) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${name}:</strong> ${def}`;
+      list.appendChild(li);
+    });
+  </script>
+</body>
+</html>
