@@ -25,7 +25,8 @@ function startGame(mode, names = []) {
       players.push({ name, score: 0 });
     }
   } else {
-    players.push({ name: 'Player 1', score: 0 });
+    const name = names[0] || 'Player 1';
+    players.push({ name, score: 0 });
   }
   currentPlayerIndex = 0;
   document.getElementById('scoreboard').classList.remove('hidden');

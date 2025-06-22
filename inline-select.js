@@ -17,6 +17,7 @@ let selectedTopic = '';
 let selectedExam = '';
 
 const modeModal = document.getElementById('mode-modal');
+const singleNameInput = document.getElementById('single-name');
 const multiModal = document.getElementById('multi-modal');
 const playerCount = document.getElementById('player-count');
 const nameFields = document.getElementById('name-fields');
@@ -51,7 +52,10 @@ function updateNameFields() {
 playerCount.addEventListener('input', updateNameFields);
 updateNameFields();
 
-document.getElementById('single-mode').onclick = () => startSelectedGame('single');
+document.getElementById('single-mode').onclick = () => {
+  const name = singleNameInput.value.trim() || 'Player 1';
+  startSelectedGame('single', [name]);
+};
 document.getElementById('multi-mode').onclick = () => {
   modeModal.classList.add('hidden');
   multiModal.classList.remove('hidden');

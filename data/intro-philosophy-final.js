@@ -1,6 +1,6 @@
 // Final exam questions for Intro to Philosophy
 window.introPhilosophyFinalQuestions = {
-  "Chapter 10": [
+  "Analytic Philosophy": [
     { question: "Who is known as the founder of the analytic tradition?", answer: "Gottlob Frege or Bertrand Russell.", points: 100 },
     { question: "What is Charles Sanders Peirce\u2019s pragmatic maxim?", answer: "The meaning of a concept lies in its practical consequences.", points: 200 },
     { question: "Which philosopher introduced the verification principle?", answer: "A.J. Ayer.", points: 300 },
@@ -22,7 +22,7 @@ window.introPhilosophyFinalQuestions = {
     { question: "What is the core idea behind social contract theory?", answer: "People give up freedom for protection and order.", points: 500 }
   ],
 
-  "Chapter 14": [
+  "Philosophy of Religion": [
     { question: "What does the cosmological argument aim to prove?", answer: "God as the first cause or prime mover.", points: 100 },
     { question: "What problem does evil pose for theism?", answer: "Challenges an all-good, all-powerful God.", points: 200 },
     { question: "What is Pascal\u2019s Wager?", answer: "It's rational to believe in God given potential infinite gain.", points: 300 },
@@ -30,7 +30,7 @@ window.introPhilosophyFinalQuestions = {
     { question: "Which argument infers God\u2019s existence from design?", answer: "Teleological argument.", points: 500 }
   ],
 
-  "Chapter 15": [
+  "Feminist Philosophy": [
     { question: "What critique do feminist philosophers have of traditional philosophy?", answer: "Exclusion of women's perspectives.", points: 100 },
     { question: "What is the ethics of care?", answer: "Emphasizes care and relationships.", points: 200 },
     { question: "What does standpoint theory claim?", answer: "Knowledge is shaped by social positions.", points: 300 },
