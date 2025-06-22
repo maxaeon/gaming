@@ -22,3 +22,12 @@ document.querySelectorAll('#topic-selector .exam-dropdown button').forEach(examB
     loadQuestions(topic, examType);
   });
 });
+
+// Home button returns to topic selection
+
+document.getElementById('home-btn').addEventListener('click', () => {
+  document.getElementById('jeopardy-board').classList.add('hidden');
+  document.getElementById('topic-selector').classList.remove('hidden');
+  document.getElementById('question-modal').classList.add('hidden');
+  document.getElementById('celebration-modal').classList.add('hidden');
+});
