@@ -40,7 +40,7 @@ function updateScoreboard() {
   sb.innerHTML = players
     .map((p, idx) => {
       const prefix = idx === currentPlayerIndex ? '&#8594; ' : '';
-      return `<span class="player-score" data-index="${idx}">${prefix}${p.name}: ${p.score}</span>`;
+      return `<span class="player-score" data-index="${idx}">${prefix}${p.name}: <button class="decrement" data-index="${idx}">-</button> <span class="score" data-index="${idx}">${p.score}</span> <button class="increment" data-index="${idx}">+</button></span>`;
     })
     .join(' | ');
 }
@@ -94,7 +94,6 @@ function showQuestion(questionObj, cell) {
   document.getElementById('correct-answer').innerText = `Correct Answer: ${questionObj.answer}`;
   const userField = document.getElementById('user-answer');
   const submitBtn = document.getElementById('submit-answer');
-  const overrideBtn = document.getElementById('override-btn');
   const closeBtn = document.getElementById('close-modal');
   const botAnswerEl = document.getElementById('bot-answer');
   const botControls = document.getElementById('bot-controls');
@@ -103,7 +102,6 @@ function showQuestion(questionObj, cell) {
 
   userField.classList.add('hidden');
   submitBtn.classList.add('hidden');
-  overrideBtn.classList.add('hidden');
   closeBtn.classList.add('hidden');
   botAnswerEl.classList.add('hidden');
   botControls.classList.add('hidden');
@@ -143,15 +141,8 @@ function showQuestion(questionObj, cell) {
         closeQuestionModal();
       } else {
         document.getElementById('correct-answer').classList.remove('hidden');
-        overrideBtn.classList.remove('hidden');
         closeBtn.classList.remove('hidden');
       }
-    };
-
-    overrideBtn.onclick = () => {
-      current.score += questionObj.points;
-      updateScoreboard();
-      closeQuestionModal();
     };
   }
 
@@ -161,7 +152,6 @@ function showQuestion(questionObj, cell) {
 function closeQuestionModal() {
   document.getElementById('question-modal').classList.add('hidden');
   document.getElementById('correct-answer').classList.add('hidden');
-  document.getElementById('override-btn').classList.add('hidden');
   document.getElementById('close-modal').classList.add('hidden');
   document.getElementById('bot-answer').classList.add('hidden');
   document.getElementById('bot-controls').classList.add('hidden');
@@ -180,22 +170,17 @@ document.getElementById('restart-btn').onclick = () => {
   buildBoard();
 };
 
-// Allow manual score overrides via scoreboard clicks
+// Adjust scores using the scoreboard buttons
 document.getElementById('scoreboard').addEventListener('click', (e) => {
-  if (!e.target.classList.contains('player-score')) return;
+  if (!e.target.dataset.index) return;
   const idx = parseInt(e.target.dataset.index, 10);
   const current = players[idx];
-  const input = prompt(`Set score for ${current.name} (0-${maxPossibleScore})`, current.score);
-  if (input === null) return;
-  if (!/^\d+$/.test(input)) {
-    alert('Please enter a valid number.');
-    return;
+
+  if (e.target.classList.contains('increment')) {
+    current.score += 100;
+  } else if (e.target.classList.contains('decrement')) {
+    current.score = Math.max(0, current.score - 100);
   }
-  const value = parseInt(input, 10);
-  if (value > maxPossibleScore) {
-    alert(`Score cannot exceed ${maxPossibleScore}.`);
-    return;
-  }
-  current.score = value;
+
   updateScoreboard();
 });
