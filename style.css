@@ -61,6 +61,11 @@ body {
   justify-content: center;
 }
 
+#question-modal.hidden,
+#celebration-modal.hidden {
+  display: none;
+}
+
 #modal-content, .celebration-content {
   background: #1e1e1e;
   padding: 30px;
