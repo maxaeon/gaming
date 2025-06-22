@@ -1,15 +1,21 @@
 let currentQuestions = {};
 let remainingQuestions = 0;
 
-// Load selected topic questions
+// Previously the board could be built directly from topic buttons on
+// index.html. Topic selection now happens on a separate page so these
+// listeners are no longer required. The code remains defensive in case
+// the elements exist.
 document.querySelectorAll('#topic-selector button').forEach(btn => {
   btn.onclick = () => {
     loadQuestions(btn.dataset.topic);
   };
 });
 
-function loadQuestions(topic) {
-  currentQuestions = window[`${topic}Questions`];
+// Load questions for a topic and optional exam type. If the exam specific
+// question set does not exist, fall back to the generic set for that topic.
+function loadQuestions(topic, examType = '') {
+  const key = `${topic}${examType}Questions`;
+  currentQuestions = window[key] || window[`${topic}Questions`] || {};
   buildBoard();
 }
 
