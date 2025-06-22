@@ -186,6 +186,25 @@ button {
 #submit-answer { background: #8e24aa; color: white; }
 #cancel-btn, #restart-btn { background: #ba68c8; color: black; }
 
+/* Visual feedback for awarding points */
+#modal-content.answer-correct {
+  background-color: #2e7d32;
+  color: #fff;
+}
+
+#modal-content.answer-wrong {
+  background-color: #c62828;
+  color: #fff;
+}
+
+#question-modal.fade-out {
+  animation: fadeOut 0.4s forwards;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
 .site-footer {
   margin: 40px 0 10px 0;
   text-align: center;

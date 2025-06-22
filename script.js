@@ -97,6 +97,7 @@ function showQuestion(questionObj, cell) {
   const awardControls = document.getElementById('award-controls');
   const awardYes = document.getElementById('award-yes');
   const awardNo = document.getElementById('award-no');
+  const modalContent = document.getElementById('modal-content');
 
   userField.classList.remove('hidden');
   submitBtn.classList.remove('hidden');
@@ -116,14 +117,22 @@ function showQuestion(questionObj, cell) {
     awardControls.classList.remove('hidden');
 
     awardYes.onclick = () => {
-      const current = players[currentPlayerIndex];
-      current.score += questionObj.points;
-      updateScoreboard();
-      closeQuestionModal();
+      modalContent.classList.add('answer-correct');
+      document.getElementById('question-modal').classList.add('fade-out');
+      setTimeout(() => {
+        const current = players[currentPlayerIndex];
+        current.score += questionObj.points;
+        updateScoreboard();
+        closeQuestionModal();
+      }, 400);
     };
 
     awardNo.onclick = () => {
-      closeQuestionModal();
+      modalContent.classList.add('answer-wrong');
+      document.getElementById('question-modal').classList.add('fade-out');
+      setTimeout(() => {
+        closeQuestionModal();
+      }, 400);
     };
   };
 
@@ -131,7 +140,11 @@ function showQuestion(questionObj, cell) {
 }
 
 function closeQuestionModal() {
-  document.getElementById('question-modal').classList.add('hidden');
+  const modal = document.getElementById('question-modal');
+  const modalContent = document.getElementById('modal-content');
+  modal.classList.add('hidden');
+  modal.classList.remove('fade-out');
+  modalContent.classList.remove('answer-correct', 'answer-wrong');
   document.getElementById('correct-answer').classList.add('hidden');
   document.getElementById('cancel-btn').classList.add('hidden');
   document.getElementById('submitted-answer').classList.add('hidden');
