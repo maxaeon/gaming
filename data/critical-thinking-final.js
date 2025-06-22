@@ -28,7 +28,7 @@ window.criticalThinkingFinalQuestions = {
     }
   ],
 
-  "Chapter 9: A Little Categorical Logic": [
+  "Categorical Logic": [
     { question: "What is categorical logic?", answer: "A form of logic dealing with categorical statements about groups or categories.", points: 100 },
     { question: "What are the four standard forms of categorical statements?", answer: "Universal affirmative (A), universal negative (E), particular affirmative (I), particular negative (O).", points: 200 },
     { question: "Define a universal affirmative (A) statement.", answer: "A statement claiming all members of one category are included in another (All S are P).", points: 300 },
@@ -36,7 +36,7 @@ window.criticalThinkingFinalQuestions = {
     { question: "What does it mean if two statements are contradictory?", answer: "They cannot both be true or both be false simultaneously.", points: 500 }
   ],
 
-  "Chapter 10: A Little Propositional Logic": [
+  "Propositional Logic": [
     { question: "What is propositional logic?", answer: "Logic dealing with statements connected by logical operators.", points: 100 },
     { question: "What is a conjunction in propositional logic?", answer: "A compound statement joined by 'and,' symbolized as p & q.", points: 200 },
     { question: "Define a conditional statement.", answer: "An 'if-then' statement, symbolized as p → q.", points: 300 },
@@ -44,7 +44,7 @@ window.criticalThinkingFinalQuestions = {
     { question: "What does it mean for propositions to be logically equivalent?", answer: "They always share the same truth value in every possible scenario.", points: 500 }
   ],
 
-  "Chapter 11: Inductive Reasoning": [
+  "Inductive Reasoning": [
     { question: "What is inductive reasoning?", answer: "Reasoning where premises support a conclusion with probability rather than certainty.", points: 100 },
     { question: "Define enumerative induction.", answer: "Generalizing about a population based on a sample of that population.", points: 200 },
     { question: "What makes an inductive argument 'strong'?", answer: "Its premises provide probable support for its conclusion.", points: 300 },
@@ -52,7 +52,7 @@ window.criticalThinkingFinalQuestions = {
     { question: "Define causal induction.", answer: "Inferring cause-and-effect relationships based on observed patterns.", points: 500 }
   ],
 
-  "Chapter 12: Finding, Evaluating & Using Sources": [
+  "Research and Sources": [
     { question: "What is a primary source?", answer: "Original material or firsthand evidence.", points: 100 },
     { question: "What distinguishes a scholarly source from a popular source?", answer: "Scholarly sources are peer-reviewed and authoritative; popular sources are aimed at general audiences.", points: 200 },
     { question: "Define 'bias' in evaluating sources.", answer: "A prejudiced viewpoint that affects the objectivity or fairness of information.", points: 300 },
@@ -60,7 +60,7 @@ window.criticalThinkingFinalQuestions = {
     { question: "What is plagiarism?", answer: "Presenting someone else's words or ideas as your own without proper attribution.", points: 500 }
   ],
 
-  "Chapter 13: Writing Argumentative Essays": [
+  "Argumentative Essays": [
     { question: "What is a thesis statement?", answer: "A concise summary of the main point or claim of an essay.", points: 100 },
     { question: "What are the essential parts of an argumentative essay?", answer: "Introduction, thesis, supporting arguments, counterarguments, and conclusion.", points: 200 },
     { question: "Why should an argumentative essay address counterarguments?", answer: "It strengthens credibility by showing awareness of opposing views.", points: 300 },
