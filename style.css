@@ -1,0 +1,93 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+#topic-selector button {
+  background-color: #6200ee;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+#topic-selector button:hover {
+  transform: translateY(-4px);
+  background-color: #3700b3;
+}
+
+#jeopardy-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.jeopardy-cell {
+  background-color: #03dac6;
+  color: #000;
+  padding: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.jeopardy-cell:hover {
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+#question-modal, #celebration-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-content, .celebration-content {
+  background: #1e1e1e;
+  padding: 30px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#submit-answer { background: #018786; color: white; }
+#override-btn { background: #b00020; color: white; }
+#close-modal, #restart-btn { background: #03dac6; color: black; }
