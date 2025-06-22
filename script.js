@@ -2,6 +2,7 @@ let currentQuestions = {};
 let remainingQuestions = 0;
 let players = [];
 let currentPlayerIndex = 0;
+let maxPossibleScore = 0;
 
 // Topic buttons no longer load questions directly. Exam selection is handled
 // via inline dropdowns on the main page, but this remains here in case new
@@ -37,7 +38,10 @@ function startGame(mode, names = []) {
 function updateScoreboard() {
   const sb = document.getElementById('scoreboard');
   sb.innerHTML = players
-    .map((p, idx) => `${idx === currentPlayerIndex ? '&#8594; ' : ''}${p.name}: ${p.score}`)
+    .map((p, idx) => {
+      const prefix = idx === currentPlayerIndex ? '&#8594; ' : '';
+      return `<span class="player-score" data-index="${idx}">${prefix}${p.name}: ${p.score}</span>`;
+    })
     .join(' | ');
 }
 
@@ -52,6 +56,7 @@ function buildBoard() {
   const categories = Object.keys(currentQuestions);
   board.style.gridTemplateColumns = `repeat(${categories.length}, 1fr)`;
   remainingQuestions = 0;
+  maxPossibleScore = 0;
 
   // header row
   categories.forEach(cat => {
@@ -71,6 +76,7 @@ function buildBoard() {
       if (q) {
         cell.onclick = () => showQuestion(q, cell);
         remainingQuestions++;
+        maxPossibleScore += q.points;
       } else {
         cell.classList.add('hidden');
       }
@@ -173,3 +179,23 @@ document.getElementById('restart-btn').onclick = () => {
   updateScoreboard();
   buildBoard();
 };
+
+// Allow manual score overrides via scoreboard clicks
+document.getElementById('scoreboard').addEventListener('click', (e) => {
+  if (!e.target.classList.contains('player-score')) return;
+  const idx = parseInt(e.target.dataset.index, 10);
+  const current = players[idx];
+  const input = prompt(`Set score for ${current.name} (0-${maxPossibleScore})`, current.score);
+  if (input === null) return;
+  if (!/^\d+$/.test(input)) {
+    alert('Please enter a valid number.');
+    return;
+  }
+  const value = parseInt(input, 10);
+  if (value > maxPossibleScore) {
+    alert(`Score cannot exceed ${maxPossibleScore}.`);
+    return;
+  }
+  current.score = value;
+  updateScoreboard();
+});
