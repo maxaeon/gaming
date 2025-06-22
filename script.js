@@ -1,5 +1,7 @@
 let currentQuestions = {};
 let remainingQuestions = 0;
+let players = [];
+let currentPlayerIndex = 0;
 
 // Topic buttons no longer load questions directly. Exam selection is handled
 // via inline dropdowns on the main page, but this remains here in case new
@@ -13,19 +15,66 @@ function loadQuestions(topic, examType = '') {
   buildBoard();
 }
 
+function startGame(mode) {
+  players = [];
+  if (mode === 'bot') {
+    players.push({ name: 'You', score: 0 });
+    players.push({ name: 'Bot', score: 0, isBot: true });
+  } else if (mode === 'multi') {
+    const count = parseInt(prompt('How many players? (2-4)')) || 2;
+    for (let i = 1; i <= count; i++) {
+      const name = prompt(`Name for Player ${i}`) || `Player ${i}`;
+      players.push({ name, score: 0 });
+    }
+  } else {
+    players.push({ name: 'Player 1', score: 0 });
+  }
+  currentPlayerIndex = 0;
+  document.getElementById('scoreboard').classList.remove('hidden');
+  updateScoreboard();
+}
+
+function updateScoreboard() {
+  const sb = document.getElementById('scoreboard');
+  sb.innerHTML = players
+    .map((p, idx) => `${idx === currentPlayerIndex ? '&#8594; ' : ''}${p.name}: ${p.score}`)
+    .join(' | ');
+}
+
+function nextPlayer() {
+  currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+  updateScoreboard();
+}
+
 function buildBoard() {
   const board = document.getElementById('jeopardy-board');
   board.innerHTML = '';
+  const categories = Object.keys(currentQuestions);
+  board.style.gridTemplateColumns = `repeat(${categories.length}, 1fr)`;
   remainingQuestions = 0;
 
-  Object.keys(currentQuestions).forEach(category => {
-    currentQuestions[category].forEach(q => {
+  // header row
+  categories.forEach(cat => {
+    const header = document.createElement('div');
+    header.className = 'jeopardy-header';
+    header.innerText = cat;
+    board.appendChild(header);
+  });
+
+  const pointLevels = [100, 200, 300, 400, 500];
+  pointLevels.forEach(value => {
+    categories.forEach(cat => {
+      const q = currentQuestions[cat].find(item => item.points === value);
       const cell = document.createElement('div');
       cell.className = 'jeopardy-cell';
-      cell.innerText = `${category}: ${q.points}`;
-      cell.onclick = () => showQuestion(q, cell);
+      cell.innerText = value;
+      if (q) {
+        cell.onclick = () => showQuestion(q, cell);
+        remainingQuestions++;
+      } else {
+        cell.classList.add('hidden');
+      }
       board.appendChild(cell);
-      remainingQuestions++;
     });
   });
 }
@@ -37,22 +86,55 @@ function showQuestion(questionObj, cell) {
   document.getElementById('question-text').innerText = questionObj.question;
   document.getElementById('user-answer').value = '';
   document.getElementById('correct-answer').innerText = `Correct Answer: ${questionObj.answer}`;
+  const userField = document.getElementById('user-answer');
+  const submitBtn = document.getElementById('submit-answer');
+  const overrideBtn = document.getElementById('override-btn');
+  const closeBtn = document.getElementById('close-modal');
 
-  document.getElementById('submit-answer').onclick = () => {
-    const userAns = document.getElementById('user-answer').value.trim().toLowerCase();
-    const correctAns = questionObj.answer.trim().toLowerCase();
+  userField.classList.add('hidden');
+  submitBtn.classList.add('hidden');
+  overrideBtn.classList.add('hidden');
+  closeBtn.classList.add('hidden');
+  document.getElementById('correct-answer').classList.add('hidden');
 
-    if (userAns === correctAns) {
-      closeQuestionModal();
+  const current = players[currentPlayerIndex];
+  if (current.isBot) {
+    const correct = Math.random() < 0.88;
+    if (correct) {
+      current.score += questionObj.points;
+      updateScoreboard();
+      setTimeout(closeQuestionModal, 800);
     } else {
       document.getElementById('correct-answer').classList.remove('hidden');
-      document.getElementById('override-btn').classList.remove('hidden');
-      document.getElementById('close-modal').classList.remove('hidden');
+      closeBtn.classList.remove('hidden');
     }
-  };
+  } else {
+    userField.classList.remove('hidden');
+    submitBtn.classList.remove('hidden');
 
-  document.getElementById('override-btn').onclick = closeQuestionModal;
-  document.getElementById('close-modal').onclick = closeQuestionModal;
+    submitBtn.onclick = () => {
+      const userAns = userField.value.trim().toLowerCase();
+      const correctAns = questionObj.answer.trim().toLowerCase();
+
+      if (userAns === correctAns) {
+        current.score += questionObj.points;
+        updateScoreboard();
+        closeQuestionModal();
+      } else {
+        document.getElementById('correct-answer').classList.remove('hidden');
+        overrideBtn.classList.remove('hidden');
+        closeBtn.classList.remove('hidden');
+      }
+    };
+
+    overrideBtn.onclick = () => {
+      current.score += questionObj.points;
+      updateScoreboard();
+      closeQuestionModal();
+    };
+  }
+
+  closeBtn.onclick = closeQuestionModal;
 }
 
 function closeQuestionModal() {
@@ -61,6 +143,7 @@ function closeQuestionModal() {
   document.getElementById('override-btn').classList.add('hidden');
   document.getElementById('close-modal').classList.add('hidden');
   remainingQuestions--;
+  nextPlayer();
 
   if (remainingQuestions === 0) {
     document.getElementById('celebration-modal').classList.remove('hidden');
@@ -69,5 +152,7 @@ function closeQuestionModal() {
 
 document.getElementById('restart-btn').onclick = () => {
   document.getElementById('celebration-modal').classList.add('hidden');
+  players.forEach(p => p.score = 0);
+  updateScoreboard();
   buildBoard();
 };

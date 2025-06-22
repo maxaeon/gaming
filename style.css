@@ -63,6 +63,14 @@ body {
   margin-top: 20px;
 }
 
+.jeopardy-header {
+  background-color: #7b1fa2;
+  color: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
 .jeopardy-cell {
   background-color: #ce93d8;
   color: #000;
@@ -129,4 +137,9 @@ button {
   margin: 40px 0;
   text-align: center;
   color: #ffffff;
+}
+
+#scoreboard {
+  margin-top: 20px;
+  font-size: 18px;
 }

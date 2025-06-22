@@ -17,8 +17,11 @@ document.querySelectorAll('#topic-selector .exam-dropdown button').forEach(examB
   examBtn.addEventListener('click', () => {
     const examType = examBtn.dataset.exam;
     const topic = examBtn.closest('.course').querySelector('.topic-btn').dataset.topic;
+    const mode = prompt('Select mode: single, multi, bot', 'single');
+    startGame(mode);
     document.getElementById('topic-selector').classList.add('hidden');
     document.getElementById('jeopardy-board').classList.remove('hidden');
+    document.getElementById('scoreboard').classList.remove('hidden');
     loadQuestions(topic, examType);
   });
 });
@@ -30,4 +33,5 @@ document.getElementById('home-btn').addEventListener('click', () => {
   document.getElementById('topic-selector').classList.remove('hidden');
   document.getElementById('question-modal').classList.add('hidden');
   document.getElementById('celebration-modal').classList.add('hidden');
+  document.getElementById('scoreboard').classList.add('hidden');
 });
