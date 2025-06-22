@@ -15,15 +15,15 @@ function loadQuestions(topic, examType = '') {
   buildBoard();
 }
 
-function startGame(mode) {
+function startGame(mode, names = []) {
   players = [];
   if (mode === 'bot') {
     players.push({ name: 'You', score: 0 });
     players.push({ name: 'Bot', score: 0, isBot: true });
   } else if (mode === 'multi') {
-    const count = parseInt(prompt('How many players? (2-4)')) || 2;
-    for (let i = 1; i <= count; i++) {
-      const name = prompt(`Name for Player ${i}`) || `Player ${i}`;
+    const count = Math.min(Math.max(names.length || 2, 2), 4);
+    for (let i = 0; i < count; i++) {
+      const name = names[i] || `Player ${i + 1}`;
       players.push({ name, score: 0 });
     }
   } else {
@@ -90,24 +90,39 @@ function showQuestion(questionObj, cell) {
   const submitBtn = document.getElementById('submit-answer');
   const overrideBtn = document.getElementById('override-btn');
   const closeBtn = document.getElementById('close-modal');
+  const botAnswerEl = document.getElementById('bot-answer');
+  const botControls = document.getElementById('bot-controls');
+  const botYes = document.getElementById('bot-yes');
+  const botNo = document.getElementById('bot-no');
 
   userField.classList.add('hidden');
   submitBtn.classList.add('hidden');
   overrideBtn.classList.add('hidden');
   closeBtn.classList.add('hidden');
+  botAnswerEl.classList.add('hidden');
+  botControls.classList.add('hidden');
   document.getElementById('correct-answer').classList.add('hidden');
 
   const current = players[currentPlayerIndex];
   if (current.isBot) {
     const correct = Math.random() < 0.88;
-    if (correct) {
-      current.score += questionObj.points;
-      updateScoreboard();
-      setTimeout(closeQuestionModal, 800);
-    } else {
-      document.getElementById('correct-answer').classList.remove('hidden');
-      closeBtn.classList.remove('hidden');
-    }
+    const botAns = correct ? questionObj.answer : '???';
+    botAnswerEl.innerText = `Bot answers: ${botAns}`;
+    botAnswerEl.classList.remove('hidden');
+    document.getElementById('correct-answer').classList.remove('hidden');
+    botControls.classList.remove('hidden');
+
+    botYes.onclick = () => {
+      if (correct) {
+        current.score += questionObj.points;
+        updateScoreboard();
+      }
+      closeQuestionModal();
+    };
+
+    botNo.onclick = () => {
+      closeQuestionModal();
+    };
   } else {
     userField.classList.remove('hidden');
     submitBtn.classList.remove('hidden');
@@ -142,6 +157,8 @@ function closeQuestionModal() {
   document.getElementById('correct-answer').classList.add('hidden');
   document.getElementById('override-btn').classList.add('hidden');
   document.getElementById('close-modal').classList.add('hidden');
+  document.getElementById('bot-answer').classList.add('hidden');
+  document.getElementById('bot-controls').classList.add('hidden');
   remainingQuestions--;
   nextPlayer();
 

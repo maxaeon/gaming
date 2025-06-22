@@ -2,6 +2,7 @@ body {
   background-color: #121212;
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
 }
 
 #top-nav {
@@ -11,7 +12,9 @@ body {
   width: 100%;
   background: #121212;
   padding: 10px 0;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
   z-index: 1000;
 }
 
@@ -39,6 +42,12 @@ body {
   text-align: center;
 }
 
+#instructions {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #e0e0e0;
+}
+
 #topic-selector button {
   background-color: #9c27b0;
   color: white;
@@ -49,6 +58,25 @@ body {
   cursor: pointer;
   font-size: 16px;
   transition: transform 0.2s, background-color 0.3s;
+}
+
+.course {
+  position: relative;
+  display: inline-block;
+}
+
+.exam-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.exam-dropdown button {
+  background-color: #d1c4e9;
+  color: #000;
+  font-size: 14px;
+  margin-top: 4px;
 }
 
 #topic-selector button:hover {
@@ -88,7 +116,7 @@ body {
   display: none;
 }
 
-#question-modal, #celebration-modal {
+#question-modal, #celebration-modal, #mode-modal, #multi-modal, #quit-modal {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
@@ -98,7 +126,10 @@ body {
 }
 
 #question-modal.hidden,
-#celebration-modal.hidden {
+#celebration-modal.hidden,
+#mode-modal.hidden,
+#multi-modal.hidden,
+#quit-modal.hidden {
   display: none;
 }
 
@@ -120,6 +151,10 @@ input {
   font-size: 16px;
 }
 
+#name-fields input {
+  margin-top: 6px;
+}
+
 button {
   margin-top: 15px;
   padding: 10px 20px;
@@ -129,14 +164,26 @@ button {
   font-weight: bold;
 }
 
+#bot-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#bot-controls button {
+  margin-top: 0;
+}
+
 #submit-answer { background: #8e24aa; color: white; }
 #override-btn { background: #b00020; color: white; }
 #close-modal, #restart-btn { background: #ba68c8; color: black; }
 
-.copyright {
-  margin: 40px 0;
+.site-footer {
+  margin: 40px 0 10px 0;
   text-align: center;
   color: #ffffff;
+  width: 100%;
 }
 
 #scoreboard {
