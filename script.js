@@ -1,5 +1,6 @@
 let currentQuestions = {};
 let remainingQuestions = 0;
+let totalQuestions = 0;
 let players = [];
 let currentPlayerIndex = 0;
 let maxPossibleScore = 0;
@@ -43,6 +44,13 @@ function updateScoreboard() {
     .join(' | ');
 }
 
+function updateProgressBar() {
+  const bar = document.getElementById('progress-bar');
+  const total = totalQuestions || 1;
+  const percent = ((totalQuestions - remainingQuestions) / total) * 100;
+  bar.style.width = percent + '%';
+}
+
 function nextPlayer() {
   currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
   updateScoreboard();
@@ -81,6 +89,10 @@ function buildBoard() {
       board.appendChild(cell);
     });
   });
+
+  totalQuestions = remainingQuestions;
+  document.getElementById('progress').classList.remove('hidden');
+  updateProgressBar();
 }
 
 function showQuestion(questionObj, cell) {
@@ -137,6 +149,7 @@ function closeQuestionModal() {
   document.getElementById('submitted-answer').classList.add('hidden');
   document.getElementById('award-controls').classList.add('hidden');
   remainingQuestions--;
+  updateProgressBar();
   nextPlayer();
 
   if (remainingQuestions === 0) {
