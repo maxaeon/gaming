@@ -1,15 +1,9 @@
 let currentQuestions = {};
 let remainingQuestions = 0;
 
-// Previously the board could be built directly from topic buttons on
-// index.html. Topic selection now happens on a separate page so these
-// listeners are no longer required. The code remains defensive in case
-// the elements exist.
-document.querySelectorAll('#topic-selector button').forEach(btn => {
-  btn.onclick = () => {
-    loadQuestions(btn.dataset.topic);
-  };
-});
+// Topic buttons no longer load questions directly. Exam selection is handled
+// via inline dropdowns on the main page, but this remains here in case new
+// elements need to call `loadQuestions` without specifying an exam type.
 
 // Load questions for a topic and optional exam type. If the exam specific
 // question set does not exist, fall back to the generic set for that topic.

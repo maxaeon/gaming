@@ -9,15 +9,63 @@
   <div class="container">
     <h1>Philosophy Review Jeopardy 🎓</h1>
 
-    <!-- Topic Selector -->
+    <!-- Topic Selector with inline exam dropdowns -->
     <div id="topic-selector">
-      <button data-topic="introPhilosophy">Intro to Philosophy</button>
-      <button data-topic="criticalThinking">Critical Thinking</button>
-      <button data-topic="ethics">Ethics</button>
+      <div class="course">
+        <button class="topic-btn" data-topic="introPhilosophy">Intro to Philosophy</button>
+        <div class="exam-dropdown hidden">
+          <button data-exam="Midterm">Midterm Review</button>
+          <button data-exam="Final">Final Review</button>
+        </div>
+      </div>
+      <div class="course">
+        <button class="topic-btn" data-topic="criticalThinking">Critical Thinking</button>
+        <div class="exam-dropdown hidden">
+          <button data-exam="Midterm">Midterm Review</button>
+          <button data-exam="Final">Final Review</button>
+        </div>
+      </div>
+      <div class="course">
+        <button class="topic-btn" data-topic="ethics">Ethics</button>
+        <div class="exam-dropdown hidden">
+          <button data-exam="Midterm">Midterm Review</button>
+          <button data-exam="Final">Final Review</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jeopardy Board and Modals -->
+    <div id="jeopardy-board" class="hidden"></div>
+
+    <div id="question-modal" class="hidden">
+      <div id="modal-content">
+        <p id="question-text"></p>
+        <input type="text" id="user-answer" placeholder="Type your answer here..." autocomplete="off">
+        <button id="submit-answer">Submit</button>
+        <div id="correct-answer" class="hidden"></div>
+        <button id="override-btn" class="hidden">Override as Correct</button>
+        <button id="close-modal" class="hidden">Continue</button>
+      </div>
+    </div>
+
+    <div id="celebration-modal" class="hidden">
+      <div class="celebration-content">
+        <h2>🎉 Congratulations! 🎉</h2>
+        <p>You've completed this Jeopardy session!</p>
+        <button id="restart-btn">Play Again</button>
+      </div>
     </div>
 
   </div>
 
-  <script src="select-topic.js"></script>
+  <script src="data/ethics.js"></script>
+  <script src="data/ethics-final.js"></script>
+  <script src="data/critical-thinking.js"></script>
+  <script src="data/critical-thinking-midterm.js"></script>
+  <script src="data/critical-thinking-final.js"></script>
+  <script src="data/intro-philosophy.js"></script>
+  <script src="data/intro-philosophy-final.js"></script>
+  <script src="script.js"></script>
+  <script src="inline-select.js"></script>
 </body>
 </html>
