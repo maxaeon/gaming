@@ -12,7 +12,13 @@ This repository contains a lightweight browser game that lets you review philoso
 
 ## Getting Started
 
-Simply clone the repository and open **index.html** in a modern web browser. If your browser restricts loading JavaScript files from the filesystem you can serve the project locally:
+You can play the game directly from the hosted GitHub Pages site:
+
+```
+https://<USERNAME>.github.io/jeopardy/
+```
+
+No download is required. If you prefer to run it locally, clone the repository and open **index.html** in a modern web browser. If your browser restricts loading JavaScript files from the filesystem you can serve the project locally:
 
 ```bash
 python3 -m http.server 8000
