@@ -14,6 +14,7 @@ This repository contains a set of lightweight browser games that let you review 
 - Fallacy Detective and What's Missing? mini-games to practice argument analysis
 - "Who Said It?" quote quiz
 - Ethics Chat page with rotating philosopher perspectives
+- Intro Philosophy Chat covering ancient Greek thinkers
 
 ## Getting Started
 
@@ -30,6 +31,7 @@ Additional pages include:
 - `fallacy.html` – Fallacy Detective mini-game
 - `whats-missing.html` – practice identifying missing premises
 - `ethics-chat.html` – lightweight rotating chat with famous ethicists
+- `intro-philosophy-chat.html` – interactive chat with ancient Greek philosophers
 
 
 ## Project Structure
