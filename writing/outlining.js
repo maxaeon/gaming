@@ -26,6 +26,10 @@ const pieces = [
   }
 ];
 
+let pieceCounter = pieces.length - 1;
+let draggedPiece = null;
+let draggedOutline = null;
+
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -34,20 +38,32 @@ function shuffle(arr) {
   }
 }
 
+function createPiece(text, id) {
+  const li = document.createElement('li');
+  li.className = 'puzzle-piece';
+  li.draggable = true;
+  li.id = id;
+  li.textContent = text;
+  const remove = document.createElement('button');
+  remove.textContent = '✕';
+  remove.className = 'remove-btn';
+  remove.onclick = () => removePiece(id);
+  li.appendChild(remove);
+  li.addEventListener('dragstart', e => {
+    draggedPiece = li;
+    e.dataTransfer.setData('text/plain', li.id);
+  });
+  li.addEventListener('dragend', () => draggedPiece = null);
+  return li;
+}
+
 function buildPieces() {
   const list = document.getElementById('puzzle-pieces');
-  list.addEventListener('dragover', e => e.preventDefault());
+  list.addEventListener('dragover', handlePieceDragOver);
   list.addEventListener('drop', handleListDrop);
   pieces.forEach((p, idx) => {
-    const li = document.createElement('li');
-    li.innerText = p.text;
-    li.className = 'puzzle-piece';
-    li.draggable = true;
-    li.id = 'piece-' + idx;
+    const li = createPiece(p.text, 'piece-' + idx);
     li.dataset.order = p.order;
-    li.addEventListener('dragstart', e => {
-      e.dataTransfer.setData('text/plain', li.id);
-    });
     list.appendChild(li);
   });
 }
@@ -66,6 +82,64 @@ function buildSlots() {
     li.appendChild(notes);
     slots.appendChild(li);
   }
+}
+
+function handlePieceDragOver(e) {
+  e.preventDefault();
+  const list = document.getElementById('puzzle-pieces');
+  const target = e.target.closest('.puzzle-piece');
+  if (!draggedPiece || !target || target === draggedPiece || target.parentNode !== list) return;
+  const rect = target.getBoundingClientRect();
+  const next = e.clientY > rect.top + rect.height / 2;
+  list.insertBefore(draggedPiece, next ? target.nextSibling : target);
+}
+
+function removePiece(id) {
+  document.querySelectorAll('.puzzle-slot').forEach(slot => {
+    const child = slot.querySelector('#' + id);
+    if (child) child.remove();
+  });
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+function prepareOutlineItem(li) {
+  li.draggable = true;
+  const btn = document.createElement('button');
+  btn.textContent = '✕';
+  btn.className = 'remove-btn';
+  btn.onclick = () => li.remove();
+  li.appendChild(btn);
+  li.addEventListener('dragstart', e => {
+    draggedOutline = li;
+    e.dataTransfer.setData('text/plain', '');
+  });
+  li.addEventListener('dragend', () => draggedOutline = null);
+}
+
+function createOutlineItem(text) {
+  const li = document.createElement('li');
+  li.textContent = text;
+  li.contentEditable = true;
+  prepareOutlineItem(li);
+  return li;
+}
+
+function handleOutlineDragOver(e) {
+  e.preventDefault();
+  const list = document.getElementById('my-outline');
+  const target = e.target.closest('#my-outline li');
+  if (!draggedOutline || !target || target === draggedOutline) return;
+  const rect = target.getBoundingClientRect();
+  const next = e.clientY > rect.top + rect.height / 2;
+  list.insertBefore(draggedOutline, next ? target.nextSibling : target);
+}
+
+function initOutlineList() {
+  const list = document.getElementById('my-outline');
+  list.addEventListener('dragover', handleOutlineDragOver);
+  list.addEventListener('drop', e => e.preventDefault());
+  list.querySelectorAll('li').forEach(prepareOutlineItem);
 }
 
 function handleDrop(e) {
@@ -113,20 +187,42 @@ window.addEventListener('DOMContentLoaded', () => {
   shuffle(pieces);
   buildPieces();
   buildSlots();
+  initOutlineList();
+});
+
+document.getElementById('add-piece').addEventListener('click', () => {
+  const text = prompt('Enter block text:');
+  if (text) {
+    const id = 'piece-' + (++pieceCounter);
+    const li = createPiece(text, id);
+    document.getElementById('puzzle-pieces').appendChild(li);
+  }
 });
 
 document.getElementById('start-project').addEventListener('click', () => {
   document.getElementById('project-area').classList.remove('hidden');
 });
 
+document.getElementById('add-outline-item').addEventListener('click', () => {
+  document.getElementById('my-outline').appendChild(createOutlineItem('New point...'));
+});
+
 function resetOutline() {
-  document.querySelectorAll('#my-outline li').forEach(li => li.innerText = '');
+  const list = document.getElementById('my-outline');
+  list.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    list.appendChild(createOutlineItem(`Point ${i + 1}...`));
+  }
 }
 
-function exportOutline() {
+function exportOutlineDocx() {
   const { Document, Packer, Paragraph } = window.docx;
   const doc = new Document();
-  const children = Array.from(document.querySelectorAll('#my-outline li')).map(li => new Paragraph(li.innerText));
+  const children = Array.from(document.querySelectorAll('#my-outline li')).map(li => {
+    const clone = li.cloneNode(true);
+    clone.querySelector('button')?.remove();
+    return new Paragraph(clone.textContent.trim());
+  });
   doc.addSection({ children });
   Packer.toBlob(doc).then(blob => {
     const url = URL.createObjectURL(blob);
@@ -138,5 +234,18 @@ function exportOutline() {
   });
 }
 
+function exportOutlinePdf() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const lines = Array.from(document.querySelectorAll('#my-outline li')).map(li => {
+    const clone = li.cloneNode(true);
+    clone.querySelector('button')?.remove();
+    return clone.textContent.trim();
+  });
+  lines.forEach((line, i) => doc.text(line, 10, 10 + i * 10));
+  doc.save('outline.pdf');
+}
+
 document.getElementById('reset-outline').addEventListener('click', resetOutline);
-document.getElementById('export-outline').addEventListener('click', exportOutline);
+document.getElementById('export-outline').addEventListener('click', exportOutlineDocx);
+document.getElementById('export-outline-pdf').addEventListener('click', exportOutlinePdf);
