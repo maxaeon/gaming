@@ -334,6 +334,18 @@ button {
   transform: translate(100%, -50%);
 }
 
+@media (min-width: 768px) {
+  #quote-sidebar {
+    bottom: 0;
+    top: auto;
+    transform: none;
+  }
+
+  #quote-sidebar.collapsed {
+    transform: translateX(100%);
+  }
+}
+
 #quote-toggle {
   position: absolute;
   left: -32px;
