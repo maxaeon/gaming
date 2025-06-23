@@ -83,6 +83,16 @@ body.home #site-icon {
   text-align: center;
 }
 
+#home-title .mind,
+#home-link .mind {
+  transition: color 0.3s;
+}
+
+#home-title:hover .mind,
+#home-link:hover .mind {
+  color: red;
+}
+
 #home-header {
   display: flex;
   flex-direction: column;
