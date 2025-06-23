@@ -13,6 +13,11 @@ function evaluate(text) {
   return res;
 }
 
+const vulgarWords = ['fuck', 'shit', 'bitch', 'asshole', 'dick', 'crap'];
+function containsVulgarity(text) {
+  return new RegExp(`\\b(${vulgarWords.join('|')})\\b`, 'i').test(text);
+}
+
 function showFeedback(res, elemId) {
   const div = document.getElementById(elemId);
   div.innerHTML = `<ul>` +
@@ -28,6 +33,10 @@ function handleSubmit() {
   const text = document.getElementById('draft-input').value.trim();
   const res = evaluate(text);
   showFeedback(res, 'feedback');
+  if (containsVulgarity(text)) {
+    const div = document.getElementById('feedback');
+    div.innerHTML += '<p>Heads up! Colorful language isn\'t usually welcome in academic circles.</p>';
+  }
   document.getElementById('revision-section').classList.remove('hidden');
 }
 
@@ -42,6 +51,10 @@ function handleRevision() {
   const text = document.getElementById('revision-input').value.trim();
   const res = evaluate(text);
   showFeedback(res, 'revision-feedback');
+  if (containsVulgarity(text)) {
+    const div = document.getElementById('revision-feedback');
+    div.innerHTML += '<p>Remember: scholarly writing works best without vulgar words!</p>';
+  }
   document.getElementById('reflection').classList.remove('hidden');
 }
 
