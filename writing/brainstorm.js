@@ -171,9 +171,7 @@ document.getElementById('clear-map').addEventListener('click', resetMindMap);
 document.getElementById('export-mindmap').addEventListener('click', exportMindMap);
 document.getElementById('export-pdf').addEventListener('click', exportMindMapPDF);
 document.getElementById('add-cluster').addEventListener('click', () => {
-  const name = prompt('Cluster name');
-  if (name) {
-    document.getElementById('clusters').appendChild(createCluster(name));
-    enableDrops();
-  }
+  const cluster = createCluster('New Cluster');
+  document.getElementById('clusters').appendChild(cluster);
+  enableDrops();
 });
