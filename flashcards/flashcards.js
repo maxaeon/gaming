@@ -26,6 +26,13 @@ const flashcards = buildFlashcards();
 if (typeof window !== 'undefined') {
   window.flashcards = flashcards;
 }
+
+const courseColors = {
+  introPhilosophy: '#9c27b0',
+  criticalThinking: '#f44336',
+  ethics: '#2196f3',
+  writing: '#424242'
+};
 let currentCards = [];
 let cardIndex = 0;
 
@@ -51,13 +58,18 @@ function populateCategories(course) {
 
 function loadCards(course, category = 'all') {
   if (!flashcards[course]) return;
+  const color = courseColors[course] || '#9c27b0';
+  const wrapper = document.getElementById('flashcard');
+  if (wrapper) wrapper.style.setProperty('--flashcard-color', color);
   const allCards = category === 'all'
     ? Object.values(flashcards[course]).flat()
     : (flashcards[course][category] || []);
   currentCards = allCards.slice();
   shuffle(currentCards);
   cardIndex = 0;
-  document.getElementById('flashcard').classList.remove('hidden');   document.getElementById('flashcard').hidden = false;
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('hidden');
+  fc.hidden = false;
   loadCard();
 }
 
@@ -158,12 +170,19 @@ document.getElementById('category-select').addEventListener('change', e => {
 });
 
 document.querySelector('#flashcard .flip-card').addEventListener('click', toggleFlip);
-document.getElementById('next-card').addEventListener('click', nextCard);
-document.getElementById('prev-card').addEventListener('click', prevCard);
-document.getElementById('exit-cards').addEventListener('click', () => {
-  const flashcard = document.getElementById('flashcard');
-  flashcard.classList.add('hidden');
-  flashcard.hidden = true;
+document.querySelectorAll('.next-card').forEach(btn => {
+  btn.addEventListener('click', e => { e.stopPropagation(); nextCard(); });
+});
+document.querySelectorAll('.prev-card').forEach(btn => {
+  btn.addEventListener('click', e => { e.stopPropagation(); prevCard(); });
+});
+document.querySelectorAll('.flashcard-close').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const flashcard = document.getElementById('flashcard');
+    flashcard.classList.add('hidden');
+    flashcard.hidden = true;
+  });
 });
 
 // Keyboard navigation
@@ -174,7 +193,7 @@ document.addEventListener('keydown', (e) => {
     nextCard();
   } else if (e.key === 'ArrowLeft') {
     prevCard();
-  } else if (e.key === 'Shift') {
+  } else if (e.key === 'Shift' || e.code === 'Space') {
     toggleFlip();
   }
 });
