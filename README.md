@@ -1,4 +1,4 @@
-# Thinkers' Arcade
+# PhilHub
 
 This repository contains a set of lightweight browser games that let you review philosophy concepts. Everything runs in the browser, so no server setup is required. Clone the repo or visit the GitHub Pages site to start playing immediately.
 
@@ -22,7 +22,7 @@ This repository contains a set of lightweight browser games that let you review 
 You can play the games directly from the hosted GitHub Pages site:
 
 ```
-https://maxaeon.github.io/jeopardy/
+https://maxaeon.github.io/philhub/
 ```
 
 The homepage lists links to each activity including the Jeopardy board game,

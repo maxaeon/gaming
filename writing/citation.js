@@ -102,6 +102,8 @@ document.getElementById('citation-next').addEventListener('click', () => {
     completedRounds++;
     if (completedRounds === 1) {
       document.getElementById('citation-aid-link').classList.remove('hidden');
+      document.getElementById('start-project').classList.remove('hidden');
+      document.getElementById('research-guide').classList.remove('hidden');
     }
   }
   buildCitation();
