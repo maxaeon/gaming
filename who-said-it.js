@@ -22,6 +22,12 @@ const philosopherQuotes = [
 ];
 
 let currentQuote = null;
+let quotePool = [];
+
+function refillQuotePool() {
+  quotePool = [...philosopherQuotes];
+  shuffle(quotePool);
+}
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -40,8 +46,10 @@ function buildOptions(correct) {
 }
 
 function showRandomQuote() {
-  const idx = Math.floor(Math.random() * philosopherQuotes.length);
-  currentQuote = philosopherQuotes[idx];
+  if (quotePool.length === 0) {
+    refillQuotePool();
+  }
+  currentQuote = quotePool.pop();
   document.getElementById('quote-text').innerText = '"' + currentQuote.quote + '"';
 
   const optionsDiv = document.getElementById('quote-options');
