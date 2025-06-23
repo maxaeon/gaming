@@ -24,7 +24,9 @@
       div.innerHTML = `<strong>${speaker}:</strong> <span class="typing">…</span>`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
-      const delay = 1000 + Math.random() * 1500;
+      const baseDelay = 1000;
+      const extraDelay = Math.min(2000, text.length * 20);
+      const delay = baseDelay + Math.random() * extraDelay;
       await new Promise(res => setTimeout(res, delay));
       div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
       chatBox.scrollTop = chatBox.scrollHeight;
@@ -73,7 +75,9 @@
         }
         await addMessage(current, closing);
       }
-      current = data.nextTheorist;
+      const next = data.nextTheorist;
+      await addMessage('System', `${current} added ${next} to the chat`, 'chat-notice');
+      current = next;
       exchangeIndex = 0;
       if (current === 'Philosophy Student') {
         const finalText = bots['Philosophy Student'].finalAssessment('', alignmentScores);

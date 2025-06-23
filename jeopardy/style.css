@@ -408,6 +408,12 @@ button {
   color: #80cbc4;
 }
 
+.chat-notice {
+  color: #c0c0c0;
+  font-style: italic;
+  text-align: center;
+}
+
 #chat-controls {
   display: flex;
   gap: 8px;

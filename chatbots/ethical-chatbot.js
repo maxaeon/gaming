@@ -35,11 +35,11 @@ const ethicalChatbots = {
     ],
     closings: {
       highAlignment: (userName) =>
-        `You clearly resonate with utilitarian ethics${userName ? `, ${userName}` : ""}. But let's hear from Immanuel Kant next.`,
+        `You clearly resonate with utilitarian ethics${userName ? `, ${userName}` : ""}. Someone who disagrees with me is Immanuel Kant, so I've added him to the chat. Kant believes morality is about following universal duties, not just happiness.`,
       moderateAlignment: (userName) =>
-        `Interesting perspectives${userName ? `, ${userName}` : ""}. Perhaps Kant's approach can add clarity.`,
+        `Interesting perspectives${userName ? `, ${userName}` : ""}. I've invited Immanuel Kant, who argues morality comes from universal duties rather than consequences.`,
       lowAlignment: (userName) =>
-        `Fascinating disagreements${userName ? `, ${userName}` : ""}. Kant might offer insights you'll appreciate more.`
+        `Fascinating disagreements${userName ? `, ${userName}` : ""}. I've added Immanuel Kant to explain his view that morality rests on universal duties.`
     },
     nextTheorist: "Immanuel Kant"
   },
@@ -70,11 +70,11 @@ const ethicalChatbots = {
     ],
     closings: {
       highAlignment: (userName) =>
-        `You align well with duty-based ethics${userName ? `, ${userName}` : ""}. Let's now meet Thomas Aquinas.`,
+        `You align well with duty-based ethics${userName ? `, ${userName}` : ""}. To deepen the discussion I've added Thomas Aquinas. He emphasizes natural law and intentions.`,
       moderateAlignment: (userName) =>
-        `Thoughtful engagement${userName ? `, ${userName}` : ""}. Perhaps Aquinas will provide more insights.`,
+        `Thoughtful engagement${userName ? `, ${userName}` : ""}. I've invited Thomas Aquinas, who focuses on natural law and intentions.`,
       lowAlignment: (userName) =>
-        `Interesting differences${userName ? `, ${userName}` : ""}. Aquinas' natural law might resonate better.`
+        `Interesting differences${userName ? `, ${userName}` : ""}. Thomas Aquinas, whom I've added, argues morality depends on natural law and intentions.`
     },
     nextTheorist: "St. Thomas Aquinas"
   },
@@ -105,11 +105,11 @@ const ethicalChatbots = {
     ],
     closings: {
       highAlignment: (userName) =>
-        `You resonate strongly with natural law ethics${userName ? `, ${userName}` : ""}. Let's introduce Aristotle next.`,
+        `You resonate strongly with natural law ethics${userName ? `, ${userName}` : ""}. I've added Aristotle to share his focus on cultivating virtue for human flourishing.`,
       moderateAlignment: (userName) =>
-        `Good reflections${userName ? `, ${userName}` : ""}. Aristotle might enhance our discussion further.`,
+        `Good reflections${userName ? `, ${userName}` : ""}. Aristotle will join us next to discuss virtue and flourishing.`,
       lowAlignment: (userName) =>
-        `Interesting viewpoints${userName ? `, ${userName}` : ""}. Aristotle’s virtue ethics could offer another angle.`
+        `Interesting viewpoints${userName ? `, ${userName}` : ""}. I've invited Aristotle, who centers morality on developing virtue.`
     },
     nextTheorist: "Aristotle"
   },
@@ -140,11 +140,11 @@ const ethicalChatbots = {
     ],
     closings: {
       highAlignment: (userName) =>
-        `You strongly align with virtue ethics${userName ? `, ${userName}` : ""}. Lastly, let's meet Nel Noddings.`,
+        `You strongly align with virtue ethics${userName ? `, ${userName}` : ""}. I've now added Nel Noddings to share her ethics of care perspective.`,
       moderateAlignment: (userName) =>
-        `Interesting thoughts${userName ? `, ${userName}` : ""}. Noddings' perspective on care might be valuable.`,
+        `Interesting thoughts${userName ? `, ${userName}` : ""}. I've invited Nel Noddings, who emphasizes empathy and care.`,
       lowAlignment: (userName) =>
-        `Fascinating differences${userName ? `, ${userName}` : ""}. Perhaps Noddings' ethics of care will resonate better.`
+        `Fascinating differences${userName ? `, ${userName}` : ""}. Nel Noddings will join us next to discuss ethics of care.`
     },
     nextTheorist: "Nel Noddings"
   },
@@ -176,11 +176,11 @@ const ethicalChatbots = {
     ],
     closings: {
       highAlignment: (userName) =>
-        `Strong resonance with care ethics${userName ? `, ${userName}` : ""}. I'll now return you to our fellow student.`,
+        `Strong resonance with care ethics${userName ? `, ${userName}` : ""}. I'm adding our fellow student back to the chat to conclude.`,
       moderateAlignment: (userName) =>
-        `Thanks for the thoughtful discussion${userName ? `, ${userName}` : ""}. Back to our fellow student now.`,
+        `Thanks for the thoughtful discussion${userName ? `, ${userName}` : ""}. I'm returning you to our fellow student now.`,
       lowAlignment: (userName) =>
-        `Interesting dialogue${userName ? `, ${userName}` : ""}. Let's return to our fellow student to wrap up.`
+        `Interesting dialogue${userName ? `, ${userName}` : ""}. I'll add our fellow student back so we can wrap up.`
     },
     nextTheorist: "Philosophy Student"
   }
