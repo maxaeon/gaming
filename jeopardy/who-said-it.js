@@ -86,7 +86,12 @@ showRandomQuote();
 const sidebar = document.getElementById('quote-sidebar');
 const toggleBtn = document.getElementById('quote-toggle');
 if (sidebar && toggleBtn) {
+  // Set initial arrow based on sidebar state
+  toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '&#x276E;' : '&#x276F;';
+
   toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
+    const collapsed = sidebar.classList.toggle('collapsed');
+    // When collapsed show left-pointing arrow, otherwise point inward
+    toggleBtn.innerHTML = collapsed ? '&#x276E;' : '&#x276F;';
   });
 }
