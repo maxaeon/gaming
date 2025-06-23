@@ -134,3 +134,11 @@ document.getElementById('quit-no').onclick = () => {
 window.addEventListener("pagehide", goHome);
 // Also reset when the page is shown again from the back/forward cache
 window.addEventListener("pageshow", goHome);
+
+// Ensure the game closes when the page is hidden or unloaded
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    goHome();
+  }
+});
+window.addEventListener('beforeunload', goHome);
