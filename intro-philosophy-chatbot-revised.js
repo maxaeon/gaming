@@ -144,15 +144,24 @@ const philosophyChatSteps = [
     'Aristotle': 'speaker-aristotle'
   };
 
-  function addMessage(speaker, text, className) {
+  async function addMessage(speaker, text, className) {
     if (!className) {
       className = speakerClasses[speaker] || 'chat-bot';
     }
     const div = document.createElement('div');
     div.className = `chat-message ${className}`;
-    div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
-    chatBox.appendChild(div);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    if (div.classList.contains('chat-bot')) {
+      div.innerHTML = `<strong>${speaker}:</strong> <span class="typing">…</span>`;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      await new Promise(res => setTimeout(res, 1000));
+      div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    } else {
+      div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
   }
 
   function showChoices(step) {
@@ -166,14 +175,18 @@ const philosophyChatSteps = [
     });
   }
 
-  function handleChoice(choice) {
-    addMessage('You', choice, 'chat-user');
+  async function handleChoice(choice) {
+    await addMessage('You', choice, 'chat-user');
     const step = philosophyChatSteps[stepIndex];
     controls.innerHTML = '';
     const replies = step.responses[choice] || [];
-    replies.forEach(m => addMessage(m.speaker, m.text));
+    for (const m of replies) {
+      await addMessage(m.speaker, m.text);
+    }
     if (step.after) {
-      step.after.forEach(m => addMessage(m.speaker, m.text));
+      for (const m of step.after) {
+        await addMessage(m.speaker, m.text);
+      }
     }
     stepIndex++;
     if (stepIndex < philosophyChatSteps.length) {
@@ -181,14 +194,18 @@ const philosophyChatSteps = [
     }
   }
 
-  function showStep() {
+  async function showStep() {
     const step = philosophyChatSteps[stepIndex];
-    step.messages.forEach(m => addMessage(m.speaker, m.text));
+    for (const m of step.messages) {
+      await addMessage(m.speaker, m.text);
+    }
     if (step.choices) {
       showChoices(step);
     } else {
       if (step.after) {
-        step.after.forEach(m => addMessage(m.speaker, m.text));
+        for (const m of step.after) {
+          await addMessage(m.speaker, m.text);
+        }
       }
       stepIndex++;
       if (stepIndex < philosophyChatSteps.length) {
