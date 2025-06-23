@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trolley Problem Simulator</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <style>
+    #scenario-text {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    #result p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Thinker's Arcade</a>
+  </nav>
+  <div class="container">
+    <h1>Trolley Problem Simulator</h1>
+    <div id="scenario">
+      <p id="scenario-text"></p>
+      <div class="game-links" id="choices">
+        <button id="action-btn">Pull the Lever</button>
+        <button id="inaction-btn">Do Nothing</button>
+      </div>
+    </div>
+    <div id="result" class="hidden">
+      <p id="result-text"></p>
+      <p id="reflection-question"></p>
+      <button id="next-btn">Next Scenario</button>
+    </div>
+    <div id="summary" class="hidden"></div>
+    <button id="ai-btn" class="hidden">AI Scenario</button>
+  </div>
+  <script src="trolley.js"></script>
+</body>
+</html>
