@@ -19,53 +19,53 @@
       <div class="course">
         <h3>Intro to Philosophy</h3>
         <div class="game-links">
-          <button onclick="location.href='../flashcards/flashcards.html?course=introPhilosophy'">Flashcards</button>
-          <button onclick="location.href='../trivia/trivia.html?course=introPhilosophy'">Trivia</button>
-          <button onclick="location.href='../chatbots/intro-philosophy-chat.html'">Chat</button>
+          <button onclick="location.href='../flashcards/flashcards.html?course=introPhilosophy'" title="Flashcards – Study key terms">Flashcards</button>
+          <button onclick="location.href='../trivia/trivia.html?course=introPhilosophy'" title="Trivia – Quick knowledge quiz">Trivia</button>
+          <button onclick="location.href='../chatbots/intro-philosophy-chat.html'" title="Chat – Talk with Kant, Mill, Aristotle…">Chat</button>
         </div>
-        <button class="topic-btn" data-topic="introPhilosophy">Game Board</button>
+        <button class="topic-btn" data-topic="introPhilosophy" title="Game Board – Play Jeopardy-style questions">Game Board</button>
         <div class="exam-dropdown hidden" hidden>
-          <button data-exam="Midterm">Midterm Review</button>
-          <button data-exam="Final">Final Review</button>
+          <button data-exam="Midterm" title="Midterm Review – Part 1">Midterm Review</button>
+          <button data-exam="Final" title="Final Review – Part 2">Final Review</button>
         </div>
       </div>
       <div class="course">
         <h3>Critical Thinking</h3>
         <div class="game-links">
-          <button onclick="location.href='../flashcards/flashcards.html?course=criticalThinking'">Flashcards</button>
-          <button onclick="location.href='../trivia/trivia.html?course=criticalThinking'">Trivia</button>
-          <button onclick="location.href='../sherlock-mystery/sherlock.html'">Sherlock Mystery</button>
-          <button onclick="location.href='../argument-reconstruction/critical-thinking.html'">Reconstruction</button>
+          <button onclick="location.href='../flashcards/flashcards.html?course=criticalThinking'" title="Flashcards – Review logic terms">Flashcards</button>
+          <button onclick="location.href='../trivia/trivia.html?course=criticalThinking'" title="Trivia – Quick critical thinking quiz">Trivia</button>
+          <button onclick="location.href='../sherlock-mystery/sherlock.html'" title="Sherlock Mystery – Solve a logic puzzle">Sherlock Mystery</button>
+          <button onclick="location.href='../argument-reconstruction/critical-thinking.html'" title="Reconstruction – Analyze arguments">Reconstruction</button>
         </div>
-        <button class="topic-btn" data-topic="criticalThinking">Game Board</button>
+        <button class="topic-btn" data-topic="criticalThinking" title="Game Board – Play Jeopardy-style questions">Game Board</button>
         <div class="exam-dropdown hidden" hidden>
-          <button data-exam="Midterm">Midterm Review</button>
-          <button data-exam="Final">Final Review</button>
+          <button data-exam="Midterm" title="Midterm Review – Part 1">Midterm Review</button>
+          <button data-exam="Final" title="Final Review – Part 2">Final Review</button>
         </div>
       </div>
       <div class="course">
         <h3>Ethics</h3>
         <div class="game-links">
-          <button onclick="location.href='../flashcards/flashcards.html?course=ethics'">Flashcards</button>
-          <button onclick="location.href='../trivia/trivia.html?course=ethics'">Trivia</button>
-          <button onclick="location.href='../chatbots/ethics-chat.html'">Chat</button>
+          <button onclick="location.href='../flashcards/flashcards.html?course=ethics'" title="Flashcards – Study ethical theories">Flashcards</button>
+          <button onclick="location.href='../trivia/trivia.html?course=ethics'" title="Trivia – Quick ethics questions">Trivia</button>
+          <button onclick="location.href='../chatbots/ethics-chat.html'" title="Chat – Debate dilemmas with philosophers">Chat</button>
         </div>
-        <button class="topic-btn" data-topic="ethics">Game Board</button>
+        <button class="topic-btn" data-topic="ethics" title="Game Board – Play Jeopardy-style questions">Game Board</button>
         <div class="exam-dropdown hidden" hidden>
-          <button data-exam="Midterm">Midterm Review</button>
-          <button data-exam="Final">Final Review</button>
+          <button data-exam="Midterm" title="Midterm Review – Part 1">Midterm Review</button>
+          <button data-exam="Final" title="Final Review – Part 2">Final Review</button>
         </div>
       </div>
     </div>
 
     <div id="quote-sidebar" class="quote-open">
-      <button id="quote-toggle" aria-label="Toggle Who Said It">&#x276E;</button>
+      <button id="quote-toggle" aria-label="Toggle Who Said It" title="Toggle the quote game">&#x276E;</button>
       <div id="quote-game">
         <h2>Who said it?</h2>
         <p id="quote-text"></p>
         <div id="quote-options" class="mc-options"></div>
         <div id="quote-feedback" class="hidden" hidden></div>
-        <button id="quote-next" class="hidden" hidden>Next Quote</button>
+        <button id="quote-next" class="hidden" hidden title="Next quote">Next Quote</button>
       </div>
     </div>
 
@@ -78,14 +78,14 @@
       <div id="modal-content">
         <p id="question-text"></p>
         <input type="text" id="user-answer" placeholder="Type your answer here..." autocomplete="off">
-        <button id="submit-answer">Submit</button>
+        <button id="submit-answer" title="Submit your answer">Submit</button>
         <div id="correct-answer" class="hidden" hidden></div>
         <div id="submitted-answer" class="hidden" hidden></div>
         <div id="award-controls" class="hidden" hidden>
-          <button id="award-yes">Give Points</button>
-          <button id="award-no">No Points</button>
+          <button id="award-yes" title="Award points for this answer">Give Points</button>
+          <button id="award-no" title="No points for this answer">No Points</button>
         </div>
-        <button id="cancel-btn">Cancel</button>
+        <button id="cancel-btn" title="Cancel and close">Cancel</button>
       </div>
     </div>
 
@@ -94,10 +94,10 @@
         <h2 id="celebration-heading">Congratulations!</h2>
         <p>You've completed the game board!</p>
         <div id="share-controls" class="hidden" hidden>
-          <button id="copy-link">Copy Link</button>
-          <button id="web-share">Share</button>
+          <button id="copy-link" title="Copy a link to share">Copy Link</button>
+          <button id="web-share" title="Share using web tools">Share</button>
         </div>
-        <button id="restart-btn">Play Again</button>
+        <button id="restart-btn" title="Restart the game">Play Again</button>
       </div>
     </div>
 
@@ -105,8 +105,8 @@
       <div class="modal-content">
         <h2 id="mode-heading">Select Game Mode</h2>
         <input id="single-name" type="text" placeholder="Your name">
-        <button id="single-mode">Single Player</button>
-        <button id="multi-mode">Multiplayer</button>
+        <button id="single-mode" title="Play solo">Single Player</button>
+        <button id="multi-mode" title="Play with friends">Multiplayer</button>
       </div>
     </div>
 
@@ -116,7 +116,7 @@
         <label for="player-count">Number of Players (2-4)</label>
         <input id="player-count" type="number" min="2" max="4" value="2">
         <div id="name-fields"></div>
-        <button id="start-multi">Start Game</button>
+        <button id="start-multi" title="Begin multiplayer game">Start Game</button>
       </div>
     </div>
 
@@ -124,8 +124,8 @@
       <div class="modal-content">
         <h2 id="quit-heading">Quit Game?</h2>
         <p>Your progress may not be saved. Are you sure you want to proceed?</p>
-        <button id="quit-yes">Yes</button>
-        <button id="quit-no">Cancel</button>
+        <button id="quit-yes" title="Exit without saving">Yes</button>
+        <button id="quit-no" title="Continue playing">Cancel</button>
       </div>
     </div>
 
