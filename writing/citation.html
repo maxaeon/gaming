@@ -21,6 +21,22 @@
       <div id="citation-answer" class="hidden" hidden></div>
       <button id="citation-next" class="hidden" hidden>Next</button>
     </div>
+    <div id="citation-complete" class="hidden" hidden>
+      <p>Nice work! You've completed the citation fixes.</p>
+      <button id="citation-restart">Start Over</button>
+    </div>
+
+    <section id="citation-choice-section" class="hidden" hidden>
+      <h2>Select the Correct Citation</h2>
+      <p id="choice-prompt"></p>
+      <div id="choice-options" class="mc-options"></div>
+      <div id="choice-feedback" class="hidden" hidden></div>
+      <button id="choice-next" class="hidden" hidden>Next</button>
+    </section>
+    <div id="choice-summary" class="hidden" hidden>
+      <p>Great job on these selections!</p>
+      <button id="choice-restart">Try Again</button>
+    </div>
     <p id="research-guide" class="hidden" hidden>Explore your own peer-reviewed sources using <a href="https://scholar.google.com" target="_blank">scholar.google.com</a> or your college library. Use the "Cite" or "Export" options to save references to tools like <a href="https://www.zotero.org" target="_blank">Zotero</a>, <a href="https://www.mendeley.com" target="_blank">Mendeley</a>, or <a href="https://endnote.com" target="_blank">EndNote</a>. For MLA guidelines see <a href="https://owl.purdue.edu" target="_blank">Purdue OWL</a>.</p>
     <button id="citation-aid-link" class="hidden" hidden>Citation Guide</button>
 
@@ -37,6 +53,23 @@ Clark, Mary. "An Article." <i>Journal of Examples</i>, vol. 12, no. 3, 2019, pp.
         <pre>
 <span class="info" data-tooltip="Author names should be reversed and the title needs a period.">John Smith The Example Book</span> Example Press <span class="info" data-tooltip="Add a comma after the publisher and a period after the year.">2020</span>
 <span class="info" data-tooltip="Missing quotation marks, volume, and issue information.">Mary Clark. An Article. Journal of Examples 12.3 (2019): 45-50</span>
+        </pre>
+      </div>
+    </section>
+
+    <section id="in-text-examples">
+      <div class="correct-format">
+        <h2>Correct In-Text</h2>
+        <pre>
+(Kant 31)
+Kant writes that one must never lie (31).
+        </pre>
+      </div>
+      <div class="needs-work">
+        <h2>Needs Work</h2>
+        <pre>
+<span class="info" data-tooltip="Omit the author here since it appears in the sentence.">Kant writes that one must never lie (Kant 31)</span>
+<span class="info" data-tooltip="Remove the comma and 'p.'">(Kant, p. 31)</span>
         </pre>
       </div>
     </section>

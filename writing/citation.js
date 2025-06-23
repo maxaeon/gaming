@@ -41,8 +41,48 @@ const citationExercises = [
   }
 ];
 
+const citationChoices = [
+  {
+    type: 'in-text',
+    prompt: 'Which in-text citation is formatted correctly?',
+    options: [
+      'Aristotle holds that virtues are means between extremes (Aristotle, <em>Nicomachean Ethics</em>, p. 1107b).',
+      'Aristotle holds that virtues are means between extremes (<em>Nicomachean Ethics</em> 1107b).'
+    ],
+    correct: 1
+  },
+  {
+    type: 'in-text',
+    prompt: 'Select the proper citation.',
+    options: [
+      'Mill states that happiness is the basis of morality (Mill, <em>Utilitarianism</em>, p. 14).',
+      'Mill states that happiness is the basis of morality (Mill 14).'
+    ],
+    correct: 1
+  },
+  {
+    type: 'works-cited',
+    prompt: 'Which Works Cited entry follows MLA style?',
+    options: [
+      'Plato. <em>The Republic</em>. Translated by G.M.A. Grube, Hackett, 1992.',
+      'Plato, <em>The Republic</em>. Translated by G.M.A. Grube Hackett 1992.'
+    ],
+    correct: 0
+  },
+  {
+    type: 'works-cited',
+    prompt: 'Choose the correctly formatted citation.',
+    options: [
+      'Singer, Peter. "Famine, Affluence, and Morality." <em>Philosophy & Public Affairs</em>, vol. 1, no. 3, 1972, pp. 229-243.',
+      'Singer Peter. "Famine, Affluence, and Morality." <em>Philosophy & Public Affairs</em> vol. 1 no. 3 1972 229-243.'
+    ],
+    correct: 0
+  }
+];
+
 let citationIndex = 0;
 let completedRounds = 0;
+let choiceIndex = 0;
 
 function buildCitation() {
   const ex = citationExercises[citationIndex];
@@ -94,22 +134,101 @@ function highlightErrors() {
   });
 }
 
+function showCompletion() {
+  document.getElementById('citation-game').classList.add('hidden');
+  document.getElementById('citation-game').hidden = true;
+  const complete = document.getElementById('citation-complete');
+  complete.classList.remove('hidden');
+  complete.hidden = false;
+  startChoiceGame();
+}
+
+function startChoiceGame() {
+  document.getElementById('citation-choice-section').classList.remove('hidden');
+  document.getElementById('citation-choice-section').hidden = false;
+  choiceIndex = 0;
+  buildChoiceQuestion();
+}
+
+function buildChoiceQuestion() {
+  const q = citationChoices[choiceIndex];
+  document.getElementById('choice-prompt').innerText = q.prompt;
+  const opts = document.getElementById('choice-options');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = opt;
+    btn.onclick = () => submitChoice(i);
+    opts.appendChild(btn);
+  });
+  document.getElementById('choice-feedback').classList.add('hidden');
+  document.getElementById('choice-feedback').hidden = true;
+  document.getElementById('choice-next').classList.add('hidden');
+  document.getElementById('choice-next').hidden = true;
+}
+
+function submitChoice(idx) {
+  const q = citationChoices[choiceIndex];
+  const fb = document.getElementById('choice-feedback');
+  if (idx === q.correct) {
+    fb.innerText = 'Correct!';
+  } else {
+    fb.innerHTML = `Not quite. The correct citation is: ${q.options[q.correct]}`;
+  }
+  fb.classList.remove('hidden');
+  fb.hidden = false;
+  document.getElementById('choice-next').classList.remove('hidden');
+  document.getElementById('choice-next').hidden = false;
+}
+
+function nextChoice() {
+  choiceIndex++;
+  if (choiceIndex >= citationChoices.length) {
+    document.getElementById('citation-choice-section').classList.add('hidden');
+    document.getElementById('citation-choice-section').hidden = true;
+    document.getElementById('choice-summary').classList.remove('hidden');
+    document.getElementById('choice-summary').hidden = false;
+  } else {
+    buildChoiceQuestion();
+  }
+}
+
 document.getElementById('citation-giveup').addEventListener('click', revealCitation);
 document.getElementById('citation-next').addEventListener('click', () => {
   citationIndex++;
   if (citationIndex >= citationExercises.length) {
-    citationIndex = 0;
     completedRounds++;
     if (completedRounds === 1) {
-        document.getElementById('citation-aid-link').classList.remove('hidden');       document.getElementById('citation-aid-link').hidden = false;
-        document.getElementById('research-guide').classList.remove('hidden');       document.getElementById('research-guide').hidden = false;
-      }
+      document.getElementById('citation-aid-link').classList.remove('hidden');
+      document.getElementById('citation-aid-link').hidden = false;
+      document.getElementById('research-guide').classList.remove('hidden');
+      document.getElementById('research-guide').hidden = false;
+    }
+    showCompletion();
+  } else {
+    buildCitation();
   }
-  buildCitation();
 });
 
 window.addEventListener('DOMContentLoaded', buildCitation);
 
 document.getElementById('citation-aid-link').addEventListener('click', () => {
   window.open('citation-aid.html', '_blank');
+});
+
+document.getElementById('choice-next').addEventListener('click', nextChoice);
+document.getElementById('citation-restart').addEventListener('click', () => {
+  document.getElementById('citation-complete').classList.add('hidden');
+  document.getElementById('citation-complete').hidden = true;
+  document.getElementById('citation-game').classList.remove('hidden');
+  document.getElementById('citation-game').hidden = false;
+  citationIndex = 0;
+  buildCitation();
+});
+
+document.getElementById('choice-restart').addEventListener('click', () => {
+  document.getElementById('choice-summary').classList.add('hidden');
+  document.getElementById('choice-summary').hidden = true;
+  startChoiceGame();
 });
