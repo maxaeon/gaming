@@ -90,17 +90,17 @@ let roundIndex = 0;
 const counts = { strong: 0, weak: 0, fallacious: 0 };
 
 function showTopics() {
-  document.getElementById('intro').classList.add('hidden');
-  document.getElementById('topic-select').classList.remove('hidden');
+  document.getElementById('intro').classList.add('hidden');   document.getElementById('intro').hidden = true;
+  document.getElementById('topic-select').classList.remove('hidden');   document.getElementById('topic-select').hidden = false;
 }
 
 function startTopic(key) {
   currentTopic = topics[key];
   roundIndex = 0;
   counts.strong = counts.weak = counts.fallacious = 0;
-  document.getElementById('topic-select').classList.add('hidden');
+  document.getElementById('topic-select').classList.add('hidden');   document.getElementById('topic-select').hidden = true;
   document.getElementById('debate-title').innerText = currentTopic.title;
-  document.getElementById('debate').classList.remove('hidden');
+  document.getElementById('debate').classList.remove('hidden');   document.getElementById('debate').hidden = false;
   showRound();
 }
 
@@ -116,8 +116,8 @@ function showRound() {
     btn.onclick = () => chooseResponse(opt);
     respDiv.appendChild(btn);
   });
-  document.getElementById('feedback').classList.add('hidden');
-  document.getElementById('next-round').classList.add('hidden');
+  document.getElementById('feedback').classList.add('hidden');   document.getElementById('feedback').hidden = true;
+  document.getElementById('next-round').classList.add('hidden');   document.getElementById('next-round').hidden = true;
 }
 
 function chooseResponse(option) {
@@ -125,8 +125,8 @@ function chooseResponse(option) {
   const fb = document.getElementById('feedback');
   fb.innerText = option.feedback;
   fb.style.color = option.type === 'strong' ? '#4caf50' : option.type === 'weak' ? '#ff9800' : '#c62828';
-  fb.classList.remove('hidden');
-  document.getElementById('next-round').classList.remove('hidden');
+  fb.classList.remove('hidden');   fb.hidden = false;
+  document.getElementById('next-round').classList.remove('hidden');   document.getElementById('next-round').hidden = false;
 }
 
 function nextRound() {
@@ -139,12 +139,12 @@ function nextRound() {
 }
 
 function showSummary() {
-  document.getElementById('debate').classList.add('hidden');
+  document.getElementById('debate').classList.add('hidden');   document.getElementById('debate').hidden = true;
   const text = `You chose strong arguments: ${counts.strong}/2\n` +
                `You chose weak arguments: ${counts.weak}/2\n` +
                `Logical fallacies used: ${counts.fallacious}`;
   document.getElementById('summary-text').innerText = text;
-  document.getElementById('summary').classList.remove('hidden');
+  document.getElementById('summary').classList.remove('hidden');   document.getElementById('summary').hidden = false;
 }
 
 document.getElementById('start-btn').addEventListener('click', showTopics);

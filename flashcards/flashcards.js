@@ -69,24 +69,24 @@ function loadCards(course, category = 'all') {
   currentCards = allCards.slice();
   shuffle(currentCards);
   cardIndex = 0;
-  document.getElementById('flashcard').classList.remove('hidden');
+  document.getElementById('flashcard').classList.remove('hidden');   document.getElementById('flashcard').hidden = false;
   loadCard();
 }
 
 function loadCard() {
   if (!currentCards.length) {
     document.getElementById('flashcard-question').innerText = 'No cards available.';
-    document.getElementById('flashcard-answer').classList.add('hidden');
+    document.getElementById('flashcard-answer').classList.add('hidden');     document.getElementById('flashcard-answer').hidden = true;
     return;
   }
   const card = currentCards[cardIndex];
   document.getElementById('flashcard-question').innerText = card.question;
   document.getElementById('flashcard-answer').innerText = card.answer;
-  document.getElementById('flashcard-answer').classList.add('hidden');
+  document.getElementById('flashcard-answer').classList.add('hidden');   document.getElementById('flashcard-answer').hidden = true;
 }
 
 function showAnswer() {
-  document.getElementById('flashcard-answer').classList.remove('hidden');
+  document.getElementById('flashcard-answer').classList.remove('hidden');   document.getElementById('flashcard-answer').hidden = false;
 }
 
 function nextCard() {

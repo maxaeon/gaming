@@ -54,7 +54,7 @@ function showCitation() {
 document.getElementById('citation-submit').addEventListener('click', () => {
   const ans = `<strong>Example Provided:</strong> ${citationData.better}<br><em>Source:</em> ${citationData.source}`;
   document.getElementById('citation-answer').innerHTML = ans;
-  document.getElementById('citation-answer').classList.remove('hidden');
+  document.getElementById('citation-answer').classList.remove('hidden');   document.getElementById('citation-answer').hidden = false;
 });
 
 function buildConcepts() {
@@ -69,7 +69,7 @@ function buildConcepts() {
 document.getElementById('concept-submit').addEventListener('click', () => {
   const ans = 'Example provided: {Consequences & circumstances} [Importance of consequences, Nazi-at-the-door case, Individual circumstances]; {Critiques of rigidity} [Doctrine of double effect (criticism), Rigidity of absolute rules, Moral dilemmas]; {Human values} [Empathy and compassion, Human flourishing (Aristotle)].';
   document.getElementById('concept-answer').innerText = ans;
-  document.getElementById('concept-answer').classList.remove('hidden');
+  document.getElementById('concept-answer').classList.remove('hidden');   document.getElementById('concept-answer').hidden = false;
 });
 
 let currentOrder = [2,0,1];
@@ -97,13 +97,13 @@ document.getElementById('check-order').addEventListener('click', () => {
     fb.innerHTML = '<strong>Correct!</strong>';
   } else {
     fb.innerText = 'Not quite. Try again or reveal the example provided.';
-    document.getElementById('order-reveal').classList.remove('hidden');
+    document.getElementById('order-reveal').classList.remove('hidden');     document.getElementById('order-reveal').hidden = false;
   }
 });
 
 document.getElementById('order-reveal').addEventListener('click', () => {
   document.getElementById('order-answer').innerHTML = orderSentences.map(s => `<div>${s}</div>`).join('');
-  document.getElementById('order-answer').classList.remove('hidden');
+  document.getElementById('order-answer').classList.remove('hidden');   document.getElementById('order-answer').hidden = false;
 });
 
 function showRewritePrompt() {
@@ -112,12 +112,12 @@ function showRewritePrompt() {
 
 document.getElementById('rewrite-reveal').addEventListener('click', () => {
   document.getElementById('rewrite-answer').innerHTML = `<strong>Example Provided:</strong> ${rewriteExample.better}`;
-  document.getElementById('rewrite-answer').classList.remove('hidden');
+  document.getElementById('rewrite-answer').classList.remove('hidden');   document.getElementById('rewrite-answer').hidden = false;
 });
 
 document.getElementById('thesis-reveal').addEventListener('click', () => {
   document.getElementById('thesis-answer').innerHTML = `<strong>Example Provided:</strong> ${betterThesis}`;
-  document.getElementById('thesis-answer').classList.remove('hidden');
+  document.getElementById('thesis-answer').classList.remove('hidden');   document.getElementById('thesis-answer').hidden = false;
 });
 
 function showDialoguePrompt() {
@@ -132,7 +132,7 @@ document.getElementById('dialogue-reveal').addEventListener('click', () => {
     li.innerText = item;
     list.appendChild(li);
   });
-  list.classList.remove('hidden');
+  list.classList.remove('hidden');   list.hidden = false;
 });
 
 function showProofPrompt() {
@@ -141,12 +141,12 @@ function showProofPrompt() {
 
 document.getElementById('proof-reveal').addEventListener('click', () => {
   document.getElementById('proof-answer').innerHTML = `<strong>Example Provided:</strong> ${proofExample.better}<br><em>Source:</em> ${proofExample.source}`;
-  document.getElementById('proof-answer').classList.remove('hidden');
+  document.getElementById('proof-answer').classList.remove('hidden');   document.getElementById('proof-answer').hidden = false;
 });
 
 document.getElementById('ai-reveal').addEventListener('click', () => {
   document.getElementById('ai-answer').innerHTML = `<strong>Example Provided:</strong> ${aiExample.better}`;
-  document.getElementById('ai-answer').classList.remove('hidden');
+  document.getElementById('ai-answer').classList.remove('hidden');   document.getElementById('ai-answer').hidden = false;
 });
 
 function showAIPrompt() {
@@ -162,7 +162,7 @@ showProofPrompt();
 showAIPrompt();
 
 document.getElementById('start-project').addEventListener('click', () => {
-  document.getElementById('project-area').classList.remove('hidden');
+  document.getElementById('project-area').classList.remove('hidden');   document.getElementById('project-area').hidden = false;
 });
 
 document.getElementById('reset-notes').addEventListener('click', () => {

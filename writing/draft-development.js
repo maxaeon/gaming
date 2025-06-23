@@ -3,10 +3,16 @@ const sections = ['intro','thesis-screen','body1','body2','body3','conclusion','
 function showSection(id) {
   sections.forEach(sec => {
     const el = document.getElementById(sec);
-    if (el) el.classList.add('hidden');
+    if (el) {
+      el.classList.add('hidden');
+      el.hidden = true;
+    }
   });
   const target = document.getElementById(id);
-  if (target) target.classList.remove('hidden');
+  if (target) {
+    target.classList.remove('hidden');
+    target.hidden = false;
+  }
 }
 
 document.querySelectorAll('.next-btn').forEach(btn => {
@@ -19,14 +25,25 @@ document.querySelectorAll('.next-btn').forEach(btn => {
 document.querySelectorAll('.detail-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const detail = btn.nextElementSibling;
-    if (detail) detail.classList.toggle('hidden');
+    if (detail) {
+      detail.classList.toggle('hidden');
+      detail.hidden = detail.classList.contains('hidden');
+    }
     btn.innerText = detail.classList.contains('hidden') ? 'Show Details' : 'Hide Details';
   });
 });
 
 document.getElementById('revise-btn').addEventListener('click', () => {
-  document.getElementById('revise-updated').classList.remove('hidden');
-  document.getElementById('revise-note').classList.remove('hidden');
+  const updated = document.getElementById('revise-updated');
+  const note = document.getElementById('revise-note');
+  if (updated) {
+    updated.classList.remove('hidden');
+    updated.hidden = false;
+  }
+  if (note) {
+    note.classList.remove('hidden');
+    note.hidden = false;
+  }
 });
 
 function addBodySection() {

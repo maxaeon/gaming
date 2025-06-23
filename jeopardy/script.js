@@ -35,7 +35,7 @@ function startGame(mode, names = []) {
     players.push({ name, score: 0 });
   }
   currentPlayerIndex = 0;
-  document.getElementById('scoreboard').classList.remove('hidden');
+  document.getElementById('scoreboard').classList.remove('hidden');   document.getElementById('scoreboard').hidden = false;
   updateScoreboard();
 }
 
@@ -118,7 +118,7 @@ function buildBoard() {
         totalQuestions++;
         maxPossibleScore += q.points;
       } else {
-        cell.classList.add('hidden');
+        cell.classList.add('hidden');         cell.hidden = true;
       }
       board.appendChild(cell);
     });
@@ -127,14 +127,14 @@ function buildBoard() {
   const progressEl = document.getElementById('progress');
   if (progressEl) {
     progressEl.style.width = '0%';
-    progressEl.classList.remove('hidden');
+    progressEl.classList.remove('hidden');     progressEl.hidden = false;
   }
 }
 
 function showQuestion(questionObj, cell) {
-  cell.classList.add('hidden');
+  cell.classList.add('hidden');   cell.hidden = true;
   const modal = document.getElementById('question-modal');
-  modal.classList.remove('hidden');
+  modal.classList.remove('hidden');   modal.hidden = false;
   document.getElementById('question-text').innerText = questionObj.question;
   document.getElementById('user-answer').value = '';
   document.getElementById('correct-answer').innerText = `Correct Answer: ${questionObj.answer}`;
@@ -147,12 +147,12 @@ function showQuestion(questionObj, cell) {
   const awardNo = document.getElementById('award-no');
   const modalContent = document.getElementById('modal-content');
 
-  userField.classList.remove('hidden');
-  submitBtn.classList.remove('hidden');
-  cancelBtn.classList.remove('hidden');
-  submittedAnswerEl.classList.add('hidden');
-  awardControls.classList.add('hidden');
-  document.getElementById('correct-answer').classList.add('hidden');
+  userField.classList.remove('hidden');   userField.hidden = false;
+  submitBtn.classList.remove('hidden');   submitBtn.hidden = false;
+  cancelBtn.classList.remove('hidden');   cancelBtn.hidden = false;
+  submittedAnswerEl.classList.add('hidden');   submittedAnswerEl.hidden = true;
+  awardControls.classList.add('hidden');   awardControls.hidden = true;
+  document.getElementById('correct-answer').classList.add('hidden');   document.getElementById('correct-answer').hidden = true;
 
   submitBtn.onclick = () => {
     const userAns = userField.value.trim();
@@ -161,12 +161,12 @@ function showQuestion(questionObj, cell) {
       display += ' \u2014 Just a friendly note: vulgar language rarely earns academic style points!';
     }
     submittedAnswerEl.innerText = `Your answer: ${display}`;
-    submittedAnswerEl.classList.remove('hidden');
-    document.getElementById('correct-answer').classList.remove('hidden');
-    submitBtn.classList.add('hidden');
-    userField.classList.add('hidden');
-    cancelBtn.classList.add('hidden');
-    awardControls.classList.remove('hidden');
+    submittedAnswerEl.classList.remove('hidden');     submittedAnswerEl.hidden = false;
+    document.getElementById('correct-answer').classList.remove('hidden');     document.getElementById('correct-answer').hidden = false;
+    submitBtn.classList.add('hidden');     submitBtn.hidden = true;
+    userField.classList.add('hidden');     userField.hidden = true;
+    cancelBtn.classList.add('hidden');     cancelBtn.hidden = true;
+    awardControls.classList.remove('hidden');     awardControls.hidden = false;
 
     awardYes.onclick = () => {
       modalContent.classList.add('answer-correct');
@@ -194,13 +194,13 @@ function showQuestion(questionObj, cell) {
 function closeQuestionModal() {
   const modal = document.getElementById('question-modal');
   const modalContent = document.getElementById('modal-content');
-  modal.classList.add('hidden');
+  modal.classList.add('hidden');   modal.hidden = true;
   modal.classList.remove('fade-out');
   modalContent.classList.remove('answer-correct', 'answer-wrong');
-  document.getElementById('correct-answer').classList.add('hidden');
-  document.getElementById('cancel-btn').classList.add('hidden');
-  document.getElementById('submitted-answer').classList.add('hidden');
-  document.getElementById('award-controls').classList.add('hidden');
+  document.getElementById('correct-answer').classList.add('hidden');   document.getElementById('correct-answer').hidden = true;
+  document.getElementById('cancel-btn').classList.add('hidden');   document.getElementById('cancel-btn').hidden = true;
+  document.getElementById('submitted-answer').classList.add('hidden');   document.getElementById('submitted-answer').hidden = true;
+  document.getElementById('award-controls').classList.add('hidden');   document.getElementById('award-controls').hidden = true;
   remainingQuestions--;
   const progressEl = document.getElementById('progress');
   if (progressEl && totalQuestions > 0) {
@@ -211,21 +211,21 @@ function closeQuestionModal() {
   nextPlayer();
 
   if (remainingQuestions === 0) {
-    document.getElementById('celebration-modal').classList.remove('hidden');
+    document.getElementById('celebration-modal').classList.remove('hidden');     document.getElementById('celebration-modal').hidden = false;
   }
 }
 
 function cancelQuestion(cell) {
-  document.getElementById('question-modal').classList.add('hidden');
-  document.getElementById('correct-answer').classList.add('hidden');
-  document.getElementById('submitted-answer').classList.add('hidden');
-  document.getElementById('award-controls').classList.add('hidden');
-  document.getElementById('cancel-btn').classList.add('hidden');
-  cell.classList.remove('hidden');
+  document.getElementById('question-modal').classList.add('hidden');   document.getElementById('question-modal').hidden = true;
+  document.getElementById('correct-answer').classList.add('hidden');   document.getElementById('correct-answer').hidden = true;
+  document.getElementById('submitted-answer').classList.add('hidden');   document.getElementById('submitted-answer').hidden = true;
+  document.getElementById('award-controls').classList.add('hidden');   document.getElementById('award-controls').hidden = true;
+  document.getElementById('cancel-btn').classList.add('hidden');   document.getElementById('cancel-btn').hidden = true;
+  cell.classList.remove('hidden');   cell.hidden = false;
 }
 
 document.getElementById('restart-btn').onclick = () => {
-  document.getElementById('celebration-modal').classList.add('hidden');
+  document.getElementById('celebration-modal').classList.add('hidden');   document.getElementById('celebration-modal').hidden = true;
   players.forEach(p => p.score = 0);
   updateScoreboard();
   buildBoard();

@@ -98,7 +98,7 @@ document.getElementById('show-suggested').addEventListener('click', () => {
     '<li>Ethical Flexibility</li></ul>';
   const div = document.getElementById('suggested');
   div.innerHTML = example;
-  div.classList.remove('hidden');
+  div.classList.remove('hidden');   div.hidden = false;
 });
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -109,7 +109,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Project mode
 document.getElementById('start-project').addEventListener('click', () => {
-  document.getElementById('project-area').classList.remove('hidden');
+  document.getElementById('project-area').classList.remove('hidden');   document.getElementById('project-area').hidden = false;
 });
 
 function resetMindMap() {

@@ -42,15 +42,15 @@ function showClues() {
     btn.innerText = clue.title;
     btn.addEventListener('click', () => {
       document.getElementById('clue-text').innerText = clue.text;
-      document.getElementById('analyze-evidence').classList.remove('hidden');
+      document.getElementById('analyze-evidence').classList.remove('hidden');       document.getElementById('analyze-evidence').hidden = false;
     });
     buttonsDiv.appendChild(btn);
   });
 }
 
 function startPuzzles() {
-  document.getElementById('clue-section').classList.add('hidden');
-  document.getElementById('puzzle-section').classList.remove('hidden');
+  document.getElementById('clue-section').classList.add('hidden');   document.getElementById('clue-section').hidden = true;
+  document.getElementById('puzzle-section').classList.remove('hidden');   document.getElementById('puzzle-section').hidden = false;
   showPuzzle();
 }
 
@@ -66,8 +66,8 @@ function showPuzzle() {
     btn.addEventListener('click', () => selectOption(i));
     optsDiv.appendChild(btn);
   });
-  document.getElementById('puzzle-feedback').classList.add('hidden');
-  document.getElementById('next-puzzle').classList.add('hidden');
+  document.getElementById('puzzle-feedback').classList.add('hidden');   document.getElementById('puzzle-feedback').hidden = true;
+  document.getElementById('next-puzzle').classList.add('hidden');   document.getElementById('next-puzzle').hidden = true;
 }
 
 function selectOption(choice) {
@@ -80,8 +80,8 @@ function selectOption(choice) {
     feedback.innerHTML = 'Incorrect.';
     feedback.style.color = '#c62828';
   }
-  feedback.classList.remove('hidden');
-  document.getElementById('next-puzzle').classList.remove('hidden');
+  feedback.classList.remove('hidden');   feedback.hidden = false;
+  document.getElementById('next-puzzle').classList.remove('hidden');   document.getElementById('next-puzzle').hidden = false;
 }
 
 function nextPuzzle() {
@@ -94,9 +94,9 @@ function nextPuzzle() {
 }
 
 function showResolution() {
-  document.getElementById('puzzle-section').classList.add('hidden');
+  document.getElementById('puzzle-section').classList.add('hidden');   document.getElementById('puzzle-section').hidden = true;
   const resDiv = document.getElementById('resolution-section');
-  resDiv.classList.remove('hidden');
+  resDiv.classList.remove('hidden');   resDiv.hidden = false;
   resDiv.innerHTML = `<p><strong>Excellent deduction!</strong> You've concluded that Charles Finch took Professor Russell's manuscript.</p>` +
     `<p>Reflect on the investigation:</p>` +
     `<ul><li>What clues or contradictions most effectively guided your reasoning?</li>` +
@@ -105,8 +105,8 @@ function showResolution() {
 }
 
 document.getElementById('start-investigation').addEventListener('click', () => {
-  document.getElementById('intro-section').classList.add('hidden');
-  document.getElementById('clue-section').classList.remove('hidden');
+  document.getElementById('intro-section').classList.add('hidden');   document.getElementById('intro-section').hidden = true;
+  document.getElementById('clue-section').classList.remove('hidden');   document.getElementById('clue-section').hidden = false;
   showClues();
 });
 
