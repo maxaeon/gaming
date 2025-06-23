@@ -43,6 +43,10 @@
       margin:10px 0;
       min-height:60px;
       border-radius:8px;
+      position:relative;
+    }
+    .cluster h3 {
+      margin-top:0;
     }
     .cluster ul {
       list-style: none;
@@ -60,6 +64,19 @@
       position:relative;
     }
     .cluster li button.delete {
+      position:absolute;
+      top:0;
+      right:0;
+      background:#777;
+      border:none;
+      color:#fff;
+      border-radius:50%;
+      width:16px;
+      height:16px;
+      font-size:12px;
+      cursor:pointer;
+    }
+    .cluster button.cluster-delete {
       position:absolute;
       top:0;
       right:0;
@@ -103,11 +120,8 @@
     <button id="start-project">Start Your Own Project</button>
     <div id="project-area" class="project-area hidden" hidden>
       <h2>Your Mind Map</h2>
-      <div id="mindmap">
-        <div class="cluster"><h3>Cluster 1</h3><ul contenteditable="true"></ul></div>
-        <div class="cluster"><h3>Cluster 2</h3><ul contenteditable="true"></ul></div>
-        <div class="cluster"><h3>Cluster 3</h3><ul contenteditable="true"></ul></div>
-      </div>
+      <div id="mindmap"></div>
+      <button id="add-cluster">Add Cluster</button>
       <button id="export-mindmap">Export as PNG</button>
       <button id="export-pdf">Export as PDF</button>
       <button id="reset-mindmap">Reset</button>
