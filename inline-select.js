@@ -130,5 +130,7 @@ document.getElementById('quit-no').onclick = () => {
   quitModal.classList.add('hidden');
 };
 
-// Ensure game view is reset when returning via browser navigation
+// Hide the board before caching so it doesn't reappear when returning
+window.addEventListener("pagehide", goHome);
+// Also reset when the page is shown again from the back/forward cache
 window.addEventListener("pageshow", goHome);
