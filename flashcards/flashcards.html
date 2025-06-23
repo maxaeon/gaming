@@ -28,8 +28,21 @@
     </div>
 
     <div id="flashcard" class="hidden" hidden tabindex="0">
-      <p id="flashcard-question"></p>
-      <p id="flashcard-answer" class="hidden" hidden></p>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <p id="flashcard-question"></p>
+          </div>
+          <div class="flip-card-back">
+            <p id="flashcard-answer" class="hidden" hidden></p>
+            <div id="review-buttons" class="hidden">
+              <button data-result="easy">Easy</button>
+              <button data-result="hard">Hard</button>
+              <button data-result="review">Review again</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <button id="show-answer">Show Answer</button>
       <button id="next-card">Next Card</button>
       <button id="export-cards">Export</button>
