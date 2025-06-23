@@ -6,10 +6,6 @@ const pieces = [
   { text: 'Therefore, Kant\u2019s insistence on exceptionless moral rules is overly rigid and problematic.', order: 4 }
 ];
 
-const hints = [
-  'Which piece introduces Kant\u2019s main idea clearly?',
-  'Look for a piece that summarizes your argument explicitly at the end.'
-];
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -20,6 +16,8 @@ function shuffle(arr) {
 
 function buildPieces() {
   const list = document.getElementById('puzzle-pieces');
+  list.addEventListener('dragover', e => e.preventDefault());
+  list.addEventListener('drop', handleListDrop);
   pieces.forEach((p, idx) => {
     const li = document.createElement('li');
     li.innerText = p.text;
@@ -42,6 +40,10 @@ function buildSlots() {
     li.dataset.index = i;
     li.addEventListener('dragover', e => e.preventDefault());
     li.addEventListener('drop', handleDrop);
+    const notes = document.createElement('textarea');
+    notes.rows = 4;
+    notes.placeholder = 'Add explanation/support...';
+    li.appendChild(notes);
     slots.appendChild(li);
   }
 }
@@ -50,44 +52,43 @@ function handleDrop(e) {
   e.preventDefault();
   const id = e.dataTransfer.getData('text/plain');
   const piece = document.getElementById(id);
-  if (!piece || this.childElementCount > 0) return;
-  if (parseInt(piece.dataset.order) === parseInt(this.dataset.index)) {
-    this.classList.add('correct');
-    this.appendChild(piece);
-    piece.draggable = false;
-    piece.style.cursor = 'default';
-    checkComplete();
-  } else {
-    this.classList.add('incorrect');
-    piece.classList.add('shake');
-    setTimeout(() => {
-      this.classList.remove('incorrect');
-      piece.classList.remove('shake');
-    }, 500);
-  }
+  if (!piece) return;
+  const notes = this.querySelector('textarea');
+  this.insertBefore(piece, notes);
+  checkComplete();
+}
+
+function handleListDrop(e) {
+  e.preventDefault();
+  const id = e.dataTransfer.getData('text/plain');
+  const piece = document.getElementById(id);
+  if (!piece) return;
+  document.getElementById('puzzle-pieces').appendChild(piece);
+  checkComplete();
 }
 
 function checkComplete() {
   const slots = document.querySelectorAll('.puzzle-slot');
-  const done = Array.from(slots).every(s => s.classList.contains('correct'));
+  const done = Array.from(slots).every(s => s.querySelector('.puzzle-piece'));
   if (done) {
-    document.getElementById('congrats').innerText = '🎉 Congratulations! 🎉';
+    document.getElementById('congrats').innerText = 'Outline complete!';
     document.getElementById('congrats').classList.remove('hidden');
     document.getElementById('reflection').classList.remove('hidden');
-    document.getElementById('ai-partner').classList.remove('hidden');
     document.getElementById('summary').classList.remove('hidden');
   }
 }
 
-function showHint() {
-  if (hints.length === 0) return;
-  const text = hints.shift();
-  const div = document.getElementById('hint-text');
-  div.innerText = text;
-  div.classList.remove('hidden');
+function showExample() {
+  const list = document.getElementById('hint-text');
+  list.innerHTML = pieces
+    .slice()
+    .sort((a, b) => a.order - b.order)
+    .map(p => `<li>${p.text}</li>`) 
+    .join('');
+  list.classList.remove('hidden');
 }
 
-document.getElementById('hint-btn').addEventListener('click', showHint);
+document.getElementById('example-btn').addEventListener('click', showExample);
 
 window.addEventListener('DOMContentLoaded', () => {
   shuffle(pieces);
