@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sherlock Holmes Mystery</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Thinker's Arcade</a>
+  </nav>
+  <div class="container">
+    <h1>Sherlock Holmes Mystery</h1>
+    <div id="intro-section">
+      <p>Welcome to 221B Baker Street! Dr. Watson is away and Sherlock Holmes needs your help to investigate the disappearance of Professor Russell's philosophy manuscript.</p>
+      <button id="start-investigation">Start Investigation</button>
+    </div>
+
+    <div id="clue-section" class="hidden">
+      <h2>Clues</h2>
+      <div id="clue-buttons" class="mc-options"></div>
+      <div id="clue-text" style="margin-top:10px;"></div>
+      <button id="analyze-evidence" class="hidden">Analyze Evidence</button>
+    </div>
+
+    <div id="puzzle-section" class="hidden">
+      <p id="puzzle-question"></p>
+      <div id="puzzle-options" class="mc-options"></div>
+      <div id="puzzle-feedback" class="hidden"></div>
+      <button id="next-puzzle" class="hidden">Next</button>
+    </div>
+
+    <div id="resolution-section" class="hidden"></div>
+  </div>
+  <script src="sherlock.js"></script>
+</body>
+</html>
