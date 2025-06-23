@@ -1,9 +1,29 @@
 const pieces = [
-  { text: 'Kant argues explicitly that moral rules must never admit exceptions, demonstrated clearly by his stance against lying even in extreme cases.', order: 0 },
-  { text: 'Moral decisions in real life often require flexibility and context sensitivity.', order: 1 },
-  { text: 'Rigid adherence to Kant\u2019s moral absolutism can lead to morally troubling outcomes, such as in Kant\u2019s famous Nazi-at-the-door scenario.', order: 2 },
-  { text: 'Ethical decision-making must sometimes prioritize consequences over absolute rules to truly be morally good.', order: 3 },
-  { text: 'Therefore, Kant\u2019s insistence on exceptionless moral rules is overly rigid and problematic.', order: 4 }
+  {
+    text: 'Kant argues explicitly that moral rules must never admit exceptions, demonstrated clearly by his stance against lying even in extreme cases.',
+    support: '(Kant, "On a Supposed Right to Lie from Philanthropy", 1797)',
+    order: 0
+  },
+  {
+    text: 'Moral decisions in real life often require flexibility and context sensitivity.',
+    support: 'W.D. Ross, "The Right and the Good" (1930)',
+    order: 1
+  },
+  {
+    text: 'Rigid adherence to Kant\u2019s moral absolutism can lead to morally troubling outcomes, such as in Kant\u2019s famous Nazi-at-the-door scenario.',
+    support: 'See Christine Korsgaard, "Creating the Kingdom of Ends" (1996)',
+    order: 2
+  },
+  {
+    text: 'Ethical decision-making must sometimes prioritize consequences over absolute rules to truly be morally good.',
+    support: 'J.S. Mill, "Utilitarianism" (1863)',
+    order: 3
+  },
+  {
+    text: 'Therefore, Kant\u2019s insistence on exceptionless moral rules is overly rigid and problematic.',
+    support: 'Balancing deontology with consequentialist concerns is recommended by many modern ethicists.',
+    order: 4
+  }
 ];
 
 
@@ -73,7 +93,6 @@ function checkComplete() {
   if (done) {
     document.getElementById('congrats').innerText = 'Outline complete!';
     document.getElementById('congrats').classList.remove('hidden');
-    document.getElementById('reflection').classList.remove('hidden');
     document.getElementById('summary').classList.remove('hidden');
   }
 }
@@ -83,7 +102,7 @@ function showExample() {
   list.innerHTML = pieces
     .slice()
     .sort((a, b) => a.order - b.order)
-    .map(p => `<li>${p.text}</li>`) 
+    .map(p => `<li>${p.text}<br><em>${p.support}</em></li>`)
     .join('');
   list.classList.remove('hidden');
 }
