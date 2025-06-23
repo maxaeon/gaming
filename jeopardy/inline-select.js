@@ -106,12 +106,12 @@ function goHome() {
 }
 
 document.getElementById('home-link').addEventListener('click', (e) => {
-  e.preventDefault();
   if (!document.getElementById('game-board').classList.contains('hidden')) {
-    pendingAction = goHome;
+    e.preventDefault();
+    pendingAction = () => { window.location.href = '../index.html'; };
     quitModal.classList.remove('hidden');
   } else {
-    goHome();
+    // allow normal navigation to the homepage
   }
 });
 

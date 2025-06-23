@@ -12,49 +12,48 @@
   </nav>
 
   <main class="container">
-    <img id="site-icon" src="icon.png" alt="Thinker's Arcade icon">
-    <p id="instructions">Select a game below to review philosophy concepts.</p>
+    <a href="index.html"><img id="site-icon" src="icon.png" alt="Thinker's Arcade icon"></a>
+    <p id="instructions">Pick a course to explore flashcards, trivia, and a game board. Play solo or with friends.</p>
     <div id="topic-selector">
       <div class="course">
-        <h3>Jeopardy Board</h3>
+        <h3>Intro to Philosophy</h3>
         <div class="game-links">
-          <a class="button" href="jeopardy/index.html">Play Now</a>
+          <a class="button" href="jeopardy/index.html">Game Board</a>
+          <a class="button" href="flashcards/flashcards.html?course=introPhilosophy">Flashcards</a>
+          <a class="button" href="trivia/trivia.html?course=introPhilosophy">Trivia</a>
+          <a class="button" href="chatbots/intro-philosophy-chat.html">Chat</a>
         </div>
       </div>
       <div class="course">
-        <h3>Flashcards</h3>
+        <h3>Critical Thinking</h3>
         <div class="game-links">
-          <a class="button" href="flashcards/flashcards.html">Start Reviewing</a>
-        </div>
-      </div>
-      <div class="course">
-        <h3>Trivia Quiz</h3>
-        <div class="game-links">
-          <a class="button" href="trivia/trivia.html">Take Quiz</a>
-        </div>
-      </div>
-      <div class="course">
-        <h3>Fallacy Detective</h3>
-        <div class="game-links">
-          <a class="button" href="fallacy-detection/fallacy.html">Detect Fallacies</a>
+          <a class="button" href="jeopardy/index.html">Game Board</a>
+          <a class="button" href="flashcards/flashcards.html?course=criticalThinking">Flashcards</a>
+          <a class="button" href="trivia/trivia.html?course=criticalThinking">Trivia</a>
+          <a class="button" href="fallacy-detection/fallacy.html">Fallacy Detective</a>
           <a class="button" href="fallacy-detection/whats-missing.html">What's Missing?</a>
         </div>
       </div>
       <div class="course">
-        <h3>Ethics Chat</h3>
+        <h3>Ethics</h3>
         <div class="game-links">
-          <a class="button" href="chatbots/ethics-chat.html">Start Chat</a>
+          <a class="button" href="jeopardy/index.html">Game Board</a>
+          <a class="button" href="flashcards/flashcards.html?course=ethics">Flashcards</a>
+          <a class="button" href="trivia/trivia.html?course=ethics">Trivia</a>
+          <a class="button" href="chatbots/ethics-chat.html">Chat</a>
         </div>
       </div>
-      <div class="course">
-        <h3>Intro Philosophy Chat</h3>
-        <div class="game-links">
-          <a class="button" href="chatbots/intro-philosophy-chat.html">Start Chat</a>
-        </div>
-      </div>
+    </div>
+    <div id="quote-game">
+      <h2>Who said it?</h2>
+      <p id="quote-text"></p>
+      <div id="quote-options" class="mc-options"></div>
+      <div id="quote-feedback" class="hidden"></div>
+      <button id="quote-next" class="hidden">Next Quote</button>
     </div>
   </main>
 
   <footer class="site-footer">&copy; <a href="https://www.maparks.com">maxaeon</a> 2025</footer>
+  <script src="jeopardy/who-said-it.js"></script>
 </body>
 </html>
