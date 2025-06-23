@@ -16,6 +16,8 @@ function startFallacyGame() {
   document.getElementById('fallacy-next').classList.add('hidden');
   showFallacy();
   document.getElementById('fallacy-game').classList.remove('hidden');
+  const startBtn = document.getElementById('start-fallacy');
+  if (startBtn) startBtn.classList.add('hidden');
 }
 
 function showFallacy() {
