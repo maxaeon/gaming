@@ -13,22 +13,10 @@ function buildFlashcards() {
   courses.forEach(course => {
     flashcards[course] = {};
 
-    const customSet = window[`${course}Flashcards`];
-    if (customSet) {
-      mergeSets(flashcards[course], customSet);
-      return;
+    const set = window[`${course}Flashcards`];
+    if (set) {
+      mergeSets(flashcards[course], set);
     }
-
-    const variants = [
-      `${course}Questions`,
-      `${course}MidtermQuestions`,
-      `${course}FinalQuestions`
-    ];
-
-    variants.forEach(name => {
-      const data = window[name];
-      if (data) mergeSets(flashcards[course], data);
-    });
   });
 
   return flashcards;
