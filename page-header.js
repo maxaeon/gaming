@@ -35,7 +35,13 @@ window.addEventListener('DOMContentLoaded', () => {
     ethics: 'Ethics',
     writing: 'Writing'
   };
-  const courseKey = params.get('course');
+  let courseKey = params.get('course');
+  if (!courseKey) {
+    const path = window.location.pathname;
+    if (/intro-?philosophy/i.test(path)) courseKey = 'introPhilosophy';
+    else if (/critical-?thinking/i.test(path)) courseKey = 'criticalThinking';
+    else if (/ethics/i.test(path)) courseKey = 'ethics';
+  }
   const course = courseMap[courseKey] || (courseKey ? courseKey : 'Course');
   const h1 = document.querySelector('.container h1');
   const activity = h1 ? h1.textContent.trim() : 'Activity';

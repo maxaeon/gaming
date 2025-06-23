@@ -16,7 +16,6 @@ function buildFlashcards() {
     const customSet = window[`${course}Flashcards`];
     if (customSet) {
       mergeSets(flashcards[course], customSet);
-      return;
     }
 
     const variants = [
