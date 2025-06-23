@@ -84,27 +84,6 @@ document.getElementById('export-thesis').addEventListener('click', () => {
     URL.revokeObjectURL(url);
   });
 });
-
-function addPrompt(text = 'New prompt') {
-  const container = document.getElementById('questions');
-  const div = document.createElement('div');
-  div.className = 'prompt';
-  const label = document.createElement('label');
-  label.contentEditable = 'true';
-  label.innerText = text;
-  const ta = document.createElement('textarea');
-  ta.rows = 2;
-  ta.className = 'answer';
-  ta.style.width = '90%';
-  div.append(label, document.createElement('br'), ta);
-  container.appendChild(div);
-}
-
-document.getElementById('add-prompt').addEventListener('click', () => {
-  const text = prompt('Enter a new prompt question:');
-  if (text) addPrompt(text);
-});
-
 document.getElementById('export-all').addEventListener('click', () => {
   const { Document, Packer, Paragraph } = window.docx;
   const doc = new Document();
