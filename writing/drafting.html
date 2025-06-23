@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thesis Quest</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Thinker's Arcade</a>
+  </nav>
+  <div class="container">
+    <h1>Thesis Quest</h1>
+    <p class="instructions">Welcome to Thesis Quest! Draft a thesis critiquing Kant's insistence on exceptionless moral rules.</p>
+    <textarea id="draft-input" rows="3" style="width:90%;"></textarea><br>
+    <button id="draft-submit">Submit Draft</button>
+    <button id="show-example">Show Example Thesis</button>
+    <div id="feedback" class="hidden"></div>
+    <div id="example" class="hidden"></div>
+    <div id="revision-section" class="hidden">
+      <h2>Revise Your Thesis</h2>
+      <textarea id="revision-input" rows="3" style="width:90%;"></textarea><br>
+      <button id="revise-submit">Submit Revision</button>
+      <div id="revision-feedback" class="hidden"></div>
+    </div>
+    <section id="reflection" class="hidden">
+      <h2>Reflective Prompts</h2>
+      <p>How did the feedback change your approach? What remains unclear in your argument?</p>
+    </section>
+  </div>
+  <script src="drafting.js"></script>
+</body>
+</html>
