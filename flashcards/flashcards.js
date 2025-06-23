@@ -35,6 +35,9 @@ function buildFlashcards() {
 }
 
 const flashcards = buildFlashcards();
+if (typeof window !== 'undefined') {
+  window.flashcards = flashcards;
+}
 let currentCards = [];
 let cardIndex = 0;
 
