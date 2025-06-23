@@ -457,7 +457,50 @@ function initTimelineHover() {
   });
 }
 
+function formatYear(year) {
+  if (year >= 1) {
+    return year - 1; // adjust for missing year zero
+  }
+  if (year === 0) {
+    return 1;
+  }
+  return `${Math.abs(year)} BCE`;
+}
+
+function initLabels() {
+  const ticks = document.getElementById('timeline-ticks');
+  const labels = document.getElementById('philosopher-labels');
+  ticks.innerHTML = '';
+  labels.innerHTML = '';
+  const range = timelineEnd - timelineStart;
+  const step = 500;
+  let firstTick = Math.ceil(timelineStart / step) * step;
+  for (let y = firstTick; y <= timelineEnd; y += step) {
+    const tick = document.createElement('div');
+    tick.className = 'timeline-tick';
+    const left = ((y - timelineStart) / range) * 100;
+    tick.style.left = `${left}%`;
+    const lbl = document.createElement('span');
+    lbl.className = 'tick-label';
+    const display = formatYear(y);
+    lbl.textContent = display;
+    tick.appendChild(lbl);
+    ticks.appendChild(tick);
+  }
+
+  philosophyTimeline.forEach(p => {
+    const label = document.createElement('div');
+    label.className = 'philosopher-label';
+    label.textContent = p.name;
+    const mid = (p.startYear + p.endYear) / 2;
+    const pos = ((mid - timelineStart) / range) * 100;
+    label.style.left = `${pos}%`;
+    labels.appendChild(label);
+  });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   displayEntry(currentIndex);
   initTimelineHover();
+  initLabels();
 });
