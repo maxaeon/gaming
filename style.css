@@ -340,3 +340,40 @@ button {
     font-size: 12px;
   }
 }
+
+#chat-box {
+  background: #1e1e1e;
+  padding: 10px;
+  height: 400px;
+  overflow-y: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.chat-message {
+  margin: 6px 0;
+}
+
+.chat-user {
+  color: #ba68c8;
+}
+
+.chat-bot {
+  color: #80cbc4;
+}
+
+#chat-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+#user-input {
+  flex: 1;
+  padding: 8px;
+}
+
+#send-btn {
+  padding: 8px 12px;
+}
