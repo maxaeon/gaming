@@ -524,7 +524,7 @@ button {
 /* Interactive timeline styles */
 #timeline-container {
   position: relative;
-  height: 40px;
+  height: 80px;
   margin-top: 30px;
 }
 
@@ -532,7 +532,7 @@ button {
   position: absolute;
   left: 0;
   right: 0;
-  top: 15px;
+  top: 35px;
   height: 10px;
   background: linear-gradient(to right, #4caf50, #ff9800, #e91e63);
   border-radius: 5px;
@@ -540,7 +540,7 @@ button {
 
 #timeline-highlight {
   position: absolute;
-  top: 15px;
+  top: 35px;
   height: 10px;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
@@ -560,6 +560,48 @@ button {
   pointer-events: none;
   transition: opacity 0.2s;
   font-size: 14px;
+}
+
+#timeline-ticks {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20px;
+  pointer-events: none;
+}
+
+.timeline-tick {
+  position: absolute;
+  bottom: 0;
+  width: 1px;
+  height: 8px;
+  background: #fff;
+}
+
+.tick-label {
+  position: absolute;
+  bottom: 10px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#philosopher-labels {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 20px;
+  pointer-events: none;
+}
+
+.philosopher-label {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 @media (min-width: 768px) {
