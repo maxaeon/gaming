@@ -45,5 +45,37 @@ window.ethicsFlashcards = {
     { question: "Doctrine of double effect", answer: "The principle stating an action causing serious harm may be permissible if the harm is an unintended side-effect of promoting a good end." },
     { question: "Virtue ethics", answer: "Ethical theory emphasizing moral character and virtues rather than rules or consequences." },
     { question: "Eudaimonia", answer: "Aristotle's concept of human flourishing achieved through developing virtues and practical wisdom." }
+  ],
+
+  "Kantian Ethics": [
+    { question: "What gives an action moral worth for Kant?", answer: "Acting from duty and good will." },
+    { question: "Define the first formulation of the categorical imperative.", answer: "Act only on maxims you could will as universal laws." },
+    { question: "What is a perfect duty?", answer: "A duty that must always be followed without exception." },
+    { question: "What is an imperfect duty?", answer: "A duty that allows flexibility in how it is fulfilled." },
+    { question: "Why does Kant oppose lying?", answer: "It cannot be universalized without contradiction." }
+  ],
+
+  "Thomistic Ethics": [
+    { question: "What is natural law for Aquinas?", answer: "Moral principles discoverable by reason reflecting human nature." },
+    { question: "Name a primary precept in Thomistic ethics.", answer: "Preserve life, procreate, educate offspring, live in society, worship God." },
+    { question: "What are secondary precepts?", answer: "Practical rules derived from primary precepts." },
+    { question: "Explain the doctrine of double effect.", answer: "Actions with bad side effects can be permissible if the bad is not intended and the good outweighs it." },
+    { question: "What is synderesis?", answer: "Innate knowledge of basic moral principles." }
+  ],
+
+  "Virtue Ethics": [
+    { question: "What is a virtue?", answer: "A stable trait that enables a person to act well." },
+    { question: "What is a vice?", answer: "A habitual disposition toward bad actions or feelings." },
+    { question: "What is the golden mean?", answer: "Virtue lies between excess and deficiency." },
+    { question: "Define practical wisdom (phronesis).", answer: "The ability to deliberate well about how to act." },
+    { question: "Name the four cardinal virtues.", answer: "Prudence, justice, courage, and temperance." }
+  ],
+
+  "Feminist and Care Ethics": [
+    { question: "What does care ethics emphasize?", answer: "Responsiveness in relationships and concrete needs." },
+    { question: "How do feminist ethicists view traditional theories?", answer: "They often critique them for ignoring women's experiences." },
+    { question: "What is relational autonomy?", answer: "The idea that personal identity is formed within relationships." },
+    { question: "Why is partiality sometimes justified in care ethics?", answer: "Because moral attention to particular others can take priority over abstract rules." },
+    { question: "Name a key figure in care ethics.", answer: "Carol Gilligan or Nel Noddings." }
   ]
 };
