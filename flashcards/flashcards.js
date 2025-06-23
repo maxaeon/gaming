@@ -151,16 +151,13 @@ function exportCards() {
   URL.revokeObjectURL(url);
 }
 
-function startQuiz() {
-  const course = document.getElementById('course-select').value;
-  const dest = course ? `../trivia/trivia.html?course=${course}` : '../trivia/trivia.html';
-  window.location.href = dest;
-}
-
 document.getElementById('course-select').addEventListener('change', e => {
   const course = e.target.value;
   populateCategories(course);
-  if (course) loadCards(course);
+  if (course) {
+    loadCards(course);
+    if (window.updatePageHeader) updatePageHeader(course);
+  }
 });
 
 document.getElementById('category-select').addEventListener('change', e => {
@@ -173,11 +170,6 @@ document.querySelector('#flashcard .flip-card').addEventListener('click', toggle
 document.getElementById('next-card').addEventListener('click', nextCard);
 document.getElementById('prev-card').addEventListener('click', prevCard);
 document.getElementById('export-cards').addEventListener('click', exportCards);
-const quizBtn = document.getElementById('quiz-mode');
-quizBtn.addEventListener('click', e => {
-  if (e.currentTarget !== e.target) return;
-  startQuiz();
-});
 document.getElementById('exit-cards').addEventListener('click', () => {
   const flashcard = document.getElementById('flashcard');
   flashcard.classList.add('hidden');
@@ -215,5 +207,6 @@ window.addEventListener('DOMContentLoaded', () => {
     select.value = course;
     populateCategories(course);
     loadCards(course);
+    if (window.updatePageHeader) updatePageHeader(course);
   }
 });
