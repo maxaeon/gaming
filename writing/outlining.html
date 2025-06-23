@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kant Logic Puzzle Quest</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <style>
+    #puzzle-pieces li {
+      display: inline-block;
+      background: #ce93d8;
+      color: #000;
+      padding: 6px 8px;
+      margin: 4px;
+      border-radius: 6px;
+      cursor: grab;
+    }
+    #outline-slots li {
+      border: 2px dashed #7b1fa2;
+      padding: 10px;
+      margin: 8px 0;
+      min-height: 40px;
+      border-radius: 8px;
+      list-style: none;
+    }
+    .correct {
+      border-color: #2e7d32;
+      background: #1b5e20;
+      color: #fff;
+    }
+    .incorrect {
+      border-color: #c62828;
+    }
+    .shake {
+      animation: shake 0.3s;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      50% { transform: translateX(3px); }
+      75% { transform: translateX(-3px); }
+      100% { transform: translateX(0); }
+    }
+    #congrats {
+      font-size: 24px;
+      margin-top: 10px;
+      color: #ffd54f;
+    }
+  </style>
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Thinker's Arcade</a>
+  </nav>
+  <div class="container">
+    <h1>Kant Logic Puzzle Quest</h1>
+    <p class="instructions">Drag each puzzle piece into the correct logical order to outline a critique of Kant's view that moral rules allow no exceptions.</p>
+    <ul id="puzzle-pieces"></ul>
+    <ol id="outline-slots"></ol>
+    <button id="hint-btn">Hint</button>
+    <div id="hint-text" class="hidden"></div>
+    <div id="congrats" class="hidden"></div>
+    <section id="reflection" class="hidden">
+      <h2>Reflective Prompts</h2>
+      <p>How did arranging these puzzle pieces help you understand structuring philosophical arguments?</p>
+      <p>Explain why logical organization is essential for persuasive philosophical writing.</p>
+    </section>
+    <section id="ai-partner" class="hidden">
+      <h2>AI Outlining Partner</h2>
+      <p>Ask your AI assistant for an alternative outline critiquing Kant. Compare its structure with yours. What strengths or weaknesses do you notice?</p>
+    </section>
+    <p id="summary" class="hidden"><strong>Remember:</strong> Clear outlines guide readers step by step through your argument.</p>
+  </div>
+  <script src="outlining.js"></script>
+</body>
+</html>
