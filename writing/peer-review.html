@@ -14,39 +14,26 @@
   <div class="container">
     <h1>Peer Review Workshop</h1>
     <section id="intro">
-      <p>Welcome to the Philosophy Peer Review Workshop! You'll practice giving helpful feedback on a short essay about Kant's ethics.</p>
+      <p>Welcome to the Philosophy Peer Review Workshop! You'll practice giving helpful feedback on a student draft about Kant's moral absolutism.</p>
       <button class="next-btn" data-next="example">Start</button>
     </section>
 
     <section id="example" class="hidden" hidden>
-      <h2>Peer Review Example</h2>
-      <p id="example-paragraph">Kant argues that moral rules must hold without exception. Critics reply that this rigidity ignores cases where following a rule creates obvious harm. Consider Kant&rsquo;s claim that lying is always wrong even if it helps protect an innocent person.</p>
-      <div class="review-row">
-        <label>Clarity of Thesis:</label><br>
-        <textarea id="example-thesis" rows="2" style="width:90%;"></textarea>
+      <h2>Student Draft: Kant&rsquo;s Moral Absolutism</h2>
+      <div id="draft-text">
+        <p>Immanuel Kant&rsquo;s moral theory says you always have to follow moral rules without making exceptions. Kant calls this the categorical imperative, which says you must act according to rules that you could will everyone else to follow too. But what happens when following those rules leads to harmful consequences? Is Kant&rsquo;s theory still good then?</p>
+        <p>Kant says you must always tell the truth, no matter what happens. He believes lying is always morally wrong because if everyone lied, then trust would disappear. Kant demonstrates this with his famous example where a murderer is at your door asking about a friend you&rsquo;re hiding. Kant says you must tell the truth. However, in reality, doing this would clearly lead to your friend&rsquo;s death. Does that really make sense?</p>
+        <p>Some critics argue that Kant&rsquo;s moral rules are too strict and ignore context and outcomes. In real-life situations, we need flexibility to decide what is right based on circumstances. For instance, if lying could save a life, most people would agree that lying is justified. Kant&rsquo;s categorical imperative does not allow for these exceptions, which can lead to morally unacceptable results.</p>
+        <p>I personally think Kant&rsquo;s theory has some problems because it doesn&rsquo;t consider real-life complexities. Morality should consider the outcomes of actions, not just blindly follow rules. For a theory to be useful, it has to work in practical situations, not just in theory. Kant&rsquo;s strict rules fail this important test.</p>
+        <p>In conclusion, Kant&rsquo;s moral theory may seem consistent and straightforward, but its rigidity can create troubling situations. Maybe morality is more about finding the right balance and not just following absolute rules.</p>
       </div>
-      <div class="review-row">
-        <label>Argument Development:</label><br>
-        <textarea id="example-argument" rows="2" style="width:90%;"></textarea>
-      </div>
-      <div class="review-row">
-        <label>Use of Examples/Evidence:</label><br>
-        <textarea id="example-evidence" rows="2" style="width:90%;"></textarea>
-      </div>
-      <div class="review-row">
-        <label>Citation Accuracy:</label><br>
-        <textarea id="example-citation" rows="2" style="width:90%;"></textarea>
-      </div>
-      <button id="example-show">Show Example Provided</button>
-      <ul id="example-answer" class="hidden" hidden></ul>
+      <button id="analysis-toggle">Show Analysis</button>
+      <ul id="analysis-list" class="hidden" hidden></ul>
       <button class="next-btn" data-next="practice">Next</button>
     </section>
 
     <section id="practice" class="hidden" hidden>
-      <h2>Peer Review Practice</h2>
-      <p><strong>Thesis Statement:</strong> Kant’s ethics is too rigid because it demands rules without exceptions.</p>
-      <p>Kant thinks you should always tell the truth. But what if a murderer is at your door? Then telling the truth would get someone killed. This example highlights how strict adherence to Kant’s rule clashes with common-sense morality. Many philosophers argue that moral decisions need flexibility to prevent obvious harm.</p>
-      <p>Imagine a friend hides in your house to escape danger. If you follow Kant strictly, you must reveal their location when questioned. Critics say this shows why any moral system needs room for exceptions.</p>
+      <h2>Your Feedback</h2>
       <div class="review-row">
         <label>Clarity of Thesis:</label><br>
         <textarea id="crit-thesis" rows="2" style="width:90%;"></textarea>
@@ -63,7 +50,11 @@
         <label>Citation Accuracy:</label><br>
         <textarea id="crit-citation" rows="2" style="width:90%;"></textarea>
       </div>
-      <button id="practice-show">Show Example Provided</button>
+      <div class="review-row">
+        <label>Additional Suggestions:</label><br>
+        <textarea id="crit-suggestions" rows="2" style="width:90%;"></textarea>
+      </div>
+      <button id="practice-show">Show Analysis</button>
       <ul id="practice-answer" class="hidden" hidden></ul>
       <button class="next-btn" data-next="reflect">Next</button>
     </section>

@@ -89,9 +89,28 @@ if (sidebar && toggleBtn) {
   // Set initial arrow based on sidebar state
   toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '&#x276E;' : '&#x276F;';
 
+  let hideTimeout;
+
+  function scheduleHide() {
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      if (!sidebar.matches(':hover') && !sidebar.classList.contains('collapsed')) {
+        sidebar.classList.add('collapsed');
+        toggleBtn.innerHTML = '&#x276E;';
+      }
+    }, 3000);
+  }
+
+  sidebar.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+  sidebar.addEventListener('mouseleave', scheduleHide);
+
   toggleBtn.addEventListener('click', () => {
     const collapsed = sidebar.classList.toggle('collapsed');
     // When collapsed show left-pointing arrow, otherwise point inward
     toggleBtn.innerHTML = collapsed ? '&#x276E;' : '&#x276F;';
+    if (!collapsed) scheduleHide();
+    else clearTimeout(hideTimeout);
   });
+
+  scheduleHide();
 }
