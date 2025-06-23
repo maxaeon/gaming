@@ -170,7 +170,11 @@ document.getElementById('category-select').addEventListener('change', e => {
 document.getElementById('show-answer').addEventListener('click', showAnswer);
 document.getElementById('next-card').addEventListener('click', nextCard);
 document.getElementById('export-cards').addEventListener('click', exportCards);
-document.getElementById('quiz-mode').addEventListener('click', startQuiz);
+const quizBtn = document.getElementById('quiz-mode');
+quizBtn.addEventListener('click', e => {
+  if (e.currentTarget !== e.target) return;
+  startQuiz();
+});
 document.getElementById('review-buttons').addEventListener('click', e => {
   const result = e.target.dataset.result;
   if (!result) return;
