@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Peer Review Workshop</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Philosophy MindGames</a>
+  </nav>
+  <div class="container">
+    <h1>Peer Review Workshop</h1>
+    <section id="intro">
+      <p>Welcome to the Philosophy Peer Review Workshop! You'll practice giving helpful feedback on a short essay about Kant's ethics.</p>
+      <button class="next-btn" data-next="example">Start</button>
+    </section>
+
+    <section id="example" class="hidden">
+      <h2>Peer Review Example</h2>
+      <p id="example-paragraph">Kant says morality has rules, but sometimes rules are too strict, and that can be bad.</p>
+      <textarea id="example-input" rows="3" style="width:90%;"></textarea><br>
+      <button id="example-show">Show Example Provided</button>
+      <p id="example-answer" class="hidden"></p>
+      <button class="next-btn" data-next="practice">Next</button>
+    </section>
+
+    <section id="practice" class="hidden">
+      <h2>Peer Review Practice</h2>
+      <p><strong>Thesis Statement:</strong> Kant’s ethics is too rigid because it demands rules without exceptions.</p>
+      <p>Kant thinks you should always tell the truth. But what if a murderer is at your door? Then telling the truth would get someone killed. This is why Kant’s rules don’t always work.</p>
+      <div class="review-row">
+        <label>Clarity of Thesis:</label><br>
+        <textarea id="crit-thesis" rows="2" style="width:90%;"></textarea>
+      </div>
+      <div class="review-row">
+        <label>Argument Development:</label><br>
+        <textarea id="crit-argument" rows="2" style="width:90%;"></textarea>
+      </div>
+      <div class="review-row">
+        <label>Use of Examples/Evidence:</label><br>
+        <textarea id="crit-evidence" rows="2" style="width:90%;"></textarea>
+      </div>
+      <div class="review-row">
+        <label>Citation Accuracy:</label><br>
+        <textarea id="crit-citation" rows="2" style="width:90%;"></textarea>
+      </div>
+      <button id="practice-show">Show Example Provided</button>
+      <ul id="practice-answer" class="hidden"></ul>
+      <button class="next-btn" data-next="reflect">Next</button>
+    </section>
+
+    <section id="reflect" class="hidden">
+      <h2>Reflect</h2>
+      <p>How did giving feedback help you notice strengths or weaknesses in your own writing?</p>
+      <textarea id="reflect-input" rows="3" style="width:90%;"></textarea><br>
+      <button class="next-btn" data-next="template">Continue</button>
+    </section>
+
+    <section id="template" class="hidden">
+      <h2>Your Peer Review Template</h2>
+      <label>Reviewed Text Excerpt:</label><br>
+      <textarea id="template-excerpt" rows="4" style="width:90%;"></textarea>
+      <table>
+        <tr><th>Clarity of Thesis</th><td><textarea class="template-field" data-key="thesis" rows="2" style="width:90%;"></textarea></td></tr>
+        <tr><th>Argument Development</th><td><textarea class="template-field" data-key="argument" rows="2" style="width:90%;"></textarea></td></tr>
+        <tr><th>Use of Examples/Evidence</th><td><textarea class="template-field" data-key="evidence" rows="2" style="width:90%;"></textarea></td></tr>
+        <tr><th>Citation Accuracy</th><td><textarea class="template-field" data-key="citation" rows="2" style="width:90%;"></textarea></td></tr>
+        <tr><th>Additional Suggestions</th><td><textarea class="template-field" data-key="extra" rows="2" style="width:90%;"></textarea></td></tr>
+      </table>
+      <div>
+        <button id="export-docx">Export Your Peer Review (DOCX)</button>
+        <button id="export-pdf">Export Your Peer Review (PDF)</button>
+      </div>
+    </section>
+  </div>
+  <script src="peer-review.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.5.0/docx.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
