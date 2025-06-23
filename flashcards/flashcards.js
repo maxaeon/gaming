@@ -92,6 +92,40 @@ function nextCard() {
   loadCard();
 }
 
+function exportCards() {
+  if (!currentCards.length) return;
+  const format = prompt('Export as json or csv?', 'json');
+  if (!format) return;
+  let data, mime, ext;
+  if (format.toLowerCase().startsWith('c')) {
+    const rows = currentCards.map(c => {
+      const q = '"' + c.question.replace(/"/g, '""') + '"';
+      const a = '"' + c.answer.replace(/"/g, '""') + '"';
+      return `${q},${a}`;
+    });
+    data = 'question,answer\n' + rows.join('\n');
+    mime = 'text/csv';
+    ext = 'csv';
+  } else {
+    data = JSON.stringify(currentCards, null, 2);
+    mime = 'application/json';
+    ext = 'json';
+  }
+  const blob = new Blob([data], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `flashcards.${ext}`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function startQuiz() {
+  const course = document.getElementById('course-select').value;
+  const dest = course ? `../trivia/trivia.html?course=${course}` : '../trivia/trivia.html';
+  window.location.href = dest;
+}
+
 document.getElementById('course-select').addEventListener('change', e => {
   const course = e.target.value;
   populateCategories(course);
@@ -105,6 +139,8 @@ document.getElementById('category-select').addEventListener('change', e => {
 
 document.getElementById('show-answer').addEventListener('click', showAnswer);
 document.getElementById('next-card').addEventListener('click', nextCard);
+document.getElementById('export-cards').addEventListener('click', exportCards);
+document.getElementById('quiz-mode').addEventListener('click', startQuiz);
 
 function getParam(name) {
   const params = new URLSearchParams(window.location.search);
