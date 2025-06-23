@@ -12,6 +12,7 @@
   </nav>
   <div class="container">
     <h1>Argument Reconstruction Activity</h1>
+    <button id="info-btn">Info</button>
     <p>This activity lets you practice identifying premises and conclusions, distinguishing moral from nonmoral premises, and evaluating arguments. It follows Lewis Vaughn's guideline that moral arguments typically include at least one moral and one nonmoral premise.</p>
 
     <div id="reconstruction-game">
@@ -19,6 +20,8 @@
       <p id="reconstruction-question"></p>
       <div id="reconstruction-options" class="mc-options"></div>
       <div id="reconstruction-feedback" class="hidden"></div>
+      <button id="reconstruction-try" class="hidden">Try Again</button>
+      <button id="reconstruction-show" class="hidden">Show Answer</button>
       <button id="reconstruction-next" class="hidden">Next</button>
     </div>
 
@@ -29,6 +32,14 @@
         <p>Identifying hidden or missing premises helps clarify whether an argument succeeds according to these standards.</p>
       </section>
 
+  </div>
+
+  <div id="info-modal" class="hidden">
+    <div class="modal-content">
+      <h2>How to Play</h2>
+      <p>Read each argument carefully and choose the option that best answers the question. If you get it wrong, select "Try Again" to attempt the same question or "Show Answer" to reveal the correct response.</p>
+      <button id="close-info">Close</button>
+    </div>
   </div>
 
   <script src="ethics.js"></script>
