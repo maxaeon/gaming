@@ -21,25 +21,30 @@ This repository contains a set of lightweight browser games that let you review 
 You can play the games directly from the hosted GitHub Pages site:
 
 ```
-https://maxaeon.github.io/jeopardy/
+https://maxaeon.github.io/jeopardy/jeopardy/
 ```
 
 Additional pages include:
 
-- `flashcards.html` – study individual questions without the board
-- `trivia.html` – quick multiple-choice rounds
-- `fallacy.html` – Fallacy Detective mini-game
-- `whats-missing.html` – practice identifying missing premises
-- `ethics-chat.html` – lightweight rotating chat with famous ethicists
-- `intro-philosophy-chat.html` – interactive chat with ancient Greek philosophers
+- `flashcards/flashcards.html` – study individual questions without the board
+- `trivia/trivia.html` – quick multiple-choice rounds
+- `fallacy-detection/fallacy.html` – Fallacy Detective mini-game
+- `fallacy-detection/whats-missing.html` – practice identifying missing premises
+- `chatbots/ethics-chat.html` – lightweight rotating chat with famous ethicists
+- `chatbots/intro-philosophy-chat.html` – interactive chat with ancient Greek philosophers
 
 
 ## Project Structure
 
-- **index.html** – main page that loads the question files and game script
-- **style.css** – visual styling for the board and modals
-- **script.js** – handles topic selection, board creation and answer validation
-- **data/** – JavaScript files containing question objects for each topic
+- **jeopardy/** – main board game
+  - `index.html` – loads the question files and game script
+  - `style.css` – visual styling for the board and modals
+  - `script.js` – handles topic selection, board creation and answer validation
+  - `data/` – JavaScript files containing question objects for each topic
+- **flashcards/** – flashcard interface
+- **trivia/** – multiple-choice quiz game
+- **fallacy-detection/** – fallacy and missing premise exercises
+- **chatbots/** – lightweight chat pages
 
 ## Contributing
 
