@@ -99,7 +99,8 @@ function goHome() {
   document.getElementById('instructions').scrollIntoView();
 }
 
-document.getElementById('home-btn').addEventListener('click', () => {
+document.getElementById('home-link').addEventListener('click', (e) => {
+  e.preventDefault();
   if (!document.getElementById('jeopardy-board').classList.contains('hidden')) {
     pendingAction = goHome;
     quitModal.classList.remove('hidden');
