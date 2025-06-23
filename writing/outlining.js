@@ -1,29 +1,48 @@
 const pieces = [
   {
-    text: 'Kant argues explicitly that moral rules must never admit exceptions, demonstrated clearly by his stance against lying even in extreme cases.',
-    support: '(Kant, "On a Supposed Right to Lie from Philanthropy", 1797)',
+    text: 'Introduction: Kant\u2019s moral absolutism is ethically problematic because it rigidly disregards context and consequences.',
+    support: 'Thesis statement.',
+    explanation: 'Opening establishes the main critique of strict moral rules.',
     order: 0
   },
   {
-    text: 'Moral decisions in real life often require flexibility and context sensitivity.',
-    support: 'W.D. Ross, "The Right and the Good" (1930)',
+    text: 'Kant\u2019s ethics insists on universal, exceptionless moral rules.',
+    support: 'Categorical imperative; duty and good will; universalizability (Kant, 1797/1996).',
+    explanation: 'Summarizes Kant\u2019s foundational moral commitments.',
     order: 1
   },
   {
-    text: 'Rigid adherence to Kant\u2019s moral absolutism can lead to morally troubling outcomes, such as in Kant\u2019s famous Nazi-at-the-door scenario.',
-    support: 'See Christine Korsgaard, "Creating the Kingdom of Ends" (1996)',
+    text: 'Kant\u2019s absolute prohibition against lying demonstrates his theory\u2019s problematic rigidity.',
+    support: 'Murderer-at-the-door scenario (Kant, 1797/1996, p. 552); critiques of strict absolutism (Vaughn, 2019).',
+    explanation: 'Illustrates how blindly following rules can lead to immoral outcomes.',
     order: 2
   },
   {
-    text: 'Ethical decision-making must sometimes prioritize consequences over absolute rules to truly be morally good.',
-    support: 'J.S. Mill, "Utilitarianism" (1863)',
+    text: 'Moral reasoning requires considering context and outcomes, which Kant\u2019s theory neglects.',
+    support: 'Lying to protect innocent life; virtue ethics (Aristotle, 350 BCE/2009) and care ethics (Noddings, 1984).',
+    explanation: 'Highlights the need for flexibility and situational judgment.',
     order: 3
   },
   {
-    text: 'Therefore, Kant\u2019s insistence on exceptionless moral rules is overly rigid and problematic.',
-    support: 'Balancing deontology with consequentialist concerns is recommended by many modern ethicists.',
+    text: 'Alternative ethical frameworks provide better guidance for complex situations.',
+    support: 'Virtue ethics (Aristotle), utilitarianism (Mill, 1863/2001), and care ethics (Noddings, 1984).',
+    explanation: 'Shows other approaches that consider character, outcomes, and relationships.',
     order: 4
+  },
+  {
+    text: 'Conclusion: Kant\u2019s theory ultimately fails because rigid absolutism ignores morally relevant contexts.',
+    support: 'Effective moral reasoning requires flexibility and practical wisdom.',
+    explanation: 'Restates the thesis and final takeaway.',
+    order: 5
   }
+];
+
+const references = [
+  'Aristotle. (350 BCE/2009). Nicomachean Ethics (D. Ross, Trans.). Oxford University Press.',
+  'Kant, I. (1797/1996). The Metaphysics of Morals (M. Gregor, Trans.). Cambridge University Press.',
+  'Mill, J. S. (1863/2001). Utilitarianism (G. Sher, Ed.). Hackett Publishing.',
+  'Noddings, N. (1984). Caring: A Feminine Approach to Ethics and Moral Education. University of California Press.',
+  'Vaughn, L. (2019). Doing Ethics: Moral Reasoning and Contemporary Issues (6th ed.). W.W. Norton.'
 ];
 
 let pieceCounter = pieces.length - 1;
@@ -173,11 +192,13 @@ function checkComplete() {
 
 function showExample() {
   const list = document.getElementById('hint-text');
-  list.innerHTML = pieces
+  const outline = pieces
     .slice()
     .sort((a, b) => a.order - b.order)
-    .map(p => `<li>${p.text}<br><em>${p.support}</em></li>`)
+    .map(p => `<li>${p.text}<br><em class="citation" title="${p.explanation ?? ''}">${p.support}</em></li>`)
     .join('');
+  const refs = references.map(r => `<li>${r}</li>`).join('');
+  list.innerHTML = `<h3>Example Outline: Kant\u2019s Moral Absolutism</h3><ol>${outline}</ol><h4>References</h4><ul>${refs}</ul>`;
   list.classList.remove('hidden');   list.hidden = false;
 }
 
