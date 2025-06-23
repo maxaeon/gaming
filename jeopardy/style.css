@@ -766,6 +766,7 @@ button {
   transition: opacity 0.2s;
   font-size: 14px;
   text-align: left;
+  z-index: 10;
 }
 
 #timeline-ticks {
@@ -800,6 +801,7 @@ button {
   transform: translateX(-50%);
   font-size: 12px;
   white-space: nowrap;
+  z-index: 0;
 }
 
 @media (max-width: 600px) {
