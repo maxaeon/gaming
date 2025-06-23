@@ -171,6 +171,19 @@ body.home {
   justify-content: center;
 }
 
+/* On the homepage, arrange links in three columns and force the
+   "Review Games" button to appear on its own third row */
+body.home .game-links {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+}
+
+body.home .game-links .review-btn {
+  grid-column: 1 / -1;
+  grid-row: 3;
+}
+
 .course h3 {
   margin-bottom: 4px;
 }
