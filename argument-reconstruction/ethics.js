@@ -152,10 +152,18 @@ function showReconstructionQuestion() {
     btn.onclick = () => submitReconstruction(opt);
     opts.appendChild(btn);
   });
-  document.getElementById("reconstruction-feedback").classList.add("hidden");
-  document.getElementById("reconstruction-next").classList.add("hidden");
-  document.getElementById("reconstruction-try").classList.add("hidden");
-  document.getElementById("reconstruction-show").classList.add("hidden");
+  const feedbackEl = document.getElementById("reconstruction-feedback");
+  const nextBtn = document.getElementById("reconstruction-next");
+  const tryBtn = document.getElementById("reconstruction-try");
+  const showBtn = document.getElementById("reconstruction-show");
+  feedbackEl.classList.add("hidden");
+  feedbackEl.hidden = true;
+  nextBtn.classList.add("hidden");
+  nextBtn.hidden = true;
+  tryBtn.classList.add("hidden");
+  tryBtn.hidden = true;
+  showBtn.classList.add("hidden");
+  showBtn.hidden = true;
 }
 
 function submitReconstruction(choice) {
@@ -166,14 +174,21 @@ function submitReconstruction(choice) {
   if (choice === q.answer) {
     feedback.innerText = "Correct!";
     feedback.style.color = "#4caf50";
-    document.getElementById("reconstruction-next").classList.remove("hidden");
+    const nextBtn = document.getElementById("reconstruction-next");
+    nextBtn.classList.remove("hidden");
+    nextBtn.hidden = false;
   } else {
     feedback.innerText = "Incorrect.";
     feedback.style.color = "#c62828";
-    document.getElementById("reconstruction-try").classList.remove("hidden");
-    document.getElementById("reconstruction-show").classList.remove("hidden");
+    const tryBtn = document.getElementById("reconstruction-try");
+    const showBtn = document.getElementById("reconstruction-show");
+    tryBtn.classList.remove("hidden");
+    tryBtn.hidden = false;
+    showBtn.classList.remove("hidden");
+    showBtn.hidden = false;
   }
   feedback.classList.remove("hidden");
+  feedback.hidden = false;
 }
 
 document.getElementById("reconstruction-next").addEventListener("click", () => {
@@ -184,17 +199,31 @@ document.getElementById("reconstruction-next").addEventListener("click", () => {
 document.getElementById("reconstruction-try").addEventListener("click", () => {
   const options = document.querySelectorAll("#reconstruction-options button");
   options.forEach(btn => btn.disabled = false);
-  document.getElementById("reconstruction-feedback").classList.add("hidden");
-  document.getElementById("reconstruction-try").classList.add("hidden");
-  document.getElementById("reconstruction-show").classList.add("hidden");
+  const feedback = document.getElementById("reconstruction-feedback");
+  const tryBtn = document.getElementById("reconstruction-try");
+  const showBtn = document.getElementById("reconstruction-show");
+  feedback.classList.add("hidden");
+  feedback.hidden = true;
+  tryBtn.classList.add("hidden");
+  tryBtn.hidden = true;
+  showBtn.classList.add("hidden");
+  showBtn.hidden = true;
 });
 
 document.getElementById("reconstruction-show").addEventListener("click", () => {
   const q = reconstructionOrder[reconstructionIndex];
-  document.getElementById("reconstruction-feedback").innerText = `The correct answer is ${q.answer}.`;
-  document.getElementById("reconstruction-show").classList.add("hidden");
-  document.getElementById("reconstruction-try").classList.add("hidden");
-  document.getElementById("reconstruction-next").classList.remove("hidden");
+  const feedback = document.getElementById("reconstruction-feedback");
+  const showBtn = document.getElementById("reconstruction-show");
+  const tryBtn = document.getElementById("reconstruction-try");
+  const nextBtn = document.getElementById("reconstruction-next");
+  feedback.innerText = `The correct answer is ${q.answer}.`;
+  feedback.hidden = false;
+  showBtn.classList.add("hidden");
+  showBtn.hidden = true;
+  tryBtn.classList.add("hidden");
+  tryBtn.hidden = true;
+  nextBtn.classList.remove("hidden");
+  nextBtn.hidden = false;
 });
 
 document.addEventListener("DOMContentLoaded", () => {

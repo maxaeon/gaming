@@ -141,9 +141,15 @@ function showReconstructionQuestion() {
     btn.onclick = () => submitReconstruction(opt);
     opts.appendChild(btn);
   });
-  document.getElementById("reconstruction-feedback").classList.add("hidden");
-  document.getElementById("reconstruction-next").classList.add("hidden");
-  document.getElementById("reconstruction-controls").classList.add("hidden");
+  const feedbackEl = document.getElementById("reconstruction-feedback");
+  const nextBtn = document.getElementById("reconstruction-next");
+  const controlsEl = document.getElementById("reconstruction-controls");
+  feedbackEl.classList.add("hidden");
+  feedbackEl.hidden = true;
+  nextBtn.classList.add("hidden");
+  nextBtn.hidden = true;
+  controlsEl.classList.add("hidden");
+  controlsEl.hidden = true;
 }
 
 function submitReconstruction(choice) {
@@ -153,14 +159,19 @@ function submitReconstruction(choice) {
   if (choice === q.answer) {
     feedback.innerText = "Correct!";
     feedback.style.color = "#4caf50";
-    document.getElementById("reconstruction-next").classList.remove("hidden");
+    const nextBtn = document.getElementById("reconstruction-next");
+    nextBtn.classList.remove("hidden");
+    nextBtn.hidden = false;
     controls.classList.add("hidden");
+    controls.hidden = true;
   } else {
     feedback.innerText = "Incorrect.";
     feedback.style.color = "#c62828";
     controls.classList.remove("hidden");
+    controls.hidden = false;
   }
   feedback.classList.remove("hidden");
+  feedback.hidden = false;
 }
 
 function showAnswer() {
@@ -168,13 +179,21 @@ function showAnswer() {
   const feedback = document.getElementById("reconstruction-feedback");
   feedback.innerText = `The correct answer is: ${q.answer}.`;
   feedback.style.color = "#4caf50";
-  document.getElementById("reconstruction-next").classList.remove("hidden");
-  document.getElementById("reconstruction-controls").classList.add("hidden");
+  const nextBtn = document.getElementById("reconstruction-next");
+  nextBtn.classList.remove("hidden");
+  nextBtn.hidden = false;
+  const controls = document.getElementById("reconstruction-controls");
+  controls.classList.add("hidden");
+  controls.hidden = true;
 }
 
 function tryAgain() {
-  document.getElementById("reconstruction-feedback").classList.add("hidden");
-  document.getElementById("reconstruction-controls").classList.add("hidden");
+  const feedback = document.getElementById("reconstruction-feedback");
+  const controls = document.getElementById("reconstruction-controls");
+  feedback.classList.add("hidden");
+  feedback.hidden = true;
+  controls.classList.add("hidden");
+  controls.hidden = true;
 }
 
 document.getElementById("reconstruction-next").addEventListener("click", () => {
