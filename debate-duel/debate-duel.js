@@ -145,6 +145,7 @@ function showSummary() {
                `Logical fallacies used: ${counts.fallacious}`;
   document.getElementById('summary-text').innerText = text;
   document.getElementById('summary').classList.remove('hidden');   document.getElementById('summary').hidden = false;
+  showNextActivity('criticalThinking');
 }
 
 document.getElementById('start-btn').addEventListener('click', showTopics);
