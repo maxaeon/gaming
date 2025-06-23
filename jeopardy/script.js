@@ -5,6 +5,11 @@ let players = [];
 let currentPlayerIndex = 0;
 let maxPossibleScore = 0;
 
+const vulgarWords = ['fuck', 'shit', 'bitch', 'asshole', 'dick', 'crap'];
+function containsVulgarity(text) {
+  return new RegExp(`\\b(${vulgarWords.join('|')})\\b`, 'i').test(text);
+}
+
 // Topic buttons no longer load questions directly. Exam selection is handled
 // via inline dropdowns on the main page, but this remains here in case new
 // elements need to call `loadQuestions` without specifying an exam type.
@@ -151,7 +156,11 @@ function showQuestion(questionObj, cell) {
 
   submitBtn.onclick = () => {
     const userAns = userField.value.trim();
-    submittedAnswerEl.innerText = `Your answer: ${userAns || '[No answer]'}`;
+    let display = userAns || '[No answer]';
+    if (containsVulgarity(userAns)) {
+      display += ' \u2014 Just a friendly note: vulgar language rarely earns academic style points!';
+    }
+    submittedAnswerEl.innerText = `Your answer: ${display}`;
     submittedAnswerEl.classList.remove('hidden');
     document.getElementById('correct-answer').classList.remove('hidden');
     submitBtn.classList.add('hidden');
