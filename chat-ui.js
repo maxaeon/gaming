@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     typing.textContent = '…';
     chatBox.appendChild(typing);
     chatBox.scrollTop = chatBox.scrollHeight;
-    const delay = 1000 + Math.random() * 1000; // 1-2 seconds
+    const delay = 1000 + Math.random() * 1500; // 1-2.5 seconds
     setTimeout(() => {
       typing.textContent = message;
     }, delay);

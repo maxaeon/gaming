@@ -150,11 +150,12 @@ const philosophyChatSteps = [
     }
     const div = document.createElement('div');
     div.className = `chat-message ${className}`;
-    if (div.classList.contains('chat-bot')) {
+    if (speaker !== 'You') {
       div.innerHTML = `<strong>${speaker}:</strong> <span class="typing">…</span>`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
-      await new Promise(res => setTimeout(res, 1000));
+      const delay = 1000 + Math.random() * 1500;
+      await new Promise(res => setTimeout(res, delay));
       div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } else {
