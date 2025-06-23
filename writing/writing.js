@@ -1,7 +1,7 @@
 const citationData = {
   incorrect: 'Kant believes that one must never lie, writing, "Truthfulness in statements is a sacred duty..." (Kant, Ethics, pg. 31).',
-  better: 'Kant argues explicitly against lying, writing, "To be truthful in all declarations is therefore a sacred command of reason..." (Kant, 1785/1997, p. 31).',
-  source: 'Kant, I. (1785/1997). <em>Groundwork of the Metaphysics of Morals</em>. (M. Gregor, Trans.). Cambridge University Press.'
+  better: 'Kant argues explicitly against lying, writing, "To be truthful in all declarations is therefore a sacred command of reason..." (Kant 31).',
+  source: 'Kant, Immanuel. <em>Groundwork of the Metaphysics of Morals</em>. Translated by Mary Gregor, Cambridge University Press, 1997.'
 };
 
 const conceptItems = [
@@ -38,8 +38,8 @@ const dialogueExample = {
 
 const proofExample = {
   prompt: "Aquinas say's explicitly in his Summa theologica that lying is always wrong (Aquinas Summa pg. 423).",
-  better: 'Aquinas explicitly states in his <em>Summa Theologica</em> that lying is always morally wrong (Aquinas, 1274/1947, p. 423).',
-  source: 'Aquinas, T. (1274/1947). <em>Summa Theologica</em>. (Fathers of the English Dominican Province, Trans.). Benziger Brothers.'
+  better: 'Aquinas explicitly states in his <em>Summa Theologica</em> that lying is always morally wrong (Aquinas 423).',
+  source: 'Aquinas, Thomas. <em>Summa Theologica</em>. Translated by the Fathers of the English Dominican Province, Benziger Brothers, 1947.'
 };
 
 const aiExample = {
