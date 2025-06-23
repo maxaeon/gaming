@@ -490,8 +490,8 @@ function initTimelineHover() {
 }
 
 function formatYear(year) {
-  if (year >= 1) {
-    return year - 1; // adjust for missing year zero
+  if (year > 0) {
+    return year;
   }
   if (year === 0) {
     return 1;
