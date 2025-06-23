@@ -1,4 +1,37 @@
-const triviaQuestions = flashcards;
+// Build trivia question sets from the loaded Jeopardy data files
+function mergeTrivia(target, source) {
+  Object.keys(source).forEach(cat => {
+    if (!target[cat]) target[cat] = [];
+    target[cat] = target[cat].concat(source[cat]);
+  });
+}
+
+function buildTriviaQuestions() {
+  const courses = ['introPhilosophy', 'criticalThinking', 'ethics'];
+  const trivia = {};
+
+  courses.forEach(course => {
+    trivia[course] = {};
+
+    const variants = [
+      `${course}Questions`,
+      `${course}MidtermQuestions`,
+      `${course}FinalQuestions`
+    ];
+
+    variants.forEach(name => {
+      const data = window[name];
+      if (data) mergeTrivia(trivia[course], data);
+    });
+  });
+
+  return trivia;
+}
+
+const triviaQuestions = buildTriviaQuestions();
+if (typeof window !== 'undefined') {
+  window.triviaQuestions = triviaQuestions;
+}
 
 let currentTrivia = [];
 let triviaIndex = 0;
