@@ -21,8 +21,11 @@ This repository contains a set of lightweight browser games that let you review 
 You can play the games directly from the hosted GitHub Pages site:
 
 ```
-https://maxaeon.github.io/jeopardy/jeopardy/
+https://maxaeon.github.io/jeopardy/
 ```
+
+The homepage lists links to each activity including the Jeopardy board game,
+flashcards, trivia, fallacy detective, and the lightweight chat pages.
 
 Additional pages include:
 
