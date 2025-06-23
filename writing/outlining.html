@@ -67,18 +67,40 @@
     <div id="hint-text" class="hidden" hidden></div>
     <div id="congrats" class="hidden" hidden></div>
     <p id="summary" class="hidden" hidden><strong>Remember:</strong> Clear outlines guide readers step by step through your argument.</p>
-    <button id="start-project">Start Your Own Project</button>
-    <div id="project-area" class="project-area hidden" hidden>
-      <h2>Your Outline</h2>
-      <ol id="my-outline">
-        <li contenteditable="true">Point 1...</li>
-        <li contenteditable="true">Point 2...</li>
-        <li contenteditable="true">Point 3...</li>
-      </ol>
-      <button id="add-outline-item">Add Item</button>
-      <button id="export-outline">Export as DOCX</button>
-      <button id="export-outline-pdf">Export as PDF</button>
-      <button id="reset-outline">Reset</button>
+    <button id="draft-btn">Open Draft Worksheet</button>
+    <div id="draft-area" class="project-area hidden" hidden>
+      <h2>Draft Worksheet</h2>
+      <label>Thesis Statement:</label><br>
+      <textarea id="draft-thesis" rows="2" style="width:90%;" placeholder="Write your thesis here..."></textarea>
+      <div id="draft-body">
+        <div class="body-section">
+          <label>Topic Sentence:</label><br>
+          <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+          <label>Supporting Details:</label><br>
+          <textarea class="detail-input" rows="3" style="width:90%;"></textarea>
+        </div>
+        <div class="body-section">
+          <label>Topic Sentence:</label><br>
+          <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+          <label>Supporting Details:</label><br>
+          <textarea class="detail-input" rows="3" style="width:90%;"></textarea>
+        </div>
+        <div class="body-section">
+          <label>Topic Sentence:</label><br>
+          <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+          <label>Supporting Details:</label><br>
+          <textarea class="detail-input" rows="3" style="width:90%;"></textarea>
+        </div>
+      </div>
+      <button id="add-paragraph">Add Paragraph</button><br>
+      <label>Conclusion:</label><br>
+      <textarea id="draft-conclusion" rows="2" style="width:90%;" placeholder="Summarize your argument..."></textarea><br>
+      <label>References:</label><br>
+      <textarea id="draft-references" rows="3" style="width:90%;" placeholder="Enter references..."></textarea>
+      <div>
+        <button id="export-draft-docx">Export Draft (DOCX)</button>
+        <button id="export-draft-pdf">Export Draft (PDF)</button>
+      </div>
     </div>
   </div>
   <script src="outlining.js"></script>

@@ -1,4 +1,4 @@
-const sections = ['intro','thesis-screen','body1','body2','body3','conclusion','references','revision-demo','template'];
+const sections = ['intro','thesis-screen','body1','body2','body3','conclusion','references','revision-demo','schedule'];
 
 function showSection(id) {
   sections.forEach(sec => {
@@ -46,76 +46,39 @@ document.getElementById('revise-btn').addEventListener('click', () => {
   }
 });
 
-function addBodySection() {
-  const container = document.getElementById('body-sections');
-  const div = document.createElement('div');
-  div.className = 'body-section';
-  div.innerHTML = `<label>Topic Sentence:</label><br>
-  <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
-  <label>Supporting Details and Evidence (from textbook/course materials):</label><br>
-  <textarea class="detail-input" rows="3" style="width:90%;"></textarea>`;
-  container.appendChild(div);
-}
-
-document.getElementById('add-body').addEventListener('click', addBodySection);
-
-function gatherDraft() {
-  const thesis = document.getElementById('user-thesis').value.trim();
-  const conclusion = document.getElementById('user-conclusion').value.trim();
-  const refs = document.getElementById('user-references').value.trim().split(/\n+/);
-  const bodies = Array.from(document.querySelectorAll('#body-sections .body-section')).map(sec => {
-    return {
-      topic: sec.querySelector('.topic-input').value.trim(),
-      detail: sec.querySelector('.detail-input').value.trim()
-    };
-  });
-  return { thesis, bodies, conclusion, refs };
-}
-
-function exportDocx() {
-  const { Document, Packer, Paragraph } = window.docx;
-  const data = gatherDraft();
-  const doc = new Document();
-  const children = [new Paragraph(data.thesis)];
-  data.bodies.forEach(b => {
-    children.push(new Paragraph(b.topic));
-    children.push(new Paragraph(b.detail));
-  });
-  children.push(new Paragraph(data.conclusion));
-  if (data.refs.length) {
-    children.push(new Paragraph('References:'));
-    data.refs.forEach(r => children.push(new Paragraph(r)));
+function buildSchedule() {
+  const days = parseInt(document.getElementById('num-days').value, 10);
+  const tbody = document.querySelector('#schedule-table tbody');
+  tbody.innerHTML = '';
+  for (let i = 1; i <= days; i++) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>Day ${i}</td><td><input type="number" min="0" step="0.5"></td><td><input type="number" min="0" step="0.5"></td>`;
+    tbody.appendChild(tr);
   }
-  doc.addSection({ children });
-  Packer.toBlob(doc).then(blob => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'draft.docx';
-    a.click();
-    URL.revokeObjectURL(url);
-  });
+  const table = document.getElementById('schedule-table');
+  table.classList.remove('hidden');
+  table.hidden = false;
+  const btn = document.getElementById('export-schedule');
+  btn.classList.remove('hidden');
+  btn.hidden = false;
 }
 
-function exportPdf() {
+function exportSchedule() {
   const { jsPDF } = window.jspdf;
-  const data = gatherDraft();
   const doc = new jsPDF();
-  let y = 10;
-  doc.text(data.thesis, 10, y); y += 10;
-  data.bodies.forEach(b => {
-    doc.text(b.topic, 10, y); y += 10;
-    doc.text(b.detail, 10, y); y += 10;
+  doc.text('Drafting Schedule', 10, 10);
+  let y = 20;
+  const rows = document.querySelectorAll('#schedule-table tbody tr');
+  rows.forEach((row, i) => {
+    const draft = row.cells[1].querySelector('input').value || '0';
+    const rev = row.cells[2].querySelector('input').value || '0';
+    doc.text(`Day ${i + 1}: draft ${draft}h, revise ${rev}h`, 10, y);
+    y += 10;
   });
-  doc.text(data.conclusion, 10, y); y += 10;
-  if (data.refs.length) {
-    doc.text('References:', 10, y); y += 10;
-    data.refs.forEach(r => { doc.text(r, 10, y); y += 10; });
-  }
-  doc.save('draft.pdf');
+  doc.save('schedule.pdf');
 }
 
-document.getElementById('export-docx').addEventListener('click', exportDocx);
-document.getElementById('export-pdf').addEventListener('click', exportPdf);
+document.getElementById('build-schedule').addEventListener('click', buildSchedule);
+document.getElementById('export-schedule').addEventListener('click', exportSchedule);
 
 window.addEventListener('DOMContentLoaded', () => showSection('intro'));
