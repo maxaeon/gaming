@@ -877,3 +877,10 @@ button {
 .flip-card-back {
   transform: rotateY(180deg);
 }
+
+/* Ensure Quiz Mode button sits above overlapping flashcard */
+#quiz-mode {
+  margin-top: 10px;
+  position: relative;
+  z-index: 1;
+}
