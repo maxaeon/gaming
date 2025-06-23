@@ -154,6 +154,73 @@ body.home {
   border-radius: 12px;
   width: 100%;
   max-width: 520px;
+  border-left: 8px solid transparent;
+}
+
+/* Color coded course sections on the homepage */
+body.home .course[data-course="introPhilosophy"] {
+  border-color: #9c27b0;
+}
+
+body.home .course[data-course="introPhilosophy"] h3 {
+  color: #9c27b0;
+}
+
+body.home .course[data-course="introPhilosophy"] a.button {
+  background-color: #9c27b0;
+}
+
+body.home .course[data-course="introPhilosophy"] a.button:hover {
+  background-color: #7b1fa2;
+}
+
+body.home .course[data-course="criticalThinking"] {
+  border-color: #f44336;
+}
+
+body.home .course[data-course="criticalThinking"] h3 {
+  color: #f44336;
+}
+
+body.home .course[data-course="criticalThinking"] a.button {
+  background-color: #f44336;
+}
+
+body.home .course[data-course="criticalThinking"] a.button:hover {
+  background-color: #d32f2f;
+}
+
+body.home .course[data-course="ethics"] {
+  border-color: #2196f3;
+}
+
+body.home .course[data-course="ethics"] h3 {
+  color: #2196f3;
+}
+
+body.home .course[data-course="ethics"] a.button {
+  background-color: #2196f3;
+}
+
+body.home .course[data-course="ethics"] a.button:hover {
+  background-color: #1976d2;
+}
+
+body.home .course[data-course="writing"] {
+  background: #222;
+  border-color: #555;
+}
+
+body.home .course[data-course="writing"] h3 {
+  color: #fff;
+}
+
+body.home .course[data-course="writing"] a.button {
+  background-color: #424242;
+}
+
+body.home .course[data-course="writing"] a.button:hover {
+  background-color: #616161;
 }
 
 .exam-dropdown {
