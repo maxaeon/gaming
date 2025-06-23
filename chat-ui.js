@@ -24,7 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function botReply() {
     const speaker = getNextTheorist();
-    const message = window.ethicalChatbots[speaker].system;
+    const bot = window.ethicalChatbots[speaker] || {};
+    let message = bot.system || '';
+    if (typeof bot.greeting === 'function') {
+      message = bot.greeting();
+    } else if (typeof bot.greeting === 'string') {
+      message = bot.greeting;
+    }
     const typing = document.createElement('div');
     typing.className = 'chat-message chat-bot';
     typing.textContent = '…';
