@@ -58,6 +58,17 @@ Additional pages include:
 - **chatbots/** – lightweight chat pages
 - **writing/** – short activities for philosophical writing practice
 
+### Custom Flashcard Sets
+
+Two optional data files in `jeopardy/data` let you override the built-in
+question banks with your own flashcards:
+
+- `intro-philosophy-flashcards.js` – defines `window.introPhilosophyFlashcards`
+- `critical-thinking-flashcards.js` – defines `window.criticalThinkingFlashcards`
+
+If present, these objects are used by the Flashcards and Trivia pages in place
+of the bundled exam questions.
+
 ## Contributing
 
 Issues and pull requests are welcome.
