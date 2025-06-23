@@ -22,7 +22,14 @@ function createNode(text, color = '#ce93d8') {
   li.draggable = true;
   li.style.backgroundColor = color;
   li.dataset.color = color;
-  li.innerHTML = `<span class="label">${text}</span><button class="delete">&times;</button>`;
+  const span = document.createElement('span');
+  span.className = 'label';
+  span.textContent = text;
+  li.appendChild(span);
+  const del = document.createElement('button');
+  del.className = 'delete';
+  del.textContent = '\u00d7';
+  li.appendChild(del);
   li.addEventListener('dragstart', e => {
     e.dataTransfer.setData('text/plain', li.id);
   });
