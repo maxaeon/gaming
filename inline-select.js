@@ -1,13 +1,19 @@
 // Handles topic dropdown toggling and exam selection on index.html
 
 document.querySelectorAll('#topic-selector .topic-btn').forEach(topicBtn => {
+  const dropdown = topicBtn.nextElementSibling;
+  topicBtn.setAttribute('aria-expanded', 'false');
   topicBtn.addEventListener('click', () => {
-    const dropdown = topicBtn.nextElementSibling;
     // Close other dropdowns
     document.querySelectorAll('#topic-selector .exam-dropdown').forEach(dd => {
-      if (dd !== dropdown) dd.classList.add('hidden');
+      if (dd !== dropdown) {
+        dd.classList.add('hidden');
+        const btn = dd.previousElementSibling;
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      }
     });
     dropdown.classList.toggle('hidden');
+    topicBtn.setAttribute('aria-expanded', String(!dropdown.classList.contains('hidden')));
   });
 });
 
