@@ -84,3 +84,43 @@ document.getElementById('export-thesis').addEventListener('click', () => {
     URL.revokeObjectURL(url);
   });
 });
+
+function addPrompt(text = 'New prompt') {
+  const container = document.getElementById('questions');
+  const div = document.createElement('div');
+  div.className = 'prompt';
+  const label = document.createElement('label');
+  label.contentEditable = 'true';
+  label.innerText = text;
+  const ta = document.createElement('textarea');
+  ta.rows = 2;
+  ta.className = 'answer';
+  ta.style.width = '90%';
+  div.append(label, document.createElement('br'), ta);
+  container.appendChild(div);
+}
+
+document.getElementById('add-prompt').addEventListener('click', () => {
+  const text = prompt('Enter a new prompt question:');
+  if (text) addPrompt(text);
+});
+
+document.getElementById('export-all').addEventListener('click', () => {
+  const { Document, Packer, Paragraph } = window.docx;
+  const doc = new Document();
+  const children = [new Paragraph(document.getElementById('project-thesis').value)];
+  document.querySelectorAll('#questions .prompt').forEach(p => {
+    const q = p.querySelector('label').innerText.trim();
+    const a = p.querySelector('textarea').value.trim();
+    children.push(new Paragraph(`${q} ${a}`));
+  });
+  doc.addSection({ children });
+  Packer.toBlob(doc).then(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'thesis-with-notes.docx';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+});
