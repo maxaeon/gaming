@@ -200,7 +200,7 @@ body.home {
   display: none;
 }
 
-#question-modal, #celebration-modal, #mode-modal, #multi-modal, #quit-modal {
+#question-modal, #celebration-modal, #mode-modal, #multi-modal, #quit-modal, #info-modal {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
@@ -213,7 +213,8 @@ body.home {
 #celebration-modal.hidden,
 #mode-modal.hidden,
 #multi-modal.hidden,
-#quit-modal.hidden {
+#quit-modal.hidden,
+#info-modal.hidden {
   display: none;
 }
 

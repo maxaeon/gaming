@@ -32,7 +32,7 @@ Additional pages include:
 - `flashcards/flashcards.html` – study individual questions without the board
 - `trivia/trivia.html` – quick multiple-choice rounds
 - `fallacy-detection/fallacy.html` – Fallacy Detective mini-game
-- `fallacy-detection/whats-missing.html` – practice identifying missing premises
+ - `argument-reconstruction/critical-thinking.html` – practice identifying missing premises
 - `chatbots/ethics-chat.html` – lightweight rotating chat with famous ethicists
 - `chatbots/intro-philosophy-chat.html` – interactive chat with ancient Greek philosophers
 - `writing/citation.html` – identify citation mistakes

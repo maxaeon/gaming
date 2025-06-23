@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Argument Reconstruction - Critical Thinking</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Thinker's Arcade</a>
+  </nav>
+  <div class="container">
+    <h1>Argument Reconstruction Activity</h1>
+    <p>Fill in the missing premises to strengthen each argument. Select the best option from the list.</p>
+    <button id="open-info">Summary</button>
+    <div id="reconstruction-game">
+      <p id="reconstruction-argument"></p>
+      <p id="reconstruction-question"></p>
+      <div id="reconstruction-options" class="mc-options"></div>
+      <div id="reconstruction-feedback" class="hidden"></div>
+      <div id="reconstruction-controls" class="hidden">
+        <button id="reconstruction-try-again">Try Again</button>
+        <button id="reconstruction-show-answer">Show Answer</button>
+      </div>
+      <button id="reconstruction-next" class="hidden">Next</button>
+    </div>
+  </div>
+
+  <div id="info-modal" class="hidden">
+    <div class="modal-content">
+      <h2>Summary</h2>
+      <p>This exercise presents short arguments with a missing statement. Choosing the correct completion helps reveal hidden assumptions.</p>
+      <p>Reconstructing arguments clarifies the reasoning at work. Identifying implied premises is a key part of critical thinking.</p>
+      <button id="close-info">Close</button>
+    </div>
+  </div>
+
+  <script src="critical-thinking.js"></script>
+</body>
+</html>
