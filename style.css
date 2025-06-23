@@ -420,3 +420,15 @@ button {
 .info:hover::after {
   opacity: 1;
 }
+
+@media (min-width: 768px) {
+  #topic-selector {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .course {
+    margin: 8px;
+  }
+}
