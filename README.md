@@ -1,4 +1,4 @@
-# Philosophy Jeopardy Game
+# Thinker's Arcade
 
 This repository contains a set of lightweight browser games that let you review philosophy concepts. Everything runs in the browser, so no server setup is required. Clone the repo or visit the GitHub Pages site to start playing immediately.
 
