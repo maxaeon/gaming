@@ -161,3 +161,18 @@ showDialoguePrompt();
 showProofPrompt();
 showAIPrompt();
 
+document.getElementById('start-project').addEventListener('click', () => {
+  document.getElementById('project-area').classList.remove('hidden');
+});
+
+document.getElementById('reset-notes').addEventListener('click', () => {
+  document.getElementById('project-notes').value = '';
+});
+
+document.getElementById('export-notes').addEventListener('click', () => {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.text(document.getElementById('project-notes').value, 10, 10);
+  doc.save('notes.pdf');
+});
+

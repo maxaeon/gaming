@@ -68,3 +68,22 @@ window.addEventListener('DOMContentLoaded', () => {
   buildPool();
   enableDrops();
 });
+
+// Project mode
+document.getElementById('start-project').addEventListener('click', () => {
+  document.getElementById('project-area').classList.remove('hidden');
+});
+
+function resetMindMap() {
+  document.querySelectorAll('#mindmap .cluster ul').forEach(ul => ul.innerHTML = '');
+}
+
+function exportMindMap() {
+  const area = document.getElementById('mindmap');
+  html2canvas(area).then(canvas => {
+    canvasToImage(canvas, { name: 'mindmap', type: 'png', quality: 1 });
+  });
+}
+
+document.getElementById('reset-mindmap').addEventListener('click', resetMindMap);
+document.getElementById('export-mindmap').addEventListener('click', exportMindMap);

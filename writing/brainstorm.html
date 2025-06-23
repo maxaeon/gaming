@@ -46,7 +46,20 @@
       <p>Explain why you grouped the concepts as you did. What other ideas could strengthen your argument?</p>
       <textarea id="reflection-input" rows="3" style="width:90%;"></textarea>
     </section>
+    <button id="start-project">Start Your Own Project</button>
+    <div id="project-area" class="project-area hidden">
+      <h2>Your Mind Map</h2>
+      <div id="mindmap">
+        <div class="cluster"><h3>Cluster 1</h3><ul contenteditable="true"></ul></div>
+        <div class="cluster"><h3>Cluster 2</h3><ul contenteditable="true"></ul></div>
+        <div class="cluster"><h3>Cluster 3</h3><ul contenteditable="true"></ul></div>
+      </div>
+      <button id="export-mindmap">Export as PNG</button>
+      <button id="reset-mindmap">Reset</button>
+    </div>
   </div>
   <script src="brainstorm.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-to-image@1.0.4/dist/canvas-to-image.min.js"></script>
 </body>
 </html>

@@ -701,3 +701,22 @@ button {
     margin: 8px;
   }
 }
+.project-area {
+  margin-top: 20px;
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+}
+.project-area h2 {
+  margin-top: 0;
+}
+.project-area input,
+.project-area textarea {
+  width: 90%;
+  margin-top: 6px;
+  background: #121212;
+  color: #fff;
+  border: 1px solid #7b1fa2;
+  border-radius: 4px;
+  padding: 6px;
+}

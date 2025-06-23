@@ -114,3 +114,29 @@ window.addEventListener('DOMContentLoaded', () => {
   buildPieces();
   buildSlots();
 });
+
+document.getElementById('start-project').addEventListener('click', () => {
+  document.getElementById('project-area').classList.remove('hidden');
+});
+
+function resetOutline() {
+  document.querySelectorAll('#my-outline li').forEach(li => li.innerText = '');
+}
+
+function exportOutline() {
+  const { Document, Packer, Paragraph } = window.docx;
+  const doc = new Document();
+  const children = Array.from(document.querySelectorAll('#my-outline li')).map(li => new Paragraph(li.innerText));
+  doc.addSection({ children });
+  Packer.toBlob(doc).then(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'outline.docx';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+
+document.getElementById('reset-outline').addEventListener('click', resetOutline);
+document.getElementById('export-outline').addEventListener('click', exportOutline);
