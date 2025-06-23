@@ -97,6 +97,7 @@ function showSummary() {
   summaryDiv.innerHTML =
     `<p>You chose the utilitarian option ${pullCount} time(s) and refused ${inactionCount} time(s).</p>` +
     `<p>Consequences matter, but ethics also involves principles, rights, and virtues beyond mere calculation.</p>`;
+  showNextActivity('ethics');
 }
 
 

@@ -4,6 +4,7 @@ let currentTrivia = [];
 let triviaIndex = 0;
 let optionIndex = 0;
 let questionsAnswered = 0;
+let selectedCourse = '';
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -14,6 +15,7 @@ function shuffle(arr) {
 
 function loadTrivia(course) {
   if (!triviaQuestions[course]) return;
+  selectedCourse = course;
   currentTrivia = Object.values(triviaQuestions[course]).flat();
   shuffle(currentTrivia);
   triviaIndex = 0;
@@ -72,6 +74,7 @@ function submitTrivia(choice) {
       share.classList.remove('hidden');
       share.hidden = false;
     }
+    showNextActivity(selectedCourse || getParam('course'));
   }
 }
 
