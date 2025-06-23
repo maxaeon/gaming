@@ -11,7 +11,7 @@ This repository contains a set of lightweight browser games that let you review 
 - Single-player mode lets you enter your name, displayed next to your score
 - Simple flashcards page for quick review
 - Multiple-choice trivia game for each course
-- Fallacy Detective and What's Missing? mini-games to practice argument analysis
+ - Sherlock Holmes Mystery and What's Missing? mini-games to practice argument analysis
 - "Who Said It?" quote quiz
 - Ethics Chat page with rotating philosopher perspectives
 - Intro Philosophy Chat covering ancient Greek thinkers
@@ -25,13 +25,13 @@ https://maxaeon.github.io/jeopardy/
 ```
 
 The homepage lists links to each activity including the Jeopardy board game,
-flashcards, trivia, fallacy detective, and the lightweight chat pages.
+ flashcards, trivia, Sherlock Holmes mystery, and the lightweight chat pages.
 
 Additional pages include:
 
 - `flashcards/flashcards.html` – study individual questions without the board
 - `trivia/trivia.html` – quick multiple-choice rounds
-- `fallacy-detection/fallacy.html` – Fallacy Detective mini-game
+ - `sherlock-mystery/sherlock.html` – Sherlock Holmes Mystery mini-game
 - `argument-reconstruction/critical-thinking.html` – practice identifying missing premises
 - `argument-reconstruction/intro-philosophy.html` – analyze classic philosophical arguments
 - `chatbots/ethics-chat.html` – lightweight rotating chat with famous ethicists
@@ -50,7 +50,7 @@ Additional pages include:
   - `data/` – JavaScript files containing question objects for each topic
 - **flashcards/** – flashcard interface
 - **trivia/** – multiple-choice quiz game
-- **fallacy-detection/** – fallacy and missing premise exercises
+ - **sherlock-mystery/** – detective logic exercises
 - **chatbots/** – lightweight chat pages
 - **writing/** – short activities for philosophical writing practice
 
