@@ -89,6 +89,19 @@ function showAnswer() {
   document.getElementById('review-buttons').hidden = false;
 }
 
+function toggleFlip() {
+  const card = document.querySelector('#flashcard .flip-card');
+  if (card.classList.contains('flipped')) {
+    card.classList.remove('flipped');
+    document.getElementById('flashcard-answer').classList.add('hidden');
+    document.getElementById('flashcard-answer').hidden = true;
+    document.getElementById('review-buttons').classList.add('hidden');
+    document.getElementById('review-buttons').hidden = true;
+  } else {
+    showAnswer();
+  }
+}
+
 function nextCard() {
   if (!currentCards.length) return;
   cardIndex = (cardIndex + 1) % currentCards.length;
@@ -156,12 +169,19 @@ document.getElementById('category-select').addEventListener('change', e => {
 });
 
 document.getElementById('show-answer').addEventListener('click', showAnswer);
+document.querySelector('#flashcard .flip-card').addEventListener('click', toggleFlip);
 document.getElementById('next-card').addEventListener('click', nextCard);
+document.getElementById('prev-card').addEventListener('click', prevCard);
 document.getElementById('export-cards').addEventListener('click', exportCards);
 const quizBtn = document.getElementById('quiz-mode');
 quizBtn.addEventListener('click', e => {
   if (e.currentTarget !== e.target) return;
   startQuiz();
+});
+document.getElementById('exit-cards').addEventListener('click', () => {
+  const flashcard = document.getElementById('flashcard');
+  flashcard.classList.add('hidden');
+  flashcard.hidden = true;
 });
 document.getElementById('review-buttons').addEventListener('click', e => {
   const result = e.target.dataset.result;
