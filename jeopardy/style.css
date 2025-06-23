@@ -537,6 +537,9 @@ button {
   position: relative;
   height: 80px;
   margin-top: 30px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #timeline-bar {
@@ -566,11 +569,12 @@ button {
   color: #fff;
   padding: 4px 8px;
   border-radius: 4px;
-  white-space: nowrap;
+  white-space: normal;
   opacity: 0;
-  pointer-events: none;
+  pointer-events: auto;
   transition: opacity 0.2s;
   font-size: 14px;
+  text-align: left;
 }
 
 #timeline-ticks {
@@ -580,6 +584,15 @@ button {
   bottom: 0;
   height: 20px;
   pointer-events: none;
+}
+
+#timeline-tooltip .tooltip-name {
+  cursor: pointer;
+  display: block;
+}
+
+#timeline-tooltip .tooltip-year {
+  font-weight: bold;
 }
 
 .timeline-tick {
@@ -596,6 +609,12 @@ button {
   transform: translateX(-50%);
   font-size: 12px;
   white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  #timeline-container {
+    max-width: 100%;
+  }
 }
 
 

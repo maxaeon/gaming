@@ -434,26 +434,44 @@ document.getElementById('prev-btn').addEventListener('click', () => {
 });
 
 function initTimelineHover() {
+  const container = document.getElementById('timeline-container');
   const bar = document.getElementById('timeline-bar');
   const tooltip = document.getElementById('timeline-tooltip');
-  bar.addEventListener('mousemove', (e) => {
+
+  container.addEventListener('mousemove', (e) => {
     const rect = bar.getBoundingClientRect();
     const percent = (e.clientX - rect.left) / rect.width;
     const year = Math.round(timelineStart + percent * (timelineEnd - timelineStart));
-    const names = philosophyTimeline
-      .filter(p => year >= p.startYear && year <= p.endYear)
-      .map(p => p.name);
-    if (names.length) {
+
+    const matches = philosophyTimeline
+      .map((p, idx) => ({ idx, p }))
+      .filter(obj => year >= obj.p.startYear && year <= obj.p.endYear);
+
+    if (matches.length) {
       tooltip.style.opacity = 1;
       tooltip.style.left = `${percent * 100}%`;
       const displayYear = year < 0 ? `${Math.abs(year)} BCE` : year;
-      tooltip.innerText = `${displayYear}: ${names.join(', ')}`;
+      tooltip.innerHTML = `<div class="tooltip-year">${displayYear}</div>` +
+        matches.map(m => `<div class="tooltip-name" data-index="${m.idx}">${m.p.name}</div>`).join('');
     } else {
       tooltip.style.opacity = 0;
     }
   });
-  bar.addEventListener('mouseleave', () => {
+
+  container.addEventListener('mouseleave', () => {
     tooltip.style.opacity = 0;
+  });
+
+  tooltip.addEventListener('click', (e) => {
+    const target = e.target.closest('.tooltip-name');
+    if (target) {
+      const idx = parseInt(target.dataset.index, 10);
+      if (!isNaN(idx)) {
+        currentIndex = idx;
+        displayEntry(currentIndex);
+        tooltip.style.opacity = 0;
+      }
+    }
   });
 }
 
