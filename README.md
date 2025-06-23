@@ -38,7 +38,7 @@ Additional pages include:
 - `chatbots/intro-philosophy-chat.html` – interactive chat with ancient Greek philosophers
 - `writing/citation.html` – identify citation mistakes
 - `writing/brainstorm.html` – build mind-map clusters for brainstorming
-- `writing/outlining.html` – drag-and-drop puzzle outlining a critique of Kant's absolutism
+ - `writing/outlining.html` – outline builder for critiquing Kant's absolutism
 
 
 ## Project Structure

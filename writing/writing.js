@@ -52,7 +52,7 @@ function showCitation() {
 }
 
 document.getElementById('citation-submit').addEventListener('click', () => {
-  const ans = `<strong>Better:</strong> ${citationData.better}<br><em>Source:</em> ${citationData.source}`;
+  const ans = `<strong>Example Provided:</strong> ${citationData.better}<br><em>Source:</em> ${citationData.source}`;
   document.getElementById('citation-answer').innerHTML = ans;
   document.getElementById('citation-answer').classList.remove('hidden');
 });
@@ -67,7 +67,7 @@ function buildConcepts() {
 }
 
 document.getElementById('concept-submit').addEventListener('click', () => {
-  const ans = 'Better grouping example: {Consequences & circumstances} [Importance of consequences, Nazi-at-the-door case, Individual circumstances]; {Critiques of rigidity} [Doctrine of double effect (criticism), Rigidity of absolute rules, Moral dilemmas]; {Human values} [Empathy and compassion, Human flourishing (Aristotle)].';
+  const ans = 'Example provided: {Consequences & circumstances} [Importance of consequences, Nazi-at-the-door case, Individual circumstances]; {Critiques of rigidity} [Doctrine of double effect (criticism), Rigidity of absolute rules, Moral dilemmas]; {Human values} [Empathy and compassion, Human flourishing (Aristotle)].';
   document.getElementById('concept-answer').innerText = ans;
   document.getElementById('concept-answer').classList.remove('hidden');
 });
@@ -96,7 +96,7 @@ document.getElementById('check-order').addEventListener('click', () => {
   if (correct) {
     fb.innerHTML = '<strong>Correct!</strong>';
   } else {
-    fb.innerText = 'Not quite. Try again or reveal the better order.';
+    fb.innerText = 'Not quite. Try again or reveal the example provided.';
     document.getElementById('order-reveal').classList.remove('hidden');
   }
 });
@@ -111,12 +111,12 @@ function showRewritePrompt() {
 }
 
 document.getElementById('rewrite-reveal').addEventListener('click', () => {
-  document.getElementById('rewrite-answer').innerHTML = `<strong>Better:</strong> ${rewriteExample.better}`;
+  document.getElementById('rewrite-answer').innerHTML = `<strong>Example Provided:</strong> ${rewriteExample.better}`;
   document.getElementById('rewrite-answer').classList.remove('hidden');
 });
 
 document.getElementById('thesis-reveal').addEventListener('click', () => {
-  document.getElementById('thesis-answer').innerHTML = `<strong>Better:</strong> ${betterThesis}`;
+  document.getElementById('thesis-answer').innerHTML = `<strong>Example Provided:</strong> ${betterThesis}`;
   document.getElementById('thesis-answer').classList.remove('hidden');
 });
 
@@ -140,12 +140,12 @@ function showProofPrompt() {
 }
 
 document.getElementById('proof-reveal').addEventListener('click', () => {
-  document.getElementById('proof-answer').innerHTML = `<strong>Better:</strong> ${proofExample.better}<br><em>Source:</em> ${proofExample.source}`;
+  document.getElementById('proof-answer').innerHTML = `<strong>Example Provided:</strong> ${proofExample.better}<br><em>Source:</em> ${proofExample.source}`;
   document.getElementById('proof-answer').classList.remove('hidden');
 });
 
 document.getElementById('ai-reveal').addEventListener('click', () => {
-  document.getElementById('ai-answer').innerHTML = `<strong>Better:</strong> ${aiExample.better}`;
+  document.getElementById('ai-answer').innerHTML = `<strong>Example Provided:</strong> ${aiExample.better}`;
   document.getElementById('ai-answer').classList.remove('hidden');
 });
 
