@@ -135,6 +135,7 @@ const philosophyChatSteps = [
   const chatBox = document.getElementById('chat-box');
   const controls = document.getElementById('chat-controls');
   let stepIndex = 0;
+  let awaitingChoice = false;
   const speakerClasses = {
     'Philosophy Student': 'speaker-student',
     'Thales': 'speaker-thales',
@@ -166,6 +167,7 @@ const philosophyChatSteps = [
   }
 
   function showChoices(step) {
+    awaitingChoice = true;
     controls.innerHTML = '';
     step.choices.forEach(opt => {
       const btn = document.createElement('button');
@@ -177,6 +179,9 @@ const philosophyChatSteps = [
   }
 
   async function handleChoice(choice) {
+    if (!awaitingChoice) return;
+    awaitingChoice = false;
+    controls.querySelectorAll('button').forEach(b => b.disabled = true);
     await addMessage('You', choice, 'chat-user');
     const step = philosophyChatSteps[stepIndex];
     controls.innerHTML = '';

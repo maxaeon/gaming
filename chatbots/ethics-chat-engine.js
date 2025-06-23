@@ -4,6 +4,7 @@
   const bots = window.ethicalChatbots || {};
   let current = 'Philosophy Student';
   let exchangeIndex = 0;
+  let awaitingChoice = false;
   const alignmentScores = {};
   const speakerClasses = {
     'John Stuart Mill': 'speaker-mill',
@@ -38,6 +39,7 @@
   }
 
   function showOptions(responses, view) {
+    awaitingChoice = true;
     controls.innerHTML = '';
     Object.keys(responses).forEach(option => {
       const btn = document.createElement('button');
@@ -49,6 +51,9 @@
   }
 
   async function handleChoice(option, reply, view) {
+    if (!awaitingChoice) return;
+    awaitingChoice = false;
+    controls.querySelectorAll('button').forEach(b => b.disabled = true);
     await addMessage('You', option, 'chat-user');
     await addMessage(current, reply);
     if (option === view) {
