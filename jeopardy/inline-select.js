@@ -148,5 +148,9 @@ const startParams = new URLSearchParams(window.location.search);
 const startTopic = startParams.get('topic');
 const startExam = startParams.get('exam');
 if (startTopic && startExam) {
+  document.getElementById('topic-selector').classList.add('hidden');
+  document.getElementById('quote-game').classList.add('hidden');
+  const instr = document.getElementById('instructions');
+  if (instr) instr.classList.add('hidden');
   showModeModal(startTopic, startExam);
 }
