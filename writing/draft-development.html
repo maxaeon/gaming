@@ -5,6 +5,20 @@
   <title>Φ Gaming</title>
   <link rel="stylesheet" href="../jeopardy/style.css">
   <link rel="icon" href="../favicon.png" type="image/png">
+  <style>
+    .schedule-block {
+      display: inline-block;
+      padding: 2px 4px;
+      margin: 2px;
+      border-radius: 4px;
+      color: #fff;
+    }
+    .schedule-block.draft { background: #2196f3; }
+    .schedule-block.revise { background: #4caf50; }
+    .schedule-block.work { background: #9e9e9e; }
+    .blocks-container input, .blocks-container select { margin-right: 4px; }
+    .add-block { margin-left: 6px; }
+  </style>
 </head>
 <body>
   <nav id="top-nav">
@@ -85,12 +99,12 @@
       <label for="num-days">Days until completion:</label>
       <input id="num-days" type="number" min="1" value="7"><br>
       <button id="build-schedule">Build Plan</button>
-      <table id="schedule-table" class="hidden" hidden>
-        <thead>
-          <tr><th>Day</th><th>Drafting Hours</th><th>Revision Hours</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div id="legend" class="hidden" hidden>
+        <span class="schedule-block draft">Draft</span>
+        <span class="schedule-block revise">Revise</span>
+        <span class="schedule-block work">Work/Class</span>
+      </div>
+      <div id="schedule-container" class="hidden" hidden></div>
       <button id="export-schedule" class="hidden" hidden>Export Plan (PDF)</button>
       <div id="schedule-guidance">
         <h3>Writing Guidance</h3>

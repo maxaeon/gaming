@@ -46,18 +46,44 @@ document.getElementById('revise-btn').addEventListener('click', () => {
   }
 });
 
+function addBlock(container, start = '08:00', end = '09:00', type = 'draft') {
+  const block = document.createElement('div');
+  block.className = `schedule-block ${type}`;
+  block.innerHTML = `<input type="time" class="start" value="${start}"> - <input type="time" class="end" value="${end}">` +
+    `<select class="activity"><option value="draft">Draft</option><option value="revise">Revise</option><option value="work">Work/Class</option></select>` +
+    ` <button class="remove-block">\u2715</button>`;
+  const select = block.querySelector('select');
+  select.value = type;
+  select.addEventListener('change', () => {
+    block.className = `schedule-block ${select.value}`;
+  });
+  block.querySelector('.remove-block').addEventListener('click', () => block.remove());
+  container.appendChild(block);
+}
+
 function buildSchedule() {
   const days = parseInt(document.getElementById('num-days').value, 10);
-  const tbody = document.querySelector('#schedule-table tbody');
-  tbody.innerHTML = '';
+  const container = document.getElementById('schedule-container');
+  container.innerHTML = '';
   for (let i = 1; i <= days; i++) {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>Day ${i}</td><td><input type="number" min="0" step="0.5"></td><td><input type="number" min="0" step="0.5"></td>`;
-    tbody.appendChild(tr);
+    const dayDiv = document.createElement('div');
+    dayDiv.className = 'day-schedule';
+    dayDiv.dataset.day = i;
+    dayDiv.innerHTML = `<h3>Day ${i}</h3>`;
+    const blocks = document.createElement('div');
+    blocks.className = 'blocks-container';
+    dayDiv.appendChild(blocks);
+    const add = document.createElement('button');
+    add.textContent = 'Add Block';
+    add.className = 'add-block';
+    add.addEventListener('click', () => addBlock(blocks));
+    dayDiv.appendChild(add);
+    container.appendChild(dayDiv);
   }
-  const table = document.getElementById('schedule-table');
-  table.classList.remove('hidden');
-  table.hidden = false;
+  document.getElementById('legend').classList.remove('hidden');
+  document.getElementById('legend').hidden = false;
+  container.classList.remove('hidden');
+  container.hidden = false;
   const btn = document.getElementById('export-schedule');
   btn.classList.remove('hidden');
   btn.hidden = false;
@@ -68,12 +94,19 @@ function exportSchedule() {
   const doc = new jsPDF();
   doc.text('Drafting Schedule', 10, 10);
   let y = 20;
-  const rows = document.querySelectorAll('#schedule-table tbody tr');
-  rows.forEach((row, i) => {
-    const draft = row.cells[1].querySelector('input').value || '0';
-    const rev = row.cells[2].querySelector('input').value || '0';
-    doc.text(`Day ${i + 1}: draft ${draft}h, revise ${rev}h`, 10, y);
-    y += 10;
+  const days = document.querySelectorAll('.day-schedule');
+  days.forEach(day => {
+    const num = day.dataset.day;
+    doc.text(`Day ${num}`, 10, y);
+    y += 6;
+    day.querySelectorAll('.schedule-block').forEach(block => {
+      const start = block.querySelector('.start').value;
+      const end = block.querySelector('.end').value;
+      const type = block.querySelector('.activity').value;
+      doc.text(`  ${start}-${end} ${type}`, 12, y);
+      y += 6;
+    });
+    y += 4;
   });
   doc.save('schedule.pdf');
 }
