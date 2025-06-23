@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Draft Development</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Thinker's Arcade</a>
+  </nav>
+  <div class="container">
+    <h1>Draft Development</h1>
+    <section id="intro">
+      <p>In this activity, we'll show how to develop a philosophy draft step-by-step. We'll use Kant’s theory of moral absolutism as our example. Afterward, you’ll get a customizable template for your own writing projects.</p>
+      <button class="next-btn" data-next="thesis-screen">Start</button>
+    </section>
+
+    <section id="thesis-screen" class="hidden">
+      <h2>Example Thesis</h2>
+      <p id="example-thesis">Kant’s categorical imperative is overly rigid, failing to account for morally complex scenarios.</p>
+      <p>A good thesis clearly states your argument and sets the stage for your paper.</p>
+      <button class="next-btn" data-next="body1">Next</button>
+    </section>
+
+    <section id="body1" class="hidden">
+      <h2>Body Paragraph 1</h2>
+      <p class="topic">Kant’s categorical imperative demands universal moral rules without exceptions.</p>
+      <button class="detail-btn">Show Details</button>
+      <div class="details hidden">
+        <p>Refer to Kant’s <em>Groundwork of the Metaphysics of Morals</em> for the formulation of the categorical imperative.</p>
+      </div>
+      <button class="next-btn" data-next="body2">Next</button>
+    </section>
+
+    <section id="body2" class="hidden">
+      <h2>Body Paragraph 2</h2>
+      <p class="topic">However, Kant’s insistence on absolute truthfulness can lead to ethically troubling outcomes.</p>
+      <button class="detail-btn">Show Details</button>
+      <div class="details hidden">
+        <p>Consider the Nazi-at-the-door scenario discussed in many textbooks.</p>
+      </div>
+      <button class="next-btn" data-next="body3">Next</button>
+    </section>
+
+    <section id="body3" class="hidden">
+      <h2>Body Paragraph 3</h2>
+      <p class="topic">Morally effective decisions often require flexibility and attention to consequences.</p>
+      <button class="detail-btn">Show Details</button>
+      <div class="details hidden">
+        <p>For example, Aristotle’s notion of practical wisdom emphasizes context.</p>
+      </div>
+      <button class="next-btn" data-next="conclusion">Next</button>
+    </section>
+
+    <section id="conclusion" class="hidden">
+      <h2>Conclusion</h2>
+      <p id="example-conclusion">Therefore, Kant’s moral absolutism, while theoretically consistent, struggles with complex moral realities.</p>
+      <button class="next-btn" data-next="references">Next</button>
+    </section>
+
+    <section id="references" class="hidden">
+      <h2>References</h2>
+      <ul>
+        <li>Kant, Immanuel. <em>Groundwork of the Metaphysics of Morals</em>.</li>
+        <li>Course Textbook on Ethics.</li>
+      </ul>
+      <button class="next-btn" data-next="revision-demo">Next</button>
+    </section>
+
+    <section id="revision-demo" class="hidden">
+      <h2>Interactive Revision</h2>
+      <p id="revise-original">Kant’s ideas are interesting but they don't always work.</p>
+      <button id="revise-btn">Revise</button>
+      <p id="revise-updated" class="hidden">Though Kant’s moral theory emphasizes universal consistency, it proves inadequate for complex moral scenarios requiring flexibility.</p>
+      <p class="hidden" id="revise-note">Revisions sharpen your ideas, making your argument clearer and more persuasive.</p>
+      <button class="next-btn" data-next="template">Continue</button>
+    </section>
+
+    <section id="template" class="hidden">
+      <h2>Your Draft Template</h2>
+      <label>Thesis Statement:</label><br>
+      <textarea id="user-thesis" rows="2" style="width:90%;" placeholder="Write your thesis statement here."></textarea>
+      <div id="body-sections">
+        <div class="body-section">
+          <label>Topic Sentence:</label><br>
+          <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+          <label>Supporting Details and Evidence (from textbook/course materials):</label><br>
+          <textarea class="detail-input" rows="3" style="width:90%;"></textarea>
+        </div>
+        <div class="body-section">
+          <label>Topic Sentence:</label><br>
+          <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+          <label>Supporting Details and Evidence (from textbook/course materials):</label><br>
+          <textarea class="detail-input" rows="3" style="width:90%;"></textarea>
+        </div>
+        <div class="body-section">
+          <label>Topic Sentence:</label><br>
+          <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+          <label>Supporting Details and Evidence (from textbook/course materials):</label><br>
+          <textarea class="detail-input" rows="3" style="width:90%;"></textarea>
+        </div>
+      </div>
+      <button id="add-body">Add Paragraph</button><br>
+      <label>Conclusion:</label><br>
+      <textarea id="user-conclusion" rows="2" style="width:90%;" placeholder="Summarize your argument here."></textarea><br>
+      <label>References:</label><br>
+      <textarea id="user-references" rows="3" style="width:90%;" placeholder="Enter your references here, using APA or MLA style."></textarea>
+      <div>
+        <button id="export-docx">Export Your Draft (DOCX)</button>
+        <button id="export-pdf">Export Your Draft (PDF)</button>
+      </div>
+    </section>
+  </div>
+  <script src="draft-development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.5.0/docx.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
