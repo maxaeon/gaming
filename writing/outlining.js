@@ -47,7 +47,6 @@ const references = [
 
 let pieceCounter = pieces.length - 1;
 let draggedPiece = null;
-let draggedOutline = null;
 
 
 function shuffle(arr) {
@@ -122,44 +121,6 @@ function removePiece(id) {
   if (el) el.remove();
 }
 
-function prepareOutlineItem(li) {
-  li.draggable = true;
-  const btn = document.createElement('button');
-  btn.textContent = '✕';
-  btn.className = 'remove-btn';
-  btn.onclick = () => li.remove();
-  li.appendChild(btn);
-  li.addEventListener('dragstart', e => {
-    draggedOutline = li;
-    e.dataTransfer.setData('text/plain', '');
-  });
-  li.addEventListener('dragend', () => draggedOutline = null);
-}
-
-function createOutlineItem(text) {
-  const li = document.createElement('li');
-  li.textContent = text;
-  li.contentEditable = true;
-  prepareOutlineItem(li);
-  return li;
-}
-
-function handleOutlineDragOver(e) {
-  e.preventDefault();
-  const list = document.getElementById('my-outline');
-  const target = e.target.closest('#my-outline li');
-  if (!draggedOutline || !target || target === draggedOutline) return;
-  const rect = target.getBoundingClientRect();
-  const next = e.clientY > rect.top + rect.height / 2;
-  list.insertBefore(draggedOutline, next ? target.nextSibling : target);
-}
-
-function initOutlineList() {
-  const list = document.getElementById('my-outline');
-  list.addEventListener('dragover', handleOutlineDragOver);
-  list.addEventListener('drop', e => e.preventDefault());
-  list.querySelectorAll('li').forEach(prepareOutlineItem);
-}
 
 function handleDrop(e) {
   e.preventDefault();
@@ -208,7 +169,6 @@ window.addEventListener('DOMContentLoaded', () => {
   shuffle(pieces);
   buildPieces();
   buildSlots();
-  initOutlineList();
 });
 
 document.getElementById('add-piece').addEventListener('click', () => {
@@ -220,53 +180,76 @@ document.getElementById('add-piece').addEventListener('click', () => {
   }
 });
 
-document.getElementById('start-project').addEventListener('click', () => {
-  document.getElementById('project-area').classList.remove('hidden');   document.getElementById('project-area').hidden = false;
+document.getElementById('draft-btn').addEventListener('click', () => {
+  document.getElementById('draft-area').classList.remove('hidden');
+  document.getElementById('draft-area').hidden = false;
 });
 
-document.getElementById('add-outline-item').addEventListener('click', () => {
-  document.getElementById('my-outline').appendChild(createOutlineItem('New point...'));
+document.getElementById('add-paragraph').addEventListener('click', () => {
+  const div = document.createElement('div');
+  div.className = 'body-section';
+  div.innerHTML = `<label>Topic Sentence:</label><br>
+  <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+  <label>Supporting Details:</label><br>
+  <textarea class="detail-input" rows="3" style="width:90%;"></textarea>`;
+  document.getElementById('draft-body').appendChild(div);
 });
 
-function resetOutline() {
-  const list = document.getElementById('my-outline');
-  list.innerHTML = '';
-  for (let i = 0; i < 3; i++) {
-    list.appendChild(createOutlineItem(`Point ${i + 1}...`));
-  }
+function gatherDraft() {
+  const thesis = document.getElementById('draft-thesis').value.trim();
+  const conclusion = document.getElementById('draft-conclusion').value.trim();
+  const refs = document.getElementById('draft-references').value.trim().split(/\n+/);
+  const bodies = Array.from(document.querySelectorAll('#draft-body .body-section')).map(sec => {
+    return {
+      topic: sec.querySelector('.topic-input').value.trim(),
+      detail: sec.querySelector('.detail-input').value.trim()
+    };
+  });
+  return { thesis, bodies, conclusion, refs };
 }
 
-function exportOutlineDocx() {
+function exportDraftDocx() {
   const { Document, Packer, Paragraph } = window.docx;
+  const data = gatherDraft();
   const doc = new Document();
-  const children = Array.from(document.querySelectorAll('#my-outline li')).map(li => {
-    const clone = li.cloneNode(true);
-    clone.querySelector('button')?.remove();
-    return new Paragraph(clone.textContent.trim());
+  const children = [new Paragraph(data.thesis)];
+  data.bodies.forEach(b => {
+    children.push(new Paragraph(b.topic));
+    children.push(new Paragraph(b.detail));
   });
+  children.push(new Paragraph(data.conclusion));
+  if (data.refs.length) {
+    children.push(new Paragraph('References:'));
+    data.refs.forEach(r => children.push(new Paragraph(r)));
+  }
   doc.addSection({ children });
   Packer.toBlob(doc).then(blob => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'outline.docx';
+    a.download = 'draft.docx';
     a.click();
     URL.revokeObjectURL(url);
   });
 }
 
-function exportOutlinePdf() {
+function exportDraftPdf() {
   const { jsPDF } = window.jspdf;
+  const data = gatherDraft();
   const doc = new jsPDF();
-  const lines = Array.from(document.querySelectorAll('#my-outline li')).map(li => {
-    const clone = li.cloneNode(true);
-    clone.querySelector('button')?.remove();
-    return clone.textContent.trim();
+  let y = 10;
+  doc.text(data.thesis, 10, y); y += 10;
+  data.bodies.forEach(b => {
+    doc.text(b.topic, 10, y); y += 10;
+    doc.text(b.detail, 10, y); y += 10;
   });
-  lines.forEach((line, i) => doc.text(line, 10, 10 + i * 10));
-  doc.save('outline.pdf');
+  doc.text(data.conclusion, 10, y); y += 10;
+  if (data.refs.length) {
+    doc.text('References:', 10, y); y += 10;
+    data.refs.forEach(r => { doc.text(r, 10, y); y += 10; });
+  }
+  doc.save('draft.pdf');
 }
 
-document.getElementById('reset-outline').addEventListener('click', resetOutline);
-document.getElementById('export-outline').addEventListener('click', exportOutlineDocx);
-document.getElementById('export-outline-pdf').addEventListener('click', exportOutlinePdf);
+document.getElementById('export-draft-docx').addEventListener('click', exportDraftDocx);
+document.getElementById('export-draft-pdf').addEventListener('click', exportDraftPdf);
