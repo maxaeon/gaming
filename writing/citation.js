@@ -1,39 +1,43 @@
 const citationExercises = [
   {
+    type: 'in-text',
     segments: [
       { text: 'Kant claims that moral rules must be universal without exception (' },
       { text: 'Kant', error: true },
       { text: ', Groundwork, p. 31).' }
     ],
     mla: 'Kant claims that moral rules must be universal without exception (<em>Groundwork of the Metaphysics of Morals</em> 31).',
-    explanation: 'In MLA, omit the author from the parentheses when it appears in the sentence, italicize the title, and list the page number without "p.".'
+    explanation: 'This MLA in-text citation omits the author from the parentheses when it appears in the sentence, italicizes the title, and lists the page number without "p.".'
   },
   {
+    type: 'in-text',
     segments: [
       { text: 'Aquinas argues that moral actions follow natural law (' },
       { text: 'Summa Theologica, Aquinas', error: true },
       { text: ', p. 423).' }
     ],
     mla: 'Aquinas argues moral actions must follow natural law (<em>Summa Theologica</em> 423).',
-    explanation: 'MLA uses only the work\'s title and page number in parentheses when the author\'s name is already mentioned.'
+    explanation: 'In an MLA in-text citation, use only the work\'s title and page number in parentheses when the author\'s name is already mentioned.'
   },
   {
+    type: 'works-cited',
     segments: [
       { text: 'Nussbaum claims that ethics must consider human capabilities ("Ethics and Capabilities,"' },
       { text: ' Philosophy Review, Martha Nussbaum', error: true },
       { text: ', 2011, 56).' }
     ],
-    mla: 'Nussbaum, Martha C. "Ethics and Capabilities." <em>Philosophy Review</em>, vol. 23, no. 2, 2011, p. 56.',
-    explanation: 'An MLA reference begins with the author\'s full name, followed by the article title in quotes, the journal title in italics, and the volume, issue, year, and page number.'
+    mla: 'Nussbaum, Martha C. "Ethics and Capabilities." <em>Philosophy Review</em>, vol. 23, no. 2, 2011, pp. 56–65.',
+    explanation: 'An MLA Works Cited entry begins with the author\'s full name, followed by the article title in quotes, the journal title in italics, and the volume, issue, year, and page range.'
   },
   {
+    type: 'works-cited',
     segments: [
       { text: 'Rachels claims euthanasia can be morally permissible ("The Morality of Euthanasia,"' },
       { text: ' James Rachels', error: true },
       { text: ', Ethics Collection, 1998, p. 104).' }
     ],
     mla: 'Rachels, James. "The Morality of Euthanasia." <em>Ethics Collection</em>, edited by John Smith, Routledge, 1998, pp. 104–116.',
-    explanation: 'MLA lists the author first, then the chapter title in quotes, followed by the book title in italics, the editor, publisher, year, and page range.'
+    explanation: 'An MLA Works Cited entry lists the author first, then the chapter title in quotes, followed by the book title in italics, the editor, publisher, year, and page range.'
   }
 ];
 
@@ -72,7 +76,8 @@ function handleClick(idx, span) {
 function revealCitation() {
   const ex = citationExercises[citationIndex];
   const ansDiv = document.getElementById('citation-answer');
-  ansDiv.innerHTML = `<strong>MLA:</strong> ${ex.mla}<br><em>${ex.explanation}</em>`;
+  const label = ex.type === 'works-cited' ? 'MLA Works Cited:' : 'MLA In-text:';
+  ansDiv.innerHTML = `<strong>${label}</strong> ${ex.mla}<br><em>${ex.explanation}</em>`;
   ansDiv.classList.remove('hidden');
   document.getElementById('citation-next').classList.remove('hidden');
   highlightErrors();
