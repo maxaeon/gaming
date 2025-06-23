@@ -42,6 +42,7 @@ const citationExercises = [
 ];
 
 let citationIndex = 0;
+let completedRounds = 0;
 
 function buildCitation() {
   const ex = citationExercises[citationIndex];
@@ -95,7 +96,14 @@ function highlightErrors() {
 
 document.getElementById('citation-giveup').addEventListener('click', revealCitation);
 document.getElementById('citation-next').addEventListener('click', () => {
-  citationIndex = (citationIndex + 1) % citationExercises.length;
+  citationIndex++;
+  if (citationIndex >= citationExercises.length) {
+    citationIndex = 0;
+    completedRounds++;
+    if (completedRounds === 1) {
+      document.getElementById('citation-aid-link').classList.remove('hidden');
+    }
+  }
   buildCitation();
 });
 
@@ -131,4 +139,8 @@ document.getElementById('export-citation').addEventListener('click', () => {
     a.click();
     URL.revokeObjectURL(url);
   });
+});
+
+document.getElementById('citation-aid-link').addEventListener('click', () => {
+  window.open('citation-aid.html', '_blank');
 });
