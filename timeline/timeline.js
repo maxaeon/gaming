@@ -1,8 +1,13 @@
+const timelineStart = -650;
+const timelineEnd = 2025;
+
 const philosophyTimeline = [
   {
     name: "Thales of Miletus",
     era: "Ancient Philosophy",
     dates: "c. 624–546 BCE",
+    startYear: -624,
+    endYear: -546,
     bio: "The first Western philosopher known for proposing rational explanations rather than myths, suggesting water is the fundamental substance.",
     keyIdeas: ["Rational explanations over mythology", "Monism: water as fundamental element"],
     quote: "All things are water.",
@@ -19,6 +24,8 @@ const philosophyTimeline = [
     name: "Heraclitus",
     era: "Ancient Philosophy",
     dates: "c. 535–475 BCE",
+    startYear: -535,
+    endYear: -475,
     bio: "Famous for emphasizing that reality is constantly changing, symbolized by the ever-flowing river.",
     keyIdeas: ["Flux (constant change)", "Unity of opposites"],
     quote: "You cannot step twice into the same river.",
@@ -35,6 +42,8 @@ const philosophyTimeline = [
     name: "Parmenides",
     era: "Ancient Philosophy",
     dates: "c. 515–450 BCE",
+    startYear: -515,
+    endYear: -450,
     bio: "Argued reality is unchanging, timeless, and unified; change and plurality are illusions.",
     keyIdeas: ["Reality as eternal and unchanging", "Illusion of change"],
     quote: "What is, is uncreated and indestructible.",
@@ -51,6 +60,8 @@ const philosophyTimeline = [
     name: "Socrates",
     era: "Ancient Philosophy",
     dates: "470–399 BCE",
+    startYear: -470,
+    endYear: -399,
     bio: "Father of Western ethics; famous for the Socratic method—using questions to reveal ignorance and seek truth.",
     keyIdeas: ["Socratic method", "Virtue as knowledge"],
     quote: "The unexamined life is not worth living.",
@@ -67,6 +78,8 @@ const philosophyTimeline = [
     name: "Plato",
     era: "Ancient Philosophy",
     dates: "427–347 BCE",
+    startYear: -427,
+    endYear: -347,
     bio: "Student of Socrates; believed in eternal, ideal Forms beyond physical reality, guiding true knowledge.",
     keyIdeas: ["Theory of Forms", "Idealism", "Allegory of the Cave"],
     quote: "Knowledge is justified true belief.",
@@ -83,6 +96,8 @@ const philosophyTimeline = [
     name: "Aristotle",
     era: "Ancient Philosophy",
     dates: "384–322 BCE",
+    startYear: -384,
+    endYear: -322,
     bio: "Plato’s student; emphasized empirical observation and virtue ethics to understand reality.",
     keyIdeas: ["Virtue ethics", "Golden mean", "Empirical observation"],
     quote: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
@@ -99,6 +114,8 @@ const philosophyTimeline = [
     name: "Confucius",
     era: "Eastern Philosophy",
     dates: "551–479 BCE",
+    startYear: -551,
+    endYear: -479,
     bio: "Chinese philosopher emphasizing ethics, social harmony, and personal virtue through self-cultivation.",
     keyIdeas: ["Virtue ethics", "Filial piety", "Social harmony"],
     quote: "What you do not wish for yourself, do not do to others.",
@@ -115,6 +132,8 @@ const philosophyTimeline = [
     name: "Gautama Buddha",
     era: "Eastern Philosophy",
     dates: "c. 5th to 4th century BCE",
+    startYear: -500,
+    endYear: -400,
     bio: "Spiritual leader whose teachings on suffering, impermanence, and enlightenment influenced Eastern philosophy.",
     keyIdeas: ["Four Noble Truths", "Eightfold Path", "Impermanence"],
     quote: "All conditioned things are impermanent—strive diligently.",
@@ -131,6 +150,8 @@ const philosophyTimeline = [
     name: "Hypatia of Alexandria",
     era: "Late Ancient Philosophy",
     dates: "c. 370–415 CE",
+    startYear: 370,
+    endYear: 415,
     bio: "Influential mathematician, astronomer, and Neoplatonist philosopher, famous for teaching and preserving classical knowledge.",
     keyIdeas: ["Neoplatonism", "Rational inquiry", "Integration of philosophy and science"],
     quote: "Reserve your right to think, for even to think wrongly is better than not to think at all.",
@@ -147,6 +168,8 @@ const philosophyTimeline = [
     name: "Augustine of Hippo",
     era: "Medieval Philosophy",
     dates: "354–430 CE",
+    startYear: 354,
+    endYear: 430,
     bio: "Christian philosopher who integrated Platonic thought into theology, emphasizing faith and inner experience.",
     keyIdeas: ["Faith seeking understanding", "Theory of original sin", "Nature of time"],
     quote: "Our hearts are restless until they rest in You.",
@@ -163,6 +186,8 @@ const philosophyTimeline = [
     name: "Thomas Aquinas",
     era: "Medieval Philosophy",
     dates: "1225–1274",
+    startYear: 1225,
+    endYear: 1274,
     bio: "Synthesized Aristotelian philosophy with Christian theology, known for natural law and proofs of God's existence.",
     keyIdeas: ["Natural law theory", "Five ways to prove God's existence", "Reason complementing faith"],
     quote: "To one who has faith, no explanation is necessary. To one without faith, no explanation is possible.",
@@ -179,6 +204,8 @@ const philosophyTimeline = [
     name: "René Descartes",
     era: "Modern Philosophy",
     dates: "1596–1650",
+    startYear: 1596,
+    endYear: 1650,
     bio: "Considered the father of modern philosophy, famous for dualism (mind-body distinction) and rationalism.",
     keyIdeas: ["Mind-body dualism", "Cogito, ergo sum (I think, therefore I am)", "Methodic doubt"],
     quote: "I think, therefore I am.",
@@ -195,6 +222,8 @@ const philosophyTimeline = [
     name: "David Hume",
     era: "Modern Philosophy",
     dates: "1711–1776",
+    startYear: 1711,
+    endYear: 1776,
     bio: "Empiricist philosopher skeptical of causation and induction, emphasizing experience over reason.",
     keyIdeas: ["Empiricism", "Problem of induction", "Hume's fork"],
     quote: "Reason is the slave of the passions.",
@@ -211,6 +240,8 @@ const philosophyTimeline = [
     name: "Immanuel Kant",
     era: "Modern Philosophy",
     dates: "1724–1804",
+    startYear: 1724,
+    endYear: 1804,
     bio: "Synthesized rationalism and empiricism; argued moral duties must apply universally (categorical imperative).",
     keyIdeas: ["Categorical imperative", "Phenomena vs. noumena", "Transcendental idealism"],
     quote: "Act only according to that maxim whereby you can at the same time will that it should become a universal law.",
@@ -227,6 +258,8 @@ const philosophyTimeline = [
     name: "Friedrich Nietzsche",
     era: "Continental Philosophy",
     dates: "1844–1900",
+    startYear: 1844,
+    endYear: 1900,
     bio: "Challenged traditional morality; known for concepts like the death of God, will to power, and the Übermensch.",
     keyIdeas: ["Will to power", "Death of God", "Critique of traditional morality"],
     quote: "God is dead! He remains dead! And we have killed him.",
@@ -243,6 +276,8 @@ const philosophyTimeline = [
     name: "Jean-Paul Sartre",
     era: "Continental Philosophy",
     dates: "1905–1980",
+    startYear: 1905,
+    endYear: 1980,
     bio: "Existentialist philosopher who emphasized radical freedom, responsibility, and authenticity.",
     keyIdeas: ["Existentialism", "Radical freedom", "Authenticity"],
     quote: "Existence precedes essence.",
@@ -259,6 +294,8 @@ const philosophyTimeline = [
     name: "Simone de Beauvoir",
     era: "Feminist Philosophy",
     dates: "1908–1986",
+    startYear: 1908,
+    endYear: 1986,
     bio: "Existential feminist philosopher known for exploring gender oppression and women's freedom.",
     keyIdeas: ["Existential feminism", "Gender as socially constructed", "Women's autonomy"],
     quote: "One is not born, but rather becomes, a woman.",
@@ -275,6 +312,8 @@ const philosophyTimeline = [
     name: "Bertrand Russell",
     era: "Analytic Philosophy",
     dates: "1872–1970",
+    startYear: 1872,
+    endYear: 1970,
     bio: "Analytic philosopher known for contributions to logic, language, epistemology, and social criticism.",
     keyIdeas: ["Analytic method", "Theory of descriptions", "Logical atomism"],
     quote: "Philosophy is to be studied for the sake of the questions themselves.",
@@ -291,6 +330,8 @@ const philosophyTimeline = [
     name: "Ludwig Wittgenstein",
     era: "Analytic Philosophy",
     dates: "1889–1951",
+    startYear: 1889,
+    endYear: 1951,
     bio: "Influential analytic philosopher; explored limits of language, meaning, and philosophy itself.",
     keyIdeas: ["Picture theory of language", "Language-games", "Limits of language"],
     quote: "Whereof one cannot speak, thereof one must be silent.",
@@ -307,6 +348,8 @@ const philosophyTimeline = [
     name: "David Chalmers",
     era: "Contemporary Philosophy",
     dates: "1966–present",
+    startYear: 1966,
+    endYear: 2025,
     bio: "Contemporary philosopher of mind; famous for the hard problem of consciousness and philosophical zombies.",
     keyIdeas: ["Hard problem of consciousness", "Philosophical zombies", "Property dualism"],
     quote: "There is nothing we know more intimately than conscious experience, but there is nothing harder to explain.",
@@ -323,6 +366,8 @@ const philosophyTimeline = [
     name: "Kwame Anthony Appiah",
     era: "Postcolonial",
     dates: "b. 1954",
+    startYear: 1954,
+    endYear: 2025,
     bio: "Global citizenship advocate; wrote on race, identity, cosmopolitanism.",
     keyIdeas: ["Cosmopolitanism", "Experiments in ethics", "African identity"],
     quote: "There is no Western civilization...",
@@ -339,6 +384,15 @@ const philosophyTimeline = [
 
 let currentIndex = 0;
 
+function updateHighlight(entry) {
+  const highlight = document.getElementById('timeline-highlight');
+  const range = timelineEnd - timelineStart;
+  const startPercent = (entry.startYear - timelineStart) / range;
+  const endPercent = (entry.endYear - timelineStart) / range;
+  highlight.style.left = `${startPercent * 100}%`;
+  highlight.style.width = `${(endPercent - startPercent) * 100}%`;
+}
+
 function displayEntry(index) {
   const entry = philosophyTimeline[index];
   document.getElementById('philosopher-name').innerText = entry.name;
@@ -354,6 +408,7 @@ function displayEntry(index) {
   document.getElementById('philosopher-quote').innerText = entry.quote;
   document.getElementById('reflection-question').innerText = entry.reflectionQuestion.question;
   document.getElementById('reflection-feedback').classList.add('hidden');
+  updateHighlight(entry);
 }
 
 function handleResponse(type) {
@@ -378,4 +433,31 @@ document.getElementById('prev-btn').addEventListener('click', () => {
   displayEntry(currentIndex);
 });
 
-window.addEventListener('DOMContentLoaded', () => displayEntry(currentIndex));
+function initTimelineHover() {
+  const bar = document.getElementById('timeline-bar');
+  const tooltip = document.getElementById('timeline-tooltip');
+  bar.addEventListener('mousemove', (e) => {
+    const rect = bar.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    const year = Math.round(timelineStart + percent * (timelineEnd - timelineStart));
+    const names = philosophyTimeline
+      .filter(p => year >= p.startYear && year <= p.endYear)
+      .map(p => p.name);
+    if (names.length) {
+      tooltip.style.opacity = 1;
+      tooltip.style.left = `${percent * 100}%`;
+      const displayYear = year < 0 ? `${Math.abs(year)} BCE` : year;
+      tooltip.innerText = `${displayYear}: ${names.join(', ')}`;
+    } else {
+      tooltip.style.opacity = 0;
+    }
+  });
+  bar.addEventListener('mouseleave', () => {
+    tooltip.style.opacity = 0;
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  displayEntry(currentIndex);
+  initTimelineHover();
+});
