@@ -847,7 +847,7 @@ button {
 .flip-card {
   perspective: 1000px;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto 20px;
 }
 
@@ -878,9 +878,26 @@ button {
   transform: rotateY(180deg);
 }
 
-/* Ensure Quiz Mode button sits above overlapping flashcard */
-#quiz-mode {
-  margin-top: 10px;
-  position: relative;
-  z-index: 1;
+#flashcard button,
+#trivia-game button {
+  background-color: #9c27b0;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  margin: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
 }
+
+#flashcard p,
+#trivia-question {
+  font-size: 1.2em;
+}
+
+#trivia-game,
+#flashcard {
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+

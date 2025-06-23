@@ -141,6 +141,7 @@ document.getElementById('trivia-course').addEventListener('change', e => {
   const course = e.target.value;
   if (course) {
     loadTrivia(course);
+    if (window.updatePageHeader) updatePageHeader(course);
   } else {
     document.getElementById('trivia-game').classList.add('hidden');     document.getElementById('trivia-game').hidden = true;
   }
@@ -157,6 +158,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const select = document.getElementById('trivia-course');
     select.value = course;
     loadTrivia(course);
+    if (window.updatePageHeader) updatePageHeader(course);
   }
 
   const copy = document.getElementById('trivia-copy');
