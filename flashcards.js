@@ -94,3 +94,18 @@ document.getElementById('category-select').addEventListener('change', e => {
 
 document.getElementById('show-answer').addEventListener('click', showAnswer);
 document.getElementById('next-card').addEventListener('click', nextCard);
+
+function getParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const course = getParam('course');
+  if (course) {
+    const select = document.getElementById('course-select');
+    select.value = course;
+    populateCategories(course);
+    loadCards(course);
+  }
+});

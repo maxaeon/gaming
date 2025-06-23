@@ -72,3 +72,17 @@ document.getElementById('trivia-course').addEventListener('change', e => {
     document.getElementById('trivia-game').classList.add('hidden');
   }
 });
+
+function getParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const course = getParam('course');
+  if (course) {
+    const select = document.getElementById('trivia-course');
+    select.value = course;
+    loadTrivia(course);
+  }
+});

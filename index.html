@@ -8,29 +8,42 @@
 <body>
   <nav id="top-nav">
     <button id="home-btn">Home</button>
-    <button onclick="location.href='flashcards.html'">Flashcards</button>
-    <button onclick='location.href="trivia.html"'>Trivia</button>
-    <button onclick="location.href='fallacy.html'">Fallacy Game</button>
     <div id="topic-selector">
       <div class="course">
-        <button class="topic-btn" data-topic="introPhilosophy">Intro to Philosophy</button>
+        <h3>Intro to Philosophy</h3>
+        <button class="topic-btn" data-topic="introPhilosophy">Jeopardy</button>
         <div class="exam-dropdown hidden">
           <button data-exam="Midterm">Midterm Review</button>
           <button data-exam="Final">Final Review</button>
         </div>
+        <div class="game-links">
+          <button onclick="location.href='flashcards.html?course=introPhilosophy'">Flashcards</button>
+          <button onclick="location.href='trivia.html?course=introPhilosophy'">Trivia</button>
+        </div>
       </div>
       <div class="course">
-        <button class="topic-btn" data-topic="criticalThinking">Critical Thinking</button>
+        <h3>Critical Thinking</h3>
+        <button class="topic-btn" data-topic="criticalThinking">Jeopardy</button>
         <div class="exam-dropdown hidden">
           <button data-exam="Midterm">Midterm Review</button>
           <button data-exam="Final">Final Review</button>
         </div>
+        <div class="game-links">
+          <button onclick="location.href='flashcards.html?course=criticalThinking'">Flashcards</button>
+          <button onclick="location.href='trivia.html?course=criticalThinking'">Trivia</button>
+          <button onclick="location.href='fallacy.html'">Fallacy Detective</button>
+        </div>
       </div>
       <div class="course">
-        <button class="topic-btn" data-topic="ethics">Ethics</button>
+        <h3>Ethics</h3>
+        <button class="topic-btn" data-topic="ethics">Jeopardy</button>
         <div class="exam-dropdown hidden">
           <button data-exam="Midterm">Midterm Review</button>
           <button data-exam="Final">Final Review</button>
+        </div>
+        <div class="game-links">
+          <button onclick="location.href='flashcards.html?course=ethics'">Flashcards</button>
+          <button onclick="location.href='trivia.html?course=ethics'">Trivia</button>
         </div>
       </div>
     </div>
