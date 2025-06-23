@@ -1,12 +1,33 @@
-const sections = ['intro','example','practice','reflect','template'];
+// List of section ids in the order they appear. The optional "reflect" step
+// was removed from the activity, so it is no longer included here.
+const sections = ['intro','example','practice','template'];
 
 function showSection(id) {
+  // Hide all tracked sections first
   sections.forEach(sec => {
     const el = document.getElementById(sec);
-    if (el) el.classList.add('hidden');     if (el) el.hidden = true;
+    if (el) {
+      el.classList.add('hidden');
+      el.hidden = true;
+    }
   });
-  const target = document.getElementById(id);
-  if (target) target.classList.remove('hidden');   if (target) target.hidden = false;
+
+  if (id === 'practice') {
+    // When practicing, keep the example visible for reference
+    ['example', 'practice'].forEach(sec => {
+      const el = document.getElementById(sec);
+      if (el) {
+        el.classList.remove('hidden');
+        el.hidden = false;
+      }
+    });
+  } else {
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.remove('hidden');
+      target.hidden = false;
+    }
+  }
 }
 
 document.querySelectorAll('.next-btn').forEach(btn => {
