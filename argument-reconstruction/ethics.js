@@ -154,20 +154,26 @@ function showReconstructionQuestion() {
   });
   document.getElementById("reconstruction-feedback").classList.add("hidden");
   document.getElementById("reconstruction-next").classList.add("hidden");
+  document.getElementById("reconstruction-try").classList.add("hidden");
+  document.getElementById("reconstruction-show").classList.add("hidden");
 }
 
 function submitReconstruction(choice) {
   const q = reconstructionOrder[reconstructionIndex];
   const feedback = document.getElementById("reconstruction-feedback");
+  const options = document.querySelectorAll("#reconstruction-options button");
+  options.forEach(btn => btn.disabled = true);
   if (choice === q.answer) {
     feedback.innerText = "Correct!";
     feedback.style.color = "#4caf50";
+    document.getElementById("reconstruction-next").classList.remove("hidden");
   } else {
-    feedback.innerText = `Incorrect. The correct answer is ${q.answer}.`;
+    feedback.innerText = "Incorrect.";
     feedback.style.color = "#c62828";
+    document.getElementById("reconstruction-try").classList.remove("hidden");
+    document.getElementById("reconstruction-show").classList.remove("hidden");
   }
   feedback.classList.remove("hidden");
-  document.getElementById("reconstruction-next").classList.remove("hidden");
 }
 
 document.getElementById("reconstruction-next").addEventListener("click", () => {
@@ -175,4 +181,28 @@ document.getElementById("reconstruction-next").addEventListener("click", () => {
   showReconstructionQuestion();
 });
 
+document.getElementById("reconstruction-try").addEventListener("click", () => {
+  const options = document.querySelectorAll("#reconstruction-options button");
+  options.forEach(btn => btn.disabled = false);
+  document.getElementById("reconstruction-feedback").classList.add("hidden");
+  document.getElementById("reconstruction-try").classList.add("hidden");
+  document.getElementById("reconstruction-show").classList.add("hidden");
+});
+
+document.getElementById("reconstruction-show").addEventListener("click", () => {
+  const q = reconstructionOrder[reconstructionIndex];
+  document.getElementById("reconstruction-feedback").innerText = `The correct answer is ${q.answer}.`;
+  document.getElementById("reconstruction-show").classList.add("hidden");
+  document.getElementById("reconstruction-try").classList.add("hidden");
+  document.getElementById("reconstruction-next").classList.remove("hidden");
+});
+
 document.addEventListener("DOMContentLoaded", startReconstruction);
+
+// Info modal logic
+document.getElementById("info-btn").addEventListener("click", () => {
+  document.getElementById("info-modal").classList.remove("hidden");
+});
+document.getElementById("close-info").addEventListener("click", () => {
+  document.getElementById("info-modal").classList.add("hidden");
+});
