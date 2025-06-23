@@ -180,9 +180,13 @@ document.getElementById('add-piece').addEventListener('click', () => {
   }
 });
 
-document.getElementById('draft-btn').addEventListener('click', () => {
-  document.getElementById('draft-area').classList.remove('hidden');
-  document.getElementById('draft-area').hidden = false;
+document.getElementById('outline-btn').addEventListener('click', () => {
+  document.getElementById('outline-area').classList.remove('hidden');
+  document.getElementById('outline-area').hidden = false;
+});
+
+document.getElementById('open-draft-dev').addEventListener('click', () => {
+  window.location.href = 'draft-development.html';
 });
 
 document.getElementById('add-paragraph').addEventListener('click', () => {
@@ -192,14 +196,14 @@ document.getElementById('add-paragraph').addEventListener('click', () => {
   <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
   <label>Supporting Details:</label><br>
   <textarea class="detail-input" rows="3" style="width:90%;"></textarea>`;
-  document.getElementById('draft-body').appendChild(div);
+  document.getElementById('outline-body').appendChild(div);
 });
 
-function gatherDraft() {
-  const thesis = document.getElementById('draft-thesis').value.trim();
-  const conclusion = document.getElementById('draft-conclusion').value.trim();
-  const refs = document.getElementById('draft-references').value.trim().split(/\n+/);
-  const bodies = Array.from(document.querySelectorAll('#draft-body .body-section')).map(sec => {
+function gatherOutline() {
+  const thesis = document.getElementById('outline-thesis').value.trim();
+  const conclusion = document.getElementById('outline-conclusion').value.trim();
+  const refs = document.getElementById('outline-references').value.trim().split(/\n+/);
+  const bodies = Array.from(document.querySelectorAll('#outline-body .body-section')).map(sec => {
     return {
       topic: sec.querySelector('.topic-input').value.trim(),
       detail: sec.querySelector('.detail-input').value.trim()
@@ -208,9 +212,9 @@ function gatherDraft() {
   return { thesis, bodies, conclusion, refs };
 }
 
-function exportDraftDocx() {
+function exportOutlineDocx() {
   const { Document, Packer, Paragraph } = window.docx;
-  const data = gatherDraft();
+  const data = gatherOutline();
   const doc = new Document();
   const children = [new Paragraph(data.thesis)];
   data.bodies.forEach(b => {
@@ -227,15 +231,15 @@ function exportDraftDocx() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'draft.docx';
+    a.download = 'outline.docx';
     a.click();
     URL.revokeObjectURL(url);
   });
 }
 
-function exportDraftPdf() {
+function exportOutlinePdf() {
   const { jsPDF } = window.jspdf;
-  const data = gatherDraft();
+  const data = gatherOutline();
   const doc = new jsPDF();
   let y = 10;
   doc.text(data.thesis, 10, y); y += 10;
@@ -248,8 +252,8 @@ function exportDraftPdf() {
     doc.text('References:', 10, y); y += 10;
     data.refs.forEach(r => { doc.text(r, 10, y); y += 10; });
   }
-  doc.save('draft.pdf');
+  doc.save('outline.pdf');
 }
 
-document.getElementById('export-draft-docx').addEventListener('click', exportDraftDocx);
-document.getElementById('export-draft-pdf').addEventListener('click', exportDraftPdf);
+document.getElementById('export-outline-docx').addEventListener('click', exportOutlineDocx);
+document.getElementById('export-outline-pdf').addEventListener('click', exportOutlinePdf);
