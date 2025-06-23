@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Debate Duel</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Thinker's Arcade</a>
+  </nav>
+  <div class="container">
+    <div id="intro">
+      <h1>Debate Duel</h1>
+      <p>Welcome to Debate Duel! In this interactive simulation, you'll practice critical thinking skills by engaging in structured debates. You'll choose responses, evaluate arguments, and avoid logical fallacies to out-debate your virtual opponent.</p>
+      <button id="start-btn">Start</button>
+    </div>
+    <div id="topic-select" class="hidden">
+      <h2>Select a Topic</h2>
+      <div class="game-links">
+        <button class="topic-btn" data-topic="A">Topic A: Should social media platforms regulate misinformation?</button>
+        <button class="topic-btn" data-topic="B">Topic B: Is artificial intelligence beneficial or dangerous?</button>
+        <button class="topic-btn" data-topic="C">Topic C: Should animal testing be banned in all circumstances?</button>
+        <button class="topic-btn" data-topic="D">Topic D: Should college education be tuition-free?</button>
+      </div>
+    </div>
+    <div id="debate" class="hidden">
+      <h2 id="debate-title"></h2>
+      <p id="opponent"></p>
+      <div id="responses" class="mc-options"></div>
+      <p id="feedback" class="hidden"></p>
+      <button id="next-round" class="hidden">Next</button>
+    </div>
+    <div id="summary" class="hidden">
+      <h2>Debate Completed!</h2>
+      <p id="summary-text"></p>
+      <section id="reflection">
+        <p>Which argument or response was the most challenging for you, and why?</p>
+        <textarea rows="3" style="width:90%;"></textarea>
+        <p>Did identifying logical fallacies help you improve your critical thinking? How?</p>
+        <textarea rows="3" style="width:90%;"></textarea>
+        <p>Describe a strategy you used successfully to construct strong, logical arguments.</p>
+        <textarea rows="3" style="width:90%;"></textarea>
+      </section>
+    </div>
+  </div>
+  <script src="debate-duel.js"></script>
+</body>
+</html>
