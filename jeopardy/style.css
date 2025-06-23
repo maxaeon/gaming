@@ -72,8 +72,13 @@ a.button:hover {
 }
 
 body.home #site-icon {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
+}
+
+#home-title {
+  margin-top: 20px;
+  font-size: 32px;
 }
 
 body.home {
