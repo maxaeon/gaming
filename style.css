@@ -159,6 +159,9 @@ body {
 .hidden {
   display: none;
 }
+#jeopardy-board.hidden {
+  display: none;
+}
 
 #question-modal, #celebration-modal, #mode-modal, #multi-modal, #quit-modal {
   position: fixed;
