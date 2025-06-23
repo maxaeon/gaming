@@ -99,7 +99,7 @@ function buildPool() {
 
 function enableDrops() {
   makeDroppable(document.getElementById('concept-pool'));
-  document.querySelectorAll('.drop-zone, #mindmap .cluster').forEach(div => {
+  document.querySelectorAll('.drop-zone, #clusters .cluster').forEach(div => {
     const ul = div.querySelector('ul');
     makeDroppable(div, ul);
     if (ul) makeDroppable(ul);
@@ -135,46 +135,26 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('add-node').addEventListener('click', addNodeFromInput);
 });
 
-// Project mode
-document.getElementById('start-project').addEventListener('click', () => {
-  const proj = document.getElementById('project-area');
-  proj.classList.remove('hidden');
-  proj.hidden = false;
-  resetMindMap();
-  const mindmap = document.getElementById('mindmap');
-  const names = [];
-  for (let i = 1; i <= 3; i++) {
-    const optional = i > 2 ? ' (optional)' : '';
-    const name = prompt(`Enter a name for cluster ${i}${optional}`);
-    if (!name) {
-      if (i <= 2) { i--; continue; }
-      break;
-    }
-    names.push(name);
-    if (i === 3 && !name) break;
-  }
-  names.forEach(n => mindmap.appendChild(createCluster(n)));
-  enableDrops();
-  let term;
-  while ((term = prompt('Add a term to sort (leave blank to finish)'))){
-    addNode(term);
-  }
-});
 
 function resetMindMap() {
-  document.getElementById('mindmap').innerHTML = '';
+  const clusters = document.getElementById('clusters');
+  clusters.innerHTML =
+    '<div class="cluster drop-zone"><h3>Cluster 1</h3><ul></ul></div>' +
+    '<div class="cluster drop-zone"><h3>Cluster 2</h3><ul></ul></div>' +
+    '<div class="cluster drop-zone"><h3>Cluster 3</h3><ul></ul></div>';
   document.getElementById('concept-pool').innerHTML = '';
+  enableDrops();
 }
 
 function exportMindMap() {
-  const area = document.getElementById('mindmap');
+  const area = document.getElementById('clusters');
   html2canvas(area).then(canvas => {
     canvasToImage(canvas, { name: 'mindmap', type: 'png', quality: 1 });
   });
 }
 
 function exportMindMapPDF() {
-  const area = document.getElementById('mindmap');
+  const area = document.getElementById('clusters');
   html2canvas(area).then(canvas => {
     const imgData = canvas.toDataURL('image/png');
     const { jsPDF } = window.jspdf;
@@ -187,13 +167,13 @@ function exportMindMapPDF() {
   });
 }
 
-document.getElementById('reset-mindmap').addEventListener('click', resetMindMap);
+document.getElementById('clear-map').addEventListener('click', resetMindMap);
 document.getElementById('export-mindmap').addEventListener('click', exportMindMap);
 document.getElementById('export-pdf').addEventListener('click', exportMindMapPDF);
 document.getElementById('add-cluster').addEventListener('click', () => {
   const name = prompt('Cluster name');
   if (name) {
-    document.getElementById('mindmap').appendChild(createCluster(name));
+    document.getElementById('clusters').appendChild(createCluster(name));
     enableDrops();
   }
 });
