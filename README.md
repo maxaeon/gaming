@@ -35,6 +35,8 @@ Additional pages include:
 - `fallacy-detection/whats-missing.html` – practice identifying missing premises
 - `chatbots/ethics-chat.html` – lightweight rotating chat with famous ethicists
 - `chatbots/intro-philosophy-chat.html` – interactive chat with ancient Greek philosophers
+- `writing/citation.html` – identify citation mistakes
+- `writing/brainstorm.html` – build mind-map clusters for brainstorming
 
 
 ## Project Structure
@@ -48,6 +50,7 @@ Additional pages include:
 - **trivia/** – multiple-choice quiz game
 - **fallacy-detection/** – fallacy and missing premise exercises
 - **chatbots/** – lightweight chat pages
+- **writing/** – short activities for philosophical writing practice
 
 ## Contributing
 

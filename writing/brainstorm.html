@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Philosophical Mind-Map Builder</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <style>
+    #concept-pool li {
+      display:inline-block;
+      background:#ce93d8;
+      color:#000;
+      padding:6px 8px;
+      margin:4px;
+      border-radius:6px;
+      cursor:grab;
+    }
+    .cluster {
+      border:2px dashed #7b1fa2;
+      padding:10px;
+      margin:10px 0;
+      min-height:60px;
+      border-radius:8px;
+    }
+    .cluster ul { list-style:none; padding:0; }
+    .cluster li { background:#ba68c8; color:#000; margin:4px; padding:4px 6px; border-radius:4px; cursor:grab; display:inline-block; }
+  </style>
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Thinker's Arcade</a>
+  </nav>
+  <div class="container">
+    <h1>Philosophical Mind-Map Builder</h1>
+    <p class="instructions">Drag and drop the concepts below into logical clusters to brainstorm arguments against exceptionless moral rules.</p>
+    <ul id="concept-pool"></ul>
+    <div id="clusters">
+      <div class="cluster drop-zone"><h3>Cluster 1</h3><ul></ul></div>
+      <div class="cluster drop-zone"><h3>Cluster 2</h3><ul></ul></div>
+      <div class="cluster drop-zone"><h3>Cluster 3</h3><ul></ul></div>
+    </div>
+    <button id="show-suggested">Show Suggested Clusters</button>
+    <div id="suggested" class="hidden"></div>
+    <section id="reflection">
+      <h2>Reflective Prompts</h2>
+      <p>Explain why you grouped the concepts as you did. What other ideas could strengthen your argument?</p>
+      <textarea id="reflection-input" rows="3" style="width:90%;"></textarea>
+    </section>
+  </div>
+  <script src="brainstorm.js"></script>
+</body>
+</html>
