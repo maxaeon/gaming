@@ -7,52 +7,62 @@
   <link rel="icon" href="favicon.png" type="image/png">
 </head>
 <body class="home">
-  <nav id="top-nav" aria-label="Main">
-    <a id="home-link" href="index.html">Thinkers' Arcade</a>
-  </nav>
+
 
   <main class="container home-container">
     <h1 id="home-title">Thinkers' Arcade</h1>
     <a href="index.html"><img id="site-icon" src="icon.png" alt="Thinkers' Arcade icon"></a>
-    <p id="instructions">Browse flashcards, trivia quizzes, argument reconstruction challenges, bonus games, and full review sets for every course.</p>
+    <p id="instructions">Browse flashcards, trivia quizzes, argument challenges, bonus games, and full review sets for every course.</p>
     <div id="topic-selector">
       <div class="course">
         <h3>Intro to Philosophy</h3>
         <div class="game-links">
-          <a class="button" href="jeopardy/index.html">Game Board</a>
           <a class="button" href="flashcards/flashcards.html?course=introPhilosophy">Flashcards</a>
           <a class="button" href="trivia/trivia.html?course=introPhilosophy">Trivia</a>
           <a class="button" href="chatbots/intro-philosophy-chat.html">Chat</a>
           <a class="button" href="timeline/timeline.html">Timeline</a>
-          <a class="button" href="argument-reconstruction/intro-philosophy.html">Reconstruction</a>
+          <a class="button" href="argument-reconstruction/intro-philosophy.html">Arguments</a>
+          <a class="button review-btn" href="#">Review Games</a>
+          <div class="exam-dropdown hidden">
+            <button onclick="location.href='jeopardy/index.html?topic=introPhilosophy&exam=Midterm'">Part 1</button>
+            <button onclick="location.href='jeopardy/index.html?topic=introPhilosophy&exam=Final'">Part 2</button>
+          </div>
         </div>
       </div>
       <div class="course">
         <h3>Critical Thinking</h3>
         <div class="game-links">
-          <a class="button" href="jeopardy/index.html">Game Board</a>
           <a class="button" href="flashcards/flashcards.html?course=criticalThinking">Flashcards</a>
           <a class="button" href="trivia/trivia.html?course=criticalThinking">Trivia</a>
           <a class="button" href="fallacy-detection/fallacy.html">Fallacy Detective</a>
-          <a class="button" href="argument-reconstruction/critical-thinking.html">Reconstruction</a>
+          <a class="button" href="argument-reconstruction/critical-thinking.html">Arguments</a>
+          <a class="button review-btn" href="#">Review Games</a>
+          <div class="exam-dropdown hidden">
+            <button onclick="location.href='jeopardy/index.html?topic=criticalThinking&exam=Midterm'">Part 1</button>
+            <button onclick="location.href='jeopardy/index.html?topic=criticalThinking&exam=Final'">Part 2</button>
+          </div>
         </div>
       </div>
       <div class="course">
         <h3>Ethics</h3>
         <div class="game-links">
-          <a class="button" href="jeopardy/index.html">Game Board</a>
           <a class="button" href="flashcards/flashcards.html?course=ethics">Flashcards</a>
           <a class="button" href="trivia/trivia.html?course=ethics">Trivia</a>
           <a class="button" href="chatbots/ethics-chat.html">Chat</a>
-          <a class="button" href="argument-reconstruction/ethics.html">Reconstruction</a>
+          <a class="button" href="argument-reconstruction/ethics.html">Arguments</a>
           <a class="button" href="trolley/trolley.html">Trolley Game</a>
+          <a class="button review-btn" href="#">Review Games</a>
+          <div class="exam-dropdown hidden">
+            <button onclick="location.href='jeopardy/index.html?topic=ethics&exam=Midterm'">Part 1</button>
+            <button onclick="location.href='jeopardy/index.html?topic=ethics&exam=Final'">Part 2</button>
+          </div>
         </div>
       </div>
       <div class="course">
         <h3>Writing in Philosophy</h3>
         <div class="game-links">
           <a class="button" href="writing/citation.html">Citation Investigator</a>
-          <a class="button" href="writing/brainstorm.html">Mind-Map Builder</a>
+          <a class="button" href="writing/brainstorm.html">Mind Mapping</a>
           <a class="button" href="writing/outlining.html">Outline Builder</a>
         </div>
       </div>
@@ -67,6 +77,7 @@
   </main>
 
   <footer class="site-footer">&copy; <a href="https://www.maparks.com">maxaeon</a> 2025</footer>
+  <script src="home-review.js"></script>
   <script src="jeopardy/who-said-it.js"></script>
 </body>
 </html>

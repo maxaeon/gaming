@@ -142,3 +142,11 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 window.addEventListener('beforeunload', goHome);
+
+// Auto-open the appropriate exam if parameters are provided in the URL
+const startParams = new URLSearchParams(window.location.search);
+const startTopic = startParams.get('topic');
+const startExam = startParams.get('exam');
+if (startTopic && startExam) {
+  showModeModal(startTopic, startExam);
+}
