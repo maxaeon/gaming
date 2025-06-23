@@ -3,6 +3,7 @@ const triviaQuestions = flashcards;
 let currentTrivia = [];
 let triviaIndex = 0;
 let optionIndex = 0;
+let questionsAnswered = 0;
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -16,6 +17,9 @@ function loadTrivia(course) {
   currentTrivia = Object.values(triviaQuestions[course]).flat();
   shuffle(currentTrivia);
   triviaIndex = 0;
+  questionsAnswered = 0;
+  const share = document.getElementById('trivia-share');
+  if (share) share.classList.add('hidden');
   document.getElementById('trivia-game').classList.remove('hidden');   document.getElementById('trivia-game').hidden = false;
   showTriviaQuestion();
 }
@@ -61,6 +65,14 @@ function submitTrivia(choice) {
   }
   feedback.classList.remove('hidden');   feedback.hidden = false;
   document.getElementById('trivia-next').classList.remove('hidden');   document.getElementById('trivia-next').hidden = false;
+  questionsAnswered++;
+  if (questionsAnswered >= currentTrivia.length) {
+    const share = document.getElementById('trivia-share');
+    if (share) {
+      share.classList.remove('hidden');
+      share.hidden = false;
+    }
+  }
 }
 
 document.getElementById('trivia-next').addEventListener('click', () => {
@@ -109,5 +121,23 @@ window.addEventListener('DOMContentLoaded', () => {
     const select = document.getElementById('trivia-course');
     select.value = course;
     loadTrivia(course);
+  }
+
+  const copy = document.getElementById('trivia-copy');
+  if (copy) {
+    copy.addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href);
+    });
+  }
+
+  const share = document.getElementById('trivia-web-share');
+  if (share) {
+    share.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({ url: window.location.href });
+      } else if (copy) {
+        navigator.clipboard.writeText(window.location.href);
+      }
+    });
   }
 });

@@ -69,6 +69,18 @@ a.button:hover {
   background-color: #7b1fa2;
 }
 
+.help-link {
+  margin-left: 8px;
+  color: #9c27b0;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.help-link:hover {
+  text-decoration: underline;
+}
+
 .container {
   width: 100%;
   margin: 80px auto 0;
@@ -317,7 +329,7 @@ body.home .game-links .review-btn {
   display: none;
 }
 
-#question-modal, #celebration-modal, #mode-modal, #multi-modal, #quit-modal, #info-modal {
+#question-modal, #celebration-modal, #mode-modal, #multi-modal, #quit-modal, #info-modal, #help-modal {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
@@ -331,7 +343,8 @@ body.home .game-links .review-btn {
 #mode-modal.hidden,
 #multi-modal.hidden,
 #quit-modal.hidden,
-#info-modal.hidden {
+#info-modal.hidden,
+#help-modal.hidden {
   display: none;
 }
 
