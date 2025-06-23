@@ -95,6 +95,12 @@ function nextCard() {
   loadCard();
 }
 
+function prevCard() {
+  if (!currentCards.length) return;
+  cardIndex = (cardIndex - 1 + currentCards.length) % currentCards.length;
+  loadCard();
+}
+
 function exportCards() {
   if (!currentCards.length) return;
   const format = prompt('Export as json or csv?', 'json');
@@ -144,6 +150,19 @@ document.getElementById('show-answer').addEventListener('click', showAnswer);
 document.getElementById('next-card').addEventListener('click', nextCard);
 document.getElementById('export-cards').addEventListener('click', exportCards);
 document.getElementById('quiz-mode').addEventListener('click', startQuiz);
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  const flashcard = document.getElementById('flashcard');
+  if (flashcard.classList.contains('hidden')) return;
+  if (e.key === 'ArrowRight') {
+    nextCard();
+  } else if (e.key === 'ArrowLeft') {
+    prevCard();
+  } else if (e.key === 'ArrowDown') {
+    showAnswer();
+  }
+});
 
 function getParam(name) {
   const params = new URLSearchParams(window.location.search);

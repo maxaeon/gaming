@@ -514,6 +514,8 @@ button {
   margin-left: 4px;
   padding: 2px 6px;
   font-size: 14px;
+  background-color: #616161;
+  color: #fff;
 }
 
 @media (max-width: 600px) {
@@ -550,6 +552,8 @@ button {
 
   .player-score button {
     font-size: 12px;
+    background-color: #616161;
+    color: #fff;
   }
 }
 

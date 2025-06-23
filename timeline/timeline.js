@@ -433,6 +433,17 @@ document.getElementById('prev-btn').addEventListener('click', () => {
   displayEntry(currentIndex);
 });
 
+// Arrow key navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') {
+    currentIndex = (currentIndex + 1) % philosophyTimeline.length;
+    displayEntry(currentIndex);
+  } else if (e.key === 'ArrowLeft') {
+    currentIndex = (currentIndex - 1 + philosophyTimeline.length) % philosophyTimeline.length;
+    displayEntry(currentIndex);
+  }
+});
+
 function initTimelineHover() {
   const container = document.getElementById('timeline-container');
   const bar = document.getElementById('timeline-bar');

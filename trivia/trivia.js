@@ -2,6 +2,7 @@ const triviaQuestions = flashcards;
 
 let currentTrivia = [];
 let triviaIndex = 0;
+let optionIndex = 0;
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -34,11 +35,14 @@ function showTriviaQuestion() {
   document.getElementById('trivia-question').innerText = q.question;
   const optionsDiv = document.getElementById('trivia-options');
   optionsDiv.innerHTML = '';
-  buildChoices(q.answer).forEach(ans => {
+  const choices = buildChoices(q.answer);
+  optionIndex = 0;
+  choices.forEach((ans, idx) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
     btn.innerText = ans;
     btn.onclick = () => submitTrivia(ans);
+    btn.tabIndex = idx === 0 ? 0 : -1;
     optionsDiv.appendChild(btn);
   });
   document.getElementById('trivia-feedback').classList.add('hidden');   document.getElementById('trivia-feedback').hidden = true;
@@ -62,6 +66,27 @@ function submitTrivia(choice) {
 document.getElementById('trivia-next').addEventListener('click', () => {
   triviaIndex = (triviaIndex + 1) % currentTrivia.length;
   showTriviaQuestion();
+});
+
+// Keyboard navigation for options
+document.addEventListener('keydown', (e) => {
+  const game = document.getElementById('trivia-game');
+  if (game.classList.contains('hidden')) return;
+  const buttons = Array.from(document.querySelectorAll('#trivia-options button'));
+  if (!buttons.length) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    optionIndex = (optionIndex + 1) % buttons.length;
+    buttons.forEach((b, i) => { b.tabIndex = i === optionIndex ? 0 : -1; });
+    buttons[optionIndex].focus();
+    e.preventDefault();
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    optionIndex = (optionIndex - 1 + buttons.length) % buttons.length;
+    buttons.forEach((b, i) => { b.tabIndex = i === optionIndex ? 0 : -1; });
+    buttons[optionIndex].focus();
+    e.preventDefault();
+  } else if (e.key === 'Enter') {
+    buttons[optionIndex].click();
+  }
 });
 
 document.getElementById('trivia-course').addEventListener('change', e => {

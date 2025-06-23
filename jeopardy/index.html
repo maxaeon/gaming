@@ -73,7 +73,7 @@
     <div id="scoreboard" class="hidden" hidden role="status" aria-live="polite"></div>
     <div id="progress" class="hidden" hidden></div>
 
-    <div id="question-modal" class="hidden" hidden>
+    <div id="question-modal" class="hidden" hidden role="dialog" aria-labelledby="question-text" aria-modal="true">
       <div id="modal-content">
         <p id="question-text"></p>
         <input type="text" id="user-answer" placeholder="Type your answer here..." autocomplete="off">
@@ -88,26 +88,26 @@
       </div>
     </div>
 
-    <div id="celebration-modal" class="hidden" hidden>
+    <div id="celebration-modal" class="hidden" hidden role="dialog" aria-labelledby="celebration-heading" aria-modal="true">
       <div class="celebration-content">
-        <h2>Congratulations!</h2>
+        <h2 id="celebration-heading">Congratulations!</h2>
         <p>You've completed the game board!</p>
         <button id="restart-btn">Play Again</button>
       </div>
     </div>
 
-    <div id="mode-modal" class="hidden" hidden>
+    <div id="mode-modal" class="hidden" hidden role="dialog" aria-labelledby="mode-heading" aria-modal="true">
       <div class="modal-content">
-        <h2>Select Game Mode</h2>
+        <h2 id="mode-heading">Select Game Mode</h2>
         <input id="single-name" type="text" placeholder="Your name">
         <button id="single-mode">Single Player</button>
         <button id="multi-mode">Multiplayer</button>
       </div>
     </div>
 
-    <div id="multi-modal" class="hidden" hidden>
+    <div id="multi-modal" class="hidden" hidden role="dialog" aria-labelledby="multi-heading" aria-modal="true">
       <div class="modal-content">
-        <h2>Multiplayer Setup</h2>
+        <h2 id="multi-heading">Multiplayer Setup</h2>
         <label for="player-count">Number of Players (2-4)</label>
         <input id="player-count" type="number" min="2" max="4" value="2">
         <div id="name-fields"></div>
@@ -115,8 +115,9 @@
       </div>
     </div>
 
-    <div id="quit-modal" class="hidden" hidden>
+    <div id="quit-modal" class="hidden" hidden role="dialog" aria-labelledby="quit-heading" aria-modal="true">
       <div class="modal-content">
+        <h2 id="quit-heading">Quit Game?</h2>
         <p>Your progress may not be saved. Are you sure you want to proceed?</p>
         <button id="quit-yes">Yes</button>
         <button id="quit-no">Cancel</button>
