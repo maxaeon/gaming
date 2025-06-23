@@ -82,3 +82,11 @@ function submitGuess(name) {
 document.getElementById('quote-next').addEventListener('click', showRandomQuote);
 
 showRandomQuote();
+
+const sidebar = document.getElementById('quote-sidebar');
+const toggleBtn = document.getElementById('quote-toggle');
+if (sidebar && toggleBtn) {
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+  });
+}
