@@ -14,6 +14,28 @@
       margin:4px;
       border-radius:6px;
       cursor:grab;
+      position:relative;
+    }
+    #concept-pool li button.delete {
+      position:absolute;
+      top:-6px;
+      right:-6px;
+      background:#f44336;
+      border:none;
+      color:#fff;
+      border-radius:50%;
+      width:16px;
+      height:16px;
+      font-size:12px;
+      cursor:pointer;
+    }
+    #node-controls {
+      margin-bottom:10px;
+    }
+    #node-controls input[type="text"] {
+      padding:4px 6px;
+      border-radius:4px;
+      margin-right:6px;
     }
     .cluster {
       border:2px dashed #7b1fa2;
@@ -23,7 +45,29 @@
       border-radius:8px;
     }
     .cluster ul { list-style:none; padding:0; }
-    .cluster li { background:#ba68c8; color:#000; margin:4px; padding:4px 6px; border-radius:4px; cursor:grab; display:inline-block; }
+    .cluster li {
+      background:#ba68c8;
+      color:#000;
+      margin:4px;
+      padding:4px 6px;
+      border-radius:4px;
+      cursor:grab;
+      display:inline-block;
+      position:relative;
+    }
+    .cluster li button.delete {
+      position:absolute;
+      top:-6px;
+      right:-6px;
+      background:#f44336;
+      border:none;
+      color:#fff;
+      border-radius:50%;
+      width:16px;
+      height:16px;
+      font-size:12px;
+      cursor:pointer;
+    }
   </style>
 </head>
 <body>
@@ -33,6 +77,11 @@
   <div class="container">
     <h1>Philosophical Mind Mapping</h1>
     <p class="instructions">Drag and drop the concepts below into logical clusters to brainstorm arguments against exceptionless moral rules.</p>
+    <div id="node-controls">
+      <input type="text" id="new-node-text" placeholder="Concept text">
+      <input type="color" id="node-color" value="#ce93d8">
+      <button id="add-node">Add Node</button>
+    </div>
     <ul id="concept-pool"></ul>
     <div id="clusters">
       <div class="cluster drop-zone"><h3>Cluster 1</h3><ul></ul></div>
@@ -55,11 +104,13 @@
         <div class="cluster"><h3>Cluster 3</h3><ul contenteditable="true"></ul></div>
       </div>
       <button id="export-mindmap">Export as PNG</button>
+      <button id="export-pdf">Export as PDF</button>
       <button id="reset-mindmap">Reset</button>
     </div>
   </div>
   <script src="brainstorm.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-to-image@1.0.4/dist/canvas-to-image.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
