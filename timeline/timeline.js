@@ -437,29 +437,43 @@ function initTimelineHover() {
   const container = document.getElementById('timeline-container');
   const bar = document.getElementById('timeline-bar');
   const tooltip = document.getElementById('timeline-tooltip');
+  let lastHtml = '';
+  let lastLeft = '';
+  let lastHasMatch = false;
 
   container.addEventListener('mousemove', (e) => {
-    const rect = bar.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
-    const year = Math.round(timelineStart + percent * (timelineEnd - timelineStart));
+    const isOverTooltip = tooltip.contains(e.target);
+    if (!isOverTooltip) {
+      const rect = bar.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+      const year = Math.round(timelineStart + percent * (timelineEnd - timelineStart));
 
-    const matches = philosophyTimeline
-      .map((p, idx) => ({ idx, p }))
-      .filter(obj => year >= obj.p.startYear && year <= obj.p.endYear);
+      const matches = philosophyTimeline
+        .map((p, idx) => ({ idx, p }))
+        .filter(obj => year >= obj.p.startYear && year <= obj.p.endYear);
 
-    if (matches.length) {
-      tooltip.style.opacity = 1;
-      tooltip.style.left = `${percent * 100}%`;
-      const displayYear = year < 0 ? `${Math.abs(year)} BCE` : year;
-      tooltip.innerHTML = `<div class="tooltip-year">${displayYear}</div>` +
-        matches.map(m => `<div class="tooltip-name" data-index="${m.idx}">${m.p.name}</div>`).join('');
-    } else {
-      tooltip.style.opacity = 0;
+      if (matches.length) {
+        tooltip.style.opacity = 1;
+        tooltip.style.left = `${percent * 100}%`;
+        const displayYear = year < 0 ? `${Math.abs(year)} BCE` : year;
+        tooltip.innerHTML = `<div class="tooltip-year">${displayYear}</div>` +
+          matches.map(m => `<div class="tooltip-name" data-index="${m.idx}">${m.p.name}</div>`).join('');
+        lastHtml = tooltip.innerHTML;
+        lastLeft = tooltip.style.left;
+        lastHasMatch = true;
+      } else if (lastHasMatch) {
+        tooltip.style.opacity = 1;
+        tooltip.style.left = lastLeft;
+        tooltip.innerHTML = lastHtml;
+      } else {
+        tooltip.style.opacity = 0;
+      }
     }
   });
 
   container.addEventListener('mouseleave', () => {
     tooltip.style.opacity = 0;
+    lastHasMatch = false;
   });
 
   tooltip.addEventListener('click', (e) => {
