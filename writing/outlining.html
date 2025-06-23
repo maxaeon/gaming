@@ -36,6 +36,16 @@
       margin-top: 10px;
       color: #ffd54f;
     }
+    .remove-btn {
+      margin-left: 6px;
+      background: #7b1fa2;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -46,6 +56,7 @@
     <h1>Outline Builder</h1>
     <p class="instructions">Drag each piece into any order you wish. Use the blank lines to add your own explanation and support for each claim.</p>
     <ul id="puzzle-pieces"></ul>
+    <button id="add-piece">Add Block</button>
     <ol id="outline-slots"></ol>
     <button id="example-btn">Show Example Outline</button>
     <div id="hint-text" class="hidden"></div>
@@ -59,11 +70,14 @@
         <li contenteditable="true">Point 2...</li>
         <li contenteditable="true">Point 3...</li>
       </ol>
+      <button id="add-outline-item">Add Item</button>
       <button id="export-outline">Export as DOCX</button>
+      <button id="export-outline-pdf">Export as PDF</button>
       <button id="reset-outline">Reset</button>
     </div>
   </div>
   <script src="outlining.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.5.0/docx.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
