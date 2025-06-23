@@ -1,25 +1,36 @@
 // Aggregate question sets into a single object keyed by course
+function mergeSets(target, source) {
+  Object.keys(source).forEach(cat => {
+    if (!target[cat]) target[cat] = [];
+    target[cat] = target[cat].concat(source[cat]);
+  });
+}
+
 function buildFlashcards() {
   const courses = ['introPhilosophy', 'criticalThinking', 'ethics'];
   const flashcards = {};
 
   courses.forEach(course => {
     flashcards[course] = {};
+
+    const customSet = window[`${course}Flashcards`];
+    if (customSet) {
+      mergeSets(flashcards[course], customSet);
+      return;
+    }
+
     const variants = [
       `${course}Questions`,
       `${course}MidtermQuestions`,
       `${course}FinalQuestions`
     ];
+
     variants.forEach(name => {
       const data = window[name];
-      if (data) {
-        Object.keys(data).forEach(cat => {
-          if (!flashcards[course][cat]) flashcards[course][cat] = [];
-          flashcards[course][cat] = flashcards[course][cat].concat(data[cat]);
-        });
-      }
+      if (data) mergeSets(flashcards[course], data);
     });
   });
+
   return flashcards;
 }
 
