@@ -17,3 +17,17 @@ document.querySelectorAll('.review-btn').forEach(btn => {
   });
 });
 
+// Update homepage course progress bars from localStorage
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.course').forEach(course => {
+    const key = course.dataset.course;
+    const bar = course.querySelector('.course-progress-bar');
+    if (!key || !bar) return;
+    const value = parseInt(localStorage.getItem(`progress-${key}`) || '0', 10);
+    if (!isNaN(value)) {
+      const pct = Math.min(Math.max(value, 0), 100);
+      bar.style.width = pct + '%';
+    }
+  });
+});
+
