@@ -42,6 +42,7 @@ Additional pages include:
 - `writing/outlining.html` – outline builder for critiquing moral absolutism
 - `writing/thesis-evaluation.html` – evaluate and revise a thesis draft
 - `writing/draft-development.html` – step-by-step draft development with export options
+- `writing/peer-review.html` – practice giving constructive peer feedback
 - `writing/writing.html` – combined quick-writing challenges
 
 
