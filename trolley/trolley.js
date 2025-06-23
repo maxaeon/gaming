@@ -62,7 +62,6 @@ const resultText = document.getElementById('result-text');
 const reflectionText = document.getElementById('reflection-question');
 const nextBtn = document.getElementById('next-btn');
 const summaryDiv = document.getElementById('summary');
-const aiBtn = document.getElementById('ai-btn');
 
 function showScenario() {
   const data = scenarios[currentIndex];
@@ -98,19 +97,14 @@ function showSummary() {
   summaryDiv.innerHTML =
     `<p>You chose the utilitarian option ${pullCount} time(s) and refused ${inactionCount} time(s).</p>` +
     `<p>Consequences matter, but ethics also involves principles, rights, and virtues beyond mere calculation.</p>`;
-  aiBtn.classList.remove('hidden');
 }
 
-function loadAIScenario() {
-  scenarios.push(aiScenario);
-  aiBtn.classList.add('hidden');
-  currentIndex = scenarios.length - 1;
-  showScenario();
-}
 
 actionBtn.addEventListener('click', () => handleChoice('action'));
 inactionBtn.addEventListener('click', () => handleChoice('inaction'));
 nextBtn.addEventListener('click', nextScenario);
-aiBtn.addEventListener('click', loadAIScenario);
 
-window.addEventListener('DOMContentLoaded', showScenario);
+window.addEventListener('DOMContentLoaded', () => {
+  scenarios.push(aiScenario);
+  showScenario();
+});
