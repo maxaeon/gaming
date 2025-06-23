@@ -129,3 +129,6 @@ document.getElementById('quit-yes').onclick = () => {
 document.getElementById('quit-no').onclick = () => {
   quitModal.classList.add('hidden');
 };
+
+// Ensure game view is reset when returning via browser navigation
+window.addEventListener("pageshow", goHome);
