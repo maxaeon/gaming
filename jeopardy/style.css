@@ -931,3 +931,27 @@ button {
   text-align: center;
 }
 
+#works-cited-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+#works-cited-examples > div {
+  flex: 1;
+  border: 1px solid #7b1fa2;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+#works-cited-examples h2 {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  #works-cited-examples {
+    flex-direction: row;
+  }
+}
+
