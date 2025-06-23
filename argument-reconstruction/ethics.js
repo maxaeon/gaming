@@ -197,12 +197,14 @@ document.getElementById("reconstruction-show").addEventListener("click", () => {
   document.getElementById("reconstruction-next").classList.remove("hidden");
 });
 
-document.addEventListener("DOMContentLoaded", startReconstruction);
-
-// Info modal logic
-document.getElementById("info-btn").addEventListener("click", () => {
-  document.getElementById("info-modal").classList.remove("hidden");
-});
-document.getElementById("close-info").addEventListener("click", () => {
-  document.getElementById("info-modal").classList.add("hidden");
+document.addEventListener("DOMContentLoaded", () => {
+  startReconstruction();
+  const open = document.getElementById("open-info");
+  const close = document.getElementById("close-info");
+  const modal = document.getElementById("info-modal");
+  if (open && close && modal) {
+    open.addEventListener("click", () => modal.classList.remove("hidden"));
+    close.addEventListener("click", () => modal.classList.add("hidden"));
+    modal.classList.remove("hidden");
+  }
 });
