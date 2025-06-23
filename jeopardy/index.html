@@ -23,7 +23,7 @@
           <button onclick="location.href='../chatbots/intro-philosophy-chat.html'">Chat</button>
         </div>
         <button class="topic-btn" data-topic="introPhilosophy">Game Board</button>
-        <div class="exam-dropdown hidden">
+        <div class="exam-dropdown hidden" hidden>
           <button data-exam="Midterm">Midterm Review</button>
           <button data-exam="Final">Final Review</button>
         </div>
@@ -37,7 +37,7 @@
           <button onclick="location.href='../argument-reconstruction/critical-thinking.html'">Reconstruction</button>
         </div>
         <button class="topic-btn" data-topic="criticalThinking">Game Board</button>
-        <div class="exam-dropdown hidden">
+        <div class="exam-dropdown hidden" hidden>
           <button data-exam="Midterm">Midterm Review</button>
           <button data-exam="Final">Final Review</button>
         </div>
@@ -50,7 +50,7 @@
           <button onclick="location.href='../chatbots/ethics-chat.html'">Chat</button>
         </div>
         <button class="topic-btn" data-topic="ethics">Game Board</button>
-        <div class="exam-dropdown hidden">
+        <div class="exam-dropdown hidden" hidden>
           <button data-exam="Midterm">Midterm Review</button>
           <button data-exam="Final">Final Review</button>
         </div>
@@ -63,24 +63,24 @@
         <h2>Who said it?</h2>
         <p id="quote-text"></p>
         <div id="quote-options" class="mc-options"></div>
-        <div id="quote-feedback" class="hidden"></div>
-        <button id="quote-next" class="hidden">Next Quote</button>
+        <div id="quote-feedback" class="hidden" hidden></div>
+        <button id="quote-next" class="hidden" hidden>Next Quote</button>
       </div>
     </div>
 
     <!-- Game Board and Modals -->
-    <div id="game-board" class="hidden"></div>
-    <div id="scoreboard" class="hidden" role="status" aria-live="polite"></div>
-    <div id="progress" class="hidden"></div>
+    <div id="game-board" class="hidden" hidden></div>
+    <div id="scoreboard" class="hidden" hidden role="status" aria-live="polite"></div>
+    <div id="progress" class="hidden" hidden></div>
 
-    <div id="question-modal" class="hidden">
+    <div id="question-modal" class="hidden" hidden>
       <div id="modal-content">
         <p id="question-text"></p>
         <input type="text" id="user-answer" placeholder="Type your answer here..." autocomplete="off">
         <button id="submit-answer">Submit</button>
-        <div id="correct-answer" class="hidden"></div>
-        <div id="submitted-answer" class="hidden"></div>
-        <div id="award-controls" class="hidden">
+        <div id="correct-answer" class="hidden" hidden></div>
+        <div id="submitted-answer" class="hidden" hidden></div>
+        <div id="award-controls" class="hidden" hidden>
           <button id="award-yes">Give Points</button>
           <button id="award-no">No Points</button>
         </div>
@@ -88,7 +88,7 @@
       </div>
     </div>
 
-    <div id="celebration-modal" class="hidden">
+    <div id="celebration-modal" class="hidden" hidden>
       <div class="celebration-content">
         <h2>Congratulations!</h2>
         <p>You've completed the game board!</p>
@@ -96,7 +96,7 @@
       </div>
     </div>
 
-    <div id="mode-modal" class="hidden">
+    <div id="mode-modal" class="hidden" hidden>
       <div class="modal-content">
         <h2>Select Game Mode</h2>
         <input id="single-name" type="text" placeholder="Your name">
@@ -105,7 +105,7 @@
       </div>
     </div>
 
-    <div id="multi-modal" class="hidden">
+    <div id="multi-modal" class="hidden" hidden>
       <div class="modal-content">
         <h2>Multiplayer Setup</h2>
         <label for="player-count">Number of Players (2-4)</label>
@@ -115,7 +115,7 @@
       </div>
     </div>
 
-    <div id="quit-modal" class="hidden">
+    <div id="quit-modal" class="hidden" hidden>
       <div class="modal-content">
         <p>Your progress may not be saved. Are you sure you want to proceed?</p>
         <button id="quit-yes">Yes</button>

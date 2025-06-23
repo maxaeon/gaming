@@ -15,7 +15,7 @@ function loadTrivia(course) {
   currentTrivia = Object.values(triviaQuestions[course]).flat();
   shuffle(currentTrivia);
   triviaIndex = 0;
-  document.getElementById('trivia-game').classList.remove('hidden');
+  document.getElementById('trivia-game').classList.remove('hidden');   document.getElementById('trivia-game').hidden = false;
   showTriviaQuestion();
 }
 
@@ -41,8 +41,8 @@ function showTriviaQuestion() {
     btn.onclick = () => submitTrivia(ans);
     optionsDiv.appendChild(btn);
   });
-  document.getElementById('trivia-feedback').classList.add('hidden');
-  document.getElementById('trivia-next').classList.add('hidden');
+  document.getElementById('trivia-feedback').classList.add('hidden');   document.getElementById('trivia-feedback').hidden = true;
+  document.getElementById('trivia-next').classList.add('hidden');   document.getElementById('trivia-next').hidden = true;
 }
 
 function submitTrivia(choice) {
@@ -55,8 +55,8 @@ function submitTrivia(choice) {
     feedback.innerText = `Nope! The correct answer is ${q.answer}.`;
     feedback.style.color = '#c62828';
   }
-  feedback.classList.remove('hidden');
-  document.getElementById('trivia-next').classList.remove('hidden');
+  feedback.classList.remove('hidden');   feedback.hidden = false;
+  document.getElementById('trivia-next').classList.remove('hidden');   document.getElementById('trivia-next').hidden = false;
 }
 
 document.getElementById('trivia-next').addEventListener('click', () => {
@@ -69,7 +69,7 @@ document.getElementById('trivia-course').addEventListener('change', e => {
   if (course) {
     loadTrivia(course);
   } else {
-    document.getElementById('trivia-game').classList.add('hidden');
+    document.getElementById('trivia-game').classList.add('hidden');     document.getElementById('trivia-game').hidden = true;
   }
 });
 

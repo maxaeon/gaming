@@ -68,8 +68,8 @@ function showScenario() {
   scenarioText.innerText = data.description;
   actionBtn.innerText = data.actionLabel;
   inactionBtn.innerText = data.inactionLabel;
-  resultDiv.classList.add('hidden');
-  document.getElementById('scenario').classList.remove('hidden');
+  resultDiv.classList.add('hidden');   resultDiv.hidden = true;
+  document.getElementById('scenario').classList.remove('hidden');   document.getElementById('scenario').hidden = false;
 }
 
 function handleChoice(choice) {
@@ -78,8 +78,8 @@ function handleChoice(choice) {
   if (choice === 'action') pullCount++; else inactionCount++;
   resultText.innerText = outcome;
   reflectionText.innerText = data.reflection;
-  resultDiv.classList.remove('hidden');
-  document.getElementById('scenario').classList.add('hidden');
+  resultDiv.classList.remove('hidden');   resultDiv.hidden = false;
+  document.getElementById('scenario').classList.add('hidden');   document.getElementById('scenario').hidden = true;
 }
 
 function nextScenario() {
@@ -92,8 +92,8 @@ function nextScenario() {
 }
 
 function showSummary() {
-  resultDiv.classList.add('hidden');
-  summaryDiv.classList.remove('hidden');
+  resultDiv.classList.add('hidden');   resultDiv.hidden = true;
+  summaryDiv.classList.remove('hidden');   summaryDiv.hidden = false;
   summaryDiv.innerHTML =
     `<p>You chose the utilitarian option ${pullCount} time(s) and refused ${inactionCount} time(s).</p>` +
     `<p>Consequences matter, but ethics also involves principles, rights, and virtues beyond mere calculation.</p>`;

@@ -407,7 +407,7 @@ function displayEntry(index) {
   });
   document.getElementById('philosopher-quote').innerText = entry.quote;
   document.getElementById('reflection-question').innerText = entry.reflectionQuestion.question;
-  document.getElementById('reflection-feedback').classList.add('hidden');
+  document.getElementById('reflection-feedback').classList.add('hidden');   document.getElementById('reflection-feedback').hidden = true;
   updateHighlight(entry);
 }
 
@@ -416,7 +416,7 @@ function handleResponse(type) {
   const msg = entry.reflectionQuestion.responses[type];
   const fb = document.getElementById('reflection-feedback');
   fb.innerText = msg;
-  fb.classList.remove('hidden');
+  fb.classList.remove('hidden');   fb.hidden = false;
 }
 
 document.getElementById('btn-yes').onclick = () => handleResponse('yes');

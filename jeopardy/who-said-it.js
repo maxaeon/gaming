@@ -62,8 +62,8 @@ function showRandomQuote() {
     optionsDiv.appendChild(btn);
   });
 
-  document.getElementById('quote-feedback').classList.add('hidden');
-  document.getElementById('quote-next').classList.add('hidden');
+  document.getElementById('quote-feedback').classList.add('hidden');   document.getElementById('quote-feedback').hidden = true;
+  document.getElementById('quote-next').classList.add('hidden');   document.getElementById('quote-next').hidden = true;
 }
 
 function submitGuess(name) {
@@ -75,8 +75,8 @@ function submitGuess(name) {
     feedback.innerText = `Nope, it was ${currentQuote.philosopher}.`;
     feedback.style.color = '#c62828';
   }
-  feedback.classList.remove('hidden');
-  document.getElementById('quote-next').classList.remove('hidden');
+  feedback.classList.remove('hidden');   feedback.hidden = false;
+  document.getElementById('quote-next').classList.remove('hidden');   document.getElementById('quote-next').hidden = false;
 }
 
 document.getElementById('quote-next').addEventListener('click', showRandomQuote);

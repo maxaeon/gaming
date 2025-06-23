@@ -56,9 +56,9 @@ function buildCitation() {
     span.addEventListener('click', () => handleClick(idx, span));
     container.appendChild(span);
   });
-  document.getElementById('citation-feedback').classList.add('hidden');
-  document.getElementById('citation-answer').classList.add('hidden');
-  document.getElementById('citation-next').classList.add('hidden');
+  document.getElementById('citation-feedback').classList.add('hidden');   document.getElementById('citation-feedback').hidden = true;
+  document.getElementById('citation-answer').classList.add('hidden');   document.getElementById('citation-answer').hidden = true;
+  document.getElementById('citation-next').classList.add('hidden');   document.getElementById('citation-next').hidden = true;
 }
 
 function handleClick(idx, span) {
@@ -71,7 +71,7 @@ function handleClick(idx, span) {
   } else {
     feedback.innerText = 'Not quite. Try again.';
   }
-  feedback.classList.remove('hidden');
+  feedback.classList.remove('hidden');   feedback.hidden = false;
 }
 
 function revealCitation() {
@@ -79,8 +79,8 @@ function revealCitation() {
   const ansDiv = document.getElementById('citation-answer');
   const label = ex.type === 'works-cited' ? 'MLA Works Cited:' : 'MLA In-text:';
   ansDiv.innerHTML = `<strong>${label}</strong> ${ex.mla}<br><em>${ex.explanation}</em>`;
-  ansDiv.classList.remove('hidden');
-  document.getElementById('citation-next').classList.remove('hidden');
+  ansDiv.classList.remove('hidden');   ansDiv.hidden = false;
+  document.getElementById('citation-next').classList.remove('hidden');   document.getElementById('citation-next').hidden = false;
   highlightErrors();
 }
 
@@ -101,9 +101,9 @@ document.getElementById('citation-next').addEventListener('click', () => {
     citationIndex = 0;
     completedRounds++;
     if (completedRounds === 1) {
-      document.getElementById('citation-aid-link').classList.remove('hidden');
-      document.getElementById('start-project').classList.remove('hidden');
-      document.getElementById('research-guide').classList.remove('hidden');
+      document.getElementById('citation-aid-link').classList.remove('hidden');       document.getElementById('citation-aid-link').hidden = false;
+      document.getElementById('start-project').classList.remove('hidden');       document.getElementById('start-project').hidden = false;
+      document.getElementById('research-guide').classList.remove('hidden');       document.getElementById('research-guide').hidden = false;
     }
   }
   buildCitation();
@@ -113,7 +113,7 @@ window.addEventListener('DOMContentLoaded', buildCitation);
 
 // Project mode
 document.getElementById('start-project').addEventListener('click', () => {
-  document.getElementById('project-area').classList.remove('hidden');
+  document.getElementById('project-area').classList.remove('hidden');   document.getElementById('project-area').hidden = false;
 });
 
 document.getElementById('reset-citation').addEventListener('click', () => {

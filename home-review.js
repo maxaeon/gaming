@@ -8,11 +8,13 @@ document.querySelectorAll('.review-btn').forEach(btn => {
     document.querySelectorAll('.exam-dropdown').forEach(dd => {
       if (dd !== dropdown) {
         dd.classList.add('hidden');
+        dd.hidden = true;
         const b = dd.previousElementSibling;
         if (b) b.setAttribute('aria-expanded', 'false');
       }
     });
     dropdown.classList.toggle('hidden');
+    dropdown.hidden = dropdown.classList.contains('hidden');
     btn.setAttribute('aria-expanded', String(!dropdown.classList.contains('hidden')));
   });
 });

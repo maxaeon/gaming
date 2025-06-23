@@ -3,10 +3,10 @@ const sections = ['intro','example','practice','reflect','template'];
 function showSection(id) {
   sections.forEach(sec => {
     const el = document.getElementById(sec);
-    if (el) el.classList.add('hidden');
+    if (el) el.classList.add('hidden');     if (el) el.hidden = true;
   });
   const target = document.getElementById(id);
-  if (target) target.classList.remove('hidden');
+  if (target) target.classList.remove('hidden');   if (target) target.hidden = false;
 }
 
 document.querySelectorAll('.next-btn').forEach(btn => {
@@ -20,7 +20,7 @@ document.getElementById('example-show').addEventListener('click', () => {
   const ans = '<strong>Feedback Example:</strong> This paragraph could be stronger with a clearer topic sentence mentioning Kant\'s categorical imperative and a brief example like the Nazi-at-the-door scenario.';
   const p = document.getElementById('example-answer');
   p.innerHTML = ans;
-  p.classList.remove('hidden');
+  p.classList.remove('hidden');   p.hidden = false;
 });
 
 document.getElementById('practice-show').addEventListener('click', () => {
@@ -37,7 +37,7 @@ document.getElementById('practice-show').addEventListener('click', () => {
     li.innerText = t;
     list.appendChild(li);
   });
-  list.classList.remove('hidden');
+  list.classList.remove('hidden');   list.hidden = false;
 });
 
 function gatherReview() {

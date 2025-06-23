@@ -166,8 +166,8 @@ function checkComplete() {
   const done = Array.from(slots).every(s => s.querySelector('.puzzle-piece'));
   if (done) {
     document.getElementById('congrats').innerText = 'Outline complete!';
-    document.getElementById('congrats').classList.remove('hidden');
-    document.getElementById('summary').classList.remove('hidden');
+    document.getElementById('congrats').classList.remove('hidden');     document.getElementById('congrats').hidden = false;
+    document.getElementById('summary').classList.remove('hidden');     document.getElementById('summary').hidden = false;
   }
 }
 
@@ -178,7 +178,7 @@ function showExample() {
     .sort((a, b) => a.order - b.order)
     .map(p => `<li>${p.text}<br><em>${p.support}</em></li>`)
     .join('');
-  list.classList.remove('hidden');
+  list.classList.remove('hidden');   list.hidden = false;
 }
 
 document.getElementById('example-btn').addEventListener('click', showExample);
@@ -200,7 +200,7 @@ document.getElementById('add-piece').addEventListener('click', () => {
 });
 
 document.getElementById('start-project').addEventListener('click', () => {
-  document.getElementById('project-area').classList.remove('hidden');
+  document.getElementById('project-area').classList.remove('hidden');   document.getElementById('project-area').hidden = false;
 });
 
 document.getElementById('add-outline-item').addEventListener('click', () => {

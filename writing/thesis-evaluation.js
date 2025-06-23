@@ -26,7 +26,7 @@ function showFeedback(res, elemId) {
     `<li><strong>Conciseness:</strong> ${res.conciseness}</li>` +
     `<li><strong>Relevance:</strong> ${res.relevance}</li>` +
     `</ul>`;
-  div.classList.remove('hidden');
+  div.classList.remove('hidden');   div.hidden = false;
 }
 
 function handleSubmit() {
@@ -37,14 +37,14 @@ function handleSubmit() {
     const div = document.getElementById('feedback');
     div.innerHTML += '<p>Heads up! Colorful language isn\'t usually welcome in academic circles.</p>';
   }
-  document.getElementById('revision-section').classList.remove('hidden');
+  document.getElementById('revision-section').classList.remove('hidden');   document.getElementById('revision-section').hidden = false;
 }
 
 function showExamples() {
   const div = document.getElementById('example');
   div.innerHTML = '<strong>Example Theses:</strong><ul>' +
     examples.map(t => `<li>${t}</li>`).join('') + '</ul>';
-  div.classList.remove('hidden');
+  div.classList.remove('hidden');   div.hidden = false;
 }
 
 function handleRevision() {
@@ -55,7 +55,7 @@ function handleRevision() {
     const div = document.getElementById('revision-feedback');
     div.innerHTML += '<p>Remember: scholarly writing works best without vulgar words!</p>';
   }
-  document.getElementById('reflection').classList.remove('hidden');
+  document.getElementById('reflection').classList.remove('hidden');   document.getElementById('reflection').hidden = false;
 }
 
 document.getElementById('draft-submit').addEventListener('click', handleSubmit);
@@ -64,7 +64,7 @@ document.getElementById('revise-submit').addEventListener('click', handleRevisio
 
 // Project mode
 document.getElementById('start-project').addEventListener('click', () => {
-  document.getElementById('project-area').classList.remove('hidden');
+  document.getElementById('project-area').classList.remove('hidden');   document.getElementById('project-area').hidden = false;
 });
 
 document.getElementById('reset-thesis').addEventListener('click', () => {
