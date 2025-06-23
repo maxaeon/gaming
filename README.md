@@ -39,8 +39,9 @@ Additional pages include:
 - `chatbots/intro-philosophy-chat.html` – interactive chat with ancient Greek philosophers
 - `writing/citation.html` – identify citation mistakes
 - `writing/brainstorm.html` – build mind-map clusters for brainstorming
- - `writing/outlining.html` – outline builder for critiquing moral absolutism
+- `writing/outlining.html` – outline builder for critiquing moral absolutism
 - `writing/thesis-evaluation.html` – evaluate and revise a thesis draft
+- `writing/draft-development.html` – step-by-step draft development with export options
 - `writing/writing.html` – combined quick-writing challenges
 
 
