@@ -506,6 +506,20 @@ button {
   opacity: 1;
 }
 
+.citation-part {
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.citation-part.selected {
+  background-color: #4caf50;
+}
+
+.error-highlight {
+  background-color: #e91e63;
+}
+
 @media (min-width: 768px) {
   #topic-selector {
     flex-direction: row;
