@@ -1,5 +1,23 @@
 const sections = ['intro','thesis-screen','body1','body2','body3','conclusion','references','revision-demo','schedule'];
 
+const categories = [
+  { id: 'draft', label: 'Draft', color: '#2196f3' },
+  { id: 'revise', label: 'Revise', color: '#4caf50' },
+  { id: 'work', label: 'Work/Class', color: '#9e9e9e' }
+];
+
+function refreshLegend() {
+  const legend = document.getElementById('legend');
+  legend.innerHTML = '';
+  categories.forEach(cat => {
+    const span = document.createElement('span');
+    span.className = `schedule-block ${cat.id}`;
+    span.textContent = cat.label;
+    span.style.backgroundColor = cat.color;
+    legend.appendChild(span);
+  });
+}
+
 function showSection(id) {
   sections.forEach(sec => {
     const el = document.getElementById(sec);
@@ -46,16 +64,21 @@ document.getElementById('revise-btn').addEventListener('click', () => {
   }
 });
 
-function addBlock(container, start = '08:00', end = '09:00', type = 'draft') {
+function addBlock(container, start = '08:00', end = '09:00', type = categories[0].id) {
   const block = document.createElement('div');
   block.className = `schedule-block ${type}`;
+  const opts = categories.map(c => `<option value="${c.id}">${c.label}</option>`).join('');
   block.innerHTML = `<input type="time" class="start" value="${start}"> - <input type="time" class="end" value="${end}">` +
-    `<select class="activity"><option value="draft">Draft</option><option value="revise">Revise</option><option value="work">Work/Class</option></select>` +
+    `<select class="activity">${opts}</select>` +
     ` <button class="remove-block">\u2715</button>`;
+  const cat = categories.find(c => c.id === type);
+  if (cat) block.style.backgroundColor = cat.color;
   const select = block.querySelector('select');
   select.value = type;
   select.addEventListener('change', () => {
     block.className = `schedule-block ${select.value}`;
+    const c = categories.find(ct => ct.id === select.value);
+    block.style.backgroundColor = c ? c.color : '';
   });
   block.querySelector('.remove-block').addEventListener('click', () => block.remove());
   container.appendChild(block);
@@ -80,6 +103,7 @@ function buildSchedule() {
     dayDiv.appendChild(add);
     container.appendChild(dayDiv);
   }
+  refreshLegend();
   document.getElementById('legend').classList.remove('hidden');
   document.getElementById('legend').hidden = false;
   container.classList.remove('hidden');
@@ -87,6 +111,25 @@ function buildSchedule() {
   const btn = document.getElementById('export-schedule');
   btn.classList.remove('hidden');
   btn.hidden = false;
+}
+
+function addCategory() {
+  const nameInput = document.getElementById('new-cat-name');
+  const colorInput = document.getElementById('new-cat-color');
+  const name = nameInput.value.trim();
+  if (!name) return;
+  const id = name.toLowerCase().replace(/\s+/g, '-');
+  if (categories.some(c => c.id === id)) return;
+  const color = colorInput.value || '#888888';
+  categories.push({ id, label: name, color });
+  document.querySelectorAll('.activity').forEach(sel => {
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = name;
+    sel.appendChild(opt);
+  });
+  refreshLegend();
+  nameInput.value = '';
 }
 
 function exportSchedule() {
@@ -102,8 +145,10 @@ function exportSchedule() {
     day.querySelectorAll('.schedule-block').forEach(block => {
       const start = block.querySelector('.start').value;
       const end = block.querySelector('.end').value;
-      const type = block.querySelector('.activity').value;
-      doc.text(`  ${start}-${end} ${type}`, 12, y);
+      const typeId = block.querySelector('.activity').value;
+      const cat = categories.find(c => c.id === typeId);
+      const label = cat ? cat.label : typeId;
+      doc.text(`  ${start}-${end} ${label}`, 12, y);
       y += 6;
     });
     y += 4;
@@ -113,5 +158,9 @@ function exportSchedule() {
 
 document.getElementById('build-schedule').addEventListener('click', buildSchedule);
 document.getElementById('export-schedule').addEventListener('click', exportSchedule);
+document.getElementById('add-category').addEventListener('click', addCategory);
 
-window.addEventListener('DOMContentLoaded', () => showSection('intro'));
+window.addEventListener('DOMContentLoaded', () => {
+  showSection('intro');
+  refreshLegend();
+});
