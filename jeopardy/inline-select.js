@@ -44,7 +44,8 @@ function startSelectedGame(mode, names = []) {
   document.getElementById('game-board').classList.remove('hidden');
   document.getElementById('scoreboard').classList.remove('hidden');
   document.getElementById('progress').classList.remove('hidden');
-  document.getElementById('quote-game').classList.add('hidden');
+  const sidebar = document.getElementById('quote-sidebar');
+  if (sidebar) sidebar.classList.add('hidden');
   loadQuestions(selectedTopic, selectedExam);
 }
 
@@ -99,7 +100,8 @@ function goHome() {
   document.getElementById('celebration-modal').classList.add('hidden');
   document.getElementById('scoreboard').classList.add('hidden');
   document.getElementById('progress').classList.add('hidden');
-  document.getElementById('quote-game').classList.remove('hidden');
+  const sidebar = document.getElementById('quote-sidebar');
+  if (sidebar) sidebar.classList.remove('hidden');
   if (typeof showRandomQuote === 'function') showRandomQuote();
   document.querySelectorAll('#topic-selector .exam-dropdown').forEach(dd => dd.classList.add('hidden'));
   document.getElementById('instructions').scrollIntoView();
@@ -149,7 +151,8 @@ const startTopic = startParams.get('topic');
 const startExam = startParams.get('exam');
 if (startTopic && startExam) {
   document.getElementById('topic-selector').classList.add('hidden');
-  document.getElementById('quote-game').classList.add('hidden');
+    const sidebar = document.getElementById('quote-sidebar');
+    if (sidebar) sidebar.classList.add('hidden');
   const instr = document.getElementById('instructions');
   if (instr) instr.classList.add('hidden');
   showModeModal(startTopic, startExam);
