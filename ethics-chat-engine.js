@@ -5,8 +5,19 @@
   let current = 'Philosophy Student';
   let exchangeIndex = 0;
   const alignmentScores = {};
+  const speakerClasses = {
+    'John Stuart Mill': 'speaker-mill',
+    'Immanuel Kant': 'speaker-kant',
+    'St. Thomas Aquinas': 'speaker-aquinas',
+    'Aristotle': 'speaker-aristotle',
+    'Nel Noddings': 'speaker-noddings',
+    'Philosophy Student': 'speaker-student'
+  };
 
-  function addMessage(speaker, text, className = 'chat-bot') {
+  function addMessage(speaker, text, className) {
+    if (!className) {
+      className = speakerClasses[speaker] || 'chat-bot';
+    }
     const div = document.createElement('div');
     div.className = `chat-message ${className}`;
     div.innerHTML = `<strong>${speaker}:</strong> ${text}`;

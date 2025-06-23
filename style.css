@@ -385,6 +385,47 @@ button {
   color: #80cbc4;
 }
 
+/* Individual speaker colors */
+.speaker-mill {
+  color: #4caf50;
+}
+
+.speaker-kant {
+  color: #ff9800;
+}
+
+.speaker-aquinas {
+  color: #f44336;
+}
+
+.speaker-aristotle {
+  color: #ffeb3b;
+}
+
+.speaker-noddings {
+  color: #e91e63;
+}
+
+.speaker-student {
+  color: #9c27b0;
+}
+
+.speaker-thales {
+  color: #2196f3;
+}
+
+.speaker-heraclitus {
+  color: #ff5722;
+}
+
+.speaker-socrates {
+  color: #009688;
+}
+
+.speaker-plato {
+  color: #795548;
+}
+
 .typing {
   opacity: 0.6;
   font-style: italic;

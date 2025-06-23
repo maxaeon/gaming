@@ -135,8 +135,19 @@ const philosophyChatSteps = [
   const chatBox = document.getElementById('chat-box');
   const controls = document.getElementById('chat-controls');
   let stepIndex = 0;
+  const speakerClasses = {
+    'Philosophy Student': 'speaker-student',
+    'Thales': 'speaker-thales',
+    'Heraclitus': 'speaker-heraclitus',
+    'Socrates': 'speaker-socrates',
+    'Plato': 'speaker-plato',
+    'Aristotle': 'speaker-aristotle'
+  };
 
-  function addMessage(speaker, text, className = 'chat-bot') {
+  function addMessage(speaker, text, className) {
+    if (!className) {
+      className = speakerClasses[speaker] || 'chat-bot';
+    }
     const div = document.createElement('div');
     div.className = `chat-message ${className}`;
     div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
