@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>What's Missing?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav id="top-nav">
+    <button onclick="location.href='index.html'">Back</button>
+  </nav>
+  <div class="container">
+    <h1>What's Missing?</h1>
+    <div id="missing-game" class="hidden">
+      <p id="missing-prompt"></p>
+      <input type="text" id="missing-input" placeholder="Type the missing premise...">
+      <button id="missing-submit">Submit</button>
+      <div id="missing-feedback" class="hidden"></div>
+      <button id="missing-next" class="hidden">Next</button>
+    </div>
+    <button id="start-missing">Start Game</button>
+  </div>
+  <script src="whats-missing.js"></script>
+</body>
+</html>
