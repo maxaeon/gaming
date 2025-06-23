@@ -66,8 +66,6 @@ function loadCard() {
     document.getElementById('flashcard-question').innerText = 'No cards available.';
     document.getElementById('flashcard-answer').classList.add('hidden');
     document.getElementById('flashcard-answer').hidden = true;
-    document.getElementById('review-buttons').classList.add('hidden');
-    document.getElementById('review-buttons').hidden = true;
     document.querySelector('#flashcard .flip-card').classList.remove('flipped');
     return;
   }
@@ -76,8 +74,6 @@ function loadCard() {
   document.getElementById('flashcard-answer').innerText = card.answer;
   document.getElementById('flashcard-answer').classList.add('hidden');
   document.getElementById('flashcard-answer').hidden = true;
-  document.getElementById('review-buttons').classList.add('hidden');
-  document.getElementById('review-buttons').hidden = true;
   document.querySelector('#flashcard .flip-card').classList.remove('flipped');
 }
 
@@ -85,8 +81,6 @@ function showAnswer() {
   document.querySelector('#flashcard .flip-card').classList.add('flipped');
   document.getElementById('flashcard-answer').classList.remove('hidden');
   document.getElementById('flashcard-answer').hidden = false;
-  document.getElementById('review-buttons').classList.remove('hidden');
-  document.getElementById('review-buttons').hidden = false;
 }
 
 function toggleFlip() {
@@ -95,8 +89,6 @@ function toggleFlip() {
     card.classList.remove('flipped');
     document.getElementById('flashcard-answer').classList.add('hidden');
     document.getElementById('flashcard-answer').hidden = true;
-    document.getElementById('review-buttons').classList.add('hidden');
-    document.getElementById('review-buttons').hidden = true;
   } else {
     showAnswer();
   }
@@ -165,21 +157,13 @@ document.getElementById('category-select').addEventListener('change', e => {
   if (course) loadCards(course, e.target.value);
 });
 
-document.getElementById('show-answer').addEventListener('click', showAnswer);
 document.querySelector('#flashcard .flip-card').addEventListener('click', toggleFlip);
 document.getElementById('next-card').addEventListener('click', nextCard);
 document.getElementById('prev-card').addEventListener('click', prevCard);
-document.getElementById('export-cards').addEventListener('click', exportCards);
 document.getElementById('exit-cards').addEventListener('click', () => {
   const flashcard = document.getElementById('flashcard');
   flashcard.classList.add('hidden');
   flashcard.hidden = true;
-});
-document.getElementById('review-buttons').addEventListener('click', e => {
-  const result = e.target.dataset.result;
-  if (!result) return;
-  saveResult(result);
-  nextCard();
 });
 
 // Keyboard navigation
@@ -190,8 +174,8 @@ document.addEventListener('keydown', (e) => {
     nextCard();
   } else if (e.key === 'ArrowLeft') {
     prevCard();
-  } else if (e.key === 'ArrowDown') {
-    showAnswer();
+  } else if (e.key === 'Shift') {
+    toggleFlip();
   }
 });
 

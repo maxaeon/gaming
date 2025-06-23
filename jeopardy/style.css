@@ -901,3 +901,21 @@ button {
   margin: 0 auto 20px;
 }
 
+#flashcard {
+  position: relative;
+}
+
+.flashcard-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.flashcard-controls {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
