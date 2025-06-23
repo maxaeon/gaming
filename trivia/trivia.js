@@ -39,6 +39,22 @@ let optionIndex = 0;
 let questionsAnswered = 0;
 let selectedCourse = '';
 
+function populateCategories(course) {
+  const catSelect = document.getElementById('category-select');
+  catSelect.innerHTML = '';
+  if (!course || !triviaQuestions[course]) {
+    catSelect.disabled = true;
+    return;
+  }
+  const cats = Object.keys(triviaQuestions[course]);
+  catSelect.appendChild(new Option('All', 'all'));
+  cats.forEach(cat => {
+    const label = cat.replace(/^Chapter\s*\d+\s*:\s*/i, '');
+    catSelect.appendChild(new Option(label, cat));
+  });
+  catSelect.disabled = false;
+}
+
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -46,10 +62,13 @@ function shuffle(arr) {
   }
 }
 
-function loadTrivia(course) {
+function loadTrivia(course, category = 'all') {
   if (!triviaQuestions[course]) return;
   selectedCourse = course;
-  currentTrivia = Object.values(triviaQuestions[course]).flat();
+  const all = category === 'all'
+    ? Object.values(triviaQuestions[course]).flat()
+    : (triviaQuestions[course][category] || []);
+  currentTrivia = all;
   shuffle(currentTrivia);
   triviaIndex = 0;
   questionsAnswered = 0;
@@ -137,13 +156,10 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-document.getElementById('trivia-course').addEventListener('change', e => {
-  const course = e.target.value;
-  if (course) {
-    loadTrivia(course);
-    if (window.updatePageHeader) updatePageHeader(course);
-  } else {
-    document.getElementById('trivia-game').classList.add('hidden');     document.getElementById('trivia-game').hidden = true;
+
+document.getElementById('category-select').addEventListener('change', e => {
+  if (selectedCourse) {
+    loadTrivia(selectedCourse, e.target.value);
   }
 });
 
@@ -153,12 +169,11 @@ function getParam(name) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  const course = getParam('course');
-  if (course) {
-    const select = document.getElementById('trivia-course');
-    select.value = course;
-    loadTrivia(course);
-    if (window.updatePageHeader) updatePageHeader(course);
+  selectedCourse = getParam('course');
+  if (selectedCourse) {
+    populateCategories(selectedCourse);
+    loadTrivia(selectedCourse);
+    if (window.updatePageHeader) updatePageHeader(selectedCourse);
   }
 
   const copy = document.getElementById('trivia-copy');

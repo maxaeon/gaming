@@ -52,7 +52,10 @@ function populateCategories(course) {
   }
   const cats = Object.keys(flashcards[course]);
   catSelect.appendChild(new Option('All', 'all'));
-  cats.forEach(cat => catSelect.appendChild(new Option(cat, cat)));
+  cats.forEach(cat => {
+    const label = cat.replace(/^Chapter\s*\d+\s*:\s*/i, '');
+    catSelect.appendChild(new Option(label, cat));
+  });
   catSelect.disabled = false;
 }
 
@@ -155,18 +158,10 @@ function exportCards() {
   URL.revokeObjectURL(url);
 }
 
-document.getElementById('course-select').addEventListener('change', e => {
-  const course = e.target.value;
-  populateCategories(course);
-  if (course) {
-    loadCards(course);
-    if (window.updatePageHeader) updatePageHeader(course);
-  }
-});
+let selectedCourse = '';
 
 document.getElementById('category-select').addEventListener('change', e => {
-  const course = document.getElementById('course-select').value;
-  if (course) loadCards(course, e.target.value);
+  if (selectedCourse) loadCards(selectedCourse, e.target.value);
 });
 
 document.querySelector('#flashcard .flip-card').addEventListener('click', toggleFlip);
@@ -204,12 +199,10 @@ function getParam(name) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  const course = getParam('course');
-  if (course) {
-    const select = document.getElementById('course-select');
-    select.value = course;
-    populateCategories(course);
-    loadCards(course);
-    if (window.updatePageHeader) updatePageHeader(course);
+  selectedCourse = getParam('course');
+  if (selectedCourse) {
+    populateCategories(selectedCourse);
+    loadCards(selectedCourse);
+    if (window.updatePageHeader) updatePageHeader(selectedCourse);
   }
 });

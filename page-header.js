@@ -48,14 +48,5 @@ window.addEventListener('DOMContentLoaded', () => {
   const h1 = document.querySelector('.container h1');
   updatePageHeader(courseKey);
 
-  if (h1) {
-    const help = document.createElement('a');
-    help.href = '#';
-    help.className = 'help-link';
-    help.textContent = '?';
-    help.addEventListener('click', (e) => { e.preventDefault(); openHelp(); });
-    h1.appendChild(help);
-  }
-
   loadHelpModal();
 });
