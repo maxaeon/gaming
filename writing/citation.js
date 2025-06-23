@@ -101,47 +101,14 @@ document.getElementById('citation-next').addEventListener('click', () => {
     citationIndex = 0;
     completedRounds++;
     if (completedRounds === 1) {
-      document.getElementById('citation-aid-link').classList.remove('hidden');       document.getElementById('citation-aid-link').hidden = false;
-      document.getElementById('start-project').classList.remove('hidden');       document.getElementById('start-project').hidden = false;
-      document.getElementById('research-guide').classList.remove('hidden');       document.getElementById('research-guide').hidden = false;
-    }
+        document.getElementById('citation-aid-link').classList.remove('hidden');       document.getElementById('citation-aid-link').hidden = false;
+        document.getElementById('research-guide').classList.remove('hidden');       document.getElementById('research-guide').hidden = false;
+      }
   }
   buildCitation();
 });
 
 window.addEventListener('DOMContentLoaded', buildCitation);
-
-// Project mode
-document.getElementById('start-project').addEventListener('click', () => {
-  document.getElementById('project-area').classList.remove('hidden');   document.getElementById('project-area').hidden = false;
-});
-
-document.getElementById('reset-citation').addEventListener('click', () => {
-  document.getElementById('citation-form').reset();
-});
-
-document.getElementById('export-citation').addEventListener('click', () => {
-  const { Document, Packer, Paragraph, TextRun } = window.docx;
-  const doc = new Document();
-  const author = document.getElementById('cite-author').value;
-  const title = document.getElementById('cite-title').value;
-  const source = document.getElementById('cite-source').value;
-  doc.addSection({
-    children: [
-      new Paragraph(author),
-      new Paragraph(title),
-      new Paragraph(source)
-    ]
-  });
-  Packer.toBlob(doc).then(blob => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'citation.docx';
-    a.click();
-    URL.revokeObjectURL(url);
-  });
-});
 
 document.getElementById('citation-aid-link').addEventListener('click', () => {
   window.open('citation-aid.html', '_blank');
