@@ -51,7 +51,19 @@
     <div id="hint-text" class="hidden"></div>
     <div id="congrats" class="hidden"></div>
     <p id="summary" class="hidden"><strong>Remember:</strong> Clear outlines guide readers step by step through your argument.</p>
+    <button id="start-project">Start Your Own Project</button>
+    <div id="project-area" class="project-area hidden">
+      <h2>Your Outline</h2>
+      <ol id="my-outline">
+        <li contenteditable="true">Point 1...</li>
+        <li contenteditable="true">Point 2...</li>
+        <li contenteditable="true">Point 3...</li>
+      </ol>
+      <button id="export-outline">Export as DOCX</button>
+      <button id="reset-outline">Reset</button>
+    </div>
   </div>
   <script src="outlining.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.5.0/docx.umd.min.js"></script>
 </body>
 </html>

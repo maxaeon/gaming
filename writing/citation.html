@@ -20,7 +20,19 @@
       <div id="citation-answer" class="hidden"></div>
       <button id="citation-next" class="hidden">Next</button>
     </div>
+    <button id="start-project">Start Your Own Project</button>
+    <div id="project-area" class="project-area hidden">
+      <h2>Citation Template</h2>
+      <form id="citation-form">
+        <input id="cite-author" placeholder="Author">
+        <input id="cite-title" placeholder="Title">
+        <input id="cite-source" placeholder="Source">
+      </form>
+      <button id="export-citation">Export as DOCX</button>
+      <button id="reset-citation">Reset</button>
+    </div>
   </div>
   <script src="citation.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.5.0/docx.umd.min.js"></script>
 </body>
 </html>

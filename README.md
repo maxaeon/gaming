@@ -15,6 +15,7 @@ This repository contains a set of lightweight browser games that let you review 
 - "Who Said It?" quote quiz
 - Ethics Chat page with rotating philosopher perspectives
 - Intro Philosophy Chat covering ancient Greek thinkers
+- Writing games now include a "Start Your Own Project" mode with templates that can be exported as PDF, DOCX, or PNG
 
 ## Getting Started
 
@@ -39,6 +40,8 @@ Additional pages include:
 - `writing/citation.html` – identify citation mistakes
 - `writing/brainstorm.html` – build mind-map clusters for brainstorming
  - `writing/outlining.html` – outline builder for critiquing moral absolutism
+- `writing/thesis-evaluation.html` – evaluate and revise a thesis draft
+- `writing/writing.html` – combined quick-writing challenges
 
 
 ## Project Structure

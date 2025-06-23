@@ -102,8 +102,16 @@
         <li>Ethical AI use supports writing, but careful review and rewriting remain essential.</li>
       </ul>
     </section>
+    <button id="start-project">Start Your Own Project</button>
+    <div id="project-area" class="project-area hidden">
+      <h2>Your Writing Workspace</h2>
+      <textarea id="project-notes" rows="6" style="width:90%;"></textarea><br>
+      <button id="export-notes">Export as PDF</button>
+      <button id="reset-notes">Reset</button>
+    </div>
   </div>
 
   <script src="writing.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>

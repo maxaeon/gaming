@@ -100,3 +100,35 @@ document.getElementById('citation-next').addEventListener('click', () => {
 });
 
 window.addEventListener('DOMContentLoaded', buildCitation);
+
+// Project mode
+document.getElementById('start-project').addEventListener('click', () => {
+  document.getElementById('project-area').classList.remove('hidden');
+});
+
+document.getElementById('reset-citation').addEventListener('click', () => {
+  document.getElementById('citation-form').reset();
+});
+
+document.getElementById('export-citation').addEventListener('click', () => {
+  const { Document, Packer, Paragraph, TextRun } = window.docx;
+  const doc = new Document();
+  const author = document.getElementById('cite-author').value;
+  const title = document.getElementById('cite-title').value;
+  const source = document.getElementById('cite-source').value;
+  doc.addSection({
+    children: [
+      new Paragraph(author),
+      new Paragraph(title),
+      new Paragraph(source)
+    ]
+  });
+  Packer.toBlob(doc).then(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'citation.docx';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+});

@@ -61,3 +61,26 @@ function handleRevision() {
 document.getElementById('draft-submit').addEventListener('click', handleSubmit);
 document.getElementById('show-example').addEventListener('click', showExamples);
 document.getElementById('revise-submit').addEventListener('click', handleRevision);
+
+// Project mode
+document.getElementById('start-project').addEventListener('click', () => {
+  document.getElementById('project-area').classList.remove('hidden');
+});
+
+document.getElementById('reset-thesis').addEventListener('click', () => {
+  document.getElementById('project-thesis').value = '';
+});
+
+document.getElementById('export-thesis').addEventListener('click', () => {
+  const { Document, Packer, Paragraph } = window.docx;
+  const doc = new Document();
+  doc.addSection({ children: [ new Paragraph(document.getElementById('project-thesis').value) ] });
+  Packer.toBlob(doc).then(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'thesis.docx';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+});
