@@ -146,13 +146,6 @@ function resetMindMap() {
   enableDrops();
 }
 
-function exportMindMap() {
-  const area = document.getElementById('clusters');
-  html2canvas(area).then(canvas => {
-    canvasToImage(canvas, { name: 'mindmap', type: 'png', quality: 1 });
-  });
-}
-
 function exportMindMapPDF() {
   const area = document.getElementById('clusters');
   html2canvas(area).then(canvas => {
@@ -168,7 +161,6 @@ function exportMindMapPDF() {
 }
 
 document.getElementById('clear-map').addEventListener('click', resetMindMap);
-document.getElementById('export-mindmap').addEventListener('click', exportMindMap);
 document.getElementById('export-pdf').addEventListener('click', exportMindMapPDF);
 document.getElementById('add-cluster').addEventListener('click', () => {
   const cluster = createCluster('New Cluster');
