@@ -880,6 +880,9 @@ button {
   background: #1e1e1e;
   z-index: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .flip-card-back {
@@ -924,7 +927,7 @@ button {
 }
 
 .flashcard-controls {
-  margin-top: 20px;
+  margin-top: auto;
   text-align: center;
 }
 
