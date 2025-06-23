@@ -144,21 +144,32 @@ const philosophyChatSteps = [
     'Aristotle': 'speaker-aristotle'
   };
 
+  const avatarPaths = {
+    'Philosophy Student': 'avatars/student.png',
+    'Thales': 'avatars/thales.png',
+    'Heraclitus': 'avatars/heraclitus.png',
+    'Socrates': 'avatars/socrates.png',
+    'Plato': 'avatars/plato.png',
+    'Aristotle': 'avatars/aristotle.png',
+    'You': 'avatars/user.png'
+  };
+
   async function addMessage(speaker, text, className) {
     if (!className) {
       className = speakerClasses[speaker] || 'chat-bot';
     }
     const div = document.createElement('div');
     div.className = `chat-message ${className}`;
+    const avatar = avatarPaths[speaker] || 'avatars/placeholder.png';
     if (div.classList.contains('chat-bot')) {
-      div.innerHTML = `<strong>${speaker}:</strong> <span class="typing">…</span>`;
+      div.innerHTML = `<img class="avatar" src="${avatar}" alt="${speaker}"> <strong>${speaker}:</strong> <span class="typing">…</span>`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
       await new Promise(res => setTimeout(res, 1000));
-      div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
+      div.innerHTML = `<img class="avatar" src="${avatar}" alt="${speaker}"> <strong>${speaker}:</strong> ${text}`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } else {
-      div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
+      div.innerHTML = `<img class="avatar" src="${avatar}" alt="${speaker}"> <strong>${speaker}:</strong> ${text}`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
