@@ -469,9 +469,7 @@ function formatYear(year) {
 
 function initLabels() {
   const ticks = document.getElementById('timeline-ticks');
-  const labels = document.getElementById('philosopher-labels');
   ticks.innerHTML = '';
-  labels.innerHTML = '';
   const range = timelineEnd - timelineStart;
   const step = 500;
   let firstTick = Math.ceil(timelineStart / step) * step;
@@ -488,15 +486,6 @@ function initLabels() {
     ticks.appendChild(tick);
   }
 
-  philosophyTimeline.forEach(p => {
-    const label = document.createElement('div');
-    label.className = 'philosopher-label';
-    label.textContent = p.name;
-    const mid = (p.startYear + p.endYear) / 2;
-    const pos = ((mid - timelineStart) / range) * 100;
-    label.style.left = `${pos}%`;
-    labels.appendChild(label);
-  });
 }
 
 window.addEventListener('DOMContentLoaded', () => {

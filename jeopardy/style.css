@@ -593,22 +593,7 @@ button {
   white-space: nowrap;
 }
 
-#philosopher-labels {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 20px;
-  pointer-events: none;
-}
 
-.philosopher-label {
-  position: absolute;
-  top: 0;
-  transform: translateX(-50%);
-  font-size: 12px;
-  white-space: nowrap;
-}
 
 @media (min-width: 768px) {
   #topic-selector {
