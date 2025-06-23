@@ -69,6 +69,8 @@ function startMissingGame() {
   document.getElementById('missing-next').classList.add('hidden');
   showMissing();
   document.getElementById('missing-game').classList.remove('hidden');
+  const startBtn = document.getElementById('start-missing');
+  if (startBtn) startBtn.classList.add('hidden');
 }
 
 function showMissing() {
