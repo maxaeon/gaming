@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Philosophy Timeline</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <style>
+    #timeline-entry {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #timeline-entry ul {
+      text-align: left;
+    }
+    blockquote {
+      font-style: italic;
+      margin: 10px 0;
+    }
+    #nav-buttons {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Thinker's Arcade</a>
+  </nav>
+  <div class="container">
+    <h1>Interactive Timeline</h1>
+    <div id="timeline-entry">
+      <h2 id="philosopher-name"></h2>
+      <h3 id="philosopher-era"></h3>
+      <p id="philosopher-bio"></p>
+      <ul id="philosopher-keyideas"></ul>
+      <blockquote id="philosopher-quote"></blockquote>
+      <div id="reflection">
+        <p id="reflection-question"></p>
+        <div class="mc-options">
+          <button id="btn-yes" class="option-btn">Yes</button>
+          <button id="btn-no" class="option-btn">No</button>
+          <button id="btn-unsure" class="option-btn">Unsure</button>
+        </div>
+        <p id="reflection-feedback" class="hidden"></p>
+      </div>
+    </div>
+    <div id="nav-buttons" class="game-links">
+      <button id="prev-btn">Previous</button>
+      <button id="next-btn">Next</button>
+    </div>
+  </div>
+  <script src="timeline.js"></script>
+</body>
+</html>
