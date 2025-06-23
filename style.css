@@ -377,3 +377,46 @@ button {
 #send-btn {
   padding: 8px 12px;
 }
+
+/* Generic chat styles used by multiple chatbot pages */
+.user {
+  color: #ba68c8;
+}
+
+.bot {
+  color: #80cbc4;
+}
+
+.typing {
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* Tooltip styling for inline info spans */
+.info {
+  text-decoration: underline dotted;
+  cursor: help;
+  position: relative;
+}
+
+.info::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #333;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  font-size: 12px;
+  margin-top: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 1000;
+}
+
+.info:hover::after {
+  opacity: 1;
+}
