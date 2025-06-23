@@ -5,9 +5,8 @@ const citationExercises = [
       { text: 'Kant', error: true },
       { text: ', Groundwork, p. 31).' }
     ],
-    apa: 'Kant (1785/1997) claims that moral rules must be universal without exception (<em>Groundwork of the Metaphysics of Morals</em>, p. 31).',
     mla: 'Kant claims that moral rules must be universal without exception (<em>Groundwork of the Metaphysics of Morals</em> 31).',
-    explanation: 'APA needs the publication date and translator; MLA omits the date but italicizes the title and gives the page number without "p.".'
+    explanation: 'In MLA, omit the author from the parentheses when it appears in the sentence, italicize the title, and list the page number without "p.".'
   },
   {
     segments: [
@@ -15,9 +14,8 @@ const citationExercises = [
       { text: 'Summa Theologica, Aquinas', error: true },
       { text: ', p. 423).' }
     ],
-    apa: 'Aquinas (1274/1947) argues that moral actions must follow natural law (<em>Summa Theologica</em>, p. 423).',
     mla: 'Aquinas argues moral actions must follow natural law (<em>Summa Theologica</em> 423).',
-    explanation: 'Include author, date, and translator in APA; MLA keeps it simpler with the title and page number.'
+    explanation: 'MLA uses only the work\'s title and page number in parentheses when the author\'s name is already mentioned.'
   },
   {
     segments: [
@@ -25,9 +23,8 @@ const citationExercises = [
       { text: ' Philosophy Review, Martha Nussbaum', error: true },
       { text: ', 2011, 56).' }
     ],
-    apa: 'Nussbaum, M. C. (2011). Ethics and capabilities. <em>Philosophy Review</em>, 23(2), 56.',
     mla: 'Nussbaum, Martha C. "Ethics and Capabilities." <em>Philosophy Review</em>, vol. 23, no. 2, 2011, p. 56.',
-    explanation: 'APA uses initials and year in parentheses; MLA lists the volume and issue with "vol." and "no.".'
+    explanation: 'An MLA reference begins with the author\'s full name, followed by the article title in quotes, the journal title in italics, and the volume, issue, year, and page number.'
   },
   {
     segments: [
@@ -35,9 +32,8 @@ const citationExercises = [
       { text: ' James Rachels', error: true },
       { text: ', Ethics Collection, 1998, p. 104).' }
     ],
-    apa: 'Rachels, J. (1998). The morality of euthanasia. In J. Smith (Ed.), <em>Ethics Collection</em> (pp. 104–116). Routledge.',
     mla: 'Rachels, James. "The Morality of Euthanasia." <em>Ethics Collection</em>, edited by John Smith, Routledge, 1998, pp. 104–116.',
-    explanation: 'APA specifies the editor and page range; MLA introduces the editor with "edited by".'
+    explanation: 'MLA lists the author first, then the chapter title in quotes, followed by the book title in italics, the editor, publisher, year, and page range.'
   }
 ];
 
@@ -76,7 +72,7 @@ function handleClick(idx, span) {
 function revealCitation() {
   const ex = citationExercises[citationIndex];
   const ansDiv = document.getElementById('citation-answer');
-  ansDiv.innerHTML = `<strong>APA:</strong> ${ex.apa}<br><strong>MLA:</strong> ${ex.mla}<br><em>${ex.explanation}</em>`;
+  ansDiv.innerHTML = `<strong>MLA:</strong> ${ex.mla}<br><em>${ex.explanation}</em>`;
   ansDiv.classList.remove('hidden');
   document.getElementById('citation-next').classList.remove('hidden');
   highlightErrors();
