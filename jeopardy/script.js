@@ -211,6 +211,11 @@ function closeQuestionModal() {
   nextPlayer();
 
   if (remainingQuestions === 0) {
+    const share = document.getElementById('share-controls');
+    if (share) {
+      share.classList.remove('hidden');
+      share.hidden = false;
+    }
     document.getElementById('celebration-modal').classList.remove('hidden');     document.getElementById('celebration-modal').hidden = false;
   }
 }
@@ -226,6 +231,8 @@ function cancelQuestion(cell) {
 
 document.getElementById('restart-btn').onclick = () => {
   document.getElementById('celebration-modal').classList.add('hidden');   document.getElementById('celebration-modal').hidden = true;
+  const share = document.getElementById('share-controls');
+  if (share) share.classList.add('hidden');
   players.forEach(p => p.score = 0);
   updateScoreboard();
   buildBoard();
@@ -245,3 +252,21 @@ document.getElementById('scoreboard').addEventListener('click', (e) => {
 
   updateScoreboard();
 });
+
+const copyBtn = document.getElementById('copy-link');
+if (copyBtn) {
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href);
+  });
+}
+
+const shareBtn = document.getElementById('web-share');
+if (shareBtn) {
+  shareBtn.addEventListener('click', () => {
+    if (navigator.share) {
+      navigator.share({ url: window.location.href });
+    } else if (copyBtn) {
+      navigator.clipboard.writeText(window.location.href);
+    }
+  });
+}
