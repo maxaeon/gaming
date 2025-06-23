@@ -41,7 +41,7 @@ function startSelectedGame(mode, names = []) {
   multiModal.classList.add('hidden');
   startGame(mode, names);
   document.getElementById('topic-selector').classList.add('hidden');
-  document.getElementById('jeopardy-board').classList.remove('hidden');
+  document.getElementById('game-board').classList.remove('hidden');
   document.getElementById('scoreboard').classList.remove('hidden');
   document.getElementById('progress').classList.remove('hidden');
   document.getElementById('quote-game').classList.add('hidden');
@@ -81,7 +81,7 @@ document.querySelectorAll('#topic-selector .exam-dropdown button').forEach(examB
     const examType = examBtn.dataset.exam;
     const topic = examBtn.closest('.course').querySelector('.topic-btn').dataset.topic;
     const action = () => { goHome(); showModeModal(topic, examType); };
-    if (!document.getElementById('jeopardy-board').classList.contains('hidden')) {
+    if (!document.getElementById('game-board').classList.contains('hidden')) {
       pendingAction = action;
       quitModal.classList.remove('hidden');
     } else {
@@ -93,7 +93,7 @@ document.querySelectorAll('#topic-selector .exam-dropdown button').forEach(examB
 // Home button returns to topic selection
 
 function goHome() {
-  document.getElementById('jeopardy-board').classList.add('hidden');
+  document.getElementById('game-board').classList.add('hidden');
   document.getElementById('topic-selector').classList.remove('hidden');
   document.getElementById('question-modal').classList.add('hidden');
   document.getElementById('celebration-modal').classList.add('hidden');
@@ -107,7 +107,7 @@ function goHome() {
 
 document.getElementById('home-link').addEventListener('click', (e) => {
   e.preventDefault();
-  if (!document.getElementById('jeopardy-board').classList.contains('hidden')) {
+  if (!document.getElementById('game-board').classList.contains('hidden')) {
     pendingAction = goHome;
     quitModal.classList.remove('hidden');
   } else {
