@@ -338,6 +338,12 @@ button {
   border-radius: 6px;
   cursor: pointer;
   margin: 4px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.option-btn:hover {
+  background: #ce93d8;
+  transform: scale(1.05);
 }
 
 .player-score button {
