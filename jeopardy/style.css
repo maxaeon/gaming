@@ -853,7 +853,7 @@ button {
   width: 100%;
   max-width: 600px;
   margin: 0 auto 20px;
-  height: 260px;
+  min-height: 260px;
 }
 
 .flip-card-inner {
@@ -879,6 +879,7 @@ button {
   border-radius: 8px;
   background: #1e1e1e;
   z-index: 1;
+  overflow-y: auto;
 }
 
 .flip-card-back {
@@ -905,11 +906,14 @@ button {
 #trivia-game,
 #flashcard {
   max-width: 600px;
-  margin: 0 auto 20px;
+  margin: 20px auto;
 }
 
 #flashcard {
   position: relative;
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .flashcard-close {
@@ -920,11 +924,7 @@ button {
 }
 
 .flashcard-controls {
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  width: 100%;
+  margin-top: 20px;
   text-align: center;
-  z-index: 2;
 }
 
