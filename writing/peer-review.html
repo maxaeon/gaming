@@ -20,17 +20,33 @@
 
     <section id="example" class="hidden" hidden>
       <h2>Peer Review Example</h2>
-      <p id="example-paragraph">Kant says morality has rules, but sometimes rules are too strict, and that can be bad.</p>
-      <textarea id="example-input" rows="3" style="width:90%;"></textarea><br>
+      <p id="example-paragraph">Kant argues that moral rules must hold without exception. Critics reply that this rigidity ignores cases where following a rule creates obvious harm. Consider Kant&rsquo;s claim that lying is always wrong even if it helps protect an innocent person.</p>
+      <div class="review-row">
+        <label>Clarity of Thesis:</label><br>
+        <textarea id="example-thesis" rows="2" style="width:90%;"></textarea>
+      </div>
+      <div class="review-row">
+        <label>Argument Development:</label><br>
+        <textarea id="example-argument" rows="2" style="width:90%;"></textarea>
+      </div>
+      <div class="review-row">
+        <label>Use of Examples/Evidence:</label><br>
+        <textarea id="example-evidence" rows="2" style="width:90%;"></textarea>
+      </div>
+      <div class="review-row">
+        <label>Citation Accuracy:</label><br>
+        <textarea id="example-citation" rows="2" style="width:90%;"></textarea>
+      </div>
       <button id="example-show">Show Example Provided</button>
-      <p id="example-answer" class="hidden" hidden></p>
+      <ul id="example-answer" class="hidden" hidden></ul>
       <button class="next-btn" data-next="practice">Next</button>
     </section>
 
     <section id="practice" class="hidden" hidden>
       <h2>Peer Review Practice</h2>
       <p><strong>Thesis Statement:</strong> Kant’s ethics is too rigid because it demands rules without exceptions.</p>
-      <p>Kant thinks you should always tell the truth. But what if a murderer is at your door? Then telling the truth would get someone killed. This is why Kant’s rules don’t always work.</p>
+      <p>Kant thinks you should always tell the truth. But what if a murderer is at your door? Then telling the truth would get someone killed. This example highlights how strict adherence to Kant’s rule clashes with common-sense morality. Many philosophers argue that moral decisions need flexibility to prevent obvious harm.</p>
+      <p>Imagine a friend hides in your house to escape danger. If you follow Kant strictly, you must reveal their location when questioned. Critics say this shows why any moral system needs room for exceptions.</p>
       <div class="review-row">
         <label>Clarity of Thesis:</label><br>
         <textarea id="crit-thesis" rows="2" style="width:90%;"></textarea>
@@ -60,24 +76,12 @@
     </section>
 
     <section id="template" class="hidden" hidden>
-      <h2>Your Peer Review Template</h2>
-      <label>Reviewed Text Excerpt:</label><br>
-      <textarea id="template-excerpt" rows="4" style="width:90%;"></textarea>
-      <table>
-        <tr><th>Clarity of Thesis</th><td><textarea class="template-field" data-key="thesis" rows="2" style="width:90%;"></textarea></td></tr>
-        <tr><th>Argument Development</th><td><textarea class="template-field" data-key="argument" rows="2" style="width:90%;"></textarea></td></tr>
-        <tr><th>Use of Examples/Evidence</th><td><textarea class="template-field" data-key="evidence" rows="2" style="width:90%;"></textarea></td></tr>
-        <tr><th>Citation Accuracy</th><td><textarea class="template-field" data-key="citation" rows="2" style="width:90%;"></textarea></td></tr>
-        <tr><th>Additional Suggestions</th><td><textarea class="template-field" data-key="extra" rows="2" style="width:90%;"></textarea></td></tr>
-      </table>
-      <div>
-        <button id="export-docx">Export Your Peer Review (DOCX)</button>
-        <button id="export-pdf">Export Your Peer Review (PDF)</button>
-      </div>
+      <h2>Printable Peer Review Template</h2>
+      <p>Download a blank peer review form to print or fill in by hand.</p>
+      <button id="download-template">Download PDF Template</button>
     </section>
   </div>
   <script src="peer-review.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.5.0/docx.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="../page-header.js"></script>
 </body>
