@@ -520,6 +520,47 @@ button {
   background-color: #e91e63;
 }
 
+/* Interactive timeline styles */
+#timeline-container {
+  position: relative;
+  height: 40px;
+  margin-top: 30px;
+}
+
+#timeline-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 15px;
+  height: 10px;
+  background: linear-gradient(to right, #4caf50, #ff9800, #e91e63);
+  border-radius: 5px;
+}
+
+#timeline-highlight {
+  position: absolute;
+  top: 15px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+#timeline-tooltip {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-size: 14px;
+}
+
 @media (min-width: 768px) {
   #topic-selector {
     flex-direction: row;
