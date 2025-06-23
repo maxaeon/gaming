@@ -36,12 +36,46 @@ function startGame(mode, names = []) {
 
 function updateScoreboard() {
   const sb = document.getElementById('scoreboard');
-  sb.innerHTML = players
-    .map((p, idx) => {
-      const prefix = idx === currentPlayerIndex ? '&#8594; ' : '';
-      return `<span class="player-score" data-index="${idx}">${prefix}${p.name}: <button class="decrement" data-index="${idx}">-</button> <span class="score" data-index="${idx}">${p.score}</span> <button class="increment" data-index="${idx}">+</button></span>`;
-    })
-    .join(' | ');
+  sb.innerHTML = '';
+
+  players.forEach((p, idx) => {
+    if (idx > 0) {
+      sb.appendChild(document.createTextNode(' | '));
+    }
+
+    const playerSpan = document.createElement('span');
+    playerSpan.className = 'player-score';
+    playerSpan.dataset.index = idx;
+
+    const nameSpan = document.createElement('span');
+    const prefix = idx === currentPlayerIndex ? '\u2192 ' : '';
+    nameSpan.textContent = `${prefix}${p.name}:`;
+
+    const decBtn = document.createElement('button');
+    decBtn.className = 'decrement';
+    decBtn.dataset.index = idx;
+    decBtn.textContent = '-';
+
+    const scoreSpan = document.createElement('span');
+    scoreSpan.className = 'score';
+    scoreSpan.dataset.index = idx;
+    scoreSpan.textContent = p.score;
+
+    const incBtn = document.createElement('button');
+    incBtn.className = 'increment';
+    incBtn.dataset.index = idx;
+    incBtn.textContent = '+';
+
+    playerSpan.appendChild(nameSpan);
+    playerSpan.appendChild(document.createTextNode(' '));
+    playerSpan.appendChild(decBtn);
+    playerSpan.appendChild(document.createTextNode(' '));
+    playerSpan.appendChild(scoreSpan);
+    playerSpan.appendChild(document.createTextNode(' '));
+    playerSpan.appendChild(incBtn);
+
+    sb.appendChild(playerSpan);
+  });
 }
 
 function nextPlayer() {
