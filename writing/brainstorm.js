@@ -66,13 +66,30 @@ function editNode(li) {
   }
 }
 
-function makeDroppable(container) {
+function createCluster(name) {
+  const div = document.createElement('div');
+  div.className = 'cluster';
+  const h3 = document.createElement('h3');
+  h3.textContent = name;
+  h3.contentEditable = true;
+  const del = document.createElement('button');
+  del.className = 'cluster-delete';
+  del.textContent = '\u00d7';
+  del.addEventListener('click', () => div.remove());
+  const ul = document.createElement('ul');
+  div.append(h3, ul, del);
+  makeDroppable(div, ul);
+  makeDroppable(ul);
+  return div;
+}
+
+function makeDroppable(container, target) {
   container.addEventListener('dragover', e => e.preventDefault());
   container.addEventListener('drop', e => {
     e.preventDefault();
     const id = e.dataTransfer.getData('text/plain');
     const item = document.getElementById(id);
-    if (item) container.appendChild(item);
+    if (item) (target || container).appendChild(item);
   });
 }
 
@@ -82,7 +99,11 @@ function buildPool() {
 
 function enableDrops() {
   makeDroppable(document.getElementById('concept-pool'));
-  document.querySelectorAll('.drop-zone ul, #mindmap .cluster ul').forEach(makeDroppable);
+  document.querySelectorAll('.drop-zone, #mindmap .cluster').forEach(div => {
+    const ul = div.querySelector('ul');
+    makeDroppable(div, ul);
+    if (ul) makeDroppable(ul);
+  });
 }
 
 document.getElementById('show-suggested').addEventListener('click', () => {
@@ -116,11 +137,33 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Project mode
 document.getElementById('start-project').addEventListener('click', () => {
-  document.getElementById('project-area').classList.remove('hidden');   document.getElementById('project-area').hidden = false;
+  const proj = document.getElementById('project-area');
+  proj.classList.remove('hidden');
+  proj.hidden = false;
+  resetMindMap();
+  const mindmap = document.getElementById('mindmap');
+  const names = [];
+  for (let i = 1; i <= 3; i++) {
+    const optional = i > 2 ? ' (optional)' : '';
+    const name = prompt(`Enter a name for cluster ${i}${optional}`);
+    if (!name) {
+      if (i <= 2) { i--; continue; }
+      break;
+    }
+    names.push(name);
+    if (i === 3 && !name) break;
+  }
+  names.forEach(n => mindmap.appendChild(createCluster(n)));
+  enableDrops();
+  let term;
+  while ((term = prompt('Add a term to sort (leave blank to finish)'))){
+    addNode(term);
+  }
 });
 
 function resetMindMap() {
-  document.querySelectorAll('#mindmap .cluster ul').forEach(ul => ul.innerHTML = '');
+  document.getElementById('mindmap').innerHTML = '';
+  document.getElementById('concept-pool').innerHTML = '';
 }
 
 function exportMindMap() {
@@ -147,3 +190,10 @@ function exportMindMapPDF() {
 document.getElementById('reset-mindmap').addEventListener('click', resetMindMap);
 document.getElementById('export-mindmap').addEventListener('click', exportMindMap);
 document.getElementById('export-pdf').addEventListener('click', exportMindMapPDF);
+document.getElementById('add-cluster').addEventListener('click', () => {
+  const name = prompt('Cluster name');
+  if (name) {
+    document.getElementById('mindmap').appendChild(createCluster(name));
+    enableDrops();
+  }
+});
