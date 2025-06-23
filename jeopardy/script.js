@@ -84,7 +84,7 @@ function nextPlayer() {
 }
 
 function buildBoard() {
-  const board = document.getElementById('jeopardy-board');
+  const board = document.getElementById('game-board');
   board.innerHTML = '';
   const categories = Object.keys(currentQuestions);
   board.style.gridTemplateColumns = `repeat(${categories.length}, 1fr)`;
@@ -95,7 +95,7 @@ function buildBoard() {
   // header row
   categories.forEach(cat => {
     const header = document.createElement('div');
-    header.className = 'jeopardy-header';
+    header.className = 'board-header';
     header.innerText = cat;
     board.appendChild(header);
   });
@@ -105,7 +105,7 @@ function buildBoard() {
     categories.forEach(cat => {
       const q = currentQuestions[cat].find(item => item.points === value);
       const cell = document.createElement('div');
-      cell.className = 'jeopardy-cell';
+      cell.className = 'board-cell';
       cell.innerText = value;
       if (q) {
         cell.onclick = () => showQuestion(q, cell);

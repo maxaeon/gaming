@@ -128,14 +128,14 @@ body {
   background-color: #7b1fa2;
 }
 
-#jeopardy-board {
+#game-board {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 10px;
   margin-top: 20px;
 }
 
-.jeopardy-header {
+.board-header {
   background-color: #7b1fa2;
   color: #fff;
   padding: 20px;
@@ -143,7 +143,7 @@ body {
   font-weight: bold;
 }
 
-.jeopardy-cell {
+.board-cell {
   background-color: #ce93d8;
   color: #000;
   padding: 20px;
@@ -152,14 +152,14 @@ body {
   transition: transform 0.2s;
 }
 
-.jeopardy-cell:hover {
+.board-cell:hover {
   transform: scale(1.05);
 }
 
 .hidden {
   display: none;
 }
-#jeopardy-board.hidden {
+#game-board.hidden {
   display: none;
 }
 
@@ -319,12 +319,12 @@ button {
     font-size: 14px;
   }
 
-  #jeopardy-board {
+  #game-board {
     gap: 6px;
   }
 
-  .jeopardy-header,
-  .jeopardy-cell {
+  .board-header,
+  .board-cell {
     padding: 10px;
     font-size: 14px;
   }
