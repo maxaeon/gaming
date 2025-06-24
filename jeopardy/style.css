@@ -310,6 +310,16 @@ body.home .course[data-course="ethics"] .exam-dropdown button:hover,
 #topic-selector .course[data-course="ethics"] .exam-dropdown button:hover {
   background-color: #1976d2;
 }
+body.home .course[data-course="logic"] .exam-dropdown button,
+#topic-selector .course[data-course="logic"] .exam-dropdown button {
+  background-color: #ffeb3b;
+  color: #111;
+}
+body.home .course[data-course="logic"] .exam-dropdown button:hover,
+#topic-selector .course[data-course="logic"] .exam-dropdown button:hover {
+  background-color: #fdd835;
+  color: #111;
+}
 
 .game-links {
   display: flex;
