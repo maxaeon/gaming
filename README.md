@@ -26,7 +26,14 @@ https://maxaeon.github.io/gaming/
 ```
 
 The homepage lists links to each activity including the Jeopardy board game,
- flashcards, trivia, Sherlock Holmes mystery, and the lightweight chat pages.
+flashcards, trivia, Sherlock Holmes mystery, and the lightweight chat pages.
+
+### Vendor Libraries
+
+Some activities rely on third-party JavaScript libraries for exporting
+documents. Placeholder copies are stored in the `vendor/` directory. To enable
+PDF or DOCX export locally, replace these placeholders with the real libraries
+listed in `vendor/README.md`.
 
 Additional pages include:
 
