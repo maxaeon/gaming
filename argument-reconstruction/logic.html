@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Φ interactive</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html"><img id="site-icon" src="../icon.png" alt="Φ interactive icon"></a>
+  </nav>
+  <header id="page-header" data-default-course="logic">Course • Activity</header>
+  <div class="container">
+    <h1>Arguments Activity</h1>
+    <p>Identify the premises and conclusion, then choose the correct evaluation for each argument.</p>
+    <button id="open-info">Summary</button>
+    <div id="reconstruction-game">
+      <p id="reconstruction-argument"></p>
+      <p id="reconstruction-question"></p>
+      <div id="reconstruction-options" class="mc-options"></div>
+      <div id="reconstruction-feedback" class="hidden" hidden></div>
+      <div id="reconstruction-controls" class="hidden" hidden>
+        <button id="reconstruction-try-again">Try Again</button>
+        <button id="reconstruction-show-answer">Show Answer</button>
+      </div>
+      <button id="reconstruction-next" class="hidden" hidden>Next</button>
+    </div>
+    <div id="summary" class="hidden" hidden></div>
+  </div>
+
+  <div id="info-modal" class="hidden" hidden>
+    <div class="modal-content">
+      <h2>Summary</h2>
+      <p>Each prompt presents a short argument in natural language. Identify its premises and conclusion, then select whether it is valid and sound, valid but unsound, strong and cogent, or invalid.</p>
+      <button id="close-info">Close</button>
+    </div>
+  </div>
+
+  <script src="../utils.js"></script>
+  <script src="logic.js"></script>
+  <script src="../next-activity.js"></script>
+  <script src="../explain.js"></script>
+  <script src="../keyterms-sidebar.js"></script>
+  <script src="../page-header.js"></script>
+</body>
+</html>
