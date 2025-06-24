@@ -22,7 +22,7 @@ This repository contains a set of lightweight browser games that let you review 
 You can play the games directly from the hosted GitHub Pages site:
 
 ```
-https://maxaeon.github.io/mindgames/
+https://maxaeon.github.io/gaming/
 ```
 
 The homepage lists links to each activity including the Jeopardy board game,
