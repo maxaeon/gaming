@@ -92,11 +92,14 @@ function loadTrivia(course, category = 'all') {
   showTriviaQuestion();
 }
 
-function buildChoices(correct) {
+function buildChoices(question) {
+  if (question.options) {
+    return question.options.slice();
+  }
   const answers = currentTrivia.map(q => q.answer);
-  const others = answers.filter(a => a !== correct);
+  const others = answers.filter(a => a !== question.answer);
   shuffle(others);
-  const choices = others.slice(0, 3).concat(correct);
+  const choices = others.slice(0, 3).concat(question.answer);
   shuffle(choices);
   return choices;
 }
@@ -108,7 +111,7 @@ function showTriviaQuestion() {
   updateScore();
   const optionsDiv = document.getElementById('trivia-options');
   optionsDiv.innerHTML = '';
-  const choices = buildChoices(q.answer);
+  const choices = buildChoices(q);
   optionIndex = 0;
   choices.forEach((ans, idx) => {
     const btn = document.createElement('button');
@@ -126,11 +129,15 @@ function submitTrivia(choice) {
   const q = currentTrivia[triviaIndex];
   const feedback = document.getElementById('trivia-feedback');
   if (choice === q.answer) {
-    feedback.innerText = 'Correct!';
+    const msg = q.feedback ? `Correct! ${q.feedback}` : 'Correct!';
+    feedback.innerText = msg;
     feedback.style.color = '#4caf50';
     correctCount++;
   } else {
-    feedback.innerText = `Nope! The correct answer is ${q.answer}.`;
+    const msg = q.feedback
+      ? `Nope! The correct answer is ${q.answer}. ${q.feedback}`
+      : `Nope! The correct answer is ${q.answer}.`;
+    feedback.innerText = msg;
     feedback.style.color = '#c62828';
   }
   feedback.classList.remove('hidden');   feedback.hidden = false;
