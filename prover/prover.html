@@ -9,6 +9,29 @@
   <style>
     .rule { margin-bottom: 10px; }
     .rule button { margin-left: 8px; }
+    #tile-bank { margin-bottom: 10px; }
+    .tile {
+      display: inline-block;
+      padding: 4px 6px;
+      margin: 2px;
+      background: #e0e0e0;
+      color: #000;
+      border: 1px solid #888;
+      border-radius: 4px;
+      cursor: grab;
+      user-select: none;
+    }
+    .drop-box {
+      display: inline-block;
+      width: 1.2em;
+      min-height: 1em;
+      border-bottom: 2px solid #888;
+      margin: 0 4px;
+      text-align: center;
+    }
+    .drop-box.correct {
+      border-bottom-color: #4caf50;
+    }
   </style>
 </head>
 <body>
@@ -31,6 +54,7 @@
       <button id="mc-continue" class="hidden" hidden>Continue</button>
     </section>
     <section id="part3" class="hidden" hidden>
+      <div id="tile-bank"></div>
       <div id="fill-questions"></div>
       <button id="fill-continue" class="hidden" hidden>Next</button>
     </section>
