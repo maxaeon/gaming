@@ -157,7 +157,20 @@ function showExample() {
   list.classList.remove('hidden');   list.hidden = false;
 }
 
-document.getElementById('example-btn').addEventListener('click', showExample);
+function toggleExample() {
+  const btn = document.getElementById('example-btn');
+  const list = document.getElementById('hint-text');
+  if (list.classList.contains('hidden')) {
+    showExample();
+    btn.textContent = 'Hide Example Outline';
+  } else {
+    list.classList.add('hidden');
+    list.hidden = true;
+    btn.textContent = 'Show Example Outline';
+  }
+}
+
+document.getElementById('example-btn').addEventListener('click', toggleExample);
 
 window.addEventListener('DOMContentLoaded', () => {
   shuffle(pieces);
@@ -175,79 +188,10 @@ document.getElementById('add-piece').addEventListener('click', () => {
 });
 
 document.getElementById('outline-btn').addEventListener('click', () => {
-  document.getElementById('outline-area').classList.remove('hidden');
-  document.getElementById('outline-area').hidden = false;
+  window.location.href = 'outline-worksheet.html';
 });
 
 document.getElementById('open-draft-dev').addEventListener('click', () => {
   window.location.href = 'draft-development.html';
 });
 
-document.getElementById('add-paragraph').addEventListener('click', () => {
-  const div = document.createElement('div');
-  div.className = 'body-section';
-  div.innerHTML = `<label>Topic Sentence:</label><br>
-  <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
-  <label>Supporting Details:</label><br>
-  <textarea class="detail-input" rows="3" style="width:90%;"></textarea>`;
-  document.getElementById('outline-body').appendChild(div);
-});
-
-function gatherOutline() {
-  const thesis = document.getElementById('outline-thesis').value.trim();
-  const conclusion = document.getElementById('outline-conclusion').value.trim();
-  const refs = document.getElementById('outline-references').value.trim().split(/\n+/);
-  const bodies = Array.from(document.querySelectorAll('#outline-body .body-section')).map(sec => {
-    return {
-      topic: sec.querySelector('.topic-input').value.trim(),
-      detail: sec.querySelector('.detail-input').value.trim()
-    };
-  });
-  return { thesis, bodies, conclusion, refs };
-}
-
-function exportOutlineDocx() {
-  const { Document, Packer, Paragraph } = window.docx;
-  const data = gatherOutline();
-  const doc = new Document();
-  const children = [new Paragraph(data.thesis)];
-  data.bodies.forEach(b => {
-    children.push(new Paragraph(b.topic));
-    children.push(new Paragraph(b.detail));
-  });
-  children.push(new Paragraph(data.conclusion));
-  if (data.refs.length) {
-    children.push(new Paragraph('References:'));
-    data.refs.forEach(r => children.push(new Paragraph(r)));
-  }
-  doc.addSection({ children });
-  Packer.toBlob(doc).then(blob => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'outline.docx';
-    a.click();
-    URL.revokeObjectURL(url);
-  });
-}
-
-function exportOutlinePdf() {
-  const { jsPDF } = window.jspdf;
-  const data = gatherOutline();
-  const doc = new jsPDF();
-  let y = 10;
-  doc.text(data.thesis, 10, y); y += 10;
-  data.bodies.forEach(b => {
-    doc.text(b.topic, 10, y); y += 10;
-    doc.text(b.detail, 10, y); y += 10;
-  });
-  doc.text(data.conclusion, 10, y); y += 10;
-  if (data.refs.length) {
-    doc.text('References:', 10, y); y += 10;
-    data.refs.forEach(r => { doc.text(r, 10, y); y += 10; });
-  }
-  doc.save('outline.pdf');
-}
-
-document.getElementById('export-outline-docx').addEventListener('click', exportOutlineDocx);
-document.getElementById('export-outline-pdf').addEventListener('click', exportOutlinePdf);

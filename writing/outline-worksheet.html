@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Φ Gaming</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Gaming Philosophy Class</a>
+  </nav>
+  <header id="page-header" data-default-course="writing">Course • Activity</header>
+  <div class="container">
+    <h1>Outline Worksheet</h1>
+    <button id="example-btn">Show Example Outline</button>
+    <div id="hint-text" class="hidden" hidden></div>
+    <label>Thesis Statement:</label><br>
+    <textarea id="outline-thesis" rows="2" style="width:90%;" placeholder="Write your thesis here..."></textarea>
+    <div id="outline-body">
+      <div class="body-section">
+        <label>Topic Sentence:</label><br>
+        <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+        <label>Supporting Details:</label><br>
+        <textarea class="detail-input" rows="3" style="width:90%;"></textarea>
+      </div>
+      <div class="body-section">
+        <label>Topic Sentence:</label><br>
+        <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+        <label>Supporting Details:</label><br>
+        <textarea class="detail-input" rows="3" style="width:90%;"></textarea>
+      </div>
+      <div class="body-section">
+        <label>Topic Sentence:</label><br>
+        <textarea class="topic-input" rows="2" style="width:90%;"></textarea><br>
+        <label>Supporting Details:</label><br>
+        <textarea class="detail-input" rows="3" style="width:90%;"></textarea>
+      </div>
+    </div>
+    <button id="add-paragraph">Add Paragraph</button><br>
+    <label>Conclusion:</label><br>
+    <textarea id="outline-conclusion" rows="2" style="width:90%;" placeholder="Summarize your argument..."></textarea><br>
+    <label>References:</label><br>
+    <textarea id="outline-references" rows="3" style="width:90%;" placeholder="Enter references..."></textarea>
+    <div>
+      <button id="export-outline-pdf">Export Outline (PDF)</button>
+    </div>
+  </div>
+  <script src="outline-worksheet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="../page-header.js"></script>
+</body>
+</html>
