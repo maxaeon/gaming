@@ -67,7 +67,7 @@ function updatePageHeader(courseKey) {
 
 window.updatePageHeader = updatePageHeader;
 
-window.addEventListener('DOMContentLoaded', () => {
+function initPageHeader() {
   const params = new URLSearchParams(window.location.search);
   const header = document.getElementById('page-header');
   let courseKey = params.get('course');
@@ -82,4 +82,10 @@ window.addEventListener('DOMContentLoaded', () => {
   if (typeof createKeyTermsSidebar === 'function') {
     createKeyTermsSidebar(courseKey);
   }
-});
+}
+
+if (document.readyState !== 'loading') {
+  initPageHeader();
+} else {
+  window.addEventListener('DOMContentLoaded', initPageHeader);
+}
