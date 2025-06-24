@@ -1,82 +1,149 @@
 const reconstructionQuestions = [
   {
     argument:
-      "If it's snowing, the roads become slippery. It is snowing today. Thus, the roads are slippery.",
-    question: "How should this argument be evaluated?",
+      "Since all mammals breathe air and whales are mammals, it follows that whales breathe air.",
+    question: "What is the conclusion of this argument?",
     options: [
-      "Deductive: Valid and Sound",
-      "Deductive: Valid but Unsound",
-      "Deductive: Invalid",
-      "Inductive Argument"
+      "All mammals breathe air.",
+      "Whales are mammals.",
+      "Whales breathe air."
     ],
-    answer: "Deductive: Valid and Sound"
+    answer: "Whales breathe air."
   },
   {
     argument:
-      "All brilliant leaders have great hair. A certain political leader claims to have great hair. Thus, he is a brilliant leader.",
-    question: "How should this argument be evaluated?",
+      "Since all mammals breathe air and whales are mammals, it follows that whales breathe air.",
+    question: "Which option correctly lists the premises?",
     options: [
-      "Deductive: Valid and Sound",
-      "Deductive: Valid but Unsound",
-      "Deductive: Invalid",
-      "Inductive Argument"
+      "All mammals breathe air; Whales are mammals.",
+      "All mammals breathe air; Whales breathe air.",
+      "Whales are mammals; Whales breathe air.",
+      "Only: Whales breathe air."
     ],
-    answer: "Deductive: Valid but Unsound"
+    answer: "All mammals breathe air; Whales are mammals."
   },
   {
     argument:
-      "If Sam wins the lottery, he'll quit his job. Sam quit his job. Thus, Sam won the lottery.",
-    question: "How should this argument be evaluated?",
+      "Maria studied logic, and everyone who studies logic becomes better at reasoning. Therefore, Maria became better at reasoning.",
+    question: "What is the conclusion of this argument?",
     options: [
-      "Deductive: Valid and Sound",
-      "Deductive: Valid but Unsound",
-      "Deductive: Invalid",
-      "Inductive Argument"
+      "Maria studied logic.",
+      "Everyone who studies logic becomes better at reasoning.",
+      "Maria became better at reasoning."
     ],
-    answer: "Deductive: Invalid"
+    answer: "Maria became better at reasoning."
   },
   {
     argument:
-      "Most philosophy students love puzzles. Jane is a philosophy student. Thus, Jane probably loves puzzles.",
-    question: "How should this argument be evaluated?",
+      "Maria studied logic, and everyone who studies logic becomes better at reasoning. Therefore, Maria became better at reasoning.",
+    question: "Which option correctly lists the premises?",
     options: [
-      "Deductive: Valid and Sound",
-      "Deductive: Invalid",
-      "Inductive: Strong and Cogent",
-      "Inductive: Weak or not Cogent"
+      "Maria studied logic; Everyone who studies logic becomes better at reasoning.",
+      "Maria studied logic; Maria became better at reasoning.",
+      "Everyone who studies logic becomes better at reasoning; Maria became better at reasoning.",
+      "Maria studied logic only."
     ],
-    answer: "Inductive: Strong and Cogent"
+    answer: "Maria studied logic; Everyone who studies logic becomes better at reasoning."
   },
   {
     argument:
-      "All cats are mammals. No mammals are reptiles. Therefore, no cats are reptiles.",
-    question: "How should this argument be evaluated?",
+      "The project deadline was missed. Projects that miss deadlines lose funding. Therefore, this project will lose funding.",
+    question: "What is the conclusion of this argument?",
     options: [
-      "Deductive: Valid and Sound",
-      "Deductive: Valid but Unsound",
-      "Deductive: Invalid",
-      "Inductive Argument"
+      "The project deadline was missed.",
+      "This project will lose funding.",
+      "Projects that miss deadlines lose funding."
     ],
-    answer: "Deductive: Valid and Sound"
+    answer: "This project will lose funding."
   },
   {
     argument:
-      "All philosophers think. Socrates is a philosopher. Thus, Socrates thinks.",
-    question: "How should this argument be evaluated?",
+      "The project deadline was missed. Projects that miss deadlines lose funding. Therefore, this project will lose funding.",
+    question: "Which option correctly lists the premises?",
     options: [
-      "Deductive: Valid and Sound",
-      "Deductive: Valid but Unsound",
-      "Deductive: Invalid",
-      "Inductive Argument"
+      "The project deadline was missed; Projects that miss deadlines lose funding.",
+      "The project deadline was missed; This project will lose funding.",
+      "Projects that miss deadlines lose funding; This project will lose funding.",
+      "Only: The project deadline was missed."
     ],
-    answer: "Deductive: Valid and Sound"
+    answer: "The project deadline was missed; Projects that miss deadlines lose funding."
+  },
+  {
+    argument:
+      "If a country has a strong economy, it attracts immigrants. Country X is attracting immigrants. So, country X must have a strong economy.",
+    question: "What is the conclusion of this argument?",
+    options: [
+      "A country with a strong economy attracts immigrants.",
+      "Country X is attracting immigrants.",
+      "Country X must have a strong economy."
+    ],
+    answer: "Country X must have a strong economy."
+  },
+  {
+    argument:
+      "If a country has a strong economy, it attracts immigrants. Country X is attracting immigrants. So, country X must have a strong economy.",
+    question: "Which option correctly lists the premises?",
+    options: [
+      "If a country has a strong economy, it attracts immigrants; Country X is attracting immigrants.",
+      "Country X is attracting immigrants; Country X must have a strong economy.",
+      "If a country has a strong economy, it attracts immigrants; Country X must have a strong economy.",
+      "Country X must have a strong economy only."
+    ],
+    answer: "If a country has a strong economy, it attracts immigrants; Country X is attracting immigrants."
+  },
+  {
+    argument:
+      "If a country has a strong economy, it attracts immigrants. Country X is attracting immigrants. So, country X must have a strong economy.",
+    question: "Is this argument valid or invalid?",
+    options: [
+      "Valid",
+      "Invalid (Affirming the Consequent)",
+      "Invalid (Denying the Antecedent)",
+      "Sound"
+    ],
+    answer: "Invalid (Affirming the Consequent)"
+  },
+  {
+    argument:
+      "Either the battery is dead, or the starter is broken. The battery is not dead. Therefore, the starter must be broken.",
+    question: "What is the conclusion of this argument?",
+    options: [
+      "Either the battery is dead or the starter is broken.",
+      "The battery is not dead.",
+      "The starter must be broken."
+    ],
+    answer: "The starter must be broken."
+  },
+  {
+    argument:
+      "Either the battery is dead, or the starter is broken. The battery is not dead. Therefore, the starter must be broken.",
+    question: "Which option correctly lists the premises?",
+    options: [
+      "Either the battery is dead or the starter is broken; The battery is not dead.",
+      "Either the battery is dead or the starter is broken; The starter must be broken.",
+      "The battery is not dead; The starter must be broken.",
+      "Only: The battery is not dead."
+    ],
+    answer: "Either the battery is dead or the starter is broken; The battery is not dead."
+  },
+  {
+    argument:
+      "Either the battery is dead, or the starter is broken. The battery is not dead. Therefore, the starter must be broken.",
+    question: "Identify the valid argument form used.",
+    options: [
+      "Disjunctive Syllogism",
+      "Modus Ponens",
+      "Modus Tollens",
+      "Hypothetical Syllogism"
+    ],
+    answer: "Disjunctive Syllogism"
   }
 ];
 
 let reconstructionOrder = [];
 let reconstructionIndex = 0;
 let currentCourse = '';
-const MAX_QUESTIONS = 10;
+const MAX_QUESTIONS = 12;
 
 function startReconstruction() {
   reconstructionOrder = reconstructionQuestions.slice();
