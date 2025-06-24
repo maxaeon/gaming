@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Φ interactive</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <style>
+    .rule { margin-bottom: 10px; }
+    .rule button { margin-left: 8px; }
+  </style>
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html"><img id="site-icon" src="../icon.png" alt="Φ interactive icon"></a>
+  </nav>
+  <header id="page-header" data-default-course="logic">Course • Activity</header>
+  <div class="container">
+    <h1>Proof Lab</h1>
+    <section id="part1">
+      <p>Logical derivations are structured proofs where each step follows logically from previous steps using inference rules.</p>
+      <div class="rule">Given: "If P then Q" (P→Q) and "P", you can conclude: <span id="mp" class="hidden" hidden>Q</span><button onclick="reveal('mp')">Reveal</button></div>
+      <div class="rule">Given: "If P then Q" (P→Q) and "¬Q", you can conclude: <span id="mt" class="hidden" hidden>¬P</span><button onclick="reveal('mt')">Reveal</button></div>
+      <div class="rule">Given: "P→Q" and "Q→R", you can conclude: <span id="hs" class="hidden" hidden>P→R</span><button onclick="reveal('hs')">Reveal</button></div>
+      <div class="rule">Given: "P∨Q" and "¬P", you can conclude: <span id="ds" class="hidden" hidden>Q</span><button onclick="reveal('ds')">Reveal</button></div>
+      <button id="start-examples">Start Proof Examples</button>
+    </section>
+    <section id="part2" class="hidden" hidden>
+      <div id="example-info"></div>
+      <div id="options" class="mc-options"></div>
+      <div id="example-feedback" class="hidden" hidden></div>
+      <button id="next-step" class="hidden" hidden>Next</button>
+    </section>
+    <section id="part3" class="hidden" hidden>
+      <h2>Beyond Propositional Logic</h2>
+      <p>Toggle each statement to see its symbolic form.</p>
+      <div class="rule">Everyone is mortal. <button onclick="toggleDisplay('forall')">Show</button> <span id="forall" class="hidden" hidden>∀x(Mx)</span></div>
+      <div class="rule">Someone is happy. <button onclick="toggleDisplay('exists')">Show</button> <span id="exists" class="hidden" hidden>∃x(Hx)</span></div>
+      <p>Modal Operators:</p>
+      <div class="rule">It rains. <button onclick="toggleDisplay('poss')">◇</button> <span id="poss" class="hidden" hidden>◇R (Possibly R)</span> <button onclick="toggleDisplay('nec')">□</button> <span id="nec" class="hidden" hidden>□R (Necessarily R)</span></div>
+    </section>
+    <div id="summary" class="hidden" hidden></div>
+  </div>
+  <script src="../utils.js"></script>
+  <script src="prover.js"></script>
+  <script src="../next-activity.js"></script>
+  <script src="../explain.js"></script>
+  <script src="../keyterms-sidebar.js"></script>
+  <script src="../page-header.js"></script>
+</body>
+</html>
