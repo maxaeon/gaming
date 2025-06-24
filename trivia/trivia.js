@@ -178,18 +178,26 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const copy = document.getElementById('trivia-copy');
   if (copy) {
-    copy.addEventListener('click', () => {
-      navigator.clipboard.writeText(window.location.href);
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+      } catch (err) {
+        alert('Failed to copy link.');
+      }
     });
   }
 
   const share = document.getElementById('trivia-web-share');
   if (share) {
-    share.addEventListener('click', () => {
-      if (navigator.share) {
-        navigator.share({ url: window.location.href });
-      } else if (copy) {
-        navigator.clipboard.writeText(window.location.href);
+    share.addEventListener('click', async () => {
+      try {
+        if (navigator.share) {
+          await navigator.share({ url: window.location.href });
+        } else if (copy) {
+          await navigator.clipboard.writeText(window.location.href);
+        }
+      } catch (err) {
+        alert('Failed to share link.');
       }
     });
   }
