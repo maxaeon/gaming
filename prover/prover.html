@@ -27,18 +27,24 @@
       <button id="start-examples">Start Proof Examples</button>
     </section>
     <section id="part2" class="hidden" hidden>
-      <div id="example-info"></div>
-      <div id="options" class="mc-options"></div>
-      <div id="example-feedback" class="hidden" hidden></div>
-      <button id="next-step" class="hidden" hidden>Next</button>
+      <div id="mc-questions"></div>
+      <button id="mc-continue" class="hidden" hidden>Continue</button>
     </section>
     <section id="part3" class="hidden" hidden>
+      <div id="fill-questions"></div>
+      <button id="fill-continue" class="hidden" hidden>Next</button>
+    </section>
+    <section id="part4" class="hidden" hidden>
       <h2>Beyond Propositional Logic</h2>
-      <p>Toggle each statement to see its symbolic form.</p>
-      <div class="rule">Everyone is mortal. <button onclick="toggleDisplay('forall')">Show</button> <span id="forall" class="hidden" hidden>∀x(Mx)</span></div>
-      <div class="rule">Someone is happy. <button onclick="toggleDisplay('exists')">Show</button> <span id="exists" class="hidden" hidden>∃x(Hx)</span></div>
-      <p>Modal Operators:</p>
-      <div class="rule">It rains. <button onclick="toggleDisplay('poss')">◇</button> <span id="poss" class="hidden" hidden>◇R (Possibly R)</span> <button onclick="toggleDisplay('nec')">□</button> <span id="nec" class="hidden" hidden>□R (Necessarily R)</span></div>
+      <p>Predicate logic analyzes the structure within statements using quantifiers, helping us express arguments that propositional logic cannot capture. Modal logic introduces notions like necessity and possibility. Categorical logic, though limited, fits into this richer framework.</p>
+      <div class="rule">All humans are mortal. <button onclick="toggleDisplay('mort')">Show</button> <span id="mort" class="hidden" hidden>∀x(Hx → Mx)</span></div>
+      <div class="rule">Socrates is human. <button onclick="toggleDisplay('soc')">Show</button> <span id="soc" class="hidden" hidden>Hs</span></div>
+      <div class="rule">Therefore, Socrates is mortal. <button onclick="toggleDisplay('socm')">Show</button> <span id="socm" class="hidden" hidden>Ms</span></div>
+      <p>Modal Examples:</p>
+      <div class="rule">Necessarily, bachelors are unmarried. <button onclick="toggleDisplay('bachelor')">Show</button> <span id="bachelor" class="hidden" hidden>□∀x(Bx → ¬Mx)</span></div>
+      <div class="rule">Possibly someone wins the lottery. <button onclick="toggleDisplay('lotto')">Show</button> <span id="lotto" class="hidden" hidden>◇∃x(Lx)</span></div>
+      <p>Categorical Example:</p>
+      <div class="rule">All mammals are animals. <button onclick="toggleDisplay('cat1')">Show</button> <span id="cat1" class="hidden" hidden>∀x(Mx → Ax)</span></div>
     </section>
     <div id="summary" class="hidden" hidden></div>
   </div>

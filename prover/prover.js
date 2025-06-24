@@ -47,8 +47,16 @@ const examples = [
   }
 ];
 
-let exIndex = 0;
-let stepIndex = 0;
+const fillQuestions = [
+  {prompt: 'From P and Q, derive P ___ Q (enter the connective).', answer: '∧'},
+  {prompt: 'Given P→Q and P, fill in the conclusion:', answer: 'Q'},
+  {prompt: 'From P∨Q and ¬P, conclude:', answer: 'Q'},
+  {prompt: 'If P→(Q→R) and P∧Q, the final derived letter is:', answer: 'R'}
+];
+
+let mcStates = [];
+let mcData = [];
+let fillStates = [];
 
 function reveal(id) {
   const el = document.getElementById(id);
@@ -72,76 +80,138 @@ function toggleDisplay(id) {
   }
 }
 
-function startExamples() {
-  document.getElementById('part1').classList.add('hidden');
-  document.getElementById('part1').hidden = true;
-  document.getElementById('part2').classList.remove('hidden');
-  document.getElementById('part2').hidden = false;
-  exIndex = 0;
-  stepIndex = 0;
-  showStep();
-}
-
-document.getElementById('start-examples').addEventListener('click', startExamples);
-
-document.getElementById('next-step').addEventListener('click', () => {
-  stepIndex++;
-  if (stepIndex >= examples[exIndex].steps.length) {
-    exIndex++;
-    stepIndex = 0;
-    if (exIndex >= examples.length) {
-      startPart3();
-      return;
-    }
-  }
-  showStep();
-});
-
-function showStep() {
-  const ex = examples[exIndex];
-  const step = ex.steps[stepIndex];
-  const info = document.getElementById('example-info');
-  info.innerHTML = `<p><strong>Premises:</strong><br>${ex.premises.join('<br>')}<br><strong>Conclusion:</strong> ${ex.conclusion}</p><p>${step.prompt}</p>`;
-  const optsDiv = document.getElementById('options');
-  optsDiv.innerHTML = '';
-  rules.forEach(rule => {
-    const btn = document.createElement('button');
-    btn.className = 'option-btn';
-    btn.innerText = rule;
-    btn.addEventListener('click', () => checkRule(rule));
-    optsDiv.appendChild(btn);
+function buildMC() {
+  const container = document.getElementById('mc-questions');
+  container.innerHTML = '';
+  mcData = [];
+  mcStates = [];
+  examples.forEach(ex => {
+    ex.steps.forEach(step => {
+      mcData.push({premises: ex.premises, conclusion: ex.conclusion, prompt: step.prompt, answer: step.answer, feedback: step.feedback});
+    });
   });
-  document.getElementById('example-feedback').classList.add('hidden');
-  document.getElementById('example-feedback').hidden = true;
-  document.getElementById('next-step').classList.add('hidden');
-  document.getElementById('next-step').hidden = true;
+  mcData.forEach((q, idx) => {
+    mcStates.push(false);
+    const div = document.createElement('div');
+    div.className = 'rule';
+    div.innerHTML = `<p><strong>Premises:</strong><br>${q.premises.join('<br>')}<br><strong>Conclusion:</strong> ${q.conclusion}</p><p>${q.prompt}</p>`;
+    const opts = document.createElement('div');
+    opts.className = 'mc-options';
+    rules.forEach(rule => {
+      const b = document.createElement('button');
+      b.className = 'option-btn';
+      b.innerText = rule;
+      b.addEventListener('click', () => checkMC(idx, rule, opts, fb));
+      opts.appendChild(b);
+    });
+    const fb = document.createElement('div');
+    fb.className = 'hidden';
+    fb.hidden = true;
+    div.appendChild(opts);
+    div.appendChild(fb);
+    container.appendChild(div);
+  });
+  document.getElementById('mc-continue').classList.add('hidden');
+  document.getElementById('mc-continue').hidden = true;
 }
 
-function checkRule(choice) {
-  const step = examples[exIndex].steps[stepIndex];
-  const fb = document.getElementById('example-feedback');
-  if (choice === step.answer) {
-    fb.textContent = `Correct! ✅ ${step.feedback}`;
+function checkMC(idx, choice, optsDiv, fb) {
+  const q = mcData[idx];
+  if (choice === q.answer) {
+    fb.textContent = `Correct! ✅ ${q.feedback}`;
     fb.style.color = '#4caf50';
-    document.getElementById('next-step').classList.remove('hidden');
-    document.getElementById('next-step').hidden = false;
+    mcStates[idx] = true;
   } else {
     fb.textContent = 'Incorrect.';
     fb.style.color = '#c62828';
   }
   fb.classList.remove('hidden');
   fb.hidden = false;
+  Array.from(optsDiv.children).forEach(b => b.disabled = true);
+  if (mcStates.every(Boolean)) {
+    const btn = document.getElementById('mc-continue');
+    btn.classList.remove('hidden');
+    btn.hidden = false;
+  }
 }
 
-function startPart3() {
+function buildFill() {
+  const container = document.getElementById('fill-questions');
+  container.innerHTML = '';
+  fillStates = [];
+  fillQuestions.forEach((q, idx) => {
+    fillStates.push(false);
+    const div = document.createElement('div');
+    div.className = 'rule';
+    const p = document.createElement('p');
+    p.innerText = q.prompt;
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.id = `fill-${idx}`;
+    input.size = Math.max(1, q.answer.length);
+    const btn = document.createElement('button');
+    btn.innerText = 'Check';
+    btn.addEventListener('click', () => checkFill(idx));
+    const fb = document.createElement('span');
+    fb.id = `fill-fb-${idx}`;
+    fb.className = 'hidden';
+    fb.hidden = true;
+    div.append(p, input, btn, fb);
+    container.appendChild(div);
+  });
+  document.getElementById('fill-continue').classList.add('hidden');
+  document.getElementById('fill-continue').hidden = true;
+}
+
+function checkFill(idx) {
+  const q = fillQuestions[idx];
+  const val = document.getElementById(`fill-${idx}`).value.trim();
+  const fb = document.getElementById(`fill-fb-${idx}`);
+  if (val === q.answer) {
+    fb.textContent = 'Correct!';
+    fb.style.color = '#4caf50';
+    fillStates[idx] = true;
+    document.getElementById(`fill-${idx}`).disabled = true;
+  } else {
+    fb.textContent = 'Incorrect.';
+    fb.style.color = '#c62828';
+  }
+  fb.classList.remove('hidden');
+  fb.hidden = false;
+  if (fillStates.every(Boolean)) {
+    const btn = document.getElementById('fill-continue');
+    btn.classList.remove('hidden');
+    btn.hidden = false;
+  }
+}
+
+function startExamples() {
+  document.getElementById('part1').classList.add('hidden');
+  document.getElementById('part1').hidden = true;
+  document.getElementById('part2').classList.remove('hidden');
+  document.getElementById('part2').hidden = false;
+  buildMC();
+}
+
+document.getElementById('start-examples').addEventListener('click', startExamples);
+
+document.getElementById('mc-continue').addEventListener('click', () => {
   document.getElementById('part2').classList.add('hidden');
   document.getElementById('part2').hidden = true;
   document.getElementById('part3').classList.remove('hidden');
   document.getElementById('part3').hidden = false;
+  buildFill();
+});
+
+document.getElementById('fill-continue').addEventListener('click', () => {
+  document.getElementById('part3').classList.add('hidden');
+  document.getElementById('part3').hidden = true;
+  document.getElementById('part4').classList.remove('hidden');
+  document.getElementById('part4').hidden = false;
   if (typeof showNextActivity === 'function') {
     showNextActivity('logic');
   }
-}
+});
 
 window.addEventListener('DOMContentLoaded', () => {
   // no-op placeholder to ensure script runs after DOM ready
