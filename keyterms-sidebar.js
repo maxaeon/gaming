@@ -21,6 +21,13 @@ function createKeyTermsSidebar(courseKey) {
       'Practical Wisdom',
       'Philosophical Bullshit',
       'Environmental Impact of AI'
+    ],
+    logic: [
+      'Validity',
+      'Soundness',
+      'Modus Ponens',
+      'Modus Tollens',
+      'Disjunctive Syllogism'
     ]
   };
   const terms = termMap[courseKey];
