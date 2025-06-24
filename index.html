@@ -17,8 +17,9 @@
 
   <main class="container home-container">
     <div id="topic-selector">
-      <div class="course" data-course="introPhilosophy">
+      <div class="course" id="introPhilosophy" data-course="introPhilosophy">
         <h3>Intro to Philosophy</h3>
+        <p class="course-desc">Survey major thinkers from Plato to Nietzsche.</p>
         <div class="game-links">
           <a class="button" href="argument-reconstruction/intro-philosophy.html?course=introPhilosophy" title="Arguments – Reconstruct basic arguments">Arguments</a>
           <a class="button" href="flashcards/flashcards.html?course=introPhilosophy" title="Flashcards – Study key terms">Flashcards</a>
@@ -33,8 +34,9 @@
         </div>
         <div class="course-progress"><div class="course-progress-bar"></div></div>
       </div>
-      <div class="course" data-course="criticalThinking">
+      <div class="course" id="criticalThinking" data-course="criticalThinking">
         <h3>Critical Thinking</h3>
+        <p class="course-desc">Sharpen logic and reasoning through games.</p>
         <div class="game-links">
           <a class="button" href="argument-reconstruction/critical-thinking.html?course=criticalThinking" title="Arguments – Practice logical analysis">Arguments</a>
           <a class="button" href="flashcards/flashcards.html?course=criticalThinking" title="Flashcards – Review logic terms">Flashcards</a>
@@ -49,8 +51,9 @@
         </div>
         <div class="course-progress"><div class="course-progress-bar"></div></div>
       </div>
-      <div class="course" data-course="ethics">
+      <div class="course" id="ethics" data-course="ethics">
         <h3>Ethics</h3>
+        <p class="course-desc">Examine moral theories and difficult dilemmas.</p>
         <div class="game-links">
           <a class="button" href="argument-reconstruction/ethics.html?course=ethics" title="Arguments – Evaluate moral reasoning">Arguments</a>
           <a class="button" href="flashcards/flashcards.html?course=ethics" title="Flashcards – Study ethical theories">Flashcards</a>
@@ -65,8 +68,9 @@
         </div>
         <div class="course-progress"><div class="course-progress-bar"></div></div>
       </div>
-      <div class="course" data-course="writing">
+      <div class="course" id="writing" data-course="writing">
         <h3>Writing in Philosophy</h3>
+        <p class="course-desc">Practice outlining, drafting and peer feedback.</p>
         <div class="game-links">
           <a class="button" href="writing/citation.html?course=writing" title="Citation Activity – Spot citation errors">Citation Activity</a>
           <a class="button" href="writing/brainstorm.html?course=writing" title="Mind Mapping – Generate ideas visually">Mind Mapping</a>
@@ -89,11 +93,19 @@
         <button id="quote-next" class="hidden" hidden title="Next quote">Next Quote</button>
       </div>
     </div>
+    <div id="tour-modal" class="hidden" hidden>
+      <div class="modal-content">
+        <p id="tour-text"></p>
+        <button id="tour-next">Next</button>
+      </div>
+    </div>
   </main>
 
   <footer class="site-footer">&copy; <a href="https://www.maparks.com">maxaeon</a> 2025</footer>
   <script src="utils.js"></script>
   <script src="home-review.js"></script>
   <script src="jeopardy/who-said-it.js"></script>
+  <script src="tour.js"></script>
+  <script src="page-header.js"></script>
 </body>
 </html>

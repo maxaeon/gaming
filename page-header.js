@@ -25,6 +25,26 @@ function loadHelpModal() {
     });
 }
 
+function createCourseSidebar() {
+  const sidebar = document.createElement('div');
+  sidebar.id = 'course-sidebar';
+  sidebar.classList.add('collapsed');
+  const base = document.currentScript.src.substring(0, document.currentScript.src.lastIndexOf('/'));
+  const home = base + '/index.html';
+  sidebar.innerHTML = `
+    <button id="course-toggle" aria-label="Toggle course links">\u276E</button>
+    <nav>
+      <a href="${home}#introPhilosophy">Intro</a>
+      <a href="${home}#criticalThinking">Critical</a>
+      <a href="${home}#ethics">Ethics</a>
+    </nav>`;
+  document.body.appendChild(sidebar);
+  const toggle = sidebar.querySelector('#course-toggle');
+  if (toggle) toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+  });
+}
+
 function updatePageHeader(courseKey) {
   const header = document.getElementById('page-header');
   if (!header) return;
@@ -56,4 +76,5 @@ window.addEventListener('DOMContentLoaded', () => {
   updatePageHeader(courseKey);
 
   loadHelpModal();
+  createCourseSidebar();
 });
