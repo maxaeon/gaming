@@ -270,6 +270,22 @@ body.home .course[data-course="writing"] a.button:hover {
   margin-top: 4px;
 }
 
+/* Match exam buttons to course colors */
+body.home .course[data-course="criticalThinking"] .exam-dropdown button {
+  background-color: #f44336;
+  color: #fff;
+}
+body.home .course[data-course="criticalThinking"] .exam-dropdown button:hover {
+  background-color: #d32f2f;
+}
+body.home .course[data-course="ethics"] .exam-dropdown button {
+  background-color: #2196f3;
+  color: #fff;
+}
+body.home .course[data-course="ethics"] .exam-dropdown button:hover {
+  background-color: #1976d2;
+}
+
 .game-links {
   display: flex;
   gap: 6px;
