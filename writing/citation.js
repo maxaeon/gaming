@@ -1,3 +1,39 @@
+const verifyExercises = [
+  {
+    claim: "Immanuel Kant argues that an action’s morality depends on its consequences and outcomes.",
+    trueFeedback: "Incorrect! 🚩 Kant explicitly states morality depends solely on following moral rules (categorical imperative), not consequences. Always verify such claims carefully.",
+    falseFeedback: "Correct! ✅ Kant emphasizes duty and following rules without exceptions, not consequences.",
+    verifySteps: [
+      "Check reliable philosophy textbooks (e.g., Vaughn’s Doing Ethics).",
+      "Look up Kant’s Metaphysics of Morals online (trusted source).",
+      "Confirm explicitly Kant’s arguments about morality being based on duty (categorical imperative), not outcomes."
+    ],
+    result: "Verified Result: Kant rejects consequentialism explicitly. The original claim is false."
+  },
+  {
+    claim: "Aristotle believes happiness (eudaimonia) is the highest goal in life and is achieved through virtue and reason.",
+    trueFeedback: "Correct! ✅ Aristotle indeed argues explicitly for eudaimonia—achieved by developing virtues and reason—as life's highest goal.",
+    falseFeedback: "Incorrect! 🚩 Aristotle explicitly states happiness through virtue is the highest human good. Always check claims against reliable sources.",
+    verifySteps: [
+      "Refer to Aristotle’s Nicomachean Ethics (online or textbook).",
+      "Search key terms 'eudaimonia,' 'virtue,' and 'highest good.'",
+      "Confirm explicitly Aristotle’s description of happiness as life’s ultimate goal, achieved through virtue and reason."
+    ],
+    result: "Verified Result: Aristotle explicitly defines happiness (eudaimonia) as life's highest goal, achieved by practicing virtues."
+  },
+  {
+    claim: "John Stuart Mill argues that morality should be judged by the happiness it produces for the greatest number of people.",
+    trueFeedback: "Correct! ✅ Mill explicitly argues morality should maximize happiness for the greatest number (Utilitarianism).",
+    falseFeedback: "Incorrect! 🚩 Mill clearly states morality is about maximizing overall happiness. Always explicitly verify philosophical claims.",
+    verifySteps: [
+      "Check Mill’s Utilitarianism online or in your textbook.",
+      "Search explicitly for definitions of utilitarianism, especially 'greatest happiness principle.'",
+      "Verify explicitly Mill’s position regarding morality and greatest happiness."
+    ],
+    result: "Verified Result: Mill explicitly states morality should maximize happiness for the greatest number (Utilitarianism)."
+  }
+];
+
 const citationExercises = [
   {
     type: 'in-text',
@@ -211,7 +247,80 @@ document.getElementById('citation-next').addEventListener('click', () => {
   }
 });
 
-window.addEventListener('DOMContentLoaded', buildCitation);
+// Verification Flow
+let verifyIndex = 0;
+
+function buildVerify() {
+  const ex = verifyExercises[verifyIndex];
+  document.getElementById('verify-claim').innerText = ex.claim;
+  document.getElementById('verify-feedback').classList.add('hidden');
+  document.getElementById('verify-feedback').hidden = true;
+  document.getElementById('verify-next').classList.add('hidden');
+  document.getElementById('verify-next').hidden = true;
+}
+
+function showVerifyFeedback(isTrue) {
+  const ex = verifyExercises[verifyIndex];
+  const fb = document.getElementById('verify-feedback');
+  fb.innerText = isTrue ? ex.trueFeedback : ex.falseFeedback;
+  fb.classList.remove('hidden');
+  fb.hidden = false;
+  document.getElementById('verify-next').classList.remove('hidden');
+  document.getElementById('verify-next').hidden = false;
+}
+
+function showVerifyModal() {
+  const ex = verifyExercises[verifyIndex];
+  const modal = document.getElementById('verify-modal');
+  const content = document.getElementById('verify-modal-content');
+  const list = ex.verifySteps.map(s => `<li>${s}</li>`).join('');
+  content.innerHTML = `<h2>How to Verify:</h2><ul>${list}</ul><p><strong>${ex.result}</strong></p><button id="verify-close">Close</button>`;
+  modal.classList.remove('hidden');
+  modal.hidden = false;
+  document.getElementById('verify-close').onclick = () => {
+    modal.classList.add('hidden');
+    modal.hidden = true;
+  };
+}
+
+document.getElementById('verify-true').addEventListener('click', () => showVerifyFeedback(true));
+document.getElementById('verify-false').addEventListener('click', () => showVerifyFeedback(false));
+document.getElementById('verify-check').addEventListener('click', showVerifyModal);
+
+document.getElementById('verify-next').addEventListener('click', () => {
+  verifyIndex++;
+  if (verifyIndex >= verifyExercises.length) {
+    document.getElementById('verify-exercise').classList.add('hidden');
+    document.getElementById('verify-exercise').hidden = true;
+    document.getElementById('verify-complete').classList.remove('hidden');
+    document.getElementById('verify-complete').hidden = false;
+  } else {
+    buildVerify();
+  }
+});
+
+document.getElementById('start-verify').addEventListener('click', () => {
+  document.getElementById('verify-intro').classList.add('hidden');
+  document.getElementById('verify-intro').hidden = true;
+  document.getElementById('verify-exercise').classList.remove('hidden');
+  document.getElementById('verify-exercise').hidden = false;
+  buildVerify();
+});
+
+document.getElementById('verify-proceed').addEventListener('click', () => {
+  document.getElementById('verify-complete').classList.add('hidden');
+  document.getElementById('verify-complete').hidden = true;
+  document.getElementById('citation-intro').classList.remove('hidden');
+  document.getElementById('citation-intro').hidden = false;
+  document.getElementById('citation-game').classList.remove('hidden');
+  document.getElementById('citation-game').hidden = false;
+  document.getElementById('works-cited-examples').classList.remove('hidden');
+  document.getElementById('works-cited-examples').hidden = false;
+  document.getElementById('in-text-examples').classList.remove('hidden');
+  document.getElementById('in-text-examples').hidden = false;
+  buildCitation();
+});
+
 
 document.getElementById('citation-aid-link').addEventListener('click', () => {
   window.open('citation-aid.html', '_blank');

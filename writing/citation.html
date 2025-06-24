@@ -13,9 +13,30 @@
   </nav>
   <header id="page-header" data-default-course="writing">Course • Activity</header>
   <div class="container">
-    <h1>Citation Practice</h1>
-    <p class="instructions">Accurate citations help readers locate your sources, strengthen your credibility, and prevent plagiarism. Philosophical writing relies heavily on accurate referencing. This activity practices MLA in-text and Works Cited formatting. Other citation styles may be preferred in different contexts, so always follow your assignment guidelines.</p>
-    <div id="citation-game">
+    <h1>Source Savvy</h1>
+    <section id="verify-intro">
+      <p>Welcome to Claim Verification! In philosophy, it’s critical to verify that claims you make are accurate, truthful, and correctly attributed. Let's practice verifying philosophical claims interactively.</p>
+      <button id="start-verify">Start Verification Practice</button>
+    </section>
+    <section id="verify-exercise" class="hidden" hidden>
+      <p id="verify-claim"></p>
+      <div class="mc-options">
+        <button id="verify-true" class="option-btn">True ✅</button>
+        <button id="verify-false" class="option-btn">False ❌</button>
+        <button id="verify-check" class="option-btn">Verify Sources 🔍</button>
+      </div>
+      <div id="verify-feedback" class="hidden" hidden></div>
+      <button id="verify-next" class="hidden" hidden>Next</button>
+    </section>
+    <div id="verify-complete" class="hidden" hidden>
+      <p>Great work verifying these claims. Fact-checking ensures your writing is accurate. Next, practice proper citations.</p>
+      <button id="verify-proceed">Continue to Citation Practice</button>
+    </div>
+    <div id="verify-modal" class="hidden" hidden>
+      <div class="modal-content" id="verify-modal-content"></div>
+    </div>
+    <p class="instructions hidden" id="citation-intro" hidden>Accurate citations help readers locate your sources, strengthen your credibility, and prevent plagiarism. Philosophical writing relies heavily on accurate referencing. This activity practices MLA in-text and Works Cited formatting. Other citation styles may be preferred in different contexts, so always follow your assignment guidelines.</p>
+    <div id="citation-game" class="hidden" hidden>
       <p id="citation-prompt"></p>
       <button id="citation-giveup">I don't see any mistakes</button>
       <div id="citation-feedback" class="hidden" hidden></div>
@@ -41,7 +62,7 @@
     <p id="research-guide" class="hidden" hidden>Explore your own peer-reviewed sources using <a href="https://scholar.google.com" target="_blank">scholar.google.com</a> or your college library. Use the "Cite" or "Export" options to save references to tools like <a href="https://www.zotero.org" target="_blank">Zotero</a>, <a href="https://www.mendeley.com" target="_blank">Mendeley</a>, or <a href="https://endnote.com" target="_blank">EndNote</a>. For MLA guidelines see <a href="https://owl.purdue.edu" target="_blank">Purdue OWL</a>.</p>
     <button id="citation-aid-link" class="hidden" hidden>Citation Guide</button>
 
-    <section id="works-cited-examples">
+    <section id="works-cited-examples" class="hidden" hidden>
       <div class="correct-format">
         <h2>Correct Format</h2>
         <pre>
@@ -58,7 +79,7 @@ Clark, Mary. "An Article." <i>Journal of Examples</i>, vol. 12, no. 3, 2019, pp.
       </div>
     </section>
 
-    <section id="in-text-examples">
+    <section id="in-text-examples" class="hidden" hidden>
       <div class="correct-format">
         <h2>Correct In-Text</h2>
         <pre>
