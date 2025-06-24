@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Φ interactive</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html"><img id="site-icon" src="../icon.png" alt="Φ interactive icon"></a>
+  </nav>
+  <header id="page-header" data-default-course="logic">Course • Activity</header>
+  <div class="container">
+    <h1>Symbolization Basics</h1>
+    <p class="instructions">Review the main logical connectives and practice symbolizing statements.</p>
+
+    <h2>Connectives</h2>
+    <table class="truth-table">
+      <tr><th>P</th><th>¬P</th></tr>
+      <tr><td>T</td><td>F</td></tr>
+      <tr><td>F</td><td>T</td></tr>
+    </table>
+    <table class="truth-table">
+      <tr><th>P</th><th>Q</th><th>P ∧ Q</th></tr>
+      <tr><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>T</td><td>F</td><td>F</td></tr>
+      <tr><td>F</td><td>T</td><td>F</td></tr>
+      <tr><td>F</td><td>F</td><td>F</td></tr>
+    </table>
+    <table class="truth-table">
+      <tr><th>P</th><th>Q</th><th>P ∨ Q</th></tr>
+      <tr><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>T</td><td>F</td><td>T</td></tr>
+      <tr><td>F</td><td>T</td><td>T</td></tr>
+      <tr><td>F</td><td>F</td><td>F</td></tr>
+    </table>
+    <table class="truth-table">
+      <tr><th>P</th><th>Q</th><th>P → Q</th></tr>
+      <tr><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>T</td><td>F</td><td>F</td></tr>
+      <tr><td>F</td><td>T</td><td>T</td></tr>
+      <tr><td>F</td><td>F</td><td>T</td></tr>
+    </table>
+    <table class="truth-table">
+      <tr><th>P</th><th>Q</th><th>P ↔ Q</th></tr>
+      <tr><td>T</td><td>T</td><td>T</td></tr>
+      <tr><td>T</td><td>F</td><td>F</td></tr>
+      <tr><td>F</td><td>T</td><td>F</td></tr>
+      <tr><td>F</td><td>F</td><td>T</td></tr>
+    </table>
+
+    <h2>Symbolization Practice</h2>
+    <div class="symbolize mc-question" data-answer="R → W">
+      <p>If it rains, then the ground is wet.</p>
+      <div class="mc-options">
+        <button class="option-btn">R → W</button>
+        <button class="option-btn">R ∧ W</button>
+        <button class="option-btn">R ∨ W</button>
+      </div>
+      <div class="mc-feedback hidden" hidden></div>
+    </div>
+    <div class="symbolize mc-question" data-answer="S ∨ F">
+      <p>Either I study or I fail.</p>
+      <div class="mc-options">
+        <button class="option-btn">S ∧ F</button>
+        <button class="option-btn">S ∨ F</button>
+        <button class="option-btn">S → F</button>
+      </div>
+      <div class="mc-feedback hidden" hidden></div>
+    </div>
+    <div class="symbolize mc-question" data-answer="L ↔ U">
+      <p>The lamp is on if and only if the switch is up.</p>
+      <div class="mc-options">
+        <button class="option-btn">L ↔ U</button>
+        <button class="option-btn">L → U</button>
+        <button class="option-btn">U → L</button>
+      </div>
+      <div class="mc-feedback hidden" hidden></div>
+    </div>
+
+    <button id="start-tables">Continue to Truth Tables</button>
+  </div>
+  <script src="truth-tables.js"></script>
+  <script src="../next-activity.js"></script>
+  <script src="../page-header.js"></script>
+</body>
+</html>
