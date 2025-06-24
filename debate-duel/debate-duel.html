@@ -13,41 +13,51 @@
   </nav>
   <header id="page-header" data-default-course="criticalThinking">Course • Activity</header>
   <div class="container">
-    <div id="intro">
+    <div id="setup">
       <h1>Debate Duel</h1>
-      <p>Welcome to Debate Duel! In this interactive simulation, you'll practice critical thinking skills by engaging in structured debates. You'll choose responses, evaluate arguments, and avoid logical fallacies to out-debate your virtual opponent.</p>
-      <button id="start-btn">Start</button>
-    </div>
-    <div id="topic-select" class="hidden" hidden>
-      <h2>Select a Topic</h2>
-      <div class="game-links">
-        <button class="topic-btn" data-topic="A">Topic A: Should social media platforms regulate misinformation?</button>
-        <button class="topic-btn" data-topic="B">Topic B: Is artificial intelligence beneficial or dangerous?</button>
-        <button class="topic-btn" data-topic="C">Topic C: Should animal testing be banned in all circumstances?</button>
-        <button class="topic-btn" data-topic="D">Topic D: Should college education be tuition-free?</button>
+      <p class="instructions">Choose your stance and opponent to begin debating the topic below.</p>
+      <h2>Topic:</h2>
+      <p><em>"Social media improves public discourse."</em></p>
+      <div>
+        <label><input type="radio" name="stance" value="pro" checked> Pro</label>
+        <label><input type="radio" name="stance" value="con"> Con</label>
       </div>
+      <div style="margin-top:10px;">
+        <label><input type="radio" name="opponent" value="ai" checked> AI Opponent</label>
+        <label><input type="radio" name="opponent" value="human"> Human Opponent</label>
+      </div>
+      <button id="begin-btn">Begin Debate</button>
     </div>
+
     <div id="debate" class="hidden" hidden>
-      <h2 id="debate-title"></h2>
-      <p id="opponent"></p>
-      <div id="responses" class="mc-options"></div>
-      <p id="feedback" class="hidden" hidden></p>
-      <button id="next-round" class="hidden" hidden>Next</button>
+      <h2 id="round-label"></h2>
+      <p id="round-prompt"></p>
+      <textarea id="user-input" rows="3" style="width:90%;"></textarea><br>
+      <button id="submit-btn">Submit Statement</button>
+      <p id="opponent-response" class="hidden" hidden></p>
+      <div id="feedback" class="hidden" hidden></div>
+      <button id="next-round" class="hidden" hidden>Next Round</button>
+      <div class="course-progress"><div id="debate-progress" class="course-progress-bar"></div></div>
     </div>
-    <div id="summary" class="hidden" hidden>
+
+    <div id="score" class="hidden" hidden>
       <h2>Debate Completed!</h2>
-      <p id="summary-text"></p>
-      <section id="reflection">
-        <p>Which argument or response was the most challenging for you, and why?</p>
-        <textarea rows="3" style="width:90%;"></textarea>
-        <p>Did identifying logical fallacies help you improve your critical thinking? How?</p>
-        <textarea rows="3" style="width:90%;"></textarea>
-        <p>Describe a strategy you used successfully to construct strong, logical arguments.</p>
-        <textarea rows="3" style="width:90%;"></textarea>
-      </section>
+      <table id="score-table" style="margin:0 auto;text-align:left;"></table>
+      <button id="export-pdf">Export Transcript (PDF)</button>
+    </div>
+
+    <div id="reflection" class="hidden" hidden>
+      <h3>Reflection Questions</h3>
+      <p>After completing this debate, would you keep your original position, or change your mind? Explain why.</p>
+      <textarea rows="3" style="width:90%;"></textarea>
+      <p>Which argument was strongest from your opponent, and why?</p>
+      <textarea rows="3" style="width:90%;"></textarea>
+      <p>What could you have improved in your own argumentation?</p>
+      <textarea rows="3" style="width:90%;"></textarea>
     </div>
   </div>
   <script src="debate-duel.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="../next-activity.js"></script>
   <script src="../page-header.js"></script>
 </body>
