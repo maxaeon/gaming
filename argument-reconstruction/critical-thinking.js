@@ -22,17 +22,6 @@ const reconstructionQuestions = [
     answer: "It is raining."
   },
   {
-    argument: "Premise 1: Either Alice or Bob took the cookie.\nPremise 2: Alice didn't take the cookie.\n_____\nConclusion: Therefore, Bob took the cookie.",
-    question: "Which statement must also be true?",
-    options: [
-      "There was a cookie missing.",
-      "No one else besides Alice and Bob could have taken the cookie.",
-      "The cookie was chocolate chip.",
-      "Bob loves cookies."
-    ],
-    answer: "No one else besides Alice and Bob could have taken the cookie."
-  },
-  {
     argument: "Premise 1: Successful students usually study regularly.\n_____\nConclusion: Maria will likely succeed as a student.",
     question: "Which premise fills the gap?",
     options: [
@@ -53,17 +42,6 @@ const reconstructionQuestions = [
       "Health is important."
     ],
     answer: "Jonathan exercises regularly."
-  },
-  {
-    argument: "Premise 1: If you oversleep, you miss class.\nPremise 2: You did not oversleep.\n_____\nConclusion: Therefore, you did not miss class.",
-    question: "Which hidden premise would make the reasoning work?",
-    options: [
-      "Oversleeping is the only way to miss class.",
-      "You rarely miss class.",
-      "Class starts early.",
-      "You overslept last week."
-    ],
-    answer: "Oversleeping is the only way to miss class."
   },
   {
     argument: "Premise 1: If an animal is a bird, it has feathers.\n_____\nConclusion: Penguins have feathers.",
