@@ -60,15 +60,20 @@
     </section>
     <section id="part4" class="hidden" hidden>
       <h2>Beyond Propositional Logic</h2>
-      <p>Predicate logic analyzes the structure within statements using quantifiers, helping us express arguments that propositional logic cannot capture. Modal logic introduces notions like necessity and possibility. Categorical logic, though limited, fits into this richer framework.</p>
+      <p>Predicate logic analyzes the structure within statements using quantifiers. This allows us to express arguments that propositional logic cannot capture.</p>
       <div class="rule">All humans are mortal. <button onclick="toggleDisplay('mort')">Show</button> <span id="mort" class="hidden" hidden>∀x(Hx → Mx)</span></div>
       <div class="rule">Socrates is human. <button onclick="toggleDisplay('soc')">Show</button> <span id="soc" class="hidden" hidden>Hs</span></div>
       <div class="rule">Therefore, Socrates is mortal. <button onclick="toggleDisplay('socm')">Show</button> <span id="socm" class="hidden" hidden>Ms</span></div>
-      <p>Modal Examples:</p>
-      <div class="rule">Necessarily, bachelors are unmarried. <button onclick="toggleDisplay('bachelor')">Show</button> <span id="bachelor" class="hidden" hidden>□∀x(Bx → ¬Mx)</span></div>
-      <div class="rule">Possibly someone wins the lottery. <button onclick="toggleDisplay('lotto')">Show</button> <span id="lotto" class="hidden" hidden>◇∃x(Lx)</span></div>
-      <p>Categorical Example:</p>
+
+      <p>Modal logic introduces notions like necessity and possibility, letting us argue about what must or might be the case.</p>
+      <div class="rule">Necessarily, if the light is red then you must stop. <button onclick="toggleDisplay('modal1')">Show</button> <span id="modal1" class="hidden" hidden>□(R → S)</span></div>
+      <div class="rule">It is possible that the light is red. <button onclick="toggleDisplay('modal2')">Show</button> <span id="modal2" class="hidden" hidden>◇R</span></div>
+      <div class="rule">Therefore, it is possible that you must stop. <button onclick="toggleDisplay('modal3')">Show</button> <span id="modal3" class="hidden" hidden>◇S</span></div>
+
+      <p>Categorical logic examines how classes relate, capturing syllogisms beyond propositional variables.</p>
       <div class="rule">All mammals are animals. <button onclick="toggleDisplay('cat1')">Show</button> <span id="cat1" class="hidden" hidden>∀x(Mx → Ax)</span></div>
+      <div class="rule">All dogs are mammals. <button onclick="toggleDisplay('cat2')">Show</button> <span id="cat2" class="hidden" hidden>∀x(Dx → Mx)</span></div>
+      <div class="rule">Therefore, all dogs are animals. <button onclick="toggleDisplay('cat3')">Show</button> <span id="cat3" class="hidden" hidden>∀x(Dx → Ax)</span></div>
     </section>
     <div id="summary" class="hidden" hidden></div>
   </div>
