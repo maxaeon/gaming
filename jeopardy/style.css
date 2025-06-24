@@ -633,12 +633,10 @@ button {
   transition: transform 0.3s;
 }
 
-#quote-sidebar.collapsed {
-  transform: translate(calc(100% - 32px), -50%);
-}
-
+#quote-sidebar.collapsed,
 #keyterm-sidebar.collapsed {
-  transform: translate(calc(100% - 32px), -50%);
+  right: -228px; /* width minus visible handle */
+  transform: translateY(-50%);
 }
 
 @media (min-width: 768px) {
@@ -649,7 +647,8 @@ button {
   }
 
   #quote-sidebar.collapsed {
-    transform: translateX(calc(100% - 32px));
+    right: -228px;
+    transform: translateY(-50%);
   }
 }
 
@@ -665,11 +664,12 @@ button {
   cursor: pointer;
 }
 
-#quote-sidebar.collapsed #quote-toggle {
+#quote-sidebar.collapsed #quote-toggle,
+#keyterm-sidebar.collapsed #keyterm-toggle {
   position: fixed;
   right: 0;
-  left: auto;
 }
+
 
 #keyterm-toggle {
   position: absolute;
@@ -683,16 +683,6 @@ button {
   cursor: pointer;
   width: 32px;
   text-align: center;
-}
-
-#keyterm-sidebar.collapsed #keyterm-toggle {
-  position: fixed;
-  right: 0;
-  left: auto;
-}
-
-#quote-game {
-  margin-top: 20px;
 }
 
 #quote-text {
