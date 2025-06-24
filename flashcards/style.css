@@ -1,4 +1,5 @@
 #flashcard {
+  --flashcard-color: #9c27b0; /* default accent color */
   margin: 20px auto;
   max-width: 600px;
   position: relative;
@@ -6,6 +7,7 @@
   padding: 20px;
   border-radius: 8px;
   text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .flashcard-controls {
@@ -28,4 +30,14 @@
 body.flashcard-page .container {
   /* Add space below the fixed navbar without pushing content too far down */
   margin-top: 60px;
+}
+
+.flip-card-front,
+.flip-card-back {
+  background: var(--flashcard-color);
+  border: 1px solid var(--flashcard-color);
+}
+
+#flashcard button {
+  background-color: var(--flashcard-color);
 }
