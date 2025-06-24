@@ -35,8 +35,9 @@ function buildTruthTable(containerId, vars, formulaLabel, compute) {
   for (let i = 0; i < rows; i++) {
     const tr = document.createElement('tr');
     const assignment = {};
+    const index = rows - 1 - i;
     vars.forEach((v, idx) => {
-      const bit = (i >> (vars.length - idx - 1)) & 1;
+      const bit = (index >> (vars.length - idx - 1)) & 1;
       assignment[v] = !!bit;
       const td = document.createElement('td');
       td.textContent = bit ? 'T' : 'F';
@@ -92,8 +93,9 @@ function buildValidityTable(containerId, vars, premises, conclusion) {
   for (let i = 0; i < rows; i++) {
     const tr = document.createElement('tr');
     const assign = {};
+    const index = rows - 1 - i;
     vars.forEach((v, idx) => {
-      const bit = (i >> (vars.length - idx - 1)) & 1;
+      const bit = (index >> (vars.length - idx - 1)) & 1;
       assign[v] = !!bit;
       const td = document.createElement('td');
       td.textContent = bit ? 'T' : 'F';
@@ -177,9 +179,9 @@ function setupTables() {
   if (!document.getElementById('table-1')) return;
   buildTruthTable('table-1', ['P'], 'P ∨ ¬P', a => a.P || !a.P);
   buildTruthTable('table-2', ['P'], 'P ∧ ¬P', a => a.P && !a.P);
-  buildTruthTable('table-3', ['P','Q'], 'P → Q', a => !a.P || a.Q);
+  buildTruthTable('table-3', ['P','Q'], 'P ⊃ Q', a => !a.P || a.Q);
   buildValidityTable('validity', ['P','Q'], [
-    {label: 'P → Q', compute: a => !a.P || a.Q},
+    {label: 'P ⊃ Q', compute: a => !a.P || a.Q},
     {label: 'P', compute: a => a.P}
   ], {label: 'Q', compute: a => a.Q});
   const back = document.getElementById('back-symbolization');
