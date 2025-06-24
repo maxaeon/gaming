@@ -24,7 +24,3 @@
 .flip-card {
   cursor: pointer;
 }
-
-body.flashcard-page .container {
-  margin-top: 40px;
-}
