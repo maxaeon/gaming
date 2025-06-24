@@ -597,6 +597,12 @@ button {
   text-decoration: none;
 }
 
+/* Hide sidebar visually but keep it in the DOM for screen readers */
+#course-sidebar.visually-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 #quote-sidebar {
   position: fixed;
   right: 0;
