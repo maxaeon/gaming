@@ -106,5 +106,13 @@ if (sidebar && toggleBtn) {
     else clearTimeout(hideTimeout);
   });
 
+  sidebar.addEventListener('click', () => {
+    if (sidebar.classList.contains('collapsed')) {
+      sidebar.classList.remove('collapsed');
+      toggleBtn.innerHTML = '&#x276F;';
+      scheduleHide();
+    }
+  });
+
   scheduleHide();
 }
