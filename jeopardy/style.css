@@ -546,8 +546,7 @@ button {
 #course-sidebar {
   position: fixed;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 60px;
   background: #1e1e1e;
   border-right: 2px solid #7b1fa2;
   padding: 10px;
@@ -557,24 +556,22 @@ button {
 }
 
 #course-sidebar.collapsed {
-  transform: translate(calc(-100% + 32px), -50%);
+  transform: translateX(calc(-100% + 40px));
 }
 
 @media (min-width: 768px) {
   #course-sidebar {
-    bottom: 0;
-    top: auto;
-    transform: none;
+    top: 60px;
   }
 
   #course-sidebar.collapsed {
-    transform: translateX(calc(-100% + 32px));
+    transform: translateX(calc(-100% + 40px));
   }
 }
 
 #course-toggle {
   position: absolute;
-  right: -32px;
+  right: -40px;
   top: 10px;
   background: #9c27b0;
   color: #ffeb3b;
@@ -582,7 +579,7 @@ button {
   border-radius: 0 6px 6px 0;
   padding: 6px;
   cursor: pointer;
-  width: 32px;
+  width: 40px;
   text-align: center;
 }
 
