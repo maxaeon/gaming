@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Φ interactive</title>
+  <script>
+    (function() {
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('topic') && p.get('exam')) {
+        document.documentElement.classList.add('review');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="../favicon.png" type="image/png">
 </head>
