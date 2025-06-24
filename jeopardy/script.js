@@ -5,6 +5,17 @@ let players = [];
 let currentPlayerIndex = 0;
 let maxPossibleScore = 0;
 
+function buildChoices(correct) {
+  const answers = Object.values(currentQuestions)
+    .flat()
+    .map(q => q.answer);
+  const others = answers.filter(a => a !== correct);
+  shuffle(others);
+  const choices = others.slice(0, 3).concat(correct);
+  shuffle(choices);
+  return choices;
+}
+
 const vulgarWords = ['fuck', 'shit', 'bitch', 'asshole', 'dick', 'crap'];
 function containsVulgarity(text) {
   return new RegExp(`\\b(${vulgarWords.join('|')})\\b`, 'i').test(text);
@@ -136,59 +147,41 @@ function showQuestion(questionObj, cell) {
   const modal = document.getElementById('question-modal');
   modal.classList.remove('hidden');   modal.hidden = false;
   document.getElementById('question-text').innerText = questionObj.question;
-  document.getElementById('user-answer').value = '';
-  document.getElementById('correct-answer').innerText = `Correct Answer: ${questionObj.answer}`;
-  const userField = document.getElementById('user-answer');
-  const submitBtn = document.getElementById('submit-answer');
+
   const cancelBtn = document.getElementById('cancel-btn');
-  const submittedAnswerEl = document.getElementById('submitted-answer');
-  const awardControls = document.getElementById('award-controls');
-  const awardYes = document.getElementById('award-yes');
-  const awardNo = document.getElementById('award-no');
-  const modalContent = document.getElementById('modal-content');
+  const optionsDiv = document.getElementById('question-options');
+  const feedback = document.getElementById('question-feedback');
+  const nextBtn = document.getElementById('question-next');
 
-  userField.classList.remove('hidden');   userField.hidden = false;
-  submitBtn.classList.remove('hidden');   submitBtn.hidden = false;
-  cancelBtn.classList.remove('hidden');   cancelBtn.hidden = false;
-  submittedAnswerEl.classList.add('hidden');   submittedAnswerEl.hidden = true;
-  awardControls.classList.add('hidden');   awardControls.hidden = true;
-  document.getElementById('correct-answer').classList.add('hidden');   document.getElementById('correct-answer').hidden = true;
+  optionsDiv.innerHTML = '';
+  feedback.classList.add('hidden');   feedback.hidden = true;
+  nextBtn.classList.add('hidden');   nextBtn.hidden = true;
 
-  submitBtn.onclick = () => {
-    const userAns = userField.value.trim();
-    let display = userAns || '[No answer]';
-    if (containsVulgarity(userAns)) {
-      display += ' \u2014 Just a friendly note: vulgar language rarely earns academic style points!';
-    }
-    submittedAnswerEl.innerText = `Your answer: ${display}`;
-    submittedAnswerEl.classList.remove('hidden');     submittedAnswerEl.hidden = false;
-    document.getElementById('correct-answer').classList.remove('hidden');     document.getElementById('correct-answer').hidden = false;
-    submitBtn.classList.add('hidden');     submitBtn.hidden = true;
-    userField.classList.add('hidden');     userField.hidden = true;
-    cancelBtn.classList.add('hidden');     cancelBtn.hidden = true;
-    awardControls.classList.remove('hidden');     awardControls.hidden = false;
-
-    awardYes.onclick = () => {
-      modalContent.classList.add('answer-correct');
-      document.getElementById('question-modal').classList.add('fade-out');
-      setTimeout(() => {
+  buildChoices(questionObj.answer).forEach(ans => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerText = ans;
+    btn.onclick = () => {
+      Array.from(optionsDiv.children).forEach(b => b.disabled = true);
+      if (ans === questionObj.answer) {
+        feedback.innerText = 'Correct!';
+        feedback.style.color = '#4caf50';
         const current = players[currentPlayerIndex];
         current.score += questionObj.points;
         updateScoreboard();
-        closeQuestionModal();
-      }, 400);
+      } else {
+        feedback.innerText = `Nope, the correct answer is ${questionObj.answer}.`;
+        feedback.style.color = '#c62828';
+      }
+      feedback.classList.remove('hidden');   feedback.hidden = false;
+      nextBtn.classList.remove('hidden');   nextBtn.hidden = false;
     };
+    optionsDiv.appendChild(btn);
+  });
 
-    awardNo.onclick = () => {
-      modalContent.classList.add('answer-wrong');
-      document.getElementById('question-modal').classList.add('fade-out');
-      setTimeout(() => {
-        closeQuestionModal();
-      }, 400);
-    };
-  };
-
+  cancelBtn.classList.remove('hidden');   cancelBtn.hidden = false;
   cancelBtn.onclick = () => cancelQuestion(cell);
+  nextBtn.onclick = () => closeQuestionModal();
 }
 
 function closeQuestionModal() {
@@ -199,8 +192,9 @@ function closeQuestionModal() {
   modalContent.classList.remove('answer-correct', 'answer-wrong');
   document.getElementById('correct-answer').classList.add('hidden');   document.getElementById('correct-answer').hidden = true;
   document.getElementById('cancel-btn').classList.add('hidden');   document.getElementById('cancel-btn').hidden = true;
-  document.getElementById('submitted-answer').classList.add('hidden');   document.getElementById('submitted-answer').hidden = true;
-  document.getElementById('award-controls').classList.add('hidden');   document.getElementById('award-controls').hidden = true;
+  document.getElementById('question-options').innerHTML = '';
+  document.getElementById('question-feedback').classList.add('hidden');   document.getElementById('question-feedback').hidden = true;
+  document.getElementById('question-next').classList.add('hidden');   document.getElementById('question-next').hidden = true;
   remainingQuestions--;
   const progressEl = document.getElementById('progress');
   if (progressEl && totalQuestions > 0) {
@@ -223,9 +217,10 @@ function closeQuestionModal() {
 function cancelQuestion(cell) {
   document.getElementById('question-modal').classList.add('hidden');   document.getElementById('question-modal').hidden = true;
   document.getElementById('correct-answer').classList.add('hidden');   document.getElementById('correct-answer').hidden = true;
-  document.getElementById('submitted-answer').classList.add('hidden');   document.getElementById('submitted-answer').hidden = true;
-  document.getElementById('award-controls').classList.add('hidden');   document.getElementById('award-controls').hidden = true;
   document.getElementById('cancel-btn').classList.add('hidden');   document.getElementById('cancel-btn').hidden = true;
+  document.getElementById('question-options').innerHTML = '';
+  document.getElementById('question-feedback').classList.add('hidden');   document.getElementById('question-feedback').hidden = true;
+  document.getElementById('question-next').classList.add('hidden');   document.getElementById('question-next').hidden = true;
   cell.classList.remove('hidden');   cell.hidden = false;
 }
 

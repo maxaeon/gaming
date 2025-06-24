@@ -518,6 +518,15 @@ button {
   color: black;
 }
 
+#question-feedback {
+  margin-top: 10px;
+}
+
+#question-next {
+  background: #ba68c8;
+  color: black;
+}
+
 .mc-options {
   display: flex;
   flex-direction: row;
