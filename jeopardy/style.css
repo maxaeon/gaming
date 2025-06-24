@@ -1196,3 +1196,29 @@ button {
   flex-wrap: nowrap;
   align-items: flex-start;
 }
+
+/* Truth tables */
+.truth-table {
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+.truth-table th,
+.truth-table td {
+  border: 1px solid #fff;
+  padding: 4px 8px;
+  text-align: center;
+}
+
+.truth-table td.editable {
+  background: #263238;
+  cursor: pointer;
+}
+
+.feedback {
+  margin-top: 10px;
+}
+
+.tt-section {
+  margin-bottom: 20px;
+}
