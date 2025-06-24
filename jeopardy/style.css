@@ -560,6 +560,8 @@ button {
   border-radius: 0 6px 6px 0;
   padding: 6px;
   cursor: pointer;
+  width: 32px;
+  text-align: center;
 }
 
 #course-sidebar nav {
@@ -651,6 +653,8 @@ button {
   border-radius: 6px 0 0 6px;
   padding: 6px;
   cursor: pointer;
+  width: 32px;
+  text-align: center;
 }
 
 #quote-game {

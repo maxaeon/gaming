@@ -32,7 +32,7 @@ function createCourseSidebar() {
   const base = document.currentScript.src.substring(0, document.currentScript.src.lastIndexOf('/'));
   const home = base + '/index.html';
   sidebar.innerHTML = `
-    <button id="course-toggle" aria-label="Toggle course links">\u276E</button>
+    <button id="course-toggle" aria-label="Toggle course links">&lsaquo;</button>
     <nav>
       <a href="${home}#introPhilosophy">Intro</a>
       <a href="${home}#criticalThinking">Critical</a>
@@ -42,7 +42,8 @@ function createCourseSidebar() {
   document.body.appendChild(sidebar);
   const toggle = sidebar.querySelector('#course-toggle');
   if (toggle) toggle.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
+    const collapsed = sidebar.classList.toggle('collapsed');
+    toggle.innerHTML = collapsed ? '&lsaquo;' : '&rsaquo;';
   });
 }
 
