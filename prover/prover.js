@@ -47,11 +47,17 @@ const examples = [
   }
 ];
 
+const tiles = ['P','Q','R','∧','∨','→','¬','↔'];
+
 const fillQuestions = [
-  {prompt: 'From P and Q, derive P ___ Q (enter the connective).', answer: '∧'},
-  {prompt: 'Given P→Q and P, fill in the conclusion:', answer: 'Q'},
-  {prompt: 'From P∨Q and ¬P, conclude:', answer: 'Q'},
-  {prompt: 'If P→(Q→R) and P∧Q, the final derived letter is:', answer: 'R'}
+  {prompt: 'Combine P and Q with conjunction: P ___ Q', answers: ['∧']},
+  {prompt: 'Combine P and Q with disjunction: P ___ Q', answers: ['∨']},
+  {prompt: 'Negate P: ___P', answers: ['¬']},
+  {prompt: 'Form the conditional from P to Q: P ___ Q', answers: ['→']},
+  {prompt: 'State that P iff Q: P ___ Q', answers: ['↔']},
+  {prompt: 'Given P→Q and P, derive ___', answers: ['Q']},
+  {prompt: 'From P∨Q and ¬P, conclude ___', answers: ['Q']},
+  {prompt: 'If P→(Q→R) and P∧Q, the final derived letter is ___', answers: ['R']}
 ];
 
 let mcStates = [];
@@ -135,6 +141,21 @@ function checkMC(idx, choice, optsDiv, fb) {
   }
 }
 
+function buildTiles() {
+  const bank = document.getElementById('tile-bank');
+  bank.innerHTML = '';
+  tiles.forEach(sym => {
+    const span = document.createElement('span');
+    span.className = 'tile';
+    span.textContent = sym;
+    span.draggable = true;
+    span.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', sym);
+    });
+    bank.appendChild(span);
+  });
+}
+
 function buildFill() {
   const container = document.getElementById('fill-questions');
   container.innerHTML = '';
@@ -144,34 +165,49 @@ function buildFill() {
     const div = document.createElement('div');
     div.className = 'rule';
     const p = document.createElement('p');
-    p.innerText = q.prompt;
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.id = `fill-${idx}`;
-    input.size = Math.max(1, q.answer.length);
-    const btn = document.createElement('button');
-    btn.innerText = 'Check';
-    btn.addEventListener('click', () => checkFill(idx));
+    const parts = q.prompt.split('___');
+    parts.forEach((part, i) => {
+      p.appendChild(document.createTextNode(part));
+      if (i < q.answers.length) {
+        const box = document.createElement('span');
+        box.className = 'drop-box';
+        box.dataset.idx = idx;
+        box.dataset.answer = q.answers[i];
+        box.addEventListener('dragover', e => e.preventDefault());
+        box.addEventListener('drop', handleDropFill);
+        p.appendChild(box);
+      }
+    });
     const fb = document.createElement('span');
     fb.id = `fill-fb-${idx}`;
     fb.className = 'hidden';
     fb.hidden = true;
-    div.append(p, input, btn, fb);
+    div.append(p, fb);
     container.appendChild(div);
   });
   document.getElementById('fill-continue').classList.add('hidden');
   document.getElementById('fill-continue').hidden = true;
+  buildTiles();
+}
+
+function handleDropFill(e) {
+  e.preventDefault();
+  const sym = e.dataTransfer.getData('text/plain');
+  if (!sym) return;
+  e.target.textContent = sym;
+  checkFill(parseInt(e.target.dataset.idx));
 }
 
 function checkFill(idx) {
   const q = fillQuestions[idx];
-  const val = document.getElementById(`fill-${idx}`).value.trim();
+  const boxes = document.querySelectorAll(`.drop-box[data-idx='${idx}']`);
+  const answers = Array.from(boxes).map(b => b.textContent.trim());
   const fb = document.getElementById(`fill-fb-${idx}`);
-  if (val === q.answer) {
+  if (answers.every((a, i) => a === q.answers[i])) {
     fb.textContent = 'Correct!';
     fb.style.color = '#4caf50';
     fillStates[idx] = true;
-    document.getElementById(`fill-${idx}`).disabled = true;
+    boxes.forEach(b => b.classList.add('correct'));
   } else {
     fb.textContent = 'Incorrect.';
     fb.style.color = '#c62828';
