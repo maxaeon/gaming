@@ -255,18 +255,26 @@ document.getElementById('scoreboard').addEventListener('click', (e) => {
 
 const copyBtn = document.getElementById('copy-link');
 if (copyBtn) {
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(window.location.href);
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+    } catch (err) {
+      alert('Failed to copy link.');
+    }
   });
 }
 
 const shareBtn = document.getElementById('web-share');
 if (shareBtn) {
-  shareBtn.addEventListener('click', () => {
-    if (navigator.share) {
-      navigator.share({ url: window.location.href });
-    } else if (copyBtn) {
-      navigator.clipboard.writeText(window.location.href);
+  shareBtn.addEventListener('click', async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({ url: window.location.href });
+      } else if (copyBtn) {
+        await navigator.clipboard.writeText(window.location.href);
+      }
+    } catch (err) {
+      alert('Failed to share link.');
     }
   });
 }
