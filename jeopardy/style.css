@@ -266,10 +266,12 @@ body.home .course[data-course="writing"] h3 {
 
 body.home .course[data-course="writing"] a.button {
   background-color: #424242;
+  color: #fff;
 }
 
 body.home .course[data-course="writing"] a.button:hover {
   background-color: #616161;
+  color: #fff;
 }
 
 .exam-dropdown {
