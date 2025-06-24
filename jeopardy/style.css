@@ -889,8 +889,9 @@ button {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* allow content area to fill the card height */
+  justify-content: flex-start;
+  align-items: stretch;
   text-align: center;
 }
 
@@ -919,6 +920,10 @@ button {
 #flashcard-answer {
   /* Slightly larger text for better readability */
   font-size: 1.4em;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #trivia-game,
