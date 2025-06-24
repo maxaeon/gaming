@@ -44,7 +44,7 @@ Additional pages include:
 - `argument-reconstruction/intro-philosophy.html` – analyze classic philosophical arguments
 - `chatbots/ethics-chat.html` – lightweight rotating chat with famous ethicists
 - `chatbots/intro-philosophy-chat.html` – interactive chat with ancient Greek philosophers
-- `writing/citation.html` – citation activity focused on MLA style
+- `writing/citation.html` – citation practice focused on MLA style
 - `writing/brainstorm.html` – build mind-map clusters for brainstorming
 - `writing/outlining.html` – outline builder for critiquing moral absolutism
 - `writing/thesis-evaluation.html` – evaluate and revise a thesis draft
