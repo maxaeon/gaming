@@ -504,7 +504,7 @@ button {
 }
 
 #course-sidebar.collapsed {
-  transform: translate(-100%, -50%);
+  transform: translate(calc(-100% + 32px), -50%);
 }
 
 @media (min-width: 768px) {
@@ -515,7 +515,7 @@ button {
   }
 
   #course-sidebar.collapsed {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% + 32px));
   }
 }
 
@@ -573,11 +573,11 @@ button {
 }
 
 #quote-sidebar.collapsed {
-  transform: translate(100%, -50%);
+  transform: translate(calc(100% - 32px), -50%);
 }
 
 #keyterm-sidebar.collapsed {
-  transform: translate(100%, -50%);
+  transform: translate(calc(100% - 32px), -50%);
 }
 
 @media (min-width: 768px) {
@@ -588,7 +588,7 @@ button {
   }
 
   #quote-sidebar.collapsed {
-    transform: translateX(100%);
+    transform: translateX(calc(100% - 32px));
   }
 }
 
