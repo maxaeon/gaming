@@ -573,7 +573,7 @@ button {
 }
 
 #quote-sidebar.collapsed {
-  transform: translate(calc(100% - 32px), -50%);
+  transform: translate(100%, -50%);
 }
 
 #keyterm-sidebar.collapsed {
@@ -588,7 +588,7 @@ button {
   }
 
   #quote-sidebar.collapsed {
-    transform: translateX(calc(100% - 32px));
+    transform: translateX(100%);
   }
 }
 
@@ -602,6 +602,12 @@ button {
   border-radius: 6px 0 0 6px;
   padding: 6px;
   cursor: pointer;
+}
+
+#quote-sidebar.collapsed #quote-toggle {
+  position: fixed;
+  right: 0;
+  left: auto;
 }
 
 #keyterm-toggle {
