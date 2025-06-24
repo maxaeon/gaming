@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Φ Gaming</title>
+  <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+<body>
+  <nav id="top-nav">
+    <a id="home-link" href="../index.html">Gaming Philosophy Class</a>
+  </nav>
+  <header id="page-header" data-default-course="writing">Course • Activity</header>
+  <div class="container">
+    <h1>AI or Nay-I? Evaluating AI Writing</h1>
+
+    <section id="intro">
+      <p>Explore how artificial intelligence can help or hinder philosophical writing. Frankfurt defines <em>bullshit</em> as language offered without regard for its truth. AI tools can produce impressive but empty text if we are not careful.</p>
+      <button class="next-btn" data-next="case-study">Start</button>
+    </section>
+
+    <section id="case-study" class="hidden" hidden>
+      <h2>Case Study: The Kant Paper</h2>
+      <div class="paper-block">
+        <h3>Paper A (AI-assisted)</h3>
+        <p>Immanuel Kant's theories resonate profoundly across humanity, deeply challenging moral landscapes with universal aspirations. Morality's profundity cannot be overstated, as ethical principles reverberate within societal fabrics, continually shaping existential paradigms.</p>
+      </div>
+      <div class="paper-block">
+        <h3>Paper B (Better AI-assisted)</h3>
+        <p>Kant argues morality demands strict universal rules without exceptions, known as the categorical imperative (Kant, 1797/1996). While this provides clear guidance, it is overly rigid—for instance, Kant insists you must always tell the truth, even if doing so results in serious harm.</p>
+      </div>
+      <p>Which passage is clearer and more meaningful?</p>
+      <button id="choose-a">Paper A</button>
+      <button id="choose-b">Paper B</button>
+      <div id="case-feedback" class="hidden" hidden></div>
+      <button id="case-next" class="next-btn hidden" data-next="bullshit-game" hidden>Next</button>
+    </section>
+
+    <section id="bullshit-game" class="hidden" hidden>
+      <h2>Bullshit or Brilliant?</h2>
+      <p id="bs-text"></p>
+      <button id="bs-btn">Bullshit</button>
+      <button id="br-btn">Brilliant</button>
+      <div id="bs-feedback" class="hidden" hidden></div>
+      <button id="bs-next" class="hidden" hidden>Next Example</button>
+      <button id="bs-finish" class="next-btn hidden" data-next="environment" hidden>Continue</button>
+    </section>
+
+    <section id="environment" class="hidden" hidden>
+      <h2>Environmental Awareness Check</h2>
+      <p>Did you know? Training large AI models can emit as much carbon dioxide as several cars do in their entire lifetime.</p>
+      <p>Given this fact, how often should we rely on AI tools in our writing?</p>
+      <div>
+        <button class="env-btn" data-answer="Always">Always</button>
+        <button class="env-btn" data-answer="Sometimes">Sometimes</button>
+        <button class="env-btn" data-answer="Rarely">Rarely</button>
+        <button class="env-btn" data-answer="Never">Never</button>
+      </div>
+      <div id="env-feedback" class="hidden" hidden></div>
+      <button id="env-next" class="next-btn hidden" data-next="reflection" hidden>Next</button>
+    </section>
+
+    <section id="reflection" class="hidden" hidden>
+      <h2>Reflection</h2>
+      <ul>
+        <li>How can you tell if AI-generated text in your writing is meaningful or just bullshit?</li>
+        <li>In your future writing projects, how will you balance the convenience of AI with critical thinking and environmental responsibility?</li>
+      </ul>
+    </section>
+  </div>
+  <script src="ai-evaluation.js"></script>
+  <script src="../page-header.js"></script>
+</body>
+</html>
