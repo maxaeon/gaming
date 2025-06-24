@@ -77,22 +77,108 @@ function downloadTemplate() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
   let y = 10;
-  doc.setFontSize(14);
-  doc.text('Peer Review Form', 10, y); y += 12;
+  const pageHeight = doc.internal.pageSize.getHeight();
+
+  function check(extra = 0) {
+    if (y + extra > pageHeight - 10) {
+      doc.addPage();
+      y = 10;
+    }
+  }
+
+  function field(label) {
+    check(10);
+    doc.text(label, 10, y);
+    doc.line(60, y + 1, 200, y + 1);
+    y += 10;
+  }
+
+  function boxes(opts) {
+    check(8);
+    opts.forEach((opt, i) => {
+      const x = 10 + i * 40;
+      doc.rect(x, y - 4, 4, 4);
+      doc.text(opt, x + 6, y);
+    });
+    y += 8;
+  }
+
+  function feedback(lines) {
+    check(lines * 6 + 6);
+    doc.text('Feedback:', 10, y);
+    y += 6;
+    for (let i = 0; i < lines; i++) {
+      doc.line(10, y, 200, y);
+      y += 6;
+    }
+    y += 2;
+  }
+
+  doc.setFontSize(16);
+  doc.text('Philosophy Paper Peer Review Worksheet', 10, y);
+  y += 10;
   doc.setFontSize(12);
-  const fields = [
-    'Reviewed Text Title:',
-    'Clarity of Thesis:',
-    'Argument Development:',
-    'Use of Examples/Evidence:',
-    'Citation Accuracy:',
-    'Additional Suggestions:'
-  ];
-  fields.forEach(f => {
-    doc.text(f, 10, y); y += 8;
-    doc.line(10, y, 200, y); y += 12;
-  });
-  doc.save('peer-review-form.pdf');
+
+  ['Course Name:', 'Reviewer Name:', 'Paper Author Name:',
+   'Paper Topic/Title:', 'Date of Review:'].forEach(field);
+
+  y += 4;
+  doc.setFontSize(14);
+  doc.text('Step 1: Thesis Statement', 10, y); y += 8;
+  doc.setFontSize(12);
+  doc.text('Is the thesis statement clear, specific, and argumentative?', 10, y); y += 6;
+  boxes(['Yes', 'No', 'Partially']);
+  feedback(3);
+
+  doc.setFontSize(14);
+  doc.text('Step 2: Organization & Clarity', 10, y); y += 8;
+  doc.setFontSize(12);
+  doc.text('Does the paper have a clear logical structure?', 10, y); y += 6;
+  boxes(['Yes', 'No', 'Partially']);
+  feedback(3);
+
+  doc.setFontSize(14);
+  doc.text('Step 3: Quality of Argumentation', 10, y); y += 8;
+  doc.setFontSize(12);
+  doc.text('Does each paragraph clearly support the thesis or main claim?', 10, y); y += 6;
+  boxes(['Yes', 'No', 'Partially']);
+  doc.text('Does the author use clear evidence/examples from course texts or reputable sources?', 10, y); y += 6;
+  boxes(['Yes', 'No', 'Partially']);
+  feedback(3);
+
+  doc.setFontSize(14);
+  doc.text('Step 4: Citations and References', 10, y); y += 8;
+  doc.setFontSize(12);
+  doc.text('Are in-text citations accurate, clear, and consistently formatted (MLA/APA)?', 10, y); y += 6;
+  boxes(['Yes', 'No', 'Partially']);
+  doc.text('Are all references correctly formatted and relevant to the topic?', 10, y); y += 6;
+  boxes(['Yes', 'No', 'Partially']);
+  feedback(3);
+
+  doc.setFontSize(14);
+  doc.text('Step 5: Style, Grammar, and Readability', 10, y); y += 8;
+  doc.setFontSize(12);
+  doc.text('Is the writing clear, professional, and easy to understand?', 10, y); y += 6;
+  boxes(['Yes', 'No', 'Partially']);
+  doc.text('Are there significant grammar, spelling, or punctuation issues?', 10, y); y += 6;
+  boxes(['Yes', 'No', 'Partially']);
+  feedback(3);
+
+  doc.setFontSize(14);
+  doc.text('Step 6: Constructive Summary', 10, y); y += 8;
+  doc.setFontSize(12);
+  doc.text('Identify at least TWO strengths of the paper clearly:', 10, y); y += 6;
+  doc.text('1.', 12, y); doc.line(18, y + 1, 200, y + 1); y += 8;
+  doc.text('2.', 12, y); doc.line(18, y + 1, 200, y + 1); y += 8;
+  doc.text('Clearly list at least TWO specific areas for improvement:', 10, y); y += 6;
+  doc.text('1.', 12, y); doc.line(18, y + 1, 200, y + 1); y += 8;
+  doc.text('2.', 12, y); doc.line(18, y + 1, 200, y + 1); y += 8;
+  doc.text('Provide at least ONE concrete suggestion to help the author revise effectively:', 10, y); y += 6;
+  doc.line(10, y, 200, y); y += 8;
+  doc.line(10, y, 200, y); y += 8;
+  doc.line(10, y, 200, y); y += 8;
+
+  doc.save('peer-review-template.pdf');
 }
 
 document.getElementById('download-template').addEventListener('click', downloadTemplate);
