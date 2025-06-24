@@ -7,7 +7,7 @@ function mergeTrivia(target, source) {
 }
 
 function buildTriviaQuestions() {
-  const courses = ['introPhilosophy', 'criticalThinking', 'ethics'];
+  const courses = ['introPhilosophy', 'criticalThinking', 'ethics', 'logic'];
   const trivia = {};
 
   courses.forEach(course => {

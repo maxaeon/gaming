@@ -15,7 +15,8 @@ function showNextActivity(course) {
       label: 'Flashcards',
       url: '../flashcards/flashcards.html?course=criticalThinking'
     },
-    ethics: { label: 'Flashcards', url: '../flashcards/flashcards.html?course=ethics' }
+    ethics: { label: 'Flashcards', url: '../flashcards/flashcards.html?course=ethics' },
+    logic: { label: 'Flashcards', url: '../flashcards/flashcards.html?course=logic' }
   };
   const rec = map[course];
   const div = document.createElement('div');

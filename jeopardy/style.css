@@ -236,6 +236,25 @@ body.home .course[data-course="ethics"] a.button:hover {
   background-color: #1976d2;
 }
 
+body.home .course[data-course="logic"] {
+  background: #000;
+  border-color: #ffeb3b;
+}
+
+body.home .course[data-course="logic"] h3 {
+  color: #ffeb3b;
+}
+
+body.home .course[data-course="logic"] a.button {
+  background-color: #ffeb3b;
+  color: #000;
+}
+
+body.home .course[data-course="logic"] a.button:hover {
+  background-color: #fdd835;
+  color: #000;
+}
+
 body.home .course[data-course="writing"] {
   background: #222;
   border-color: #555;
