@@ -28,6 +28,9 @@ function loadHelpModal() {
 function updatePageHeader(courseKey) {
   const header = document.getElementById('page-header');
   if (!header) return;
+  if (!courseKey) {
+    courseKey = header.dataset.defaultCourse;
+  }
   const courseMap = {
     introPhilosophy: 'Intro to Philosophy',
     criticalThinking: 'Critical Thinking',
@@ -44,7 +47,11 @@ window.updatePageHeader = updatePageHeader;
 
 window.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
-  const courseKey = params.get('course');
+  const header = document.getElementById('page-header');
+  let courseKey = params.get('course');
+  if (!courseKey && header) {
+    courseKey = header.dataset.defaultCourse;
+  }
   const h1 = document.querySelector('.container h1');
   updatePageHeader(courseKey);
 
