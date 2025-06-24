@@ -68,6 +68,23 @@ function updatePageHeader(courseKey) {
 
 window.updatePageHeader = updatePageHeader;
 
+function addSkipLink() {
+  const link = document.createElement('a');
+  link.href = '#main';
+  link.className = 'skip-link';
+  link.textContent = 'Skip to content';
+  const first = document.body.firstChild;
+  document.body.insertBefore(link, first);
+}
+
+function ensureMainId() {
+  let main = document.getElementById('main');
+  if (!main) {
+    main = document.querySelector('main, .container');
+    if (main) main.id = 'main';
+  }
+}
+
 function initPageHeader() {
   const params = new URLSearchParams(window.location.search);
   const header = document.getElementById('page-header');
@@ -77,6 +94,9 @@ function initPageHeader() {
   }
   const h1 = document.querySelector('.container h1');
   updatePageHeader(courseKey);
+
+  ensureMainId();
+  addSkipLink();
 
   loadHelpModal();
   createCourseSidebar();
