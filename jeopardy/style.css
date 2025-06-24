@@ -1072,3 +1072,64 @@ button {
   }
 }
 
+.explain-term {
+  font-style: italic;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 1px dotted #7b1fa2;
+}
+
+.explain-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.explain-popup {
+  background: #1e1e1e;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+}
+
+.explain-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.explain-version {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
+.explain-version .version-btn {
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.explain-version .version-btn.active {
+  text-decoration: underline;
+}
+
+.explain-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
