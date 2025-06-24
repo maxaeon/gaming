@@ -1,5 +1,6 @@
 #flashcard {
   --flashcard-color: #9c27b0; /* default accent color */
+  --flashcard-bg: #d1a9e1;    /* lightened default color */
   margin: 20px auto;
   max-width: 600px;
   position: relative;
@@ -34,8 +35,9 @@ body.flashcard-page .container {
 
 .flip-card-front,
 .flip-card-back {
-  background: var(--flashcard-color);
+  background: var(--flashcard-bg);
   border: 1px solid var(--flashcard-color);
+  color: #000;
 }
 
 #flashcard button {
