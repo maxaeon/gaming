@@ -37,6 +37,7 @@ function createCourseSidebar() {
       <a href="${home}#introPhilosophy">Intro</a>
       <a href="${home}#criticalThinking">Critical</a>
       <a href="${home}#ethics">Ethics</a>
+      <a href="${home}#logic">Logic</a>
     </nav>`;
   document.body.appendChild(sidebar);
   const toggle = sidebar.querySelector('#course-toggle');
@@ -55,6 +56,7 @@ function updatePageHeader(courseKey) {
     introPhilosophy: 'Intro to Philosophy',
     criticalThinking: 'Critical Thinking',
     ethics: 'Ethics',
+    logic: 'Logic',
     writing: 'Writing'
   };
   const course = courseMap[courseKey] || (courseKey ? courseKey : 'Course');

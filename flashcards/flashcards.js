@@ -7,7 +7,7 @@ function mergeSets(target, source) {
 }
 
 function buildFlashcards() {
-  const courses = ['introPhilosophy', 'criticalThinking', 'ethics'];
+  const courses = ['introPhilosophy', 'criticalThinking', 'ethics', 'logic'];
   const flashcards = {};
 
   courses.forEach(course => {
@@ -31,6 +31,7 @@ const courseColors = {
   introPhilosophy: '#9c27b0',
   criticalThinking: '#f44336',
   ethics: '#2196f3',
+  logic: '#ffeb3b',
   writing: '#424242'
 };
 let currentCards = [];
