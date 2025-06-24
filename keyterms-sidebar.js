@@ -47,10 +47,8 @@ function createKeyTermsSidebar(courseKey) {
   });
 
   sidebar.addEventListener('click', () => {
-    if (sidebar.classList.contains('collapsed')) {
-      sidebar.classList.remove('collapsed');
-      toggle.innerHTML = '&rsaquo;';
-    }
+    const collapsed = sidebar.classList.toggle('collapsed');
+    toggle.innerHTML = collapsed ? '&lsaquo;' : '&rsaquo;';
   });
   if (typeof attachExplainHandlers === 'function') {
     attachExplainHandlers();

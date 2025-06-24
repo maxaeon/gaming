@@ -681,8 +681,8 @@ button {
 }
 
 #keyterm-sidebar.collapsed #keyterm-toggle {
-  position: absolute;
-  left: 0;
+  position: fixed;
+  right: 0;                /* match quote sidebar behavior */
 }
 
 
