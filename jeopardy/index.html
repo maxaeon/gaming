@@ -78,14 +78,11 @@
     <div id="question-modal" class="hidden" hidden role="dialog" aria-labelledby="question-text" aria-modal="true">
       <div id="modal-content">
         <p id="question-text"></p>
-        <input type="text" id="user-answer" placeholder="Type your answer here..." autocomplete="off">
-        <button id="submit-answer" title="Submit your answer">Submit</button>
+        <div id="question-options" class="mc-options"></div>
+        <div id="question-feedback" class="hidden" hidden></div>
+        <button id="question-next" class="hidden" hidden title="Next question">Next</button>
         <div id="correct-answer" class="hidden" hidden></div>
         <div id="submitted-answer" class="hidden" hidden></div>
-        <div id="award-controls" class="hidden" hidden>
-          <button id="award-yes" title="Award points for this answer">Give Points</button>
-          <button id="award-no" title="No points for this answer">No Points</button>
-        </div>
         <button id="cancel-btn" title="Cancel and close">Cancel</button>
       </div>
     </div>
