@@ -556,7 +556,27 @@ button {
   transition: transform 0.3s;
 }
 
+#keyterm-sidebar {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1e1e1e;
+  border-left: 2px solid #009688;
+  padding: 10px;
+  width: 260px;
+  max-width: 80vw;
+  max-height: 60vh;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: transform 0.3s;
+}
+
 #quote-sidebar.collapsed {
+  transform: translate(100%, -50%);
+}
+
+#keyterm-sidebar.collapsed {
   transform: translate(100%, -50%);
 }
 
@@ -577,6 +597,18 @@ button {
   left: -32px;
   top: 10px;
   background: #9c27b0;
+  color: #ffeb3b;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  padding: 6px;
+  cursor: pointer;
+}
+
+#keyterm-toggle {
+  position: absolute;
+  left: -32px;
+  top: 10px;
+  background: #009688;
   color: #ffeb3b;
   border: none;
   border-radius: 6px 0 0 6px;
@@ -1132,4 +1164,10 @@ button {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
+}
+
+#keyterm-content .explain-list {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
 }

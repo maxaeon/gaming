@@ -77,4 +77,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   loadHelpModal();
   createCourseSidebar();
+  if (typeof createKeyTermsSidebar === 'function') {
+    createKeyTermsSidebar(courseKey);
+  }
 });
