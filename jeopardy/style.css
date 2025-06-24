@@ -372,10 +372,13 @@ body.home .course[data-course="logic"] .exam-dropdown button:hover,
 /* On the homepage, arrange links in three columns and force the
    "Review Games" button to appear on its own third row */
 body.home .game-links {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+body.home .game-links .review-btn {
+  grid-column: span 3;     /* full-width row for Review Games if desired */
 }
 
 .course h3 {
