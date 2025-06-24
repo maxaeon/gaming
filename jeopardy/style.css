@@ -664,10 +664,14 @@ button {
   cursor: pointer;
 }
 
-#quote-sidebar.collapsed #quote-toggle,
-#keyterm-sidebar.collapsed #keyterm-toggle {
+#quote-sidebar.collapsed #quote-toggle {
   position: fixed;
   right: 0;
+}
+
+#keyterm-sidebar.collapsed #keyterm-toggle {
+  position: absolute;
+  left: 0;
 }
 
 
