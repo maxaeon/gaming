@@ -127,15 +127,16 @@ function buildValidityTable(containerId, vars, premises, conclusion) {
     for (let i = 0; i < rows; i++) {
       const assignment = cells[idx].assign;
       const premiseVals = premises.map(p => p.compute(assignment));
-      premiseVals.forEach(() => {
+      const allPremTrue = premiseVals.every(v => v);
+      for (let j = 0; j < premiseVals.length; j++) {
         const val = cells[idx].cell.textContent === 'T';
-        if (val !== premiseVals.shift()) correct = false;
+        if (val !== premiseVals[j]) correct = false;
         idx++;
-      });
+      }
       const conclExpected = conclusion.compute(assignment);
       const conclVal = cells[idx].cell.textContent === 'T';
       if (conclVal !== conclExpected) correct = false;
-      if (premiseVals.every(v => v) && !conclVal) valid = false;
+      if (allPremTrue && !conclVal) valid = false;
       idx++;
     }
     const msg = correct ? (valid ? 'Correct! The argument is valid.' : 'Correct! The argument is invalid.') : 'Some values are incorrect.';
