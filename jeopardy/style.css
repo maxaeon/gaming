@@ -679,6 +679,12 @@ button {
   text-align: center;
 }
 
+#keyterm-sidebar.collapsed #keyterm-toggle {
+  position: fixed;
+  right: 0;
+  left: auto;
+}
+
 #quote-game {
   margin-top: 20px;
 }
