@@ -1,5 +1,10 @@
 const timelineStart = -650;
-const timelineEnd = 2025;
+let timelineEnd = new Date().getFullYear();
+if (typeof window !== 'undefined') {
+  const params = new URLSearchParams(window.location.search);
+  const p = parseInt(params.get('endYear'), 10);
+  if (!isNaN(p)) timelineEnd = p;
+}
 
 const philosophyTimeline = [
   {
