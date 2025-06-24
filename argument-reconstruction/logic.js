@@ -1,93 +1,75 @@
 const reconstructionQuestions = [
   {
-    argument: "All humans are mortal. Socrates is human. Therefore, Socrates is mortal.",
+    argument:
+      "If it's snowing, the roads become slippery. It is snowing today. Thus, the roads are slippery.",
     question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Valid and Sound"
+    options: [
+      "Deductive: Valid and Sound",
+      "Deductive: Valid but Unsound",
+      "Deductive: Invalid",
+      "Inductive Argument"
+    ],
+    answer: "Deductive: Valid and Sound"
   },
   {
-    argument: "All birds can fly. Penguins are birds. Therefore, penguins can fly.",
+    argument:
+      "All brilliant leaders have great hair. A certain political leader claims to have great hair. Thus, he is a brilliant leader.",
     question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Valid but Unsound"
+    options: [
+      "Deductive: Valid and Sound",
+      "Deductive: Valid but Unsound",
+      "Deductive: Invalid",
+      "Inductive Argument"
+    ],
+    answer: "Deductive: Valid but Unsound"
   },
   {
-    argument: "If it rains, the street is wet. The street is wet. Therefore, it rains.",
+    argument:
+      "If Sam wins the lottery, he'll quit his job. Sam quit his job. Thus, Sam won the lottery.",
     question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Invalid"
+    options: [
+      "Deductive: Valid and Sound",
+      "Deductive: Valid but Unsound",
+      "Deductive: Invalid",
+      "Inductive Argument"
+    ],
+    answer: "Deductive: Invalid"
   },
   {
-    argument: "90% of voters polled support candidate X. Jane is a voter. Therefore, Jane probably supports candidate X.",
+    argument:
+      "Most philosophy students love puzzles. Jane is a philosophy student. Thus, Jane probably loves puzzles.",
     question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Strong and Cogent"
+    options: [
+      "Deductive: Valid and Sound",
+      "Deductive: Invalid",
+      "Inductive: Strong and Cogent",
+      "Inductive: Weak or not Cogent"
+    ],
+    answer: "Inductive: Strong and Cogent"
   },
   {
-    argument: "95% of birds observed can fly. Penguins are birds. Thus, penguins probably can fly.",
+    argument:
+      "All cats are mammals. No mammals are reptiles. Therefore, no cats are reptiles.",
     question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong but Not Cogent"],
-    answer: "Strong but Not Cogent"
+    options: [
+      "Deductive: Valid and Sound",
+      "Deductive: Valid but Unsound",
+      "Deductive: Invalid",
+      "Inductive Argument"
+    ],
+    answer: "Deductive: Valid and Sound"
   },
   {
-    argument: "All triangles have three sides. This shape is a triangle. Therefore, this shape has three sides.",
+    argument:
+      "All philosophers think. Socrates is a philosopher. Thus, Socrates thinks.",
     question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Valid and Sound"
-  },
-  {
-    argument: "All dogs can fly. Max is a dog. Thus, Max can fly.",
-    question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Valid but Unsound"
-  },
-  {
-    argument: "All humans are robots. All robots are invisible. Thus, all humans are invisible.",
-    question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Valid but Unsound"
-  },
-  {
-    argument: "If it snows, then it is cold. It is cold. Thus, it snows.",
-    question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Invalid"
-  },
-  {
-    argument: "If you are a philosopher, then you think deeply. You are not a philosopher. Thus, you don\u2019t think deeply.",
-    question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Invalid"
-  },
-  {
-    argument: "If the car runs, then the battery works. The battery doesn\u2019t work. Therefore, the car doesn\u2019t run.",
-    question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Valid and Sound"
-  },
-  {
-    argument: "If Maria is an author, she writes books. Maria writes books. Thus, Maria is an author.",
-    question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Invalid"
-  },
-  {
-    argument: "All birds swim. Sparrows are birds. Thus, sparrows swim.",
-    question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Valid but Unsound"
-  },
-  {
-    argument: "If you study, you pass the test. If you pass the test, you graduate. Thus, if you study, you graduate.",
-    question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Valid and Sound"
-  },
-  {
-    argument: "You can have cake or ice cream. You have cake. Therefore, you don\u2019t have ice cream.",
-    question: "How should this argument be evaluated?",
-    options: ["Invalid", "Valid and Sound", "Valid but Unsound", "Strong and Cogent"],
-    answer: "Invalid"
+    options: [
+      "Deductive: Valid and Sound",
+      "Deductive: Valid but Unsound",
+      "Deductive: Invalid",
+      "Inductive Argument"
+    ],
+    answer: "Deductive: Valid and Sound"
   }
 ];
 
