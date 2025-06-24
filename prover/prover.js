@@ -121,13 +121,13 @@ function checkMC(idx, choice, optsDiv, fb) {
     fb.textContent = `Correct! ✅ ${q.feedback}`;
     fb.style.color = '#4caf50';
     mcStates[idx] = true;
+    Array.from(optsDiv.children).forEach(b => b.disabled = true);
   } else {
     fb.textContent = 'Incorrect.';
     fb.style.color = '#c62828';
   }
   fb.classList.remove('hidden');
   fb.hidden = false;
-  Array.from(optsDiv.children).forEach(b => b.disabled = true);
   if (mcStates.every(Boolean)) {
     const btn = document.getElementById('mc-continue');
     btn.classList.remove('hidden');
