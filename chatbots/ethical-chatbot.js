@@ -4,8 +4,7 @@ const ethicalChatbots = {
       `Hey${userName ? ` ${userName}` : ""}! I'm a fellow philosophy student majoring in computer science. Ethics can be tricky, so I created this AI chatbot to talk directly with great moral thinkers. Let's dive in!`,
     introduceMill: "First, let's meet John Stuart Mill, who thinks morality is about maximizing happiness.",
     finalAssessment: (userName, alignmentScores) => {
-      const highest = Object.entries(alignmentScores).sort((a,b)=>b[1]-a[1])[0];
-      return `This was great${userName ? `, ${userName}` : ""}! Your ethical views align most with ${highest[0]}. Thanks for exploring ethics with me—I learned a lot too!`;
+      return `This was great${userName ? `, ${userName}` : ""}! Which parts of each philosopher's theory resonated with you? Which ideas do you disagree with? Thanks for exploring ethics with me—I learned a lot too!`;
     }
   },
 
