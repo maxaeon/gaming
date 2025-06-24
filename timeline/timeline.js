@@ -467,8 +467,22 @@ function initTimelineHover() {
         tooltip.style.opacity = 1;
         tooltip.style.left = `${percent * 100}%`;
         const displayYear = year < 0 ? `${Math.abs(year)} BCE` : year;
-        tooltip.innerHTML = `<div class="tooltip-year">${displayYear}</div>` +
-          matches.map(m => `<div class="tooltip-name" data-index="${m.idx}">${m.p.name}</div>`).join('');
+
+        // Build tooltip using DOM APIs rather than HTML strings
+        tooltip.innerHTML = '';
+        const yearDiv = document.createElement('div');
+        yearDiv.className = 'tooltip-year';
+        yearDiv.textContent = displayYear;
+        tooltip.appendChild(yearDiv);
+
+        matches.forEach(m => {
+          const nameDiv = document.createElement('div');
+          nameDiv.className = 'tooltip-name';
+          nameDiv.dataset.index = m.idx;
+          nameDiv.textContent = m.p.name;
+          tooltip.appendChild(nameDiv);
+        });
+
         lastHtml = tooltip.innerHTML;
         lastLeft = tooltip.style.left;
         lastHasMatch = true;
