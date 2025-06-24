@@ -188,6 +188,20 @@ html.review #quote-sidebar {
   overflow-y: auto;
 }
 
+body.home #topic-selector {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+body.home #topic-selector .course {
+  width: 260px;
+  margin: 8px;
+}
+
 #topic-selector button {
   background-color: #9c27b0;
   color: white;
