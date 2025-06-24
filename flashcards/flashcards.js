@@ -34,6 +34,18 @@ const courseColors = {
   logic: '#ffeb3b',
   writing: '#424242'
 };
+
+function lightenColor(hex, factor = 0.6) {
+  hex = hex.replace('#', '');
+  if (hex.length === 3) {
+    hex = hex.split('').map(c => c + c).join('');
+  }
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+  const mix = (channel) => Math.round(channel + (255 - channel) * factor);
+  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
+}
 let currentCards = [];
 let cardIndex = 0;
 
@@ -57,7 +69,10 @@ function loadCards(course, category = 'all') {
   if (!flashcards[course]) return;
   const color = courseColors[course] || '#9c27b0';
   const wrapper = document.getElementById('flashcard');
-  if (wrapper) wrapper.style.setProperty('--flashcard-color', color);
+  if (wrapper) {
+    wrapper.style.setProperty('--flashcard-color', color);
+    wrapper.style.setProperty('--flashcard-bg', lightenColor(color));
+  }
   const allCards = category === 'all'
     ? Object.values(flashcards[course]).flat()
     : (flashcards[course][category] || []);
