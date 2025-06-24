@@ -920,10 +920,6 @@ button {
 #flashcard-answer {
   /* Slightly larger text for better readability */
   font-size: 1.4em;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 #trivia-game,
@@ -944,6 +940,13 @@ button {
   top: 8px;
   right: 8px;
   z-index: 2;
+}
+
+.flashcard-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .flashcard-controls {
