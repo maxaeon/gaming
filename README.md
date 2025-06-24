@@ -51,6 +51,7 @@ Additional pages include:
 - `writing/draft-development.html` – step-by-step draft development with export options
 - `writing/peer-review.html` – practice giving constructive peer feedback
 - `writing/writing.html` – combined quick-writing challenges
+- `prover/prover.html` – Proof Lab for practicing derivations
 
 
 ## Project Structure
@@ -65,6 +66,7 @@ Additional pages include:
  - **sherlock-mystery/** – detective logic exercises
 - **chatbots/** – lightweight chat pages
 - **writing/** – short activities for philosophical writing practice
+- **prover/** – interactive derivation practice
 
 ### Custom Flashcard Sets
 
