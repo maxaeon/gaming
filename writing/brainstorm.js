@@ -55,14 +55,30 @@ function addNodeFromInput() {
   }
 }
 
+function isValidColor(value) {
+  if (/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(value.trim())) {
+    return true;
+  }
+  const s = new Option().style;
+  s.color = value;
+  return s.color !== '';
+}
+
 function editNode(li) {
   const label = li.querySelector('.label');
   const newText = prompt('Edit text', label.innerText);
   if (newText !== null) label.innerText = newText;
-  const newColor = prompt('Enter color', li.dataset.color);
+  const currentColor = li.dataset.color;
+  const newColor = prompt('Enter color', currentColor);
   if (newColor !== null) {
-    li.style.backgroundColor = newColor;
-    li.dataset.color = newColor;
+    if (isValidColor(newColor)) {
+      li.style.backgroundColor = newColor;
+      li.dataset.color = newColor;
+    } else {
+      alert('Invalid color format');
+      li.style.backgroundColor = currentColor;
+      li.dataset.color = currentColor;
+    }
   }
 }
 
