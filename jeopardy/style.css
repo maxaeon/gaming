@@ -190,15 +190,14 @@ html.review #quote-sidebar {
 
 body.home #topic-selector {
   position: static;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 12px;
   margin-top: 20px;
 }
 
 body.home #topic-selector .course {
-  width: 260px;
+  width: auto;
   margin: 8px;
 }
 
@@ -1058,6 +1057,31 @@ button {
   border: 1px solid #7b1fa2;
   border-radius: 4px;
   padding: 6px;
+}
+
+/* Responsive layout for the Writing in Philosophy page */
+body.writing-page #writing-sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 600px) {
+  body.writing-page #writing-sections {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  body.writing-page #writing-sections {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+body.writing-page #writing-sections section {
+  background: #111;
+  padding: 16px;
+  border-radius: 8px;
 }
 
 /* Flashcard flip animation */
