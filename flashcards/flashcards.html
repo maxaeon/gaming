@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Φ Gaming</title>
   <link rel="stylesheet" href="../jeopardy/style.css">
+  <link rel="stylesheet" href="style.css">
   <link rel="icon" href="../favicon.png" type="image/png">
 </head>
 <body>
@@ -22,29 +23,25 @@
     </div>
 
     <div id="flashcard" class="hidden" hidden tabindex="0">
+      <button class="flashcard-close" type="button">X</button>
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <button class="flashcard-close" type="button">X</button>
             <div class="flashcard-content">
               <p id="flashcard-question"></p>
             </div>
-            <div class="flashcard-controls">
-              <button class="prev-card">Prev Card</button>
-              <button class="next-card">Next Card</button>
-            </div>
           </div>
           <div class="flip-card-back">
-            <button class="flashcard-close" type="button">X</button>
             <div class="flashcard-content">
               <p id="flashcard-answer" class="hidden" hidden></p>
             </div>
-            <div class="flashcard-controls">
-              <button class="prev-card">Prev Card</button>
-              <button class="next-card">Next Card</button>
-            </div>
           </div>
         </div>
+      </div>
+      <div class="flashcard-controls">
+        <button class="prev-card" type="button">Prev</button>
+        <button class="flip-card-btn" type="button">Flip</button>
+        <button class="next-card" type="button">Next</button>
       </div>
     </div>
   </div>

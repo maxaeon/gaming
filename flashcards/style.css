@@ -1,0 +1,26 @@
+#flashcard {
+  margin: 20px auto;
+  max-width: 600px;
+  position: relative;
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.flashcard-controls {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.flashcard-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.flip-card {
+  cursor: pointer;
+}

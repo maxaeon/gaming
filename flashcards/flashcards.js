@@ -164,6 +164,10 @@ document.querySelectorAll('.next-card').forEach(btn => {
 document.querySelectorAll('.prev-card').forEach(btn => {
   btn.addEventListener('click', e => { e.stopPropagation(); prevCard(); });
 });
+const flipBtn = document.querySelector('.flip-card-btn');
+if (flipBtn) {
+  flipBtn.addEventListener('click', e => { e.stopPropagation(); toggleFlip(); });
+}
 document.querySelectorAll('.flashcard-close').forEach(btn => {
   btn.addEventListener('click', e => {
     e.stopPropagation();
