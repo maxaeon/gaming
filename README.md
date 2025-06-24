@@ -11,7 +11,6 @@ This repository contains a set of lightweight browser games that let you review 
 - Single-player mode lets you enter your name, displayed next to your score
 - Simple flashcards page for quick review
 - Multiple-choice trivia game for each course
- - Sherlock Holmes Mystery and What's Missing? mini-games to practice argument analysis
 - "Who Said It?" quote quiz
 - Ethics Chat page with rotating philosopher perspectives
 - Intro Philosophy Chat covering ancient Greek thinkers
