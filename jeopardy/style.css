@@ -858,7 +858,8 @@ button {
   width: 100%;
   max-width: 600px;
   margin: 0 auto 20px;
-  min-height: 260px;
+  /* Increased min-height to better accommodate longer questions */
+  min-height: 40vh;
 }
 
 .flip-card-inner {
@@ -889,6 +890,8 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .flip-card-back {
@@ -910,6 +913,12 @@ button {
 #flashcard p,
 #trivia-question {
   font-size: 1.2em;
+}
+
+#flashcard-question,
+#flashcard-answer {
+  /* Slightly larger text for better readability */
+  font-size: 1.4em;
 }
 
 #trivia-game,
