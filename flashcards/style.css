@@ -24,3 +24,8 @@
 .flip-card {
   cursor: pointer;
 }
+
+body.flashcard-page .container {
+  /* Add space below the fixed navbar without pushing content too far down */
+  margin-top: 60px;
+}
