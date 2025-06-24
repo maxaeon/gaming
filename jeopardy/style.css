@@ -147,6 +147,12 @@ body.home {
   color: #e0e0e0;
 }
 
+html.review #instructions,
+html.review #topic-selector,
+html.review #quote-sidebar {
+  display: none;
+}
+
 #topic-selector {
   display: flex;
   flex-direction: column;
