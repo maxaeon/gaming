@@ -179,7 +179,7 @@ function setupTables() {
   if (!document.getElementById('table-1')) return;
   buildTruthTable('table-1', ['P'], 'P ∨ ¬P', a => a.P || !a.P);
   buildTruthTable('table-2', ['P'], 'P ∧ ¬P', a => a.P && !a.P);
-  buildTruthTable('table-3', ['P','Q'], 'P ⊃ Q', a => !a.P || a.Q);
+  buildTruthTable('table-3', ['P','Q'], '¬(P ∧ Q)', a => !(a.P && a.Q));
   buildValidityTable('validity', ['P','Q'], [
     {label: 'P ⊃ Q', compute: a => !a.P || a.Q},
     {label: 'P', compute: a => a.P}
