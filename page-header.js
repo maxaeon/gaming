@@ -1,8 +1,14 @@
 // Dynamic header text based on query parameters
+// Capture the script's base path once so event callbacks can resolve files
+const scriptBase = (function() {
+  const current = document.currentScript;
+  if (!current) return '';
+  const src = current.src;
+  return src.substring(0, src.lastIndexOf('/'));
+})();
+
 function resolvePath(file) {
-  const src = document.currentScript.src;
-  const base = src.substring(0, src.lastIndexOf('/'));
-  return `${base}/${file}`;
+  return scriptBase ? `${scriptBase}/${file}` : file;
 }
 
 function openHelp() {
@@ -29,7 +35,7 @@ function createCourseSidebar() {
   const sidebar = document.createElement('div');
   sidebar.id = 'course-sidebar';
   sidebar.classList.add('collapsed');
-  const base = document.currentScript.src.substring(0, document.currentScript.src.lastIndexOf('/'));
+  const base = scriptBase || '.';
   const home = base + '/index.html';
   sidebar.innerHTML = `
     <button id="course-toggle" aria-label="Toggle course links">&lsaquo;</button>
