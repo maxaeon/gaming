@@ -49,12 +49,6 @@ let pieceCounter = pieces.length - 1;
 let draggedPiece = null;
 
 
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-}
 
 function createPiece(text, id) {
   const li = document.createElement('li');
