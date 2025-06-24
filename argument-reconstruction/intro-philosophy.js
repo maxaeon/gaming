@@ -22,7 +22,7 @@ const reconstructionQuestions = [
     answer: "All mental states correlate directly with physical brain states."
   },
   {
-    argument: "If the universe shows evidence of purposeful design, then there must be a designer. The universe shows evidence of purposeful design. Therefore, there must be a designer (God).",
+    argument: "If the universe shows evidence of purposeful design, then there must be a designer (God). The universe shows evidence of purposeful design. Therefore, there must be a designer (God).",
     question: "Is this argument deductive or inductive?",
     options: ["Deductive", "Inductive", "Analogical", "Abductive"],
     answer: "Deductive"
@@ -31,12 +31,12 @@ const reconstructionQuestions = [
     argument: "Most complex systems we observe (watches, computers) are designed by intelligent beings. The universe is a complex system. Thus, the universe probably has an intelligent designer.",
     question: "Which best describes this argument?",
     options: [
-      "Inductive and strong",
-      "Deductive and valid",
-      "Inductive and weak",
+      "True",
+      "Deductive",
+      "Inductive",
       "Purely circular"
     ],
-    answer: "Inductive and strong"
+    answer: "Inductive"
   },
   {
     argument: "If I am thinking, I exist. I am thinking. Therefore, I exist.",
