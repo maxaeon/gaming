@@ -124,6 +124,8 @@ const reconstructionQuestions = [
 
 let reconstructionOrder = [];
 let reconstructionIndex = 0;
+let currentCourse = '';
+const MAX_QUESTIONS = 10;
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -135,6 +137,7 @@ function shuffle(arr) {
 function startReconstruction() {
   reconstructionOrder = reconstructionQuestions.slice();
   shuffle(reconstructionOrder);
+  reconstructionOrder = reconstructionOrder.slice(0, MAX_QUESTIONS);
   reconstructionIndex = 0;
   showReconstructionQuestion();
 }
@@ -192,8 +195,12 @@ function submitReconstruction(choice) {
 }
 
 document.getElementById("reconstruction-next").addEventListener("click", () => {
-  reconstructionIndex = (reconstructionIndex + 1) % reconstructionOrder.length;
-  showReconstructionQuestion();
+  reconstructionIndex++;
+  if (reconstructionIndex >= reconstructionOrder.length) {
+    showSummary();
+  } else {
+    showReconstructionQuestion();
+  }
 });
 
 document.getElementById("reconstruction-try").addEventListener("click", () => {
@@ -226,7 +233,24 @@ document.getElementById("reconstruction-show").addEventListener("click", () => {
   nextBtn.hidden = false;
 });
 
+function showSummary() {
+  const game = document.getElementById('reconstruction-game');
+  if (game) {
+    game.classList.add('hidden');
+    game.hidden = true;
+  }
+  const summary = document.getElementById('summary');
+  if (summary) {
+    summary.classList.remove('hidden');
+    summary.hidden = false;
+  }
+  if (typeof showNextActivity === 'function') {
+    showNextActivity(currentCourse);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  currentCourse = getCourse ? getCourse() : '';
   startReconstruction();
   const open = document.getElementById("open-info");
   const close = document.getElementById("close-info");
