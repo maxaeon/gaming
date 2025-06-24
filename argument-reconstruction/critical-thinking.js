@@ -55,8 +55,8 @@ const reconstructionQuestions = [
     answer: "Penguins are birds."
   },
   {
-    argument: "Premise 1: Good arguments have true premises and valid logic.\n_____\nConclusion: Your argument is good.",
-    question: "Which completion makes the argument valid?",
+    argument: "Premise 1: All arguments with true premises and valid logic are sound.\n_____\nConclusion: Your argument is sound.",
+    question: "Which additional premise makes the argument valid?",
     options: [
       "Your argument has true premises and valid logic.",
       "Good arguments are persuasive.",
