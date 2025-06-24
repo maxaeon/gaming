@@ -28,7 +28,7 @@ function createKeyTermsSidebar(courseKey) {
   const sidebar = document.createElement('div');
   sidebar.id = 'keyterm-sidebar';
   sidebar.classList.add('collapsed');
-  sidebar.innerHTML = `<button id="keyterm-toggle" aria-label="Toggle Key Terms">\u276E</button>` +
+  sidebar.innerHTML = `<button id="keyterm-toggle" aria-label="Toggle Key Terms">&lsaquo;</button>` +
     `<div id="keyterm-content"><h2>Key Terms</h2><ul class="explain-list">` +
     terms.map(t => `<li><span class="explain-term" data-term="${t}"><em><strong>${t}</strong></em></span></li>`).join('') +
     `</ul></div>`;
@@ -36,7 +36,7 @@ function createKeyTermsSidebar(courseKey) {
   const toggle = sidebar.querySelector('#keyterm-toggle');
   toggle.addEventListener('click', () => {
     const collapsed = sidebar.classList.toggle('collapsed');
-    toggle.innerHTML = collapsed ? '\u276E' : '\u276F';
+    toggle.innerHTML = collapsed ? '&lsaquo;' : '&rsaquo;';
   });
   if (typeof attachExplainHandlers === 'function') {
     attachExplainHandlers();
