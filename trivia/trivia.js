@@ -37,7 +37,25 @@ let currentTrivia = [];
 let triviaIndex = 0;
 let optionIndex = 0;
 let questionsAnswered = 0;
+let correctCount = 0;
 let selectedCourse = '';
+
+function updateScore() {
+  const scoreEl = document.getElementById('trivia-score');
+  const correctEl = document.getElementById('trivia-correct');
+  const totalEl = document.getElementById('trivia-total');
+  if (scoreEl && correctEl && totalEl) {
+    correctEl.textContent = correctCount;
+    totalEl.textContent = currentTrivia.length;
+    scoreEl.classList.remove('hidden');
+    scoreEl.hidden = false;
+  }
+  const progress = document.getElementById('trivia-progress');
+  if (progress && currentTrivia.length > 0) {
+    const percent = (questionsAnswered / currentTrivia.length) * 100;
+    progress.style.width = `${percent}%`;
+  }
+}
 
 function populateCategories(course) {
   const catSelect = document.getElementById('category-select');
@@ -66,9 +84,11 @@ function loadTrivia(course, category = 'all') {
   shuffle(currentTrivia);
   triviaIndex = 0;
   questionsAnswered = 0;
+  correctCount = 0;
   const share = document.getElementById('trivia-share');
   if (share) share.classList.add('hidden');
   document.getElementById('trivia-game').classList.remove('hidden');   document.getElementById('trivia-game').hidden = false;
+  updateScore();
   showTriviaQuestion();
 }
 
@@ -85,6 +105,7 @@ function showTriviaQuestion() {
   if (!currentTrivia.length) return;
   const q = currentTrivia[triviaIndex];
   document.getElementById('trivia-question').innerText = q.question;
+  updateScore();
   const optionsDiv = document.getElementById('trivia-options');
   optionsDiv.innerHTML = '';
   const choices = buildChoices(q.answer);
@@ -107,6 +128,7 @@ function submitTrivia(choice) {
   if (choice === q.answer) {
     feedback.innerText = 'Correct!';
     feedback.style.color = '#4caf50';
+    correctCount++;
   } else {
     feedback.innerText = `Nope! The correct answer is ${q.answer}.`;
     feedback.style.color = '#c62828';
@@ -114,6 +136,7 @@ function submitTrivia(choice) {
   feedback.classList.remove('hidden');   feedback.hidden = false;
   document.getElementById('trivia-next').classList.remove('hidden');   document.getElementById('trivia-next').hidden = false;
   questionsAnswered++;
+  updateScore();
   if (questionsAnswered >= currentTrivia.length) {
     const share = document.getElementById('trivia-share');
     if (share) {

@@ -428,6 +428,11 @@ button {
   font-size: 18px;
 }
 
+#trivia-score {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
 #progress {
   height: 8px;
   background-color: #4caf50;
