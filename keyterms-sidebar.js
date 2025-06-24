@@ -45,6 +45,13 @@ function createKeyTermsSidebar(courseKey) {
     const collapsed = sidebar.classList.toggle('collapsed');
     toggle.innerHTML = collapsed ? '&lsaquo;' : '&rsaquo;';
   });
+
+  sidebar.addEventListener('click', () => {
+    if (sidebar.classList.contains('collapsed')) {
+      sidebar.classList.remove('collapsed');
+      toggle.innerHTML = '&rsaquo;';
+    }
+  });
   if (typeof attachExplainHandlers === 'function') {
     attachExplainHandlers();
   }
