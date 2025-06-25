@@ -107,9 +107,11 @@ if (sidebar && toggleBtn) {
   });
 
   sidebar.addEventListener('click', () => {
-    if (sidebar.classList.contains('collapsed')) {
-      sidebar.classList.remove('collapsed');
-      toggleBtn.innerHTML = '&#x276F;';
+    const collapsed = sidebar.classList.toggle('collapsed');
+    toggleBtn.innerHTML = collapsed ? '&#x276E;' : '&#x276F;';
+    if (collapsed) {
+      clearTimeout(hideTimeout);
+    } else {
       scheduleHide();
     }
   });
