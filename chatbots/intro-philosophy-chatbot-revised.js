@@ -2,7 +2,7 @@ const philosophyChatSteps = [
   {
     messages: [
       { speaker: "Philosophy Student", text: "Hey there! I’m also a student learning philosophy and computer science. Ancient Greek philosophy can feel pretty abstract, so I created this AI chat to talk directly with philosophers like Thales, Socrates, and Plato. Ready to explore reality and existence together?" },
-      { speaker: "Philosophy Student", text: "In ancient times, people explained reality through myths and gods. Thales, you suggested rational observation is better. Do you think rational explanations really help us understand reality clearly?" }
+      { speaker: "Philosophy Student", text: "In ancient times, people explained reality through myths and gods. Thales suggested rational observation is better. Do you agree with him that rational explanations really help us understand reality clearly?" }
     ],
     choices: ["Yes", "No", "Unsure"],
     responses: {
