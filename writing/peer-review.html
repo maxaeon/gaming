@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="../jeopardy/style.css">
   <link rel="icon" href="../favicon.png" type="image/png">
   <style>
+    /* Keep the form a reasonable width on large screens */
+    #peer-review-form {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     #peer-review-form fieldset {
       border: 2px solid var(--accent-color);
       border-radius: 8px;
@@ -14,11 +21,24 @@
       padding: 10px;
       text-align: left;
     }
+
+    /* Improve spacing for the Yes/No/Partially options */
+    #peer-review-form label {
+      margin-right: 12px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    #peer-review-form input[type="radio"] {
+      margin-right: 4px;
+    }
+
     #peer-review-form input[type="text"],
     #peer-review-form input[type="date"],
     #peer-review-form textarea {
       width: 90%;
     }
+
     #print-review {
       margin-top: 10px;
     }
