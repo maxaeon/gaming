@@ -168,7 +168,8 @@ const philosophyChatSteps = [
     'Aristotle': '../assets/images/aristotle.png'
   };
 
-  let useSpeakerColors = true;
+  const colorSchemes = ['speaker', 'blue', 'teal', 'purple'];
+  let colorSchemeIndex = 0;
 
   async function addMessage(speaker, text, className) {
     if (!className) {
@@ -178,9 +179,12 @@ const philosophyChatSteps = [
     div.dataset.speaker = speaker;
     div.dataset.speakerClass = className;
     const baseClass = speaker === 'You' ? 'chat-user' : 'chat-bot';
+    const scheme = colorSchemes[colorSchemeIndex];
     div.className = `chat-message ${baseClass}`;
-    if (useSpeakerColors && className && baseClass !== className) {
+    if (scheme === 'speaker' && className && baseClass !== className) {
       div.classList.add(className);
+    } else if (scheme !== 'speaker') {
+      div.classList.add(`theme-${scheme}`);
     }
     const img = speakerImages[speaker]
       ? `<img src="${speakerImages[speaker]}" alt="${speaker}" class="profile-pic">`
@@ -237,21 +241,24 @@ const philosophyChatSteps = [
   }
 
   function updateColors() {
+    const scheme = colorSchemes[colorSchemeIndex];
     const msgs = chatBox.querySelectorAll('.chat-message');
     msgs.forEach(m => {
       const speakerClass = m.dataset.speakerClass;
       const speaker = m.dataset.speaker;
       const base = speaker === 'You' ? 'chat-user' : 'chat-bot';
       m.className = `chat-message ${base}`;
-      if (useSpeakerColors && speakerClass && base !== speakerClass) {
+      if (scheme === 'speaker' && speakerClass && base !== speakerClass) {
         m.classList.add(speakerClass);
+      } else if (scheme !== 'speaker') {
+        m.classList.add(`theme-${scheme}`);
       }
     });
   }
 
   if (colorToggle) {
     colorToggle.addEventListener('click', () => {
-      useSpeakerColors = !useSpeakerColors;
+      colorSchemeIndex = (colorSchemeIndex + 1) % colorSchemes.length;
       updateColors();
     });
   }
