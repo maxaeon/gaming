@@ -7,14 +7,17 @@ const philosophyChatSteps = [
     choices: ["Yes", "No", "Unsure"],
     responses: {
       "Yes": [
+        { speaker: "System", text: "Philosophy Student added Thales to the chat", className: "chat-notice" },
         { speaker: "Thales", text: "Absolutely! Rational thought helps us see the world clearly, without superstition." },
         { speaker: "Heraclitus", text: "Reason can help—but remember, reality itself never stays still." }
       ],
       "No": [
+        { speaker: "System", text: "Philosophy Student added Thales to the chat", className: "chat-notice" },
         { speaker: "Thales", text: "Absolutely! Rational thought helps us see the world clearly, without superstition." },
         { speaker: "Heraclitus", text: "Reason can help—but remember, reality itself never stays still." }
       ],
       "Unsure": [
+        { speaker: "System", text: "Philosophy Student added Thales to the chat", className: "chat-notice" },
         { speaker: "Thales", text: "Absolutely! Rational thought helps us see the world clearly, without superstition." },
         { speaker: "Heraclitus", text: "Reason can help—but remember, reality itself never stays still." }
       ]
@@ -37,6 +40,7 @@ const philosophyChatSteps = [
       ]
     },
     after: [
+      { speaker: "System", text: "Thales added Heraclitus to the chat", className: "chat-notice" },
       { speaker: "Heraclitus", text: "But Thales, reality never holds still—how can one substance explain continuous change?" },
       { speaker: "Philosophy Student", text: "Good point, Heraclitus! You say everything changes constantly. Does that mean there’s no stability or permanence in reality at all?" }
     ]
@@ -59,6 +63,7 @@ const philosophyChatSteps = [
       ]
     },
     after: [
+      { speaker: "System", text: "Heraclitus added Socrates to the chat", className: "chat-notice" },
       { speaker: "Socrates", text: "Well said, Heraclitus. Real wisdom begins by admitting we know far less than we think." },
       { speaker: "Philosophy Student", text: "Socrates, you say true wisdom is recognizing how little we actually know. Does that mean we should question everything endlessly?" }
     ]
@@ -81,6 +86,7 @@ const philosophyChatSteps = [
       ]
     },
     after: [
+      { speaker: "System", text: "Socrates added Plato to the chat", className: "chat-notice" },
       { speaker: "Plato", text: "Absolutely, Socrates. Constant questioning guides us to deeper truths beyond appearances." },
       { speaker: "Philosophy Student", text: "Plato, you talk about deeper truths or ideal realities—what you call 'Forms.' Are these ideal Forms really something beyond our everyday experiences?" }
     ]
@@ -103,6 +109,7 @@ const philosophyChatSteps = [
       ]
     },
     after: [
+      { speaker: "System", text: "Plato added Aristotle to the chat", className: "chat-notice" },
       { speaker: "Aristotle", text: "Plato, your ideal Forms sound attractive—but isn't reality found in observable things around us rather than in abstract ideals?" },
       { speaker: "Philosophy Student", text: "Aristotle, you seem skeptical about Plato’s Forms. Do you think we should rely entirely on observing nature to understand reality?" }
     ]
@@ -125,6 +132,7 @@ const philosophyChatSteps = [
       ]
     },
     after: [
+      { speaker: "System", text: "Aristotle added Plato to the chat", className: "chat-notice" },
       { speaker: "Plato", text: "Observation is indeed crucial, Aristotle. But without ideals guiding us, might our observations become aimless?" },
       { speaker: "Philosophy Student", text: "This conversation really clarified some deep metaphysical ideas for me! Did it help you, too? Philosophy may seem abstract at first, but talking it through like this definitely makes it clearer. Let’s keep exploring!" }
     ]
@@ -145,6 +153,15 @@ const philosophyChatSteps = [
     'Aristotle': 'speaker-aristotle'
   };
 
+  const speakerImages = {
+    'Philosophy Student': 'student.png',
+    'Thales': 'thales.png',
+    'Heraclitus': 'heraclitus.png',
+    'Socrates': 'socrates.png',
+    'Plato': 'plato.png',
+    'Aristotle': 'aristotle.png'
+  };
+
   async function addMessage(speaker, text, className) {
     if (!className) {
       className = speakerClasses[speaker] || 'chat-bot';
@@ -152,12 +169,15 @@ const philosophyChatSteps = [
     const div = document.createElement('div');
     div.className = `chat-message ${className}`;
     if (speaker !== 'You') {
-      div.innerHTML = `<strong>${speaker}:</strong> <span class="typing">…</span>`;
+      const img = speakerImages[speaker] ? `<img src="${speakerImages[speaker]}" alt="${speaker}" class="profile-pic">` : '';
+      div.innerHTML = `${img}<strong>${speaker}:</strong> <span class="typing">…</span>`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
-      const delay = 1000 + Math.random() * 1500;
+      const baseDelay = 1200;
+      const extraDelay = Math.min(2500, text.length * 30);
+      const delay = baseDelay + Math.random() * extraDelay;
       await new Promise(res => setTimeout(res, delay));
-      div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
+      div.innerHTML = `${img}<strong>${speaker}:</strong> ${text}`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } else {
       div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
@@ -187,11 +207,11 @@ const philosophyChatSteps = [
     controls.innerHTML = '';
     const replies = step.responses[choice] || [];
     for (const m of replies) {
-      await addMessage(m.speaker, m.text);
+      await addMessage(m.speaker, m.text, m.className);
     }
     if (step.after) {
       for (const m of step.after) {
-        await addMessage(m.speaker, m.text);
+        await addMessage(m.speaker, m.text, m.className);
       }
     }
     stepIndex++;
@@ -203,14 +223,14 @@ const philosophyChatSteps = [
   async function showStep() {
     const step = philosophyChatSteps[stepIndex];
     for (const m of step.messages) {
-      await addMessage(m.speaker, m.text);
+      await addMessage(m.speaker, m.text, m.className);
     }
     if (step.choices) {
       showChoices(step);
     } else {
       if (step.after) {
         for (const m of step.after) {
-          await addMessage(m.speaker, m.text);
+          await addMessage(m.speaker, m.text, m.className);
         }
       }
       stepIndex++;

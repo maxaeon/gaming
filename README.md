@@ -14,6 +14,7 @@ This repository contains a set of lightweight browser games that let you review 
 - "Who Said It?" quote quiz
 - Ethics Chat page with rotating philosopher perspectives
 - Intro Philosophy Chat covering ancient Greek thinkers
+- Chat pages support optional profile pictures; add your own PNG files (e.g., `aristotle.png`) in `chatbots/`
 - Writing games now include a "Start Your Own Project" mode with templates that can be exported as PDF, DOCX, or PNG. Thesis prompts are editable and you can export just the thesis or a combined document with your answers.
 
 ## Getting Started

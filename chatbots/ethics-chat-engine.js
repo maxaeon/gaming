@@ -15,6 +15,15 @@
     'Philosophy Student': 'speaker-student'
   };
 
+  const speakerImages = {
+    'John Stuart Mill': 'mill.png',
+    'Immanuel Kant': 'kant.png',
+    'St. Thomas Aquinas': 'aquinas.png',
+    'Aristotle': 'aristotle.png',
+    'Nel Noddings': 'noddings.png',
+    'Philosophy Student': 'student.png'
+  };
+
   async function addMessage(speaker, text, className) {
     if (!className) {
       className = speakerClasses[speaker] || 'chat-bot';
@@ -22,14 +31,15 @@
     const div = document.createElement('div');
     div.className = `chat-message ${className}`;
     if (speaker !== 'You') {
-      div.innerHTML = `<strong>${speaker}:</strong> <span class="typing">…</span>`;
+      const img = speakerImages[speaker] ? `<img src="${speakerImages[speaker]}" alt="${speaker}" class="profile-pic">` : '';
+      div.innerHTML = `${img}<strong>${speaker}:</strong> <span class="typing">…</span>`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
       const baseDelay = 1000;
       const extraDelay = Math.min(2000, text.length * 20);
       const delay = baseDelay + Math.random() * extraDelay;
       await new Promise(res => setTimeout(res, delay));
-      div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
+      div.innerHTML = `${img}<strong>${speaker}:</strong> ${text}`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } else {
       div.innerHTML = `<strong>${speaker}:</strong> ${text}`;
