@@ -80,8 +80,10 @@ function loadTrivia(course, category = 'all') {
   const all = category === 'all'
     ? Object.values(triviaQuestions[course]).flat()
     : (triviaQuestions[course][category] || []);
-  currentTrivia = all;
+  currentTrivia = all.slice();
   shuffle(currentTrivia);
+  // Limit each trivia session to at most 10 questions
+  currentTrivia = currentTrivia.slice(0, 10);
   triviaIndex = 0;
   questionsAnswered = 0;
   correctCount = 0;
