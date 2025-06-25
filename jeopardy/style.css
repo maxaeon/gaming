@@ -823,7 +823,7 @@ button {
 
 .chat-message {
   margin: 6px 0;
-  display: inline-flex;
+  display: flex;
   align-items: flex-start;
   padding: 6px 10px;
   border-radius: 12px;
