@@ -452,7 +452,7 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
       const finalStep = sherlockSteps[stepIndex];
       const correct = userGuess === finalCulprit;
       finalStep.messages = [
-        { speaker: 'Holmes', text: correct ? 'You guessed it!' : 'Not quite.' },
+        { speaker: 'Holmes', text: correct ? 'Exactly! We solved it together.' : 'Not quite.' },
         { speaker: 'Holmes', text: correct ? `Excellent deduction! You've concluded that ${finalCulprit} was responsible.` : `Nice effort, but the culprit was ${finalCulprit}.` },
         { speaker: 'Holmes', text: 'Reflect on how each clue fit together to reveal the truth.' },
         { speaker: 'Holmes', text: 'Thank you for your time. Keep in touch if you want to practice solving more cases.' },
