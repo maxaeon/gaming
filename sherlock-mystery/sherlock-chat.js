@@ -51,6 +51,28 @@ const case1Steps = [
   },
   {
     messages: [
+      { speaker: "Sherlock", text: "We now have conflicting testimony about Alexander's whereabouts. How might this discrepancy be explained?" }
+    ],
+    choices: [
+      "Alexander has a twin",
+      "One witness is lying",
+      "Poor lighting or eyesight"
+    ],
+    responses: {
+      "Alexander has a twin": [
+        { speaker: "Watson", text: "Actually, Alexander does have a twin who works at a print shop nearby." },
+        { speaker: "Sherlock", text: "Interesting. That might explain the conflicting accounts, though we still need evidence linking either brother to the theft." }
+      ],
+      "One witness is lying": [
+        { speaker: "Sherlock", text: "Indeed, if someone is lying we'll need proof of motive or deception before drawing conclusions." }
+      ],
+      "Poor lighting or eyesight": [
+        { speaker: "Sherlock", text: "Quite possible. A mistaken sighting would weaken the case against Alexander rather than reveal guilt." }
+      ]
+    }
+  },
+  {
+    messages: [
       { speaker: "Watson", text: "Charles Finch's Alibi: Charles insists he remained at home all morning, yet his neighbor spotted him rushing away from his home around the time of the theft." },
       { speaker: "Sherlock", text: "Does this clue seem reliable?" }
     ],
