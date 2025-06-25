@@ -666,24 +666,6 @@ button {
   }
 }
 
-#quote-toggle {
-  position: absolute;
-  left: -32px;
-  top: 10px;
-  background: #9c27b0;
-  color: #ffeb3b;
-  border: none;
-  border-radius: 6px 0 0 6px;
-  padding: 6px;
-  cursor: pointer;
-  z-index: 1100;
-}
-
-#quote-sidebar.collapsed #quote-toggle {
-  position: fixed;
-  right: 20px;
-}
-
 #keyterm-sidebar.collapsed #keyterm-toggle {
   position: fixed;
   right: calc(20px + 32px); /* sit slightly left of sidebar */

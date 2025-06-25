@@ -78,10 +78,7 @@ document.getElementById('quote-next').addEventListener('click', showRandomQuote)
 showRandomQuote();
 
 const sidebar = document.getElementById('quote-sidebar');
-const toggleBtn = document.getElementById('quote-toggle');
-if (sidebar && toggleBtn) {
-  // Set initial arrow based on sidebar state
-  toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '&#x276E;' : '&#x276F;';
+if (sidebar) {
 
   let hideTimeout;
 
@@ -90,7 +87,6 @@ if (sidebar && toggleBtn) {
     hideTimeout = setTimeout(() => {
       if (!sidebar.matches(':hover') && !sidebar.classList.contains('collapsed')) {
         sidebar.classList.add('collapsed');
-        toggleBtn.innerHTML = '&#x276E;';
       }
     }, 3000);
   }
@@ -98,17 +94,8 @@ if (sidebar && toggleBtn) {
   sidebar.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
   sidebar.addEventListener('mouseleave', scheduleHide);
 
-  toggleBtn.addEventListener('click', () => {
-    const collapsed = sidebar.classList.toggle('collapsed');
-    // When collapsed show left-pointing arrow, otherwise point inward
-    toggleBtn.innerHTML = collapsed ? '&#x276E;' : '&#x276F;';
-    if (!collapsed) scheduleHide();
-    else clearTimeout(hideTimeout);
-  });
-
   sidebar.addEventListener('click', () => {
     const collapsed = sidebar.classList.toggle('collapsed');
-    toggleBtn.innerHTML = collapsed ? '&#x276E;' : '&#x276F;';
     if (collapsed) {
       clearTimeout(hideTimeout);
     } else {
