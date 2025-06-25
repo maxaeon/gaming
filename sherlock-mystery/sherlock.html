@@ -13,29 +13,18 @@
   </nav>
   <header id="page-header" data-default-course="criticalThinking">Course • Activity</header>
   <div class="container">
-    <h1>Sherlock Holmes Mystery</h1>
-    <div id="intro-section">
-      <p>Welcome to 221B Baker Street! Dr. Watson is away and Sherlock Holmes needs your help to investigate the disappearance of Professor Russell's philosophy manuscript.</p>
-      <button id="start-investigation">Start Investigation</button>
+    <h1>Sherlock Holmes Mystery Chat</h1>
+    <p class="instructions">Chat with Sherlock and Watson to solve the case.</p>
+    <div id="chat-box"></div>
+    <div id="chat-extras">
+      <button class="emoji-btn">😊</button>
+      <button class="emoji-btn">👍</button>
+      <button class="emoji-btn">😢</button>
+      <button id="color-toggle">Change Color Scheme</button>
     </div>
-
-    <div id="clue-section" class="hidden" hidden>
-      <h2>Clues</h2>
-      <div id="clue-buttons" class="mc-options"></div>
-      <div id="clue-text" style="margin-top:10px;"></div>
-      <button id="analyze-evidence" class="hidden" hidden>Analyze Evidence</button>
-    </div>
-
-    <div id="puzzle-section" class="hidden" hidden>
-      <p id="puzzle-question"></p>
-      <div id="puzzle-options" class="mc-options"></div>
-      <div id="puzzle-feedback" class="hidden" hidden></div>
-      <button id="next-puzzle" class="hidden" hidden>Next</button>
-    </div>
-
-    <div id="resolution-section" class="hidden" hidden></div>
+    <div id="chat-controls"></div>
   </div>
-  <script src="sherlock.js"></script>
+  <script src="sherlock-chat.js"></script>
   <script src="../explain.js"></script>
   <script src="../keyterms-sidebar.js"></script>
   <script src="../page-header.js"></script>
