@@ -204,16 +204,50 @@
     const student = bots['Sage'];
     const greet = typeof student.greeting === 'function' ? student.greeting(userName) : student.greeting;
     await addMessage('Sage', greet);
-    if (student.introduceMill) {
-      await addMessage('Sage', student.introduceMill);
+
+    let selected = null;
+    await new Promise(resolve => {
+      awaitingChoice = true;
+      const options = {
+        "Yes, let's chat!": "Great! Let's dive in.",
+        "Sure, I guess": "No worries, let's take it slow. Here we go.",
+        "No thanks": "Goodbye and good luck learning about ethics!"
+      };
+      controls.innerHTML = '';
+      Object.keys(options).forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt;
+        btn.onclick = async () => {
+          if (!awaitingChoice) return;
+          awaitingChoice = false;
+          selected = opt;
+          controls.querySelectorAll('button').forEach(b => b.disabled = true);
+          await addMessage('You', opt, 'chat-user');
+          await addMessage('Sage', options[opt]);
+          if (opt === 'No thanks') {
+            await addMessage('System', 'Chat closed', 'chat-notice');
+            resolve();
+            return;
+          }
+          if (student.introduceMill) {
+            await addMessage('Sage', student.introduceMill);
+          }
+          resolve();
+        };
+        controls.appendChild(btn);
+      });
+    });
+
+    if (selected !== 'No thanks') {
+      current = 'John Stuart Mill';
+      alignmentScores[current] = 0;
+      const firstGreet = typeof bots[current].greeting === 'function'
+        ? bots[current].greeting(userName)
+        : bots[current].greeting;
+      await addMessage(current, firstGreet);
+      showExchange();
     }
-    current = 'John Stuart Mill';
-    alignmentScores[current] = 0;
-    const firstGreet = typeof bots[current].greeting === 'function'
-      ? bots[current].greeting(userName)
-      : bots[current].greeting;
-    await addMessage(current, firstGreet);
-    showExchange();
   }
 
   document.addEventListener('DOMContentLoaded', startConversation);
