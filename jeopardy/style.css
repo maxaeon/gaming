@@ -997,6 +997,16 @@ button {
   color: #fff;
 }
 
+.speaker-sherlock {
+  background: #607d8b;
+  color: #fff;
+}
+
+.speaker-watson {
+  background: #8d6e63;
+  color: #fff;
+}
+
 .typing {
   opacity: 0.6;
   font-style: italic;
