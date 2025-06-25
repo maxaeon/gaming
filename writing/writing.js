@@ -5,7 +5,7 @@ const citationData = {
 };
 
 const conceptItems = [
-  'Nazi-at-the-door case',
+  'Murderer-at-the-door case',
   'Doctrine of double effect (criticism)',
   'Individual circumstances',
   'Empathy and compassion',
@@ -32,7 +32,7 @@ const dialogueExample = {
   prompt: 'Kant are totally wrong. They don\'t realize lying can sometimes save lives.',
   better: [
     'The paragraph should avoid oversimplified claims like \"totally wrong.\"',
-    'Include explicit references to specific cases (e.g., Kant\u2019s Nazi-at-the-door case) to clarify and strengthen your critique.'
+    'Include explicit references to specific cases (e.g., Kant\u2019s murderer-at-the-door case) to clarify and strengthen your critique.'
   ]
 };
 
@@ -67,7 +67,7 @@ function buildConcepts() {
 }
 
 document.getElementById('concept-submit').addEventListener('click', () => {
-  const ans = 'Example provided: {Consequences & circumstances} [Importance of consequences, Nazi-at-the-door case, Individual circumstances]; {Critiques of rigidity} [Doctrine of double effect (criticism), Rigidity of absolute rules, Moral dilemmas]; {Human values} [Empathy and compassion, Human flourishing (Aristotle)].';
+  const ans = 'Example provided: {Consequences & circumstances} [Importance of consequences, murderer-at-the-door case, Individual circumstances]; {Critiques of rigidity} [Doctrine of double effect (criticism), Rigidity of absolute rules, Moral dilemmas]; {Human values} [Empathy and compassion, Human flourishing (Aristotle)].';
   document.getElementById('concept-answer').innerText = ans;
   document.getElementById('concept-answer').classList.remove('hidden');   document.getElementById('concept-answer').hidden = false;
 });

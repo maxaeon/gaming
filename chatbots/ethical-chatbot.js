@@ -67,7 +67,7 @@ const ethicalChatbots = {
       },
       {
         transition: "Consider this challenging scenario:",
-        question: `In the <span class="info" data-tooltip="A Nazi solider knocks on your door and asks if you're hiding the Smith family in your basement; if you tell the truth and say yes, the soldier will kill the family and you. Kant argues lying here is still wrong.">Nazi-at-the-door scenario</span>, is lying morally acceptable to save a life?`,
+        question: `In the <span class="info" data-tooltip="A genocidal murderer knocks on your door and asks if you're hiding the Smith family in your basement; if you tell the truth and say yes, the murderer will kill the family and you. Kant argues lying here is still wrong.">murderer-at-the-door scenario</span>, is lying morally acceptable to save a life?`,
         theoristView: "No, not really",
         responses: {
           "Yes, definitely": "Compassionate, but honesty must remain absolute and universal.",
