@@ -148,15 +148,15 @@ const sherlockSteps = [
     }
     const time = `<div class="timestamp">${getTimestamp()}</div>`;
     if (speaker !== 'You') {
-      div.innerHTML = `<strong>${speaker}:</strong> <span class="typing">…</span>`;
+      div.innerHTML = `<div class="chat-content"><strong class="speaker-name">${speaker}:</strong> <span class="typing">…</span></div>`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
       const delay = 1200 + Math.random() * Math.min(2500, text.length * 30);
       await new Promise(res => setTimeout(res, delay));
-      div.innerHTML = `<strong>${speaker}:</strong> ${text}${time}`;
+      div.innerHTML = `<div class="chat-content"><strong class="speaker-name">${speaker}:</strong><div class="chat-text">${text}</div>${time}</div>`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } else {
-      div.innerHTML = `<strong>${speaker}:</strong> ${text}${time}`;
+      div.innerHTML = `<div class="chat-content"><strong class="speaker-name">${speaker}:</strong><div class="chat-text">${text}</div>${time}</div>`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
