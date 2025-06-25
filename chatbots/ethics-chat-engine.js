@@ -59,6 +59,14 @@
   const colorSchemes = ['speaker', 'blue', 'teal', 'purple'];
   let colorSchemeIndex = 0;
 
+  const schemeButtonColors = {
+    speaker: getComputedStyle(document.documentElement)
+      .getPropertyValue('--accent-light') || '#ce93d8',
+    blue: '#90caf9',
+    teal: '#80cbc4',
+    purple: '#ce93d8'
+  };
+
   function getTimestamp() {
     return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
@@ -115,6 +123,7 @@
       btn.onclick = () => handleChoice(option, responses[option], view);
       controls.appendChild(btn);
     });
+    updateColors();
   }
 
   async function handleChoice(option, reply, view) {
@@ -208,6 +217,7 @@
       btn.onclick = () => handleReflectionChoice(opt, responses[opt]);
       controls.appendChild(btn);
     });
+    updateColors();
   }
 
   function updateColors() {
@@ -229,6 +239,15 @@
       } else if (scheme !== 'speaker') {
         m.classList.add(`theme-${scheme}`);
       }
+    });
+    const btnColor = schemeButtonColors[scheme] || schemeButtonColors.speaker;
+    if (colorToggle) {
+      colorToggle.style.background = btnColor;
+      colorToggle.style.color = '#000';
+    }
+    controls.querySelectorAll('.option-btn').forEach(b => {
+      b.style.background = btnColor;
+      b.style.color = '#000';
     });
   }
 
@@ -311,6 +330,7 @@
         };
         controls.appendChild(btn);
       });
+      updateColors();
     });
 
     if (selected !== 'No thanks') {
