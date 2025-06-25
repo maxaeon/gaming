@@ -10,7 +10,7 @@ const ethicalChatbots = {
 
   "John Stuart Mill": {
     greeting: (userName) =>
-      `Thanks for the intro! I'm John Stuart Mill. For me, morality is about achieving the greatest happiness for the greatest number.`,
+      `Thanks for the introduction! I'm John Stuart Mill. For me, morality is about achieving the greatest happiness for the greatest number.`,
     exchanges: [
       {
         question: "Do you agree morality should primarily focus on maximizing happiness?",
@@ -23,7 +23,7 @@ const ethicalChatbots = {
       },
       {
         transition: "Let's apply this with a classic scenario:",
-        question: `In the <span class="info" title="A runaway trolley will kill five people unless diverted, but diverting it kills one.">trolley problem</span>, would you divert the trolley?`,
+        question: `In the <span class="info" data-tooltip="A runaway trolley will kill five people unless diverted, but diverting it kills one.">trolley problem</span>, would you divert the trolley?`,
         theoristView: "Yes, definitely",
         responses: {
           "Yes, definitely": "Precisely! Choosing the option that saves more lives is morally right.",
@@ -58,7 +58,7 @@ const ethicalChatbots = {
       },
       {
         transition: "Consider this challenging scenario:",
-        question: `In the <span class="info" title="A Nazi solider knocks on your door and asks if you're hiding the Smith family in your basement; if you tell the truth and say yes, the soldier will kill the family and you. Kant argues lying here is still wrong.">Nazi-at-the-door scenario</span>, is lying morally acceptable to save a life?`,
+        question: `In the <span class="info" data-tooltip="A Nazi solider knocks on your door and asks if you're hiding the Smith family in your basement; if you tell the truth and say yes, the soldier will kill the family and you. Kant argues lying here is still wrong.">Nazi-at-the-door scenario</span>, is lying morally acceptable to save a life?`,
         theoristView: "No, not really",
         responses: {
           "Yes, definitely": "Compassionate, but honesty must remain absolute and universal.",
