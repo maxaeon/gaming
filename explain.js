@@ -49,6 +49,21 @@ const explainData = {
   "Logical Fallacy": [
     "A logical fallacy explicitly refers to a mistake in reasoning or argumentation that weakens or invalidates an argument.",
     "The Ad Hominem fallacy explicitly occurs when someone attacks the character or traits of the person making the argument, rather than addressing the argument itself, which clearly fails to logically challenge the argument itself."
+  ],
+  "Validity": [
+    "A deductive argument is valid when its structure guarantees that if the premises are true, the conclusion must necessarily be true."
+  ],
+  "Soundness": [
+    "A deductive argument is sound when it is valid and all of its premises are in fact true, ensuring the conclusion is true as well."
+  ],
+  "Modus Ponens": [
+    "A valid argument form structured as: If P, then Q; P; therefore, Q."
+  ],
+  "Modus Tollens": [
+    "A valid argument form structured as: If P, then Q; not Q; therefore, not P."
+  ],
+  "Disjunctive Syllogism": [
+    "A valid argument form structured as: Either P or Q; not P; therefore, Q."
   ]
 };
 
