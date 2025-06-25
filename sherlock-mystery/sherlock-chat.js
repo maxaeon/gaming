@@ -23,13 +23,56 @@ const case1Steps = [
   },
   {
     messages: [
-      { speaker: "Watson", text: "Let's review all the clues before we continue." },
-      { speaker: "Watson", text: "Housekeeper's Testimony: The housekeeper observed Alexander Greaves quietly reading in the library, far from the study, when the manuscript disappeared." },
-      { speaker: "Watson", text: "Beatrice Lowell's Statement: Beatrice claims she saw Alexander near the professor's study precisely when the housekeeper saw him in the library." },
-      { speaker: "Watson", text: "Charles Finch's Alibi: Charles insists he remained at home all morning, yet his neighbor spotted him rushing away from his home around the time of the theft." },
-      { speaker: "Watson", text: "Study Door Security: Professor Russell's study can only be accessed using a unique brass key, and Charles Finch is known to have borrowed the key a day earlier, claiming he had lost his own." }
+      { speaker: "Watson", text: "Let's review all the clues before we continue." }
     ],
-    after: [
+    choices: ["Begin"]
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Housekeeper's Testimony: The housekeeper observed Alexander Greaves quietly reading in the library, far from the study, when the manuscript disappeared." },
+      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+    ],
+    choices: ["Yes", "No"],
+    responses: {
+      "Yes": [ { speaker: "Sherlock", text: "Indeed, a trustworthy observation." } ],
+      "No": [ { speaker: "Sherlock", text: "Skepticism noted. Let's keep going." } ]
+    }
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Beatrice Lowell's Statement: Beatrice claims she saw Alexander near the professor's study precisely when the housekeeper saw him in the library." },
+      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+    ],
+    choices: ["Yes", "No"],
+    responses: {
+      "Yes": [ { speaker: "Sherlock", text: "Interesting, though it conflicts with the housekeeper." } ],
+      "No": [ { speaker: "Sherlock", text: "Perhaps Beatrice misremembered." } ]
+    }
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Charles Finch's Alibi: Charles insists he remained at home all morning, yet his neighbor spotted him rushing away from his home around the time of the theft." },
+      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+    ],
+    choices: ["Yes", "No"],
+    responses: {
+      "Yes": [ { speaker: "Sherlock", text: "Quite telling, isn't it?" } ],
+      "No": [ { speaker: "Sherlock", text: "We'll see how it fits with the rest." } ]
+    }
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Study Door Security: Professor Russell's study can only be accessed using a unique brass key, and Charles Finch is known to have borrowed the key a day earlier, claiming he had lost his own." },
+      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+    ],
+    choices: ["Yes", "No"],
+    responses: {
+      "Yes": [ { speaker: "Sherlock", text: "A crucial fact to remember." } ],
+      "No": [ { speaker: "Sherlock", text: "We'll verify it against other evidence." } ]
+    }
+  },
+  {
+    messages: [
       { speaker: "Sherlock", text: "Keep those details in mind. Now let's test your deductions." }
     ]
   },
@@ -126,13 +169,56 @@ const case2Steps = [
   },
   {
     messages: [
-      { speaker: "Watson", text: "Let's review all the clues before we continue." },
-      { speaker: "Watson", text: "Guard's Report: The guard saw Tom working outside in the garden around the time of the theft." },
-      { speaker: "Watson", text: "Lucy's Statement: Lucy claims she was cleaning the parlor, but Edward says he saw her near the bedroom." },
-      { speaker: "Watson", text: "Edward's Alibi: Edward insists he was away on business, yet his carriage was spotted near the house." },
-      { speaker: "Watson", text: "Bedroom Lock: The bedroom door uses a code known only to family, and Edward uses that code for his study." }
+      { speaker: "Watson", text: "Let's review all the clues before we continue." }
     ],
-    after: [
+    choices: ["Begin"]
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Guard's Report: The guard saw Tom working outside in the garden around the time of the theft." },
+      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+    ],
+    choices: ["Yes", "No"],
+    responses: {
+      "Yes": [ { speaker: "Sherlock", text: "A trustworthy guard, I'd say." } ],
+      "No": [ { speaker: "Sherlock", text: "We'll keep that doubt in mind." } ]
+    }
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Lucy's Statement: Lucy claims she was cleaning the parlor, but Edward says he saw her near the bedroom." },
+      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+    ],
+    choices: ["Yes", "No"],
+    responses: {
+      "Yes": [ { speaker: "Sherlock", text: "Her story does conflict with Edward's." } ],
+      "No": [ { speaker: "Sherlock", text: "Perhaps Lucy is mistaken." } ]
+    }
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Edward's Alibi: Edward insists he was away on business, yet his carriage was spotted near the house." },
+      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+    ],
+    choices: ["Yes", "No"],
+    responses: {
+      "Yes": [ { speaker: "Sherlock", text: "Indeed, that casts doubt on Edward." } ],
+      "No": [ { speaker: "Sherlock", text: "We'll see how it connects." } ]
+    }
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Bedroom Lock: The bedroom door uses a code known only to family, and Edward uses that code for his study." },
+      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+    ],
+    choices: ["Yes", "No"],
+    responses: {
+      "Yes": [ { speaker: "Sherlock", text: "That detail seems hard to dispute." } ],
+      "No": [ { speaker: "Sherlock", text: "We'll verify it." } ]
+    }
+  },
+  {
+    messages: [
       { speaker: "Sherlock", text: "Keep those details in mind. Now let's test your deductions." }
     ]
   },
@@ -327,7 +413,7 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
       ];
     }
     if (stepIndex < sherlockSteps.length) {
-      setTimeout(showStep, 500);
+      await showStep();
     }
   }
 
