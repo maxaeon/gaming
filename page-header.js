@@ -40,11 +40,11 @@ function createCourseSidebar() {
   sidebar.innerHTML = `
     <button id="course-toggle" aria-label="Toggle course links">&#9776;</button>
     <nav>
-      <a href="${home}#introPhilosophy">Intro</a>
-      <a href="${home}#criticalThinking">Reasoning</a>
-      <a href="${home}#ethics">Ethics</a>
-      <a href="${home}#logic">Logic</a>
-      <a href="${home}#writing">Writing</a>
+      <a href="${home}#introPhilosophy" data-course="introPhilosophy">Intro</a>
+      <a href="${home}#criticalThinking" data-course="criticalThinking">Reasoning</a>
+      <a href="${home}#ethics" data-course="ethics">Ethics</a>
+      <a href="${home}#logic" data-course="logic">Logic</a>
+      <a href="${home}#writing" data-course="writing">Writing</a>
     </nav>`;
   document.body.appendChild(sidebar);
   const toggle = sidebar.querySelector('#course-toggle');
