@@ -23,30 +23,14 @@ const case1Steps = [
   },
   {
     messages: [
-      { speaker: "Watson", text: "Here are our clues: 1. Housekeeper's testimony. 2. Beatrice Lowell's statement. 3. Charles Finch's alibi. 4. Study door security. Which one should we examine?" }
+      { speaker: "Watson", text: "Let's review all the clues before we continue." },
+      { speaker: "Watson", text: "Housekeeper's Testimony: The housekeeper observed Alexander Greaves quietly reading in the library, far from the study, when the manuscript disappeared." },
+      { speaker: "Watson", text: "Beatrice Lowell's Statement: Beatrice claims she saw Alexander near the professor's study precisely when the housekeeper saw him in the library." },
+      { speaker: "Watson", text: "Charles Finch's Alibi: Charles insists he remained at home all morning, yet his neighbor spotted him rushing away from his home around the time of the theft." },
+      { speaker: "Watson", text: "Study Door Security: Professor Russell's study can only be accessed using a unique brass key, and Charles Finch is known to have borrowed the key a day earlier, claiming he had lost his own." }
     ],
-    choices: [
-      "Housekeeper's Testimony",
-      "Beatrice Lowell's Statement",
-      "Charles Finch's Alibi",
-      "Study Door Security"
-    ],
-    responses: {
-      "Housekeeper's Testimony": [
-        { speaker: "Watson", text: "The housekeeper observed Alexander Greaves quietly reading in the library, far from the study, when the manuscript disappeared." }
-      ],
-      "Beatrice Lowell's Statement": [
-        { speaker: "Watson", text: "Beatrice claims she saw Alexander near the professor's study precisely when the housekeeper saw him in the library." }
-      ],
-      "Charles Finch's Alibi": [
-        { speaker: "Watson", text: "Charles insists he remained at home all morning, yet his neighbor spotted him rushing away from his home around the time of the theft." }
-      ],
-      "Study Door Security": [
-        { speaker: "Watson", text: "Professor Russell's study can only be accessed using a unique brass key, and Charles Finch is known to have borrowed the key a day earlier, claiming he had lost his own." }
-      ]
-    },
     after: [
-      { speaker: "Sherlock", text: "Keep that in mind. Now let's test your deductions." }
+      { speaker: "Sherlock", text: "Keep those details in mind. Now let's test your deductions." }
     ]
   },
   {
@@ -142,25 +126,14 @@ const case2Steps = [
   },
   {
     messages: [
-      { speaker: "Watson", text: "Here are our clues: 1. Guard's report. 2. Lucy's statement. 3. Edward's alibi. 4. Bedroom lock. Which one should we examine?" }
+      { speaker: "Watson", text: "Let's review all the clues before we continue." },
+      { speaker: "Watson", text: "Guard's Report: The guard saw Tom working outside in the garden around the time of the theft." },
+      { speaker: "Watson", text: "Lucy's Statement: Lucy claims she was cleaning the parlor, but Edward says he saw her near the bedroom." },
+      { speaker: "Watson", text: "Edward's Alibi: Edward insists he was away on business, yet his carriage was spotted near the house." },
+      { speaker: "Watson", text: "Bedroom Lock: The bedroom door uses a code known only to family, and Edward uses that code for his study." }
     ],
-    choices: ["Guard's Report", "Lucy's Statement", "Edward's Alibi", "Bedroom Lock"],
-    responses: {
-      "Guard's Report": [
-        { speaker: "Watson", text: "The guard saw Tom working outside in the garden around the time of the theft." }
-      ],
-      "Lucy's Statement": [
-        { speaker: "Watson", text: "Lucy claims she was cleaning the parlor, but Edward says he saw her near the bedroom." }
-      ],
-      "Edward's Alibi": [
-        { speaker: "Watson", text: "Edward insists he was away on business, yet his carriage was spotted near the house." }
-      ],
-      "Bedroom Lock": [
-        { speaker: "Watson", text: "The bedroom door uses a code known only to family, and Edward uses that code for his study." }
-      ]
-    },
     after: [
-      { speaker: "Sherlock", text: "Keep that in mind. Now let's test your deductions." }
+      { speaker: "Sherlock", text: "Keep those details in mind. Now let's test your deductions." }
     ]
   },
   {
@@ -346,7 +319,7 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
       const finalStep = sherlockSteps[stepIndex];
       const correct = userGuess === finalCulprit;
       finalStep.messages = [
-        { speaker: 'Sherlock', text: 'You guessed it!' },
+        { speaker: 'Sherlock', text: correct ? 'You guessed it!' : 'Not quite.' },
         { speaker: 'Sherlock', text: correct ? `Excellent deduction! You've concluded that ${finalCulprit} was responsible.` : `Nice effort, but the culprit was ${finalCulprit}.` },
         { speaker: 'Sherlock', text: 'Reflect on how each clue fit together to reveal the truth.' },
         { speaker: 'Sherlock', text: 'Thank you for your time. Keep in touch if you want to practice solving more cases.' },
