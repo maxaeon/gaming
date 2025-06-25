@@ -649,7 +649,7 @@ button {
 
 #quote-sidebar.collapsed,
 #keyterm-sidebar.collapsed {
-  right: -228px; /* width minus visible handle */
+  right: -208px; /* width minus visible handle */
   transform: translateY(-50%);
 }
 
@@ -661,7 +661,7 @@ button {
   }
 
   #quote-sidebar.collapsed {
-    right: -228px;
+    right: -208px;
     transform: translateY(-50%);
   }
 }
@@ -676,16 +676,17 @@ button {
   border-radius: 6px 0 0 6px;
   padding: 6px;
   cursor: pointer;
+  z-index: 1100;
 }
 
 #quote-sidebar.collapsed #quote-toggle {
   position: fixed;
-  right: 0;
+  right: 20px;
 }
 
 #keyterm-sidebar.collapsed #keyterm-toggle {
   position: fixed;
-  right: 0;                /* match quote sidebar behavior */
+  right: 20px;                /* match quote sidebar behavior */
 }
 
 
@@ -701,6 +702,7 @@ button {
   cursor: pointer;
   width: 32px;
   text-align: center;
+  z-index: 1100;
 }
 
 #quote-text {
