@@ -73,7 +73,8 @@ function createKeyTermsSidebar(courseKey) {
   const color = courseColors[courseKey] || '#009688';
   sidebar.style.borderLeftColor = color;
   toggle.style.background = color;
-  toggle.addEventListener('click', () => {
+  toggle.addEventListener('click', (event) => {
+    event.stopPropagation();
     const collapsed = sidebar.classList.toggle('collapsed');
     toggle.innerHTML = collapsed ? '&lsaquo;' : '&rsaquo;';
   });
