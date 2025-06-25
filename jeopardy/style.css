@@ -1022,6 +1022,46 @@ button {
   color: #fff;
 }
 
+/* Scheme-specific speaker colors */
+.blue-mill { background: #90caf9; color: #000; }
+.blue-kant { background: #64b5f6; color: #000; }
+.blue-aquinas { background: #42a5f5; color: #fff; }
+.blue-aristotle { background: #2196f3; color: #fff; }
+.blue-noddings { background: #1e88e5; color: #fff; }
+.blue-student { background: #1976d2; color: #fff; }
+.blue-thales { background: #1565c0; color: #fff; }
+.blue-heraclitus { background: #0d47a1; color: #fff; }
+.blue-socrates { background: #82b1ff; color: #000; }
+.blue-plato { background: #5c6bc0; color: #fff; }
+.blue-sherlock { background: #3949ab; color: #fff; }
+.blue-watson { background: #283593; color: #fff; }
+
+.teal-mill { background: #80cbc4; color: #000; }
+.teal-kant { background: #4db6ac; color: #000; }
+.teal-aquinas { background: #26a69a; color: #fff; }
+.teal-aristotle { background: #009688; color: #fff; }
+.teal-noddings { background: #00897b; color: #fff; }
+.teal-student { background: #00796b; color: #fff; }
+.teal-thales { background: #00695c; color: #fff; }
+.teal-heraclitus { background: #004d40; color: #fff; }
+.teal-socrates { background: #a7ffeb; color: #000; }
+.teal-plato { background: #64ffda; color: #000; }
+.teal-sherlock { background: #1de9b6; color: #000; }
+.teal-watson { background: #00bfa5; color: #fff; }
+
+.purple-mill { background: #ce93d8; color: #000; }
+.purple-kant { background: #ba68c8; color: #fff; }
+.purple-aquinas { background: #ab47bc; color: #fff; }
+.purple-aristotle { background: #9c27b0; color: #fff; }
+.purple-noddings { background: #8e24aa; color: #fff; }
+.purple-student { background: #7b1fa2; color: #fff; }
+.purple-thales { background: #6a1b9a; color: #fff; }
+.purple-heraclitus { background: #4a148c; color: #fff; }
+.purple-socrates { background: #e1bee7; color: #000; }
+.purple-plato { background: #b39ddb; color: #000; }
+.purple-sherlock { background: #9575cd; color: #000; }
+.purple-watson { background: #7e57c2; color: #fff; }
+
 .typing {
   opacity: 0.6;
   font-style: italic;
