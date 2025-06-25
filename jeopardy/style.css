@@ -819,6 +819,10 @@ button {
   text-align: left;
   border: 2px solid #444;
   box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  width: 90%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .chat-message {
