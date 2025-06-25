@@ -816,6 +816,15 @@ button {
 
 .chat-message {
   margin: 6px 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.chat-message img.profile-pic {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 6px;
 }
 
 .chat-user {
@@ -830,6 +839,8 @@ button {
   color: #c0c0c0;
   font-style: italic;
   text-align: center;
+  display: block;
+  width: 100%;
 }
 
 #chat-controls {
