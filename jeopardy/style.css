@@ -823,6 +823,11 @@ button {
   margin: 6px 0;
   display: flex;
   align-items: flex-start;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: #333;
+  color: #fff;
+  max-width: 80%;
 }
 
 .chat-message img.profile-pic {
@@ -837,6 +842,8 @@ button {
   justify-content: flex-end;
   margin-left: auto;
   text-align: right;
+  background: var(--accent-light);
+  color: #000;
 }
 
 .chat-message.chat-user img.profile-pic {
@@ -845,11 +852,13 @@ button {
 }
 
 .chat-user {
-  color: var(--accent-light);
+  background: var(--accent-light);
+  color: #000;
 }
 
 .chat-bot {
-  color: #80cbc4;
+  background: #444;
+  color: #fff;
 }
 
 .chat-notice {
@@ -877,52 +886,64 @@ button {
 
 /* Generic chat styles used by multiple chatbot pages */
 .user {
-  color: var(--accent-light);
+  background: var(--accent-light);
+  color: #000;
 }
 
 .bot {
-  color: #80cbc4;
+  background: #444;
+  color: #fff;
 }
 
 /* Individual speaker colors */
 .speaker-mill {
-  color: var(--accent-color);
+  background: var(--accent-color);
+  color: #fff;
 }
 
 .speaker-kant {
-  color: #ff9800;
+  background: #ff9800;
+  color: #000;
 }
 
 .speaker-aquinas {
-  color: #f44336;
+  background: #f44336;
+  color: #fff;
 }
 
 .speaker-aristotle {
-  color: #ffeb3b;
+  background: #ffeb3b;
+  color: #000;
 }
 
 .speaker-noddings {
-  color: #e91e63;
+  background: #e91e63;
+  color: #fff;
 }
 
 .speaker-student {
-  color: var(--accent-color);
+  background: var(--accent-color);
+  color: #fff;
 }
 
 .speaker-thales {
-  color: #2196f3;
+  background: #2196f3;
+  color: #fff;
 }
 
 .speaker-heraclitus {
-  color: #ff5722;
+  background: #ff5722;
+  color: #fff;
 }
 
 .speaker-socrates {
-  color: #009688;
+  background: #009688;
+  color: #fff;
 }
 
 .speaker-plato {
-  color: #795548;
+  background: #795548;
+  color: #fff;
 }
 
 .typing {
