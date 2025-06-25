@@ -51,7 +51,7 @@ const case1Steps = [
       { speaker: "Holmes", text: "We now have conflicting testimony about Alexander's whereabouts. How might this discrepancy be explained?" }
     ],
     choices: [
-      "Alexander has a twin",
+      "Mistaken identity",
       "One witness is lying",
       "Poor lighting or eyesight"
     ],
