@@ -573,7 +573,7 @@ button {
 }
 
 #course-sidebar.collapsed {
-  transform: translateX(calc(-100% + 40px));
+  transform: translateX(calc(-100% + 80px));
 }
 
 @media (min-width: 768px) {
@@ -582,21 +582,22 @@ button {
   }
 
   #course-sidebar.collapsed {
-    transform: translateX(calc(-100% + 40px));
+    transform: translateX(calc(-100% + 80px));
   }
 }
 
 #course-toggle {
   position: absolute;
-  right: -40px;
+  right: -80px;
   top: 10px;
   background: #1e1e1e;
-  color: #ffeb3b;
+  color: #9c27b0;
   border: none;
   border-radius: 0 6px 6px 0;
   padding: 6px;
   cursor: pointer;
-  width: 40px;
+  width: 80px;
+  font-size: 32px;
   text-align: center;
 }
 
@@ -628,7 +629,7 @@ button {
 }
 
 #course-sidebar a[data-course="writing"] {
-  color: #424242;
+  color: #ffffff;
 }
 
 /* Hide sidebar visually but keep it in the DOM for screen readers */
