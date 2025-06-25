@@ -1,7 +1,7 @@
 const philosophyChatSteps = [
   {
     messages: [
-      { speaker: "Philosophy Student", text: "Hey there! I’m also a student learning philosophy and computer science. Ancient Greek philosophy can feel pretty abstract, so I created this AI chat to talk directly with philosophers like Thales, Socrates, and Plato. Ready to explore reality and existence together?" },
+      { speaker: "Philosophy Student", text: "Hey there! I’m studying philosophy and also a bit of computer science. Ancient Greek philosophy can feel pretty abstract, so I created this AI chat to talk directly with philosophers like Thales, Socrates, and Plato. Ready to explore reality and existence together?" },
       { speaker: "Philosophy Student", text: "In ancient times, people explained reality through myths and gods. Thales suggested rational observation is better. Do you agree with him that rational explanations really help us understand reality clearly?" }
     ],
     choices: ["Yes", "No", "Unsure"],
@@ -49,7 +49,7 @@ const philosophyChatSteps = [
   },
   {
     messages: [
-      { speaker: "Heraclitus", text: "Precisely! I'm Heraclitus. Think of reality as a river—always flowing, never the same twice. Change is the ultimate truth." },
+      { speaker: "Heraclitus", text: "Precisely! Think of reality as a river—always flowing, never the same twice. Change is the ultimate truth." },
       { speaker: "Philosophy Student", text: "But if everything is changing, how can we ever have lasting knowledge of anything?" }
     ],
     choices: ["We can have lasting knowledge", "We can’t", "Unsure"],
@@ -72,7 +72,7 @@ const philosophyChatSteps = [
   },
   {
     messages: [
-      { speaker: "Socrates", text: "Exactly right! I'm Socrates, and I believe we must always question our assumptions. Admitting our ignorance is the first step toward real wisdom." },
+      { speaker: "Socrates", text: "Exactly right! I believe we must always question our assumptions. Admitting our ignorance is the first step toward real wisdom." },
       { speaker: "Philosophy Student", text: "Is constantly questioning our beliefs really helpful? Doesn't it just lead us to confusion?" }
     ],
     choices: ["Helpful", "Leads to confusion", "Unsure"],
@@ -112,14 +112,14 @@ const philosophyChatSteps = [
     },
     after: [
       { speaker: "System", text: "Aristotle entered the chat", className: "chat-notice" },
-      { speaker: "Aristotle", text: "Plato, your ideal Forms sound attractive—but isn't reality found in observable things around us rather than in abstract ideals?" },
+      { speaker: "Aristotle", text: "Plato's ideal Forms sound attractive—but isn't reality found in observable things around us rather than in abstract ideals?" },
       { speaker: "Philosophy Student", text: "Aristotle, you seem skeptical about Plato’s Forms. Do you think we should rely entirely on observing nature to understand reality?" }
     ]
   },
   {
     messages: [
-      { speaker: "Aristotle", text: "Exactly! I'm Aristotle. While Plato seeks abstract ideals, I think we must start with observing the real world. Reality is understood by seeing how things fulfill their natural purposes, or telos—for example, an acorn naturally becomes an oak." },
-      { speaker: "Philosophy Student", text: "Is observing nature truly enough to understand all reality?" }
+      { speaker: "Aristotle", text: "Exactly! While Plato seeks abstract ideals, I think we must start with observing the real world. Reality is understood by seeing how things fulfill their natural purposes, or telos—for example, an acorn naturally becomes an oak." },
+      { speaker: "Philosophy Student", text: "Do you agree with Aristotle that observing nature is enough to understand all reality?" }
     ],
     choices: ["Yes", "No", "Unsure"],
     responses: {
@@ -134,7 +134,6 @@ const philosophyChatSteps = [
       ]
     },
     after: [
-      { speaker: "System", text: "Plato entered the chat", className: "chat-notice" },
       { speaker: "Plato", text: "Observation is indeed crucial, Aristotle. But without ideals guiding us, might our observations become aimless?" },
       { speaker: "Philosophy Student", text: "This conversation really clarified some deep metaphysical ideas for me! Did it help you, too? Philosophy may seem abstract at first, but talking it through like this definitely makes it clearer. Let’s keep exploring!" }
     ]
