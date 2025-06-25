@@ -286,7 +286,14 @@ const philosophyChatSteps = [
 
   async function showStep() {
     const step = philosophyChatSteps[stepIndex];
-    for (const m of step.messages) {
+    const messages = step.messages.slice();
+    if (step.choices && userName && messages.length) {
+      const last = messages[messages.length - 1];
+      if (/\?\s*$/.test(last.text)) {
+        last.text = last.text.replace(/\?\s*$/, `, ${userName}?`);
+      }
+    }
+    for (const m of messages) {
       await addMessage(m.speaker, m.text, m.className);
     }
     if (step.choices) {
