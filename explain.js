@@ -64,6 +64,69 @@ const explainData = {
   ],
   "Disjunctive Syllogism": [
     "A valid argument form structured as: Either P or Q; not P; therefore, Q."
+  ],
+  "Socratic Method": [
+    "A style of inquiry using pointed questions to reveal contradictions and stimulate critical thinking."
+  ],
+  "Forms": [
+    "Plato's eternal, perfect realities that particular things imitate."
+  ],
+  "Prime Mover": [
+    "Aristotle's first cause that initiates motion without itself changing."
+  ],
+  "Stoicism": [
+    "An ancient philosophy teaching virtue and acceptance of fate in accordance with nature."
+  ],
+  "Ontological Argument": [
+    "A reasoning that God's existence follows from the very concept of the greatest conceivable being."
+  ],
+  "Rationalism": [
+    "The view that reason is the primary source of knowledge, independent of sense experience."
+  ],
+  "Empiricism": [
+    "The theory that all knowledge comes from sensory experience."
+  ],
+  "Confirmation Bias": [
+    "Tendency to favor evidence that supports our existing beliefs while ignoring contrary information."
+  ],
+  "Sociocentrism": [
+    "Uncritical acceptance of the beliefs and values of one's social group."
+  ],
+  "Premise Indicator": [
+    "A word or phrase, such as 'because' or 'since', that signals supporting statements in an argument."
+  ],
+  "Conclusion Indicator": [
+    "A word or phrase, like 'therefore', that introduces the claim being inferred from premises."
+  ],
+  "Counterexample": [
+    "An instance showing that a general claim or argument can be false even when its premises appear true."
+  ],
+  "Ad Hominem": [
+    "A fallacy attacking the person making an argument instead of the argument itself."
+  ],
+  "Subjective Relativism": [
+    "The idea that an action is right if it is approved by the individual doing it."
+  ],
+  "Ethical Egoism": [
+    "The theory that one ought to act in ways that maximize one's own good."
+  ],
+  "Utilitarianism": [
+    "The view that morally right actions produce the greatest overall happiness for everyone affected."
+  ],
+  "Hypothetical Syllogism": [
+    "A valid argument form: If P then Q; if Q then R; therefore, if P then R."
+  ],
+  "Categorical Proposition": [
+    "A statement asserting or denying a relation between two classes, such as 'All S are P'."
+  ],
+  "Universal Affirmative": [
+    "A categorical proposition of the form 'All S are P'."
+  ],
+  "Universal Negative": [
+    "A categorical proposition of the form 'No S are P'."
+  ],
+  "Truth Table": [
+    "A chart listing truth values of compound statements for every possible combination of their components."
   ]
 };
 

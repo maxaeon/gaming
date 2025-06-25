@@ -12,13 +12,26 @@ function createKeyTermsSidebar(courseKey) {
     introPhilosophy: [
       'Dualism',
       'Materialism',
-      'Natural Law'
+      'Natural Law',
+      'Socratic Method',
+      'Forms',
+      'Prime Mover',
+      'Stoicism',
+      'Ontological Argument',
+      'Rationalism',
+      'Empiricism'
     ],
     criticalThinking: [
       'Deductive Argument',
       'Inductive Argument',
       'Logical Fallacy',
-      'Fact Verification'
+      'Fact Verification',
+      'Confirmation Bias',
+      'Sociocentrism',
+      'Premise Indicator',
+      'Conclusion Indicator',
+      'Counterexample',
+      'Ad Hominem'
     ],
     ethics: [
       'Categorical Imperative',
@@ -28,14 +41,22 @@ function createKeyTermsSidebar(courseKey) {
       'Eudaimonia',
       'Practical Wisdom',
       'Philosophical Bullshit',
-      'Environmental Impact of AI'
+      'Environmental Impact of AI',
+      'Subjective Relativism',
+      'Ethical Egoism',
+      'Utilitarianism'
     ],
     logic: [
       'Validity',
       'Soundness',
       'Modus Ponens',
       'Modus Tollens',
-      'Disjunctive Syllogism'
+      'Disjunctive Syllogism',
+      'Hypothetical Syllogism',
+      'Categorical Proposition',
+      'Universal Affirmative',
+      'Universal Negative',
+      'Truth Table'
     ]
   };
   const terms = termMap[courseKey];
