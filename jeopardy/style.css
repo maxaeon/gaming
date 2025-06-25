@@ -644,7 +644,7 @@ button {
   top: 50%;
   transform: translateY(-50%);
   background: #1e1e1e;
-  border-left: 7px solid #7b1fa2;
+  border-left: 12px solid #7b1fa2;
   padding: 10px;
   width: 260px;
   max-width: 80vw;
@@ -658,7 +658,7 @@ button {
   top: 50%;
   transform: translateY(-50%);
   background: #1e1e1e;
-  border-left: 7px solid #009688;
+  border-left: 12px solid #009688;
   padding: 10px;
   width: 260px;
   max-width: 80vw;
@@ -670,7 +670,7 @@ button {
 
 #quote-sidebar.collapsed,
 #keyterm-sidebar.collapsed {
-  right: -263px; /* shift further off-screen */
+  right: -273px; /* shift further off-screen */
   transform: translateY(-50%);
 }
 
@@ -682,14 +682,14 @@ button {
   }
 
   #quote-sidebar.collapsed {
-    right: -263px;
+    right: -273px;
     transform: translateY(-50%);
   }
 }
 
 #keyterm-sidebar.collapsed #keyterm-toggle {
   position: fixed;
-  right: 32px; /* keep handle aligned with collapsed sidebar */
+  right: 42px; /* keep handle aligned with collapsed sidebar */
 }
 
 
