@@ -271,7 +271,9 @@ const philosophyChatSteps = [
     const schemeMap = schemeSpeakerClasses[scheme] || {};
     const schemeClass = schemeMap[speaker];
     div.className = `chat-message ${baseClass}`;
-    if (scheme === 'speaker' && className && baseClass !== className) {
+    if (speaker === 'System' || className === 'chat-notice') {
+      div.classList.add('chat-notice');
+    } else if (scheme === 'speaker' && className && baseClass !== className) {
       div.classList.add(className);
     } else if (schemeClass) {
       div.classList.add(schemeClass);
@@ -346,7 +348,9 @@ const philosophyChatSteps = [
       const schemeMap = schemeSpeakerClasses[scheme] || {};
       const schemeClass = schemeMap[speaker];
       m.className = `chat-message ${base}`;
-      if (scheme === 'speaker' && speakerClass && base !== speakerClass) {
+      if (speaker === 'System' || speakerClass === 'chat-notice') {
+        m.classList.add('chat-notice');
+      } else if (scheme === 'speaker' && speakerClass && base !== speakerClass) {
         m.classList.add(speakerClass);
       } else if (schemeClass) {
         m.classList.add(schemeClass);
