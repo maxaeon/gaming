@@ -244,7 +244,7 @@ const case2Steps = [
   },
   {
     messages: [
-      { speaker: "Watson", text: "Hidden Necklace: The maid later found the necklace tucked inside Lady Harper's writing desk." },
+      { speaker: "Watson", text: "Hidden Necklace: The maid later found the necklace tucked inside Lady Harper's writing desk, and Lady Harper had recently insured it for a large sum." },
       { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
     choices: ["Yes, that seems trustworthy.", "No, I'm unsure.", "It might be a misunderstanding."],
@@ -451,13 +451,21 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
     if (sherlockSteps[stepIndex] && sherlockSteps[stepIndex].summary) {
       const finalStep = sherlockSteps[stepIndex];
       const correct = userGuess === finalCulprit;
-      finalStep.messages = [
-        { speaker: 'Holmes', text: correct ? 'Exactly! We solved it together.' : 'Not quite.' },
-        { speaker: 'Holmes', text: correct ? `Excellent deduction! You've concluded that ${finalCulprit} was responsible.` : `Nice effort, but the culprit was ${finalCulprit}.` },
-        { speaker: 'Holmes', text: 'Reflect on how each clue fit together to reveal the truth.' },
-        { speaker: 'Holmes', text: 'Thank you for your time. Keep in touch if you want to practice solving more cases.' },
-        { speaker: 'System', text: 'Chat closed', className: 'chat-notice' }
-      ];
+      if (correct) {
+        finalStep.messages = [
+          { speaker: 'Holmes', text: 'Hold on. Let me look into this.' },
+          { speaker: 'Holmes', text: `You were right—I've spoken with ${finalCulprit}, and they're confessing now.` },
+          { speaker: 'Holmes', text: 'Thanks for your help.' },
+          { speaker: 'System', text: 'Chat closed', className: 'chat-notice' }
+        ];
+      } else {
+        finalStep.messages = [
+          { speaker: 'Holmes', text: 'Hold on. Let me look into this.' },
+          { speaker: 'Holmes', text: `When I asked ${userGuess} about the crime, ${finalCulprit} suddenly confessed. They're the real culprit.` },
+          { speaker: 'Holmes', text: 'Thanks for your help.' },
+          { speaker: 'System', text: 'Chat closed', className: 'chat-notice' }
+        ];
+      }
     }
     if (stepIndex < sherlockSteps.length) {
       await showStep();
