@@ -42,4 +42,5 @@ body.flashcard-page .container {
 
 #flashcard button {
   background-color: var(--flashcard-color);
+  color: #000;
 }

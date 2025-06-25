@@ -1134,7 +1134,7 @@ body.writing-page #writing-sections section {
 #flashcard button,
 #trivia-game button {
   background-color: #9c27b0;
-  color: #ffffff;
+  color: #000;
   border: none;
   padding: 10px 16px;
   margin: 4px;
