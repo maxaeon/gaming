@@ -13,7 +13,11 @@ const puzzles = [
       "Charles’s alibi vs. neighbor’s observation.",
       "Alexander vs. Charles regarding study access."
     ],
-    correct: 1
+    correct: [0, 1],
+    feedback: {
+      0: "Those statements about Alexander can't both be true, though Charles's alibi contradiction is stronger.",
+      1: "Right. Charles's alibi conflicts with his neighbor's observation."
+    }
   },
   {
     question: "Which piece of evidence most strongly implicates a suspect?",
@@ -73,11 +77,14 @@ function showPuzzle() {
 function selectOption(choice) {
   const pz = puzzles[currentPuzzle];
   const feedback = document.getElementById('puzzle-feedback');
-  if (choice === pz.correct) {
-    feedback.innerHTML = '<strong>Correct!</strong>';
+  const correctChoices = Array.isArray(pz.correct) ? pz.correct : [pz.correct];
+  const isCorrect = correctChoices.includes(choice);
+  const custom = pz.feedback && pz.feedback[choice];
+  if (isCorrect) {
+    feedback.innerHTML = `<strong>Correct!</strong> ${custom ? custom : ''}`;
     feedback.style.color = '#4caf50';
   } else {
-    feedback.innerHTML = 'Incorrect.';
+    feedback.innerHTML = custom ? custom : 'Incorrect.';
     feedback.style.color = '#c62828';
   }
   feedback.classList.remove('hidden');   feedback.hidden = false;
