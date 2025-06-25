@@ -835,6 +835,8 @@ button {
 .chat-message.chat-user {
   flex-direction: row-reverse;
   justify-content: flex-end;
+  margin-left: auto;
+  text-align: right;
 }
 
 .chat-message.chat-user img.profile-pic {
