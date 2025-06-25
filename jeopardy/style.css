@@ -686,7 +686,7 @@ button {
 
 #keyterm-sidebar.collapsed #keyterm-toggle {
   position: fixed;
-  right: 20px;                /* match quote sidebar behavior */
+  right: calc(20px + 32px); /* sit slightly left of sidebar */
 }
 
 
