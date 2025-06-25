@@ -1,6 +1,9 @@
 (function() {
   const chatBox = document.getElementById('chat-box');
   const controls = document.getElementById('chat-controls');
+  const extras = document.getElementById('chat-extras');
+  const colorToggle = extras ? extras.querySelector('#color-toggle') : null;
+  const emojiButtons = extras ? extras.querySelectorAll('.emoji-btn') : [];
   const bots = window.ethicalChatbots || {};
   let current = 'Philosophy Student';
   let exchangeIndex = 0;
@@ -25,12 +28,20 @@
     'Philosophy Student': '../assets/images/student.png'
   };
 
+  let useSpeakerColors = true;
+
   async function addMessage(speaker, text, className) {
     if (!className) {
       className = speakerClasses[speaker] || 'chat-bot';
     }
     const div = document.createElement('div');
-    div.className = `chat-message ${className}`;
+    div.dataset.speaker = speaker;
+    div.dataset.speakerClass = className;
+    const baseClass = speaker === 'You' ? 'chat-user' : 'chat-bot';
+    div.className = `chat-message ${baseClass}`;
+    if (useSpeakerColors && className && baseClass !== className) {
+      div.classList.add(className);
+    }
     const img = speakerImages[speaker]
       ? `<img src="${speakerImages[speaker]}" alt="${speaker}" class="profile-pic">`
       : '';
@@ -45,7 +56,7 @@
       div.innerHTML = `${img}<strong>${speaker}:</strong> ${text}`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } else {
-      div.innerHTML = `${img}<strong>${speaker}:</strong> ${text}`;
+      div.innerHTML = `${text} <strong>${speaker}</strong> ${img}`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
@@ -115,6 +126,32 @@
     if (ex.transition) await addMessage(current, ex.transition);
     await addMessage(current, ex.question);
     showOptions(ex.responses, ex.theoristView);
+  }
+
+  function updateColors() {
+    const msgs = chatBox.querySelectorAll('.chat-message');
+    msgs.forEach(m => {
+      const speakerClass = m.dataset.speakerClass;
+      const speaker = m.dataset.speaker;
+      const base = speaker === 'You' ? 'chat-user' : 'chat-bot';
+      m.className = `chat-message ${base}`;
+      if (useSpeakerColors && speakerClass && base !== speakerClass) {
+        m.classList.add(speakerClass);
+      }
+    });
+  }
+
+  if (colorToggle) {
+    colorToggle.addEventListener('click', () => {
+      useSpeakerColors = !useSpeakerColors;
+      updateColors();
+    });
+  }
+
+  if (emojiButtons.length) {
+    emojiButtons.forEach(btn => {
+      btn.addEventListener('click', () => addMessage('You', btn.textContent, 'chat-user'));
+    });
   }
 
   async function startConversation() {
