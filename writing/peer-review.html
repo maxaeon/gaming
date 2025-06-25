@@ -6,6 +6,23 @@
   <title>Φ interactive</title>
   <link rel="stylesheet" href="../jeopardy/style.css">
   <link rel="icon" href="../favicon.png" type="image/png">
+  <style>
+    #peer-review-form fieldset {
+      border: 2px solid var(--accent-color);
+      border-radius: 8px;
+      margin: 10px 0;
+      padding: 10px;
+      text-align: left;
+    }
+    #peer-review-form input[type="text"],
+    #peer-review-form input[type="date"],
+    #peer-review-form textarea {
+      width: 90%;
+    }
+    #print-review {
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <nav id="top-nav">
@@ -61,87 +78,110 @@
     </section>
 
     <section id="template" class="hidden" hidden>
-      <h2>Printable Peer Review Template</h2>
-      <p>View the full worksheet below or download a blank copy to print.</p>
-      <button id="download-template">Download Peer Review Template (PDF)</button>
+      <h2>Peer Review Form</h2>
+      <p>Fill out the form below and use the Print button to create a hard copy.</p>
+      <form id="peer-review-form">
+        <div class="review-row">
+          <label>Course Name:</label><br>
+          <input type="text" id="course-name">
+        </div>
+        <div class="review-row">
+          <label>Reviewer Name:</label><br>
+          <input type="text" id="reviewer-name">
+        </div>
+        <div class="review-row">
+          <label>Paper Author Name:</label><br>
+          <input type="text" id="author-name">
+        </div>
+        <div class="review-row">
+          <label>Paper Topic/Title:</label><br>
+          <input type="text" id="paper-title">
+        </div>
+        <div class="review-row">
+          <label>Date of Review:</label><br>
+          <input type="date" id="review-date">
+        </div>
 
-      <pre id="peer-review-template" style="white-space:pre-wrap;">
-📝 Comprehensive Peer Review Template
-📘 Philosophy Paper Peer Review Worksheet
-Course Name: ______________________________
-Reviewer Name: ____________________________
-Paper Author Name: ________________________
-Paper Topic/Title: _________________________
-Date of Review: ____________________________
+        <fieldset>
+          <legend>Step 1: Thesis Statement</legend>
+          <label>Is the thesis statement clear, specific, and argumentative?</label><br>
+          <label><input type="radio" name="thesis-clear" value="Yes"> Yes</label>
+          <label><input type="radio" name="thesis-clear" value="No"> No</label>
+          <label><input type="radio" name="thesis-clear" value="Partially"> Partially</label><br>
+          <label>Feedback:</label><br>
+          <textarea id="thesis-feedback" rows="3"></textarea>
+        </fieldset>
 
-✅ Step 1: Thesis Statement
-Is the thesis statement clear, specific, and argumentative?
+        <fieldset>
+          <legend>Step 2: Organization &amp; Clarity</legend>
+          <label>Does the paper have a clear logical structure?</label><br>
+          <label><input type="radio" name="organization-clear" value="Yes"> Yes</label>
+          <label><input type="radio" name="organization-clear" value="No"> No</label>
+          <label><input type="radio" name="organization-clear" value="Partially"> Partially</label><br>
+          <label>Feedback:</label><br>
+          <textarea id="org-feedback" rows="3"></textarea>
+        </fieldset>
 
- [ ] Yes    [ ] No    [ ] Partially
+        <fieldset>
+          <legend>Step 3: Quality of Argumentation</legend>
+          <label>Does each paragraph clearly support the thesis or main claim?</label><br>
+          <label><input type="radio" name="paragraph-support" value="Yes"> Yes</label>
+          <label><input type="radio" name="paragraph-support" value="No"> No</label>
+          <label><input type="radio" name="paragraph-support" value="Partially"> Partially</label><br>
+          <label>Does the author use clear evidence/examples from course texts or reputable sources?</label><br>
+          <label><input type="radio" name="evidence-use" value="Yes"> Yes</label>
+          <label><input type="radio" name="evidence-use" value="No"> No</label>
+          <label><input type="radio" name="evidence-use" value="Partially"> Partially</label><br>
+          <label>Feedback:</label><br>
+          <textarea id="argument-feedback" rows="3"></textarea>
+        </fieldset>
 
-Feedback:
-(Explain clearly how the thesis could be improved or strengthened.)
+        <fieldset>
+          <legend>Step 4: Citations and References</legend>
+          <label>Are in-text citations accurate, clear, and consistently formatted (MLA/APA)?</label><br>
+          <label><input type="radio" name="intext-citations" value="Yes"> Yes</label>
+          <label><input type="radio" name="intext-citations" value="No"> No</label>
+          <label><input type="radio" name="intext-citations" value="Partially"> Partially</label><br>
+          <label>Are all references on the reference page correctly formatted and relevant to the topic?</label><br>
+          <label><input type="radio" name="references-correct" value="Yes"> Yes</label>
+          <label><input type="radio" name="references-correct" value="No"> No</label>
+          <label><input type="radio" name="references-correct" value="Partially"> Partially</label><br>
+          <label>Feedback:</label><br>
+          <textarea id="citation-feedback" rows="3"></textarea>
+        </fieldset>
 
-📑 Step 2: Organization & Clarity
-Does the paper have a clear logical structure?
+        <fieldset>
+          <legend>Step 5: Style, Grammar, and Readability</legend>
+          <label>Is the writing clear, professional, and easy to understand?</label><br>
+          <label><input type="radio" name="style-clear" value="Yes"> Yes</label>
+          <label><input type="radio" name="style-clear" value="No"> No</label>
+          <label><input type="radio" name="style-clear" value="Partially"> Partially</label><br>
+          <label>Are there significant grammar, spelling, or punctuation issues?</label><br>
+          <label><input type="radio" name="grammar-issues" value="Yes"> Yes</label>
+          <label><input type="radio" name="grammar-issues" value="No"> No</label>
+          <label><input type="radio" name="grammar-issues" value="Partially"> Partially</label><br>
+          <label>Feedback:</label><br>
+          <textarea id="style-feedback" rows="3"></textarea>
+        </fieldset>
 
- [ ] Yes    [ ] No    [ ] Partially
-
-Feedback:
-(Clearly describe any areas where the argument's flow or structure could be improved.)
-
-📌 Step 3: Quality of Argumentation
-Does each paragraph clearly support the thesis or main claim?
-
- [ ] Yes    [ ] No    [ ] Partially
-
-Does the author use clear evidence/examples from course texts or reputable sources?
-
- [ ] Yes    [ ] No    [ ] Partially
-
-Feedback:
-(Clearly identify paragraphs that need better evidence or stronger support.)
-
-📖 Step 4: Citations and References
-Are in-text citations accurate, clear, and consistently formatted (MLA/APA)?
-
- [ ] Yes    [ ] No    [ ] Partially
-
-Are all references on the reference page correctly formatted and relevant to the topic?
-
- [ ] Yes    [ ] No    [ ] Partially
-
-Feedback:
-(Explicitly list examples of incorrect citations or formatting, and suggest improvements.)
-
-🚩 Step 5: Style, Grammar, and Readability
-Is the writing clear, professional, and easy to understand?
-
- [ ] Yes    [ ] No    [ ] Partially
-
-Are there significant grammar, spelling, or punctuation issues?
-
- [ ] Yes    [ ] No    [ ] Partially
-
-Feedback:
-(Provide specific suggestions for improving readability and style.)
-
-🗨️ Step 6: Constructive Summary
-Identify at least TWO strengths of the paper clearly:
-1. ________________________________________________________
-2. ________________________________________________________
-
-Clearly list at least TWO specific areas for improvement:
-1. ________________________________________________________
-2. ________________________________________________________
-
-Provide at least ONE concrete suggestion to help the author revise effectively:
-____________________________________________________________
-      </pre>
+        <fieldset>
+          <legend>Step 6: Constructive Summary</legend>
+          <label>Strength 1:</label><br>
+          <input type="text" id="strength1"><br>
+          <label>Strength 2:</label><br>
+          <input type="text" id="strength2"><br>
+          <label>Area for Improvement 1:</label><br>
+          <input type="text" id="improve1"><br>
+          <label>Area for Improvement 2:</label><br>
+          <input type="text" id="improve2"><br>
+          <label>Concrete Suggestion:</label><br>
+          <textarea id="suggestion" rows="3"></textarea>
+        </fieldset>
+      </form>
+      <button id="print-review">Print Review</button>
     </section>
   </div>
   <script src="peer-review.js"></script>
-  <script src="../vendor/jspdf.umd.min.js"></script>
   <script src="../explain.js"></script>
   <script src="../keyterms-sidebar.js"></script>
   <script src="../page-header.js"></script>
