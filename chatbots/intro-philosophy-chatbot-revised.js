@@ -7,18 +7,21 @@ const philosophyChatSteps = [
     choices: ["Yes", "No", "Unsure"],
     responses: {
       "Yes": [
-        { speaker: "System", text: "Philosophy Student added Thales to the chat", className: "chat-notice" },
+        { speaker: "System", text: "Thales entered the chat", className: "chat-notice" },
         { speaker: "Thales", text: "Absolutely! Rational thought helps us see the world clearly, without superstition." },
+        { speaker: "System", text: "Heraclitus entered the chat", className: "chat-notice" },
         { speaker: "Heraclitus", text: "Reason can help—but remember, reality itself never stays still." }
       ],
       "No": [
-        { speaker: "System", text: "Philosophy Student added Thales to the chat", className: "chat-notice" },
+        { speaker: "System", text: "Thales entered the chat", className: "chat-notice" },
         { speaker: "Thales", text: "Absolutely! Rational thought helps us see the world clearly, without superstition." },
+        { speaker: "System", text: "Heraclitus entered the chat", className: "chat-notice" },
         { speaker: "Heraclitus", text: "Reason can help—but remember, reality itself never stays still." }
       ],
       "Unsure": [
-        { speaker: "System", text: "Philosophy Student added Thales to the chat", className: "chat-notice" },
+        { speaker: "System", text: "Thales entered the chat", className: "chat-notice" },
         { speaker: "Thales", text: "Absolutely! Rational thought helps us see the world clearly, without superstition." },
+        { speaker: "System", text: "Heraclitus entered the chat", className: "chat-notice" },
         { speaker: "Heraclitus", text: "Reason can help—but remember, reality itself never stays still." }
       ]
     }
@@ -40,7 +43,6 @@ const philosophyChatSteps = [
       ]
     },
     after: [
-      { speaker: "System", text: "Thales added Heraclitus to the chat", className: "chat-notice" },
       { speaker: "Heraclitus", text: "But Thales, reality never holds still—how can one substance explain continuous change?" },
       { speaker: "Philosophy Student", text: "Good point, Heraclitus! You say everything changes constantly. Does that mean there’s no stability or permanence in reality at all?" }
     ]
@@ -63,7 +65,7 @@ const philosophyChatSteps = [
       ]
     },
     after: [
-      { speaker: "System", text: "Heraclitus added Socrates to the chat", className: "chat-notice" },
+      { speaker: "System", text: "Socrates entered the chat", className: "chat-notice" },
       { speaker: "Socrates", text: "Well said, Heraclitus. Real wisdom begins by admitting we know far less than we think." },
       { speaker: "Philosophy Student", text: "Socrates, you say true wisdom is recognizing how little we actually know. Does that mean we should question everything endlessly?" }
     ]
@@ -86,7 +88,7 @@ const philosophyChatSteps = [
       ]
     },
     after: [
-      { speaker: "System", text: "Socrates added Plato to the chat", className: "chat-notice" },
+      { speaker: "System", text: "Plato entered the chat", className: "chat-notice" },
       { speaker: "Plato", text: "Absolutely, Socrates. Constant questioning guides us to deeper truths beyond appearances." },
       { speaker: "Philosophy Student", text: "Plato, you talk about deeper truths or ideal realities—what you call 'Forms.' Are these ideal Forms really something beyond our everyday experiences?" }
     ]
@@ -109,7 +111,7 @@ const philosophyChatSteps = [
       ]
     },
     after: [
-      { speaker: "System", text: "Plato added Aristotle to the chat", className: "chat-notice" },
+      { speaker: "System", text: "Aristotle entered the chat", className: "chat-notice" },
       { speaker: "Aristotle", text: "Plato, your ideal Forms sound attractive—but isn't reality found in observable things around us rather than in abstract ideals?" },
       { speaker: "Philosophy Student", text: "Aristotle, you seem skeptical about Plato’s Forms. Do you think we should rely entirely on observing nature to understand reality?" }
     ]
@@ -132,7 +134,7 @@ const philosophyChatSteps = [
       ]
     },
     after: [
-      { speaker: "System", text: "Aristotle added Plato to the chat", className: "chat-notice" },
+      { speaker: "System", text: "Plato entered the chat", className: "chat-notice" },
       { speaker: "Plato", text: "Observation is indeed crucial, Aristotle. But without ideals guiding us, might our observations become aimless?" },
       { speaker: "Philosophy Student", text: "This conversation really clarified some deep metaphysical ideas for me! Did it help you, too? Philosophy may seem abstract at first, but talking it through like this definitely makes it clearer. Let’s keep exploring!" }
     ]
