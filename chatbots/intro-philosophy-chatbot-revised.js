@@ -1,7 +1,7 @@
 const philosophyChatSteps = [
   {
     messages: [
-      { speaker: "Philosophy Student", text: "Hey there! I’m studying philosophy and also a bit of computer science. Ancient Greek philosophy can feel pretty abstract, so I created this AI chat to talk directly with philosophers like Thales, Socrates, and Plato. Ready to explore reality and existence together?" },
+      { speaker: "Philosophy Student", text: "I’m studying philosophy and also a bit of computer science. Ancient Greek philosophy can feel pretty abstract, so I created this AI chat to talk directly with philosophers like Thales, Socrates, and Plato. Ready to explore reality and existence together?" },
       { speaker: "Philosophy Student", text: "In ancient times, people explained reality through myths and gods. Thales suggested rational observation is better. Do you agree with him that rational explanations really help us understand reality clearly?" }
     ],
     choices: ["Yes", "No", "Unsure"],
@@ -148,6 +148,7 @@ const philosophyChatSteps = [
   const emojiButtons = extras ? extras.querySelectorAll('.emoji-btn') : [];
   let stepIndex = 0;
   let awaitingChoice = false;
+  let userName = '';
   const speakerClasses = {
     'Philosophy Student': 'speaker-student',
     'Thales': 'speaker-thales',
@@ -261,6 +262,28 @@ const philosophyChatSteps = [
     });
   }
 
+  function askForName() {
+    return new Promise(resolve => {
+      controls.innerHTML = '';
+      const input = document.createElement('input');
+      input.type = 'text';
+      const btn = document.createElement('button');
+      btn.textContent = 'Submit';
+      btn.onclick = () => {
+        const val = input.value.trim();
+        if (!/^[A-Za-z]{1,15}$/.test(val)) {
+          alert('Please enter a valid name (letters only, up to 15 characters)');
+          return;
+        }
+        userName = val;
+        controls.innerHTML = '';
+        resolve();
+      };
+      controls.appendChild(input);
+      controls.appendChild(btn);
+    });
+  }
+
   async function showStep() {
     const step = philosophyChatSteps[stepIndex];
     for (const m of step.messages) {
@@ -281,6 +304,10 @@ const philosophyChatSteps = [
     }
   }
 
-  document.addEventListener('DOMContentLoaded', showStep);
+  document.addEventListener('DOMContentLoaded', async () => {
+    await addMessage('Philosophy Student', "Hey there! What's your name?");
+    await askForName();
+    showStep();
+  });
 })();
 
