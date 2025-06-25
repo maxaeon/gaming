@@ -5,7 +5,16 @@ const ethicalChatbots = {
     introduceMill: "First, let's meet John Stuart Mill, who thinks morality is about maximizing happiness.",
     finalAssessment: (userName, alignmentScores) => {
       return `This was great${userName ? `, ${userName}` : ""}! Which parts of each philosopher's theory resonated with you? Which ideas do you disagree with? Thanks for exploring ethics with me—I learned a lot too!`;
-    }
+    },
+    closingQuestion: "Which philosopher's approach do you find most compelling?",
+    closingResponses: {
+      "John Stuart Mill": "Utilitarianism centers morality on outcomes and happiness—an interesting choice!",
+      "Immanuel Kant": "Duty-based ethics is tough but principled. Kant would approve!",
+      "St. Thomas Aquinas": "Natural law and good intentions clearly resonate with you.",
+      "Aristotle": "Virtue ethics focuses on character and flourishing—great pick!",
+      "Nel Noddings": "An ethic of care puts relationships and empathy first."
+    },
+    farewell: "Take care, and keep pondering these perspectives!"
   },
 
   "John Stuart Mill": {

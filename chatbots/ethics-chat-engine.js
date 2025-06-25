@@ -121,7 +121,7 @@
       if (current === 'Sage') {
         const finalText = bots['Sage'].finalAssessment(userName, alignmentScores);
         await addMessage('Sage', finalText);
-        controls.innerHTML = '';
+        await showFinalReflection();
         return;
       }
       alignmentScores[current] = 0;
@@ -140,6 +140,41 @@
     }
     await addMessage(current, questionText);
     showOptions(ex.responses, ex.theoristView);
+  }
+
+  async function handleReflectionChoice(option, reply) {
+    if (!awaitingChoice) return;
+    awaitingChoice = false;
+    controls.querySelectorAll('button').forEach(b => b.disabled = true);
+    await addMessage('You', option, 'chat-user');
+    await addMessage('Sage', reply);
+    if (bots['Sage'].farewell) {
+      await addMessage('Sage', bots['Sage'].farewell);
+    }
+    await addMessage('System', 'Chat closed', 'chat-notice');
+    controls.innerHTML = '';
+  }
+
+  async function showFinalReflection() {
+    const question = bots['Sage'].closingQuestion;
+    const responses = bots['Sage'].closingResponses;
+    if (!question || !responses) {
+      if (bots['Sage'].farewell) {
+        await addMessage('Sage', bots['Sage'].farewell);
+      }
+      await addMessage('System', 'Chat closed', 'chat-notice');
+      return;
+    }
+    await addMessage('Sage', question);
+    awaitingChoice = true;
+    controls.innerHTML = '';
+    Object.keys(responses).forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      btn.onclick = () => handleReflectionChoice(opt, responses[opt]);
+      controls.appendChild(btn);
+    });
   }
 
   function updateColors() {
