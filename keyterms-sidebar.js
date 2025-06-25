@@ -1,3 +1,11 @@
+const courseColors = {
+  introPhilosophy: '#9c27b0',
+  criticalThinking: '#f44336',
+  ethics: '#2196f3',
+  logic: '#ffeb3b',
+  writing: '#424242'
+};
+
 function createKeyTermsSidebar(courseKey) {
   if (document.body.classList.contains('home')) return;
   const termMap = {
@@ -41,6 +49,9 @@ function createKeyTermsSidebar(courseKey) {
     `</ul></div>`;
   document.body.appendChild(sidebar);
   const toggle = sidebar.querySelector('#keyterm-toggle');
+  const color = courseColors[courseKey] || '#009688';
+  sidebar.style.borderLeftColor = color;
+  toggle.style.background = color;
   toggle.addEventListener('click', () => {
     const collapsed = sidebar.classList.toggle('collapsed');
     toggle.innerHTML = collapsed ? '&lsaquo;' : '&rsaquo;';
