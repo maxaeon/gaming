@@ -1,3 +1,8 @@
+:root {
+  --accent-color: #9c27b0;
+  --accent-light: #ce93d8;
+}
+
 body {
   background-color: #1e1e1e;
   color: #ffffff;
@@ -47,7 +52,7 @@ body {
 }
 
 #top-nav button {
-  background-color: #9c27b0;
+  background-color: var(--accent-color);
   color: white;
   border: none;
   padding: 10px 16px;
@@ -60,7 +65,7 @@ body {
 
 #top-nav button:hover {
   transform: translateY(-4px);
-  background-color: #7b1fa2;
+  background-color: var(--accent-color);
 }
 
 #top-nav button:active {
@@ -76,7 +81,7 @@ body {
 }
 
 a.button {
-  background-color: #9c27b0;
+  background-color: var(--accent-color);
   color: #111;
   padding: 10px 16px;
   margin: 0 8px;
@@ -88,12 +93,12 @@ a.button {
 
 a.button:hover {
   transform: translateY(-4px);
-  background-color: #7b1fa2;
+  background-color: var(--accent-color);
 }
 
 .help-link {
   margin-left: 8px;
-  color: #9c27b0;
+  color: var(--accent-color);
   text-decoration: none;
   cursor: pointer;
   font-size: 18px;
@@ -203,7 +208,7 @@ body.home #topic-selector .course {
 }
 
 #topic-selector button {
-  background-color: #9c27b0;
+  background-color: var(--accent-color);
   color: white;
   border: none;
   padding: 10px 16px;
@@ -229,19 +234,19 @@ body.home #topic-selector .course {
 
 /* Color coded course sections on the homepage */
 body.home .course[data-course="introPhilosophy"] {
-  border-color: #9c27b0;
+  border-color: var(--accent-color);
 }
 
 body.home .course[data-course="introPhilosophy"] h3 {
-  color: #9c27b0;
+  color: var(--accent-color);
 }
 
 body.home .course[data-course="introPhilosophy"] a.button {
-  background-color: #9c27b0;
+  background-color: var(--accent-color);
 }
 
 body.home .course[data-course="introPhilosophy"] a.button:hover {
-  background-color: #7b1fa2;
+  background-color: var(--accent-color);
 }
 
 body.home .course[data-course="criticalThinking"] {
@@ -387,7 +392,7 @@ body.home .game-links .review-btn {
 
 #topic-selector button:hover {
   transform: translateY(-4px);
-  background-color: #7b1fa2;
+  background-color: var(--accent-color);
 }
 
 #game-board {
@@ -398,7 +403,7 @@ body.home .game-links .review-btn {
 }
 
 .board-header {
-  background-color: #7b1fa2;
+  background-color: var(--accent-color);
   color: #fff;
   padding: 20px;
   border-radius: 6px;
@@ -406,7 +411,7 @@ body.home .game-links .review-btn {
 }
 
 .board-cell {
-  background-color: #ce93d8;
+  background-color: var(--accent-light);
   color: #000;
   padding: 20px;
   border-radius: 6px;
@@ -486,8 +491,8 @@ button {
   margin-top: 0;
 }
 
-#submit-answer { background: #8e24aa; color: white; }
-#cancel-btn, #restart-btn { background: #ba68c8; color: black; }
+#submit-answer { background: var(--accent-color); color: white; }
+#cancel-btn, #restart-btn { background: var(--accent-light); color: black; }
 
 /* Visual feedback for awarding points */
 #modal-content.answer-correct {
@@ -516,7 +521,7 @@ button {
 }
 
 .site-footer a {
-  color: #9c27b0;
+  color: var(--accent-color);
 }
 
 #scoreboard {
@@ -531,7 +536,7 @@ button {
 
 #progress {
   height: 8px;
-  background-color: #4caf50;
+  background-color: var(--accent-color);
   width: 0;
   margin-top: 8px;
   border-radius: 4px;
@@ -548,7 +553,7 @@ button {
 
 .course-progress-bar {
   height: 100%;
-  background-color: #4caf50;
+  background-color: var(--accent-color);
   width: 0;
   border-radius: 4px;
   transition: width 0.3s ease;
@@ -591,7 +596,7 @@ button {
   right: -80px;
   top: 10px;
   background: #1e1e1e;
-  color: #9c27b0;
+  color: var(--accent-color);
   border: none;
   border-radius: 0 6px 6px 0;
   padding: 6px;
@@ -613,7 +618,7 @@ button {
 }
 
 #course-sidebar a[data-course="introPhilosophy"] {
-  color: #9c27b0;
+  color: var(--accent-color);
 }
 
 #course-sidebar a[data-course="criticalThinking"] {
@@ -644,7 +649,7 @@ button {
   top: 50%;
   transform: translateY(-50%);
   background: #1e1e1e;
-  border-left: 12px solid #7b1fa2;
+  border-left: 12px solid var(--accent-color);
   padding: 10px;
   width: 260px;
   max-width: 80vw;
@@ -718,7 +723,7 @@ button {
 }
 
 #quote-next {
-  background: #ba68c8;
+  background: var(--accent-light);
   color: black;
 }
 
@@ -727,7 +732,7 @@ button {
 }
 
 #question-next {
-  background: #ba68c8;
+  background: var(--accent-light);
   color: black;
 }
 
@@ -742,7 +747,7 @@ button {
 }
 
 .option-btn {
-  background: #ba68c8;
+  background: var(--accent-light);
   color: black;
   border: none;
   padding: 8px 12px;
@@ -753,7 +758,7 @@ button {
 }
 
 .option-btn:hover {
-  background: #ce93d8;
+  background: var(--accent-color);
   transform: scale(1.05);
 }
 
@@ -828,7 +833,7 @@ button {
 }
 
 .chat-user {
-  color: #ba68c8;
+  color: var(--accent-light);
 }
 
 .chat-bot {
@@ -860,7 +865,7 @@ button {
 
 /* Generic chat styles used by multiple chatbot pages */
 .user {
-  color: #ba68c8;
+  color: var(--accent-light);
 }
 
 .bot {
@@ -869,7 +874,7 @@ button {
 
 /* Individual speaker colors */
 .speaker-mill {
-  color: #4caf50;
+  color: var(--accent-color);
 }
 
 .speaker-kant {
@@ -889,7 +894,7 @@ button {
 }
 
 .speaker-student {
-  color: #9c27b0;
+  color: var(--accent-color);
 }
 
 .speaker-thales {
@@ -949,7 +954,7 @@ button {
 }
 
 .citation-part.selected {
-  background-color: #4caf50;
+  background-color: var(--accent-color);
 }
 
 .error-highlight {
@@ -972,7 +977,7 @@ button {
   right: 0;
   top: 35px;
   height: 10px;
-  background: linear-gradient(to right, #4caf50, #ff9800, #e91e63);
+  background: linear-gradient(to right, var(--accent-color), #ff9800, #e91e63);
   border-radius: 5px;
 }
 
@@ -1071,7 +1076,7 @@ button {
   margin-top: 6px;
   background: #121212;
   color: #fff;
-  border: 1px solid #7b1fa2;
+  border: 1px solid var(--accent-color);
   border-radius: 4px;
   padding: 6px;
 }
@@ -1150,7 +1155,7 @@ body.writing-page #writing-sections section {
 
 #flashcard button,
 #trivia-game button {
-  background-color: #9c27b0;
+  background-color: var(--accent-color);
   color: #000;
   border: none;
   padding: 10px 16px;
@@ -1213,7 +1218,7 @@ body.writing-page #writing-sections section {
 
 #works-cited-examples > div {
   flex: 1;
-  border: 1px solid #7b1fa2;
+  border: 1px solid var(--accent-color);
   padding: 10px;
   border-radius: 8px;
 }
@@ -1232,7 +1237,7 @@ body.writing-page #writing-sections section {
   font-style: italic;
   font-weight: bold;
   cursor: pointer;
-  border-bottom: 1px dotted #7b1fa2;
+  border-bottom: 1px dotted var(--accent-color);
 }
 
 .explain-overlay {
