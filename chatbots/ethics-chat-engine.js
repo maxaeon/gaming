@@ -8,6 +8,7 @@
   let current = 'Philosophy Student';
   let exchangeIndex = 0;
   let awaitingChoice = false;
+  let userName = '';
   const alignmentScores = {};
   const speakerClasses = {
     'John Stuart Mill': 'speaker-mill',
@@ -96,11 +97,11 @@
         const score = alignmentScores[current] || 0;
         let closing;
         if (score === exchanges.length) {
-          closing = data.closings.highAlignment('');
+          closing = data.closings.highAlignment(userName);
         } else if (score > 0) {
-          closing = data.closings.moderateAlignment('');
+          closing = data.closings.moderateAlignment(userName);
         } else {
-          closing = data.closings.lowAlignment('');
+          closing = data.closings.lowAlignment(userName);
         }
         await addMessage(current, closing);
       }
@@ -109,14 +110,14 @@
       current = next;
       exchangeIndex = 0;
       if (current === 'Philosophy Student') {
-        const finalText = bots['Philosophy Student'].finalAssessment('', alignmentScores);
+        const finalText = bots['Philosophy Student'].finalAssessment(userName, alignmentScores);
         await addMessage('Philosophy Student', finalText);
         controls.innerHTML = '';
         return;
       }
       alignmentScores[current] = 0;
       const greet = typeof bots[current].greeting === 'function'
-        ? bots[current].greeting('')
+        ? bots[current].greeting(userName)
         : bots[current].greeting;
       await addMessage(current, greet);
       setTimeout(showExchange, 500);
@@ -154,9 +155,33 @@
     });
   }
 
+  function askForName() {
+    return new Promise(resolve => {
+      controls.innerHTML = '';
+      const input = document.createElement('input');
+      input.type = 'text';
+      const btn = document.createElement('button');
+      btn.textContent = 'Submit';
+      btn.onclick = () => {
+        const val = input.value.trim();
+        if (!/^[A-Za-z]{1,15}$/.test(val)) {
+          alert('Please enter a valid name (letters only, up to 15 characters)');
+          return;
+        }
+        userName = val;
+        controls.innerHTML = '';
+        resolve();
+      };
+      controls.appendChild(input);
+      controls.appendChild(btn);
+    });
+  }
+
   async function startConversation() {
+    await addMessage('Philosophy Student', "Hey there! What's your name?");
+    await askForName();
     const student = bots['Philosophy Student'];
-    const greet = typeof student.greeting === 'function' ? student.greeting('') : student.greeting;
+    const greet = typeof student.greeting === 'function' ? student.greeting(userName) : student.greeting;
     await addMessage('Philosophy Student', greet);
     if (student.introduceMill) {
       await addMessage('Philosophy Student', student.introduceMill);
@@ -164,7 +189,7 @@
     current = 'John Stuart Mill';
     alignmentScores[current] = 0;
     const firstGreet = typeof bots[current].greeting === 'function'
-      ? bots[current].greeting('')
+      ? bots[current].greeting(userName)
       : bots[current].greeting;
     await addMessage(current, firstGreet);
     showExchange();
