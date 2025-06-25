@@ -41,7 +41,7 @@ function createCourseSidebar() {
     <button id="course-toggle" aria-label="Toggle course links">&#9776;</button>
     <nav>
       <a href="${home}#introPhilosophy">Intro</a>
-      <a href="${home}#criticalThinking">Critical</a>
+      <a href="${home}#criticalThinking">Reasoning</a>
       <a href="${home}#ethics">Ethics</a>
       <a href="${home}#logic">Logic</a>
       <a href="${home}#writing">Writing</a>
