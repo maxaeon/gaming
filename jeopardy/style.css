@@ -649,7 +649,7 @@ button {
 
 #quote-sidebar.collapsed,
 #keyterm-sidebar.collapsed {
-  right: -208px; /* width minus visible handle */
+  right: -238px; /* shift further off-screen */
   transform: translateY(-50%);
 }
 
@@ -661,14 +661,14 @@ button {
   }
 
   #quote-sidebar.collapsed {
-    right: -208px;
+    right: -238px;
     transform: translateY(-50%);
   }
 }
 
 #keyterm-sidebar.collapsed #keyterm-toggle {
   position: fixed;
-  right: calc(20px + 32px); /* sit slightly left of sidebar */
+  right: 22px; /* keep handle aligned with collapsed sidebar */
 }
 
 
