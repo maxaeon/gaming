@@ -32,6 +32,10 @@
   const colorSchemes = ['speaker', 'blue', 'teal', 'purple'];
   let colorSchemeIndex = 0;
 
+  function getTimestamp() {
+    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
   async function addMessage(speaker, text, className) {
     if (!className) {
       className = speakerClasses[speaker] || 'chat-bot';
@@ -50,6 +54,7 @@
     const img = speakerImages[speaker]
       ? `<img src="${speakerImages[speaker]}" alt="${speaker}" class="profile-pic">`
       : '';
+    const time = `<div class="timestamp">${getTimestamp()}</div>`;
     if (speaker !== 'You') {
       div.innerHTML = `${img}<strong>${speaker}:</strong> <span class="typing">…</span>`;
       chatBox.appendChild(div);
@@ -58,10 +63,10 @@
       const extraDelay = Math.min(2000, text.length * 20);
       const delay = baseDelay + Math.random() * extraDelay;
       await new Promise(res => setTimeout(res, delay));
-      div.innerHTML = `${img}<strong>${speaker}:</strong> ${text}`;
+      div.innerHTML = `${img}<strong>${speaker}:</strong> ${text}${time}`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } else {
-      div.innerHTML = `${text} <strong>${speaker}</strong> ${img}`;
+      div.innerHTML = `${img}<strong>${speaker}:</strong> ${text}${time}`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
@@ -173,14 +178,18 @@
       input.type = 'text';
       const btn = document.createElement('button');
       btn.textContent = 'Submit';
-      btn.onclick = () => {
-        const val = input.value.trim();
+      btn.onclick = async () => {
+        let val = input.value.trim();
         if (!/^[A-Za-z]{1,15}$/.test(val)) {
           alert('Please enter a valid name (letters only, up to 15 characters)');
           return;
         }
+        if (val === val.toLowerCase()) {
+          val = val.charAt(0).toUpperCase() + val.slice(1);
+        }
         userName = val;
         controls.innerHTML = '';
+        await addMessage('You', userName, 'chat-user');
         resolve();
       };
       controls.appendChild(input);

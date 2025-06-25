@@ -999,6 +999,17 @@ button {
   font-style: italic;
 }
 
+.timestamp {
+  font-size: 0.7em;
+  opacity: 0.7;
+  margin-top: 2px;
+  display: block;
+}
+
+.chat-message.chat-user .timestamp {
+  text-align: right;
+}
+
 /* Tooltip styling for inline info spans */
 .info {
   text-decoration: underline dotted;
