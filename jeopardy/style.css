@@ -156,7 +156,8 @@ body.home {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin: 20px auto 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .home-container #quote-sidebar {
@@ -191,7 +192,7 @@ html.review #quote-sidebar {
 body.home #topic-selector {
   position: static;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 12px;
   margin-top: 20px;
 }
@@ -222,7 +223,7 @@ body.home #topic-selector .course {
   background: #111;
   padding: 16px;
   border-radius: 8px;
-  width: 260px;
+  min-width: 320px;
   border-left: 8px solid transparent;
 }
 
