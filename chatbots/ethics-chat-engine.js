@@ -26,7 +26,8 @@
       'St. Thomas Aquinas': 'blue-aquinas',
       'Aristotle': 'blue-aristotle',
       'Nel Noddings': 'blue-noddings',
-      'Sage': 'blue-student'
+      'Sage': 'blue-student',
+      'You': 'blue-user'
     },
     teal: {
       'John Stuart Mill': 'teal-mill',
@@ -34,7 +35,8 @@
       'St. Thomas Aquinas': 'teal-aquinas',
       'Aristotle': 'teal-aristotle',
       'Nel Noddings': 'teal-noddings',
-      'Sage': 'teal-student'
+      'Sage': 'teal-student',
+      'You': 'teal-user'
     },
     purple: {
       'John Stuart Mill': 'purple-mill',
@@ -42,7 +44,8 @@
       'St. Thomas Aquinas': 'purple-aquinas',
       'Aristotle': 'purple-aristotle',
       'Nel Noddings': 'purple-noddings',
-      'Sage': 'purple-student'
+      'Sage': 'purple-student',
+      'You': 'purple-user'
     }
   };
 

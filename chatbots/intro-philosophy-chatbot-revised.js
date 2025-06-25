@@ -222,7 +222,8 @@ const philosophyChatSteps = [
       'Heraclitus': 'blue-heraclitus',
       'Socrates': 'blue-socrates',
       'Plato': 'blue-plato',
-      'Aristotle': 'blue-aristotle'
+      'Aristotle': 'blue-aristotle',
+      'You': 'blue-user'
     },
     teal: {
       'Sage': 'teal-student',
@@ -230,7 +231,8 @@ const philosophyChatSteps = [
       'Heraclitus': 'teal-heraclitus',
       'Socrates': 'teal-socrates',
       'Plato': 'teal-plato',
-      'Aristotle': 'teal-aristotle'
+      'Aristotle': 'teal-aristotle',
+      'You': 'teal-user'
     },
     purple: {
       'Sage': 'purple-student',
@@ -238,7 +240,8 @@ const philosophyChatSteps = [
       'Heraclitus': 'purple-heraclitus',
       'Socrates': 'purple-socrates',
       'Plato': 'purple-plato',
-      'Aristotle': 'purple-aristotle'
+      'Aristotle': 'purple-aristotle',
+      'You': 'purple-user'
     }
   };
 
