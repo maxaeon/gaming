@@ -122,7 +122,7 @@ function ensureMainId() {
 function initPageHeader() {
   const params = new URLSearchParams(window.location.search);
   const header = document.getElementById('page-header');
-  let courseKey = params.get('course');
+  let courseKey = params.get('course') || params.get('topic');
   if (!courseKey && header) {
     courseKey = header.dataset.defaultCourse;
   }
