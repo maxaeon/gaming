@@ -153,7 +153,44 @@ const philosophyChatSteps = [
     },
     after: [
       { speaker: "Plato", text: "Observation is indeed crucial, Aristotle. But without ideals guiding us, might our observations become aimless?" },
-      { speaker: "Sage", text: "This conversation really clarified some deep metaphysical ideas for me! Did it help you, too? Philosophy may seem abstract at first, but talking it through like this definitely makes it clearer. Let’s keep exploring!" }
+      { speaker: "Sage", text: "This conversation really clarified some deep metaphysical ideas for me! Did it help you, too? Philosophy may seem abstract at first, but talking it through like this definitely makes it clearer." }
+    ]
+  },
+  {
+    messages: [
+      { speaker: "Sage", text: "Before we wrap up, which philosopher's view stood out to you?" }
+    ],
+    choices: [
+      "Thales on rational observation",
+      "Heraclitus on constant change",
+      "Socrates on questioning",
+      "Plato on ideal Forms",
+      "Aristotle on observation",
+      "I liked them all"
+    ],
+    responses: {
+      "Thales on rational observation": [
+        { speaker: "Sage", text: "Thales laid the groundwork for scientific thinking. It's great that his focus on reason resonated with you." }
+      ],
+      "Heraclitus on constant change": [
+        { speaker: "Sage", text: "Heraclitus reminds us that everything flows, which can be a refreshing way to see the world." }
+      ],
+      "Socrates on questioning": [
+        { speaker: "Sage", text: "Socrates shows how asking the right questions can lead to wisdom. Keep that curiosity going!" }
+      ],
+      "Plato on ideal Forms": [
+        { speaker: "Sage", text: "Plato's realm of Forms invites us to look beyond appearances toward deeper truths." }
+      ],
+      "Aristotle on observation": [
+        { speaker: "Sage", text: "Aristotle grounds philosophy in what we can observe and test. It's a solid approach." }
+      ],
+      "I liked them all": [
+        { speaker: "Sage", text: "Fantastic! Each philosopher adds a piece to the puzzle." }
+      ]
+    },
+    after: [
+      { speaker: "Sage", text: "Thanks for chatting about philosophy with me. Goodbye!" },
+      { speaker: "System", text: "Chat closed", className: "chat-notice" }
     ]
   }
 ];
