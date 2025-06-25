@@ -252,17 +252,17 @@ const philosophyChatSteps = [
       : '';
     const time = `<div class="timestamp">${getTimestamp()}</div>`;
     if (speaker !== 'You') {
-      div.innerHTML = `${img}<strong>${speaker}:</strong> <span class="typing">…</span>`;
+      div.innerHTML = `${img}<div class="chat-content"><strong class="speaker-name">${speaker}:</strong> <span class="typing">…</span></div>`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
       const baseDelay = 1200;
       const extraDelay = Math.min(2500, text.length * 30);
       const delay = baseDelay + Math.random() * extraDelay;
       await new Promise(res => setTimeout(res, delay));
-      div.innerHTML = `${img}<strong>${speaker}:</strong> ${text}${time}`;
+      div.innerHTML = `${img}<div class="chat-content"><strong class="speaker-name">${speaker}:</strong><div class="chat-text">${text}</div>${time}</div>`;
       chatBox.scrollTop = chatBox.scrollHeight;
     } else {
-      div.innerHTML = `${img}<strong>${speaker}:</strong> ${text}${time}`;
+      div.innerHTML = `${img}<div class="chat-content"><strong class="speaker-name">${speaker}:</strong><div class="chat-text">${text}</div>${time}</div>`;
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
     }

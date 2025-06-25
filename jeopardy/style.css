@@ -844,6 +844,21 @@ button {
   margin-right: 6px;
 }
 
+.chat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.speaker-name {
+  display: block;
+  font-weight: bold;
+}
+
+.chat-text {
+  margin-top: 2px;
+  display: block;
+}
+
 .chat-message.chat-user {
   justify-content: flex-end;
   margin-left: auto;
