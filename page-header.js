@@ -7,6 +7,33 @@ const scriptBase = (function() {
   return src.substring(0, src.lastIndexOf('/'));
 })();
 
+const courseColors = {
+  introPhilosophy: '#9c27b0',
+  criticalThinking: '#f44336',
+  ethics: '#2196f3',
+  logic: '#ffeb3b',
+  writing: '#424242'
+};
+
+function lightenColor(hex, factor = 0.6) {
+  hex = hex.replace('#', '');
+  if (hex.length === 3) {
+    hex = hex.split('').map(c => c + c).join('');
+  }
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+  const mix = c => Math.round(c + (255 - c) * factor);
+  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
+}
+
+function applyCourseColor(key) {
+  const color = courseColors[key] || '#9c27b0';
+  const root = document.documentElement;
+  root.style.setProperty('--accent-color', color);
+  root.style.setProperty('--accent-light', lightenColor(color));
+}
+
 function resolvePath(file) {
   return scriptBase ? `${scriptBase}/${file}` : file;
 }
@@ -100,6 +127,7 @@ function initPageHeader() {
     courseKey = header.dataset.defaultCourse;
   }
   const h1 = document.querySelector('.container h1');
+  applyCourseColor(courseKey);
   updatePageHeader(courseKey);
 
   ensureMainId();
