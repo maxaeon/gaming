@@ -1,16 +1,16 @@
 const case1Steps = [
   {
     messages: [
-      { speaker: "Sherlock", text: "Professor Russell's manuscript has vanished. Watson and I could use your help." },
+      { speaker: "Holmes", text: "Professor Russell's manuscript has vanished. Watson and I could use your help." },
       { speaker: "Watson", text: "Shall we begin investigating?" }
     ],
     choices: ["Yes, let's begin.", "Not now"],
     responses: {
       "Yes, let's begin.": [
-        { speaker: "Sherlock", text: "Excellent. Let's look at the evidence." }
+        { speaker: "Holmes", text: "Excellent. Let's look at the evidence." }
       ],
       "Not now": [
-        { speaker: "Sherlock", text: "Very well. Come back when you're ready." },
+        { speaker: "Holmes", text: "Very well. Come back when you're ready." },
         { speaker: "System", text: "Chat closed", className: "chat-notice" }
       ]
     },
@@ -20,33 +20,35 @@ const case1Steps = [
     messages: [
       { speaker: "Watson", text: "Let's review all the clues before we continue." }
     ],
-    choices: ["Begin"]
+    choices: ["Yes, let's review the clues.", "I'm ready—skip the recap."]
   },
   {
     messages: [
       { speaker: "Watson", text: "Housekeeper's Testimony: The housekeeper observed Alexander Greaves quietly reading in the library, far from the study, when the manuscript disappeared." },
-      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+      { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
-    choices: ["Yes", "No"],
+    choices: ["Yes, it sounds reliable.", "No, I'm doubtful.", "I'm not sure yet."],
     responses: {
-      "Yes": [ { speaker: "Sherlock", text: "Indeed, a trustworthy observation." } ],
-      "No": [ { speaker: "Sherlock", text: "Skepticism noted. Let's keep going." } ]
+      "Yes, it sounds reliable.": [ { speaker: "Holmes", text: "Indeed, a trustworthy observation." } ],
+      "No, I'm doubtful.": [ { speaker: "Holmes", text: "Skepticism noted. Let's keep going." } ],
+      "I'm not sure yet.": [ { speaker: "Holmes", text: "Fair enough. We'll weigh it with the rest." } ]
     }
   },
   {
     messages: [
       { speaker: "Watson", text: "Beatrice Lowell's Statement: Beatrice claims she saw Alexander near the professor's study precisely when the housekeeper saw him in the library." },
-      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+      { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
-    choices: ["Yes", "No"],
+    choices: ["Yes, it seems credible.", "No, I doubt it.", "I'm unsure."],
     responses: {
-      "Yes": [ { speaker: "Sherlock", text: "Interesting, though it conflicts with the housekeeper." } ],
-      "No": [ { speaker: "Sherlock", text: "Perhaps Beatrice misremembered." } ]
+      "Yes, it seems credible.": [ { speaker: "Holmes", text: "Interesting, though it conflicts with the housekeeper." } ],
+      "No, I doubt it.": [ { speaker: "Holmes", text: "Perhaps Beatrice misremembered." } ],
+      "I'm unsure.": [ { speaker: "Holmes", text: "Let's keep an open mind." } ]
     }
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "We now have conflicting testimony about Alexander's whereabouts. How might this discrepancy be explained?" }
+      { speaker: "Holmes", text: "We now have conflicting testimony about Alexander's whereabouts. How might this discrepancy be explained?" }
     ],
     choices: [
       "Alexander has a twin",
@@ -56,51 +58,53 @@ const case1Steps = [
     responses: {
       "Alexander has a twin": [
         { speaker: "Watson", text: "Actually, Alexander does have a twin who works at a print shop nearby." },
-        { speaker: "Sherlock", text: "Interesting. That might explain the conflicting accounts, though we still need evidence linking either brother to the theft." }
+        { speaker: "Holmes", text: "Interesting. That might explain the conflicting accounts, though we still need evidence linking either brother to the theft." }
       ],
       "One witness is lying": [
-        { speaker: "Sherlock", text: "Indeed, if someone is lying we'll need proof of motive or deception before drawing conclusions." }
+        { speaker: "Holmes", text: "Indeed, if someone is lying we'll need proof of motive or deception before drawing conclusions." }
       ],
       "Poor lighting or eyesight": [
-        { speaker: "Sherlock", text: "Quite possible. A mistaken sighting would weaken the case against Alexander rather than reveal guilt." }
+        { speaker: "Holmes", text: "Quite possible. A mistaken sighting would weaken the case against Alexander rather than reveal guilt." }
       ]
     }
   },
   {
     messages: [
       { speaker: "Watson", text: "Charles Finch's Alibi: Charles insists he remained at home all morning, yet his neighbor spotted him rushing away from his home around the time of the theft." },
-      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+      { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
-    choices: ["Yes", "No"],
+    choices: ["Yes, that looks suspicious.", "No, it could be innocent.", "I'm undecided."],
     responses: {
-      "Yes": [ { speaker: "Sherlock", text: "Quite telling, isn't it?" } ],
-      "No": [ { speaker: "Sherlock", text: "We'll see how it fits with the rest." } ]
+      "Yes, that looks suspicious.": [ { speaker: "Holmes", text: "Quite telling, isn't it?" } ],
+      "No, it could be innocent.": [ { speaker: "Holmes", text: "We'll see how it fits with the rest." } ],
+      "I'm undecided.": [ { speaker: "Holmes", text: "We'll gather more clues before judging." } ]
     }
   },
   {
     messages: [
       { speaker: "Watson", text: "Study Door Security: Professor Russell's study can only be accessed using a unique brass key, and Charles Finch is known to have borrowed the key a day earlier, claiming he had lost his own." },
-      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+      { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
-    choices: ["Yes", "No"],
+    choices: ["Yes, this is solid evidence.", "No, it seems questionable.", "I'm unsure."],
     responses: {
-      "Yes": [ { speaker: "Sherlock", text: "A crucial fact to remember." } ],
-      "No": [ { speaker: "Sherlock", text: "We'll verify it against other evidence." } ]
+      "Yes, this is solid evidence.": [ { speaker: "Holmes", text: "A crucial fact to remember." } ],
+      "No, it seems questionable.": [ { speaker: "Holmes", text: "We'll verify it against other evidence." } ],
+      "I'm unsure.": [ { speaker: "Holmes", text: "Let's see how it fits with everything else." } ]
     }
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Keep those details in mind. Now let's test your deductions." }
+      { speaker: "Holmes", text: "Keep those details in mind. Now let's test your deductions." }
     ]
   },
   {
     messages: [
-      { speaker: "Watson", text: "Before we continue, remember that when Sherlock says 'deduction' he means it in a looser, Holmesian sense—different from what our philosophy professor calls a strict deduction." }
+      { speaker: "Watson", text: "Before we continue, remember that when Holmes says 'deduction' he means it in a looser, Holmesian sense—different from what our philosophy professor calls a strict deduction." }
     ]
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Which two statements directly contradict each other?" }
+      { speaker: "Holmes", text: "Which two statements directly contradict each other?" }
     ],
     choices: [
       "Housekeeper’s statement vs. Beatrice’s statement about Alexander’s location.",
@@ -109,19 +113,19 @@ const case1Steps = [
     ],
     responses: {
       "Housekeeper’s statement vs. Beatrice’s statement about Alexander’s location.": [
-        { speaker: "Sherlock", text: "Yes, those accounts clash about where Alexander was, though Charles's alibi issue seems more revealing." }
+        { speaker: "Holmes", text: "Yes, those accounts clash about where Alexander was, though Charles's alibi issue seems more revealing." }
       ],
       "Charles’s alibi vs. neighbor’s observation.": [
-        { speaker: "Sherlock", text: "Exactly. Charles's alibi conflicts with the neighbor's account." }
+        { speaker: "Holmes", text: "Exactly. Charles's alibi conflicts with the neighbor's account." }
       ],
       "Alexander vs. Charles regarding study access.": [
-        { speaker: "Sherlock", text: "Consider the evidence carefully." }
+        { speaker: "Holmes", text: "Consider the evidence carefully." }
       ]
     }
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Which piece of evidence most strongly implicates a suspect?" }
+      { speaker: "Holmes", text: "Which piece of evidence most strongly implicates a suspect?" }
     ],
     choices: [
       "The housekeeper placing Alexander away from the study.",
@@ -130,30 +134,30 @@ const case1Steps = [
     ],
     responses: {
       "The housekeeper placing Alexander away from the study.": [
-        { speaker: "Sherlock", text: "That weakens suspicion of Alexander." }
+        { speaker: "Holmes", text: "That weakens suspicion of Alexander." }
       ],
       "Beatrice accusing Alexander of being near the study.": [
-        { speaker: "Sherlock", text: "Interesting, but not our strongest lead." }
+        { speaker: "Holmes", text: "Interesting, but not our strongest lead." }
       ],
       "Charles’s key access and contradictory alibi evidence.": [
-        { speaker: "Sherlock", text: "Exactly. Those facts point strongly toward Charles." }
+        { speaker: "Holmes", text: "Exactly. Those facts point strongly toward Charles." }
       ]
     }
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Considering the evidence and contradictions, who is the most likely culprit?" }
+      { speaker: "Holmes", text: "Considering the evidence and contradictions, who is the most likely culprit?" }
     ],
     choices: ["Alexander Greaves", "Beatrice Lowell", "Charles Finch"],
     responses: {
       "Alexander Greaves": [
-        { speaker: "Sherlock", text: "Alexander has an alibi placing him elsewhere." }
+        { speaker: "Holmes", text: "Alexander has an alibi placing him elsewhere." }
       ],
       "Beatrice Lowell": [
-        { speaker: "Sherlock", text: "Beatrice raised suspicion, but little supports her guilt." }
+        { speaker: "Holmes", text: "Beatrice raised suspicion, but little supports her guilt." }
       ],
       "Charles Finch": [
-        { speaker: "Sherlock", text: "Indeed. The evidence against Charles is compelling." }
+        { speaker: "Holmes", text: "Indeed. The evidence against Charles is compelling." }
       ]
     },
     final: true,
@@ -169,16 +173,16 @@ const case1Steps = [
 const case2Steps = [
   {
     messages: [
-      { speaker: "Sherlock", text: "Lady Harper's diamond necklace has vanished. Watson and I could use your help." },
+      { speaker: "Holmes", text: "Lady Harper's diamond necklace has vanished. Watson and I could use your help." },
       { speaker: "Watson", text: "Shall we begin investigating?" }
     ],
     choices: ["Yes, let's begin.", "Not now"],
     responses: {
       "Yes, let's begin.": [
-        { speaker: "Sherlock", text: "Excellent. Let's look at the evidence." }
+        { speaker: "Holmes", text: "Excellent. Let's look at the evidence." }
       ],
       "Not now": [
-        { speaker: "Sherlock", text: "Very well. Come back when you're ready." },
+        { speaker: "Holmes", text: "Very well. Come back when you're ready." },
         { speaker: "System", text: "Chat closed", className: "chat-notice" }
       ]
     },
@@ -188,76 +192,81 @@ const case2Steps = [
     messages: [
       { speaker: "Watson", text: "Let's review all the clues before we continue." }
     ],
-    choices: ["Begin"]
+    choices: ["Yes, let's review the clues.", "I'm ready—skip the recap."]
   },
   {
     messages: [
       { speaker: "Watson", text: "Guard's Report: The guard saw Tom working outside in the garden around the time of the theft." },
-      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+      { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
-    choices: ["Yes", "No"],
+    choices: ["Yes, the guard seems reliable.", "No, I doubt his account.", "I'm not certain."],
     responses: {
-      "Yes": [ { speaker: "Sherlock", text: "A trustworthy guard, I'd say." } ],
-      "No": [ { speaker: "Sherlock", text: "We'll keep that doubt in mind." } ]
+      "Yes, the guard seems reliable.": [ { speaker: "Holmes", text: "A trustworthy guard, I'd say." } ],
+      "No, I doubt his account.": [ { speaker: "Holmes", text: "We'll keep that doubt in mind." } ],
+      "I'm not certain.": [ { speaker: "Holmes", text: "We'll compare it with other evidence." } ]
     }
   },
   {
     messages: [
       { speaker: "Watson", text: "Lucy's Statement: Lucy claims she was cleaning the parlor, but Edward says he saw her near the bedroom." },
-      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+      { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
-    choices: ["Yes", "No"],
+    choices: ["Yes, I believe her.", "No, I think she's mistaken.", "Hard to say."],
     responses: {
-      "Yes": [ { speaker: "Sherlock", text: "Her story does conflict with Edward's." } ],
-      "No": [ { speaker: "Sherlock", text: "Perhaps Lucy is mistaken." } ]
+      "Yes, I believe her.": [ { speaker: "Holmes", text: "Her story does conflict with Edward's." } ],
+      "No, I think she's mistaken.": [ { speaker: "Holmes", text: "Perhaps Lucy is mistaken." } ],
+      "Hard to say.": [ { speaker: "Holmes", text: "We'll keep both accounts in mind." } ]
     }
   },
   {
     messages: [
       { speaker: "Watson", text: "Edward's Alibi: Edward insists he was away on business, yet his carriage was spotted near the house." },
-      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+      { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
-    choices: ["Yes", "No"],
+    choices: ["Yes, his alibi seems weak.", "No, the carriage sighting proves nothing.", "I'm uncertain."],
     responses: {
-      "Yes": [ { speaker: "Sherlock", text: "Indeed, that casts doubt on Edward." } ],
-      "No": [ { speaker: "Sherlock", text: "We'll see how it connects." } ]
+      "Yes, his alibi seems weak.": [ { speaker: "Holmes", text: "Indeed, that casts doubt on Edward." } ],
+      "No, the carriage sighting proves nothing.": [ { speaker: "Holmes", text: "We'll see how it connects." } ],
+      "I'm uncertain.": [ { speaker: "Holmes", text: "We'll keep his story in mind." } ]
     }
   },
   {
     messages: [
       { speaker: "Watson", text: "Bedroom Lock: The bedroom door uses a code known only to family, and Edward uses that code for his study." },
-      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+      { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
-    choices: ["Yes", "No"],
+    choices: ["Yes, that seems credible.", "No, I'm skeptical.", "I'm not sure."],
     responses: {
-      "Yes": [ { speaker: "Sherlock", text: "That detail seems hard to dispute." } ],
-      "No": [ { speaker: "Sherlock", text: "We'll verify it." } ]
+      "Yes, that seems credible.": [ { speaker: "Holmes", text: "That detail seems hard to dispute." } ],
+      "No, I'm skeptical.": [ { speaker: "Holmes", text: "We'll verify it." } ],
+      "I'm not sure.": [ { speaker: "Holmes", text: "We'll compare it with other clues." } ]
     }
   },
   {
     messages: [
       { speaker: "Watson", text: "Hidden Necklace: The maid later found the necklace tucked inside Lady Harper's writing desk." },
-      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+      { speaker: "Holmes", text: "Does this clue seem reliable?" }
     ],
-    choices: ["Yes", "No"],
+    choices: ["Yes, that seems trustworthy.", "No, I'm unsure.", "It might be a misunderstanding."],
     responses: {
-      "Yes": [ { speaker: "Sherlock", text: "Curious. If it was stolen, why hide it there?" } ],
-      "No": [ { speaker: "Sherlock", text: "We'll need to verify her account, but keep it in mind." } ]
+      "Yes, that seems trustworthy.": [ { speaker: "Holmes", text: "Curious. If it was stolen, why hide it there?" } ],
+      "No, I'm unsure.": [ { speaker: "Holmes", text: "We'll need to verify her account, but keep it in mind." } ],
+      "It might be a misunderstanding.": [ { speaker: "Holmes", text: "Possibly. We'll check further." } ]
     }
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Keep those details in mind. Now let's test your deductions." }
+      { speaker: "Holmes", text: "Keep those details in mind. Now let's test your deductions." }
     ]
   },
   {
     messages: [
-      { speaker: "Watson", text: "Before we continue, remember that when Sherlock says 'deduction' he means it in a looser, Holmesian sense—different from what our philosophy professor calls a strict deduction." }
+      { speaker: "Watson", text: "Before we continue, remember that when Holmes says 'deduction' he means it in a looser, Holmesian sense—different from what our philosophy professor calls a strict deduction." }
     ]
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Which clue suggests the necklace's disappearance may have been staged?" }
+      { speaker: "Holmes", text: "Which clue suggests the necklace's disappearance may have been staged?" }
     ],
     choices: [
       "The guard seeing Tom outside.",
@@ -266,19 +275,19 @@ const case2Steps = [
     ],
     responses: {
       "The guard seeing Tom outside.": [
-        { speaker: "Sherlock", text: "That only places Tom nearby." }
+        { speaker: "Holmes", text: "That only places Tom nearby." }
       ],
       "Edward's carriage near the house.": [
-        { speaker: "Sherlock", text: "Suspicious for Edward, yet it doesn't show the theft was faked." }
+        { speaker: "Holmes", text: "Suspicious for Edward, yet it doesn't show the theft was faked." }
       ],
       "The necklace turning up in Lady Harper's desk.": [
-        { speaker: "Sherlock", text: "Precisely. Finding it there hints the theft was staged." }
+        { speaker: "Holmes", text: "Precisely. Finding it there hints the theft was staged." }
       ]
     }
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Which piece of evidence most strongly points to who staged the theft?" }
+      { speaker: "Holmes", text: "Which piece of evidence most strongly points to who staged the theft?" }
     ],
     choices: [
       "Tom working outside.",
@@ -287,33 +296,33 @@ const case2Steps = [
     ],
     responses: {
       "Tom working outside.": [
-        { speaker: "Sherlock", text: "That doesn't show he planned the disappearance." }
+        { speaker: "Holmes", text: "That doesn't show he planned the disappearance." }
       ],
       "Lucy and Edward's disagreement about her location.": [
-        { speaker: "Sherlock", text: "Odd, but it doesn't explain the necklace turning up." }
+        { speaker: "Holmes", text: "Odd, but it doesn't explain the necklace turning up." }
       ],
       "Lady Harper's hidden necklace and recent insurance.": [
-        { speaker: "Sherlock", text: "Indeed. Those details strongly suggest Lady Harper staged the theft." }
+        { speaker: "Holmes", text: "Indeed. Those details strongly suggest Lady Harper staged the theft." }
       ]
     }
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Considering the evidence and this new twist, who likely staged the theft?" }
+      { speaker: "Holmes", text: "Considering the evidence and this new twist, who likely staged the theft?" }
     ],
     choices: ["Lucy", "Tom", "Lady Harper", "Edward Harper"],
     responses: {
       "Lucy": [
-        { speaker: "Sherlock", text: "Lucy's actions seem minor in comparison." }
+        { speaker: "Holmes", text: "Lucy's actions seem minor in comparison." }
       ],
       "Tom": [
-        { speaker: "Sherlock", text: "Tom was outside but nothing ties him to a staged theft." }
+        { speaker: "Holmes", text: "Tom was outside but nothing ties him to a staged theft." }
       ],
       "Lady Harper": [
-        { speaker: "Sherlock", text: "Indeed. With the necklace hidden in her desk, she appears to have faked the crime." }
+        { speaker: "Holmes", text: "Indeed. With the necklace hidden in her desk, she appears to have faked the crime." }
       ],
       "Edward Harper": [
-        { speaker: "Sherlock", text: "Suspicious, but the hidden necklace points elsewhere." }
+        { speaker: "Holmes", text: "Suspicious, but the hidden necklace points elsewhere." }
       ]
     },
     final: true,
@@ -342,20 +351,20 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
   let userGuess = null;
   let finalCulprit = null;
   const speakerClasses = {
-    'Sherlock': 'speaker-sherlock',
+    'Holmes': 'speaker-sherlock',
     'Watson': 'speaker-watson'
   };
   const schemeSpeakerClasses = {
     blue: {
-      'Sherlock': 'blue-sherlock',
+      'Holmes': 'blue-sherlock',
       'Watson': 'blue-watson'
     },
     teal: {
-      'Sherlock': 'teal-sherlock',
+      'Holmes': 'teal-sherlock',
       'Watson': 'teal-watson'
     },
     purple: {
-      'Sherlock': 'purple-sherlock',
+      'Holmes': 'purple-sherlock',
       'Watson': 'purple-watson'
     }
   };
@@ -443,10 +452,10 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
       const finalStep = sherlockSteps[stepIndex];
       const correct = userGuess === finalCulprit;
       finalStep.messages = [
-        { speaker: 'Sherlock', text: correct ? 'You guessed it!' : 'Not quite.' },
-        { speaker: 'Sherlock', text: correct ? `Excellent deduction! You've concluded that ${finalCulprit} was responsible.` : `Nice effort, but the culprit was ${finalCulprit}.` },
-        { speaker: 'Sherlock', text: 'Reflect on how each clue fit together to reveal the truth.' },
-        { speaker: 'Sherlock', text: 'Thank you for your time. Keep in touch if you want to practice solving more cases.' },
+        { speaker: 'Holmes', text: correct ? 'You guessed it!' : 'Not quite.' },
+        { speaker: 'Holmes', text: correct ? `Excellent deduction! You've concluded that ${finalCulprit} was responsible.` : `Nice effort, but the culprit was ${finalCulprit}.` },
+        { speaker: 'Holmes', text: 'Reflect on how each clue fit together to reveal the truth.' },
+        { speaker: 'Holmes', text: 'Thank you for your time. Keep in touch if you want to practice solving more cases.' },
         { speaker: 'System', text: 'Chat closed', className: 'chat-notice' }
       ];
     }
