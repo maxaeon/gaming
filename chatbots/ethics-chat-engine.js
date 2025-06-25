@@ -21,6 +21,7 @@
 
   const schemeSpeakerClasses = {
     blue: {
+      'You': 'blue-user',
       'John Stuart Mill': 'blue-mill',
       'Immanuel Kant': 'blue-kant',
       'St. Thomas Aquinas': 'blue-aquinas',
@@ -29,6 +30,7 @@
       'Sage': 'blue-student'
     },
     teal: {
+      'You': 'teal-user',
       'John Stuart Mill': 'teal-mill',
       'Immanuel Kant': 'teal-kant',
       'St. Thomas Aquinas': 'teal-aquinas',
@@ -37,6 +39,7 @@
       'Sage': 'teal-student'
     },
     purple: {
+      'You': 'purple-user',
       'John Stuart Mill': 'purple-mill',
       'Immanuel Kant': 'purple-kant',
       'St. Thomas Aquinas': 'purple-aquinas',

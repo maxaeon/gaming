@@ -1035,6 +1035,7 @@ button {
 .blue-plato { background: #5c6bc0; color: #fff; }
 .blue-sherlock { background: #3949ab; color: #fff; }
 .blue-watson { background: #283593; color: #fff; }
+.blue-user { background: #03a9f4; color: #000; }
 
 .teal-mill { background: #80cbc4; color: #000; }
 .teal-kant { background: #4db6ac; color: #000; }
@@ -1048,6 +1049,7 @@ button {
 .teal-plato { background: #64ffda; color: #000; }
 .teal-sherlock { background: #1de9b6; color: #000; }
 .teal-watson { background: #00bfa5; color: #fff; }
+.teal-user { background: #00acc1; color: #000; }
 
 .purple-mill { background: #ce93d8; color: #000; }
 .purple-kant { background: #ba68c8; color: #fff; }
@@ -1061,6 +1063,7 @@ button {
 .purple-plato { background: #b39ddb; color: #000; }
 .purple-sherlock { background: #9575cd; color: #000; }
 .purple-watson { background: #7e57c2; color: #fff; }
+.purple-user { background: #673ab7; color: #fff; }
 
 .typing {
   opacity: 0.6;

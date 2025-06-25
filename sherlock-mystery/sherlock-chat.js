@@ -356,14 +356,17 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
   };
   const schemeSpeakerClasses = {
     blue: {
+      'You': 'blue-user',
       'Holmes': 'blue-sherlock',
       'Watson': 'blue-watson'
     },
     teal: {
+      'You': 'teal-user',
       'Holmes': 'teal-sherlock',
       'Watson': 'teal-watson'
     },
     purple: {
+      'You': 'purple-user',
       'Holmes': 'purple-sherlock',
       'Watson': 'purple-watson'
     }

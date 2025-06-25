@@ -217,6 +217,7 @@ const philosophyChatSteps = [
 
   const schemeSpeakerClasses = {
     blue: {
+      'You': 'blue-user',
       'Sage': 'blue-student',
       'Thales': 'blue-thales',
       'Heraclitus': 'blue-heraclitus',
@@ -225,6 +226,7 @@ const philosophyChatSteps = [
       'Aristotle': 'blue-aristotle'
     },
     teal: {
+      'You': 'teal-user',
       'Sage': 'teal-student',
       'Thales': 'teal-thales',
       'Heraclitus': 'teal-heraclitus',
@@ -233,6 +235,7 @@ const philosophyChatSteps = [
       'Aristotle': 'teal-aristotle'
     },
     purple: {
+      'You': 'purple-user',
       'Sage': 'purple-student',
       'Thales': 'purple-thales',
       'Heraclitus': 'purple-heraclitus',
