@@ -832,6 +832,16 @@ button {
   margin-right: 6px;
 }
 
+.chat-message.chat-user {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.chat-message.chat-user img.profile-pic {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
 .chat-user {
   color: var(--accent-light);
 }
