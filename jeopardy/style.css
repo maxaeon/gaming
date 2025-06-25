@@ -845,7 +845,6 @@ button {
 }
 
 .chat-message.chat-user {
-  flex-direction: row-reverse;
   justify-content: flex-end;
   margin-left: auto;
   text-align: right;
@@ -854,8 +853,8 @@ button {
 }
 
 .chat-message.chat-user img.profile-pic {
-  margin-right: 0;
-  margin-left: 6px;
+  margin-right: 6px;
+  margin-left: 0;
 }
 
 .chat-user {
@@ -895,6 +894,10 @@ button {
   display: flex;
   gap: 8px;
   justify-content: center;
+  width: 90%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #chat-extras {
