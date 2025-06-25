@@ -127,6 +127,10 @@ const explainData = {
   ],
   "Truth Table": [
     "A chart listing truth values of compound statements for every possible combination of their components."
+  ],
+  "Holmesian Deduction": [
+    "Sherlock Holmes often calls his reasoning 'deduction,' but he frequently blends careful observation with hypotheses about what is likely.",
+    "In philosophy, deduction means deriving conclusions that must be true if the premises are true. Holmes's method is looser and resembles abductive reasoning."
   ]
 };
 

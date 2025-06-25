@@ -1,4 +1,4 @@
-const sherlockSteps = [
+const case1Steps = [
   {
     messages: [
       { speaker: "Sherlock", text: "Professor Russell's manuscript has vanished. Watson and I could use your help." },
@@ -18,7 +18,12 @@ const sherlockSteps = [
   },
   {
     messages: [
-      { speaker: "Watson", text: "We have several clues. Which one should we examine?" }
+      { speaker: "Watson", text: "Just a quick note: when Sherlock speaks of <span class=\"explain-term\" data-term=\"Holmesian Deduction\">deduction</span>, he isn't using the strict philosophical sense." }
+    ]
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Here are our clues: 1. Housekeeper's testimony. 2. Beatrice Lowell's statement. 3. Charles Finch's alibi. 4. Study door security. Which one should we examine?" }
     ],
     choices: [
       "Housekeeper's Testimony",
@@ -101,16 +106,135 @@ const sherlockSteps = [
       "Charles Finch": [
         { speaker: "Sherlock", text: "Indeed. The evidence against Charles is compelling." }
       ]
+    },
+    final: true,
+    culprit: "Charles Finch"
+  },
+  {
+    summary: true,
+    culprit: "Charles Finch",
+    messages: []
+  }
+];
+
+const case2Steps = [
+  {
+    messages: [
+      { speaker: "Sherlock", text: "Lady Harper's diamond necklace has vanished. Watson and I could use your help." },
+      { speaker: "Watson", text: "Shall we begin investigating?" }
+    ],
+    choices: ["Yes, let's begin.", "Not now"],
+    responses: {
+      "Yes, let's begin.": [
+        { speaker: "Sherlock", text: "Excellent. Let's look at the evidence." }
+      ],
+      "Not now": [
+        { speaker: "Sherlock", text: "Very well. Come back when you're ready." },
+        { speaker: "System", text: "Chat closed", className: "chat-notice" }
+      ]
+    },
+    endChoices: ["Not now"]
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Just a quick note: when Sherlock speaks of <span class=\"explain-term\" data-term=\"Holmesian Deduction\">deduction</span>, he isn't using the strict philosophical sense." }
+    ]
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Here are our clues: 1. Guard's report. 2. Lucy's statement. 3. Edward's alibi. 4. Bedroom lock. Which one should we examine?" }
+    ],
+    choices: ["Guard's Report", "Lucy's Statement", "Edward's Alibi", "Bedroom Lock"],
+    responses: {
+      "Guard's Report": [
+        { speaker: "Watson", text: "The guard saw Tom working outside in the garden around the time of the theft." }
+      ],
+      "Lucy's Statement": [
+        { speaker: "Watson", text: "Lucy claims she was cleaning the parlor, but Edward says he saw her near the bedroom." }
+      ],
+      "Edward's Alibi": [
+        { speaker: "Watson", text: "Edward insists he was away on business, yet his carriage was spotted near the house." }
+      ],
+      "Bedroom Lock": [
+        { speaker: "Watson", text: "The bedroom door uses a code known only to family, and Edward uses that code for his study." }
+      ]
+    },
+    after: [
+      { speaker: "Sherlock", text: "Keep that in mind. Now let's test your deductions." }
+    ]
+  },
+  {
+    messages: [
+      { speaker: "Sherlock", text: "Which two statements directly contradict each other?" }
+    ],
+    choices: [
+      "Lucy's statement vs. Edward's claim about her location.",
+      "Edward's alibi vs. carriage sighting.",
+      "Tom vs. Edward regarding code access."
+    ],
+    responses: {
+      "Lucy's statement vs. Edward's claim about her location.": [
+        { speaker: "Sherlock", text: "Not quite. Both could be mistaken." }
+      ],
+      "Edward's alibi vs. carriage sighting.": [
+        { speaker: "Sherlock", text: "Correct. Edward's alibi conflicts with the carriage sighting." }
+      ],
+      "Tom vs. Edward regarding code access.": [
+        { speaker: "Sherlock", text: "Consider the evidence carefully." }
+      ]
     }
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Excellent deduction! You've concluded that Charles Finch took Professor Russell's manuscript." },
-      { speaker: "Sherlock", text: "Reflect on how each clue fit together to reveal the truth." },
-      { speaker: "System", text: "Chat closed", className: "chat-notice" }
-    ]
+      { speaker: "Sherlock", text: "Which piece of evidence most strongly implicates a suspect?" }
+    ],
+    choices: [
+      "The guard seeing Tom outside.",
+      "The dispute over Lucy's whereabouts.",
+      "Edward's code access and contradictory alibi."
+    ],
+    responses: {
+      "The guard seeing Tom outside.": [
+        { speaker: "Sherlock", text: "That doesn't tie Tom directly to the bedroom." }
+      ],
+      "The dispute over Lucy's whereabouts.": [
+        { speaker: "Sherlock", text: "Interesting, but not our strongest lead." }
+      ],
+      "Edward's code access and contradictory alibi.": [
+        { speaker: "Sherlock", text: "Exactly. Those facts point strongly toward Edward." }
+      ]
+    }
+  },
+  {
+    messages: [
+      { speaker: "Sherlock", text: "Considering the evidence and contradictions, who is the most likely culprit?" }
+    ],
+    choices: ["Lucy", "Tom", "Edward Harper"],
+    responses: {
+      "Lucy": [
+        { speaker: "Sherlock", text: "Lucy seems suspicious, yet the evidence is thin." }
+      ],
+      "Tom": [
+        { speaker: "Sherlock", text: "Tom was outside, but that doesn't link him to the theft." }
+      ],
+      "Edward Harper": [
+        { speaker: "Sherlock", text: "Indeed. The evidence against Edward is compelling." }
+      ]
+    },
+    final: true,
+    culprit: "Edward Harper"
+  },
+  {
+    summary: true,
+    culprit: "Edward Harper",
+    messages: []
   }
 ];
+
+const sherlockCases = [case1Steps, case2Steps];
+let caseIndex = parseInt(localStorage.getItem('sherlock-case-index') || '0', 10);
+let sherlockSteps = sherlockCases[caseIndex % sherlockCases.length];
+localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.length);
 
 (function() {
   const chatBox = document.getElementById('chat-box');
@@ -120,6 +244,8 @@ const sherlockSteps = [
   const emojiButtons = extras ? extras.querySelectorAll('.emoji-btn') : [];
   let stepIndex = 0;
   let awaitingChoice = false;
+  let userGuess = null;
+  let finalCulprit = null;
   const speakerClasses = {
     'Sherlock': 'speaker-sherlock',
     'Watson': 'speaker-watson'
@@ -180,6 +306,10 @@ const sherlockSteps = [
     controls.querySelectorAll('button').forEach(b => b.disabled = true);
     await addMessage('You', choice, 'chat-user');
     const step = sherlockSteps[stepIndex];
+    if (step.final) {
+      userGuess = choice;
+      finalCulprit = step.culprit;
+    }
     controls.innerHTML = '';
     const replies = step.responses ? (step.responses[choice] || []) : [];
     for (const m of replies) {
@@ -194,6 +324,17 @@ const sherlockSteps = [
       return;
     }
     stepIndex++;
+    if (sherlockSteps[stepIndex] && sherlockSteps[stepIndex].summary) {
+      const finalStep = sherlockSteps[stepIndex];
+      const correct = userGuess === finalCulprit;
+      finalStep.messages = [
+        { speaker: 'Sherlock', text: 'You guessed it!' },
+        { speaker: 'Sherlock', text: correct ? `Excellent deduction! You've concluded that ${finalCulprit} was responsible.` : `Nice effort, but the culprit was ${finalCulprit}.` },
+        { speaker: 'Sherlock', text: 'Reflect on how each clue fit together to reveal the truth.' },
+        { speaker: 'Sherlock', text: 'Thank you for your time. Keep in touch if you want to practice solving more cases.' },
+        { speaker: 'System', text: 'Chat closed', className: 'chat-notice' }
+      ];
+    }
     if (stepIndex < sherlockSteps.length) {
       setTimeout(showStep, 500);
     }
