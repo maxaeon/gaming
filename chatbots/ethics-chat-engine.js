@@ -125,7 +125,11 @@
     }
     const ex = exchanges[exchangeIndex];
     if (ex.transition) await addMessage(current, ex.transition);
-    await addMessage(current, ex.question);
+    let questionText = ex.question;
+    if (userName && /\?\s*$/.test(questionText)) {
+      questionText = questionText.replace(/\?\s*$/, `, ${userName}?`);
+    }
+    await addMessage(current, questionText);
     showOptions(ex.responses, ex.theoristView);
   }
 
