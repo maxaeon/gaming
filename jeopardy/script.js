@@ -10,8 +10,17 @@ function buildChoices(correct) {
     .flat()
     .map(q => q.answer);
   const others = answers.filter(a => a !== correct);
-  shuffle(others);
-  const choices = others.slice(0, 3).concat(correct);
+
+  let filtered = others;
+  if (typeof looksLikePerson === 'function' && looksLikePerson(correct)) {
+    const names = others.filter(a => looksLikePerson(a));
+    if (names.length >= 3) {
+      filtered = names;
+    }
+  }
+
+  shuffle(filtered);
+  const choices = filtered.slice(0, 3).concat(correct);
   shuffle(choices);
   return choices;
 }
