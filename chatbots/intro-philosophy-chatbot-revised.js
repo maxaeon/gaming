@@ -110,7 +110,7 @@ const philosophyChatSteps = [
   {
     messages: [
       { speaker: "Aristotle", text: "Exactly! I'm Aristotle. While Plato seeks abstract ideals, I think we must start with observing the real world. Reality is understood by seeing how things fulfill their natural purposes, or telos—for example, an acorn naturally becomes an oak." },
-      { speaker: "Philosophy Student", text: "Is observing nature truly enough to understand all reality, Aristotle?" }
+      { speaker: "Philosophy Student", text: "Is observing nature truly enough to understand all reality?" }
     ],
     choices: ["Yes", "No", "Unsure"],
     responses: {
