@@ -250,6 +250,20 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
     'Sherlock': 'speaker-sherlock',
     'Watson': 'speaker-watson'
   };
+  const schemeSpeakerClasses = {
+    blue: {
+      'Sherlock': 'blue-sherlock',
+      'Watson': 'blue-watson'
+    },
+    teal: {
+      'Sherlock': 'teal-sherlock',
+      'Watson': 'teal-watson'
+    },
+    purple: {
+      'Sherlock': 'purple-sherlock',
+      'Watson': 'purple-watson'
+    }
+  };
   const colorSchemes = ['speaker', 'blue', 'teal', 'purple'];
   let colorSchemeIndex = 0;
 
@@ -266,9 +280,13 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
     div.dataset.speakerClass = className;
     const baseClass = speaker === 'You' ? 'chat-user' : 'chat-bot';
     const scheme = colorSchemes[colorSchemeIndex];
+    const schemeMap = schemeSpeakerClasses[scheme] || {};
+    const schemeClass = schemeMap[speaker];
     div.className = `chat-message ${baseClass}`;
     if (scheme === 'speaker' && className && baseClass !== className) {
       div.classList.add(className);
+    } else if (schemeClass) {
+      div.classList.add(schemeClass);
     } else if (scheme !== 'speaker') {
       div.classList.add(`theme-${scheme}`);
     }
@@ -347,9 +365,13 @@ localStorage.setItem('sherlock-case-index', (caseIndex + 1) % sherlockCases.leng
       const speakerClass = m.dataset.speakerClass;
       const speaker = m.dataset.speaker;
       const base = speaker === 'You' ? 'chat-user' : 'chat-bot';
+      const schemeMap = schemeSpeakerClasses[scheme] || {};
+      const schemeClass = schemeMap[speaker];
       m.className = `chat-message ${base}`;
       if (scheme === 'speaker' && speakerClass && base !== speakerClass) {
         m.classList.add(speakerClass);
+      } else if (schemeClass) {
+        m.classList.add(schemeClass);
       } else if (scheme !== 'speaker') {
         m.classList.add(`theme-${scheme}`);
       }

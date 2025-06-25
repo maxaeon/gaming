@@ -19,6 +19,33 @@
     'Sage': 'speaker-student'
   };
 
+  const schemeSpeakerClasses = {
+    blue: {
+      'John Stuart Mill': 'blue-mill',
+      'Immanuel Kant': 'blue-kant',
+      'St. Thomas Aquinas': 'blue-aquinas',
+      'Aristotle': 'blue-aristotle',
+      'Nel Noddings': 'blue-noddings',
+      'Sage': 'blue-student'
+    },
+    teal: {
+      'John Stuart Mill': 'teal-mill',
+      'Immanuel Kant': 'teal-kant',
+      'St. Thomas Aquinas': 'teal-aquinas',
+      'Aristotle': 'teal-aristotle',
+      'Nel Noddings': 'teal-noddings',
+      'Sage': 'teal-student'
+    },
+    purple: {
+      'John Stuart Mill': 'purple-mill',
+      'Immanuel Kant': 'purple-kant',
+      'St. Thomas Aquinas': 'purple-aquinas',
+      'Aristotle': 'purple-aristotle',
+      'Nel Noddings': 'purple-noddings',
+      'Sage': 'purple-student'
+    }
+  };
+
   const speakerImages = {
     'You': '../assets/images/profile.png',
     'John Stuart Mill': '../assets/images/mill.png',
@@ -45,9 +72,13 @@
     div.dataset.speakerClass = className;
     const baseClass = speaker === 'You' ? 'chat-user' : 'chat-bot';
     const scheme = colorSchemes[colorSchemeIndex];
+    const schemeMap = schemeSpeakerClasses[scheme] || {};
+    const schemeClass = schemeMap[speaker];
     div.className = `chat-message ${baseClass}`;
     if (scheme === 'speaker' && className && baseClass !== className) {
       div.classList.add(className);
+    } else if (schemeClass) {
+      div.classList.add(schemeClass);
     } else if (scheme !== 'speaker') {
       div.classList.add(`theme-${scheme}`);
     }
@@ -184,9 +215,13 @@
       const speakerClass = m.dataset.speakerClass;
       const speaker = m.dataset.speaker;
       const base = speaker === 'You' ? 'chat-user' : 'chat-bot';
+      const schemeMap = schemeSpeakerClasses[scheme] || {};
+      const schemeClass = schemeMap[speaker];
       m.className = `chat-message ${base}`;
       if (scheme === 'speaker' && speakerClass && base !== speakerClass) {
         m.classList.add(speakerClass);
+      } else if (schemeClass) {
+        m.classList.add(schemeClass);
       } else if (scheme !== 'speaker') {
         m.classList.add(`theme-${scheme}`);
       }
