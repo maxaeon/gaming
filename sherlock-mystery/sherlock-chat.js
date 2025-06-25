@@ -18,11 +18,6 @@ const case1Steps = [
   },
   {
     messages: [
-      { speaker: "Watson", text: "Just a quick note: when Sherlock speaks of <span class=\"explain-term\" data-term=\"Holmesian Deduction\">deduction</span>, he isn't using the strict philosophical sense." }
-    ]
-  },
-  {
-    messages: [
       { speaker: "Watson", text: "Let's review all the clues before we continue." }
     ],
     choices: ["Begin"]
@@ -96,6 +91,11 @@ const case1Steps = [
   {
     messages: [
       { speaker: "Sherlock", text: "Keep those details in mind. Now let's test your deductions." }
+    ]
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Before we continue, remember that when Sherlock says 'deduction' he means it in a looser, Holmesian sense—different from what our philosophy professor calls a strict deduction." }
     ]
   },
   {
@@ -186,11 +186,6 @@ const case2Steps = [
   },
   {
     messages: [
-      { speaker: "Watson", text: "Just a quick note: when Sherlock speaks of <span class=\"explain-term\" data-term=\"Holmesian Deduction\">deduction</span>, he isn't using the strict philosophical sense." }
-    ]
-  },
-  {
-    messages: [
       { speaker: "Watson", text: "Let's review all the clues before we continue." }
     ],
     choices: ["Begin"]
@@ -242,6 +237,11 @@ const case2Steps = [
   {
     messages: [
       { speaker: "Sherlock", text: "Keep those details in mind. Now let's test your deductions." }
+    ]
+  },
+  {
+    messages: [
+      { speaker: "Watson", text: "Before we continue, remember that when Sherlock says 'deduction' he means it in a looser, Holmesian sense—different from what our philosophy professor calls a strict deduction." }
     ]
   },
   {
