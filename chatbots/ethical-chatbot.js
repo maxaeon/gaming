@@ -1,7 +1,7 @@
 const ethicalChatbots = {
-  "Philosophy Student": {
-    greeting: (userName) =>
-      `Hey${userName ? ` ${userName}` : ""}! I'm a fellow philosophy student majoring in computer science. Ethics can be tricky, so I created this AI chatbot to talk directly with great moral thinkers. Let's dive in!`,
+  "Sage": {
+    greeting: () =>
+      "I'm Sage, a friendly chatbot who lives at the intersection of philosophy and computer science. I'd love to explore ethics with you by chatting with some famous moral theorists about their views. Are you up for it?",
     introduceMill: "First, let's meet John Stuart Mill, who thinks morality is about maximizing happiness.",
     finalAssessment: (userName, alignmentScores) => {
       return `This was great${userName ? `, ${userName}` : ""}! Which parts of each philosopher's theory resonated with you? Which ideas do you disagree with? Thanks for exploring ethics with me—I learned a lot too!`;
@@ -175,13 +175,13 @@ const ethicalChatbots = {
     ],
     closings: {
       highAlignment: (userName) =>
-        `Strong resonance with care ethics${userName ? `, ${userName}` : ""}. I'm adding our fellow student back to the chat to conclude.`,
+        `Strong resonance with care ethics${userName ? `, ${userName}` : ""}. I'm adding Sage back to the chat to conclude.`,
       moderateAlignment: (userName) =>
-        `Thanks for the thoughtful discussion${userName ? `, ${userName}` : ""}. I'm returning you to our fellow student now.`,
+        `Thanks for the thoughtful discussion${userName ? `, ${userName}` : ""}. I'm returning you to Sage now.`,
       lowAlignment: (userName) =>
-        `Interesting dialogue${userName ? `, ${userName}` : ""}. I'll add our fellow student back so we can wrap up.`
+        `Interesting dialogue${userName ? `, ${userName}` : ""}. I'll add Sage back so we can wrap up.`
     },
-    nextTheorist: "Philosophy Student"
+    nextTheorist: "Sage"
   }
 };
 

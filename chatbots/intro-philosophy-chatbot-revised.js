@@ -1,8 +1,26 @@
 const philosophyChatSteps = [
   {
     messages: [
-      { speaker: "Philosophy Student", text: "I’m studying philosophy and also a bit of computer science. Ancient Greek philosophy can feel pretty abstract, so I created this AI chat to talk directly with philosophers like Thales, Socrates, and Plato. Ready to explore reality and existence together?" },
-      { speaker: "Philosophy Student", text: "In ancient times, people explained reality through myths and gods. Thales suggested rational observation is better. Do you agree with him that rational explanations really help us understand reality clearly?" }
+      { speaker: "Sage", text: "I'm Sage, a friendly chatbot who lives at the intersection of philosophy and computer science. I'd love to explore philosophy with you by chatting with some famous philosophers about their views. Are you up for it?" }
+    ],
+    choices: ["Yes, let's chat!", "Sure, I guess", "No thanks"],
+    responses: {
+      "Yes, let's chat!": [
+        { speaker: "Sage", text: "Great! Let's dive in." }
+      ],
+      "Sure, I guess": [
+        { speaker: "Sage", text: "No worries, let's take it slow. Here we go." }
+      ],
+      "No thanks": [
+        { speaker: "Sage", text: "Goodbye and good luck learning about philosophy!" },
+        { speaker: "System", text: "Chat closed", className: "chat-notice" }
+      ]
+    },
+    endChoices: ["No thanks"]
+  },
+  {
+    messages: [
+      { speaker: "Sage", text: "In ancient times, people explained reality through myths and gods. Thales suggested rational observation is better. Do you agree with him that rational explanations really help us understand reality clearly?" }
     ],
     choices: ["Yes, definitely", "No, not really", "I'm not sure"],
     responses: {
@@ -28,7 +46,7 @@ const philosophyChatSteps = [
   },
   {
     messages: [
-      { speaker: "Philosophy Student", text: "Thales, water as a basic element sounds odd. Can everything really boil down to just one fundamental thing?" }
+      { speaker: "Sage", text: "Thales, water as a basic element sounds odd. Can everything really boil down to just one fundamental thing?" }
     ],
     choices: ["Yes, definitely", "No, not really", "I'm not sure"],
     responses: {
@@ -44,13 +62,13 @@ const philosophyChatSteps = [
     },
     after: [
       { speaker: "Heraclitus", text: "But Thales, reality never holds still—how can one substance explain continuous change?" },
-      { speaker: "Philosophy Student", text: "Good point, Heraclitus! You say everything changes constantly. Does that mean there’s no stability or permanence in reality at all?" }
+        { speaker: "Sage", text: "Good point, Heraclitus! You say everything changes constantly. Does that mean there’s no stability or permanence in reality at all?" }
     ]
   },
   {
     messages: [
       { speaker: "Heraclitus", text: "Precisely! Think of reality as a river—always flowing, never the same twice. Change is the ultimate truth." },
-      { speaker: "Philosophy Student", text: "But if everything is changing, how can we ever have lasting knowledge of anything?" }
+      { speaker: "Sage", text: "But if everything is changing, how can we ever have lasting knowledge of anything?" }
     ],
     choices: ["We can have lasting knowledge", "We can’t", "I'm not sure"],
     responses: {
@@ -67,13 +85,13 @@ const philosophyChatSteps = [
     after: [
       { speaker: "System", text: "Socrates entered the chat", className: "chat-notice" },
       { speaker: "Socrates", text: "Well said, Heraclitus. Real wisdom begins by admitting we know far less than we think." },
-      { speaker: "Philosophy Student", text: "Socrates, you say true wisdom is recognizing how little we actually know. Does that mean we should question everything endlessly?" }
+      { speaker: "Sage", text: "Socrates, you say true wisdom is recognizing how little we actually know. Does that mean we should question everything endlessly?" }
     ]
   },
   {
     messages: [
       { speaker: "Socrates", text: "Exactly right! I believe we must always question our assumptions. Admitting our ignorance is the first step toward real wisdom." },
-      { speaker: "Philosophy Student", text: "Is constantly questioning our beliefs really helpful? Doesn't it just lead us to confusion?" }
+      { speaker: "Sage", text: "Is constantly questioning our beliefs really helpful? Doesn't it just lead us to confusion?" }
     ],
     choices: ["Yes, it's helpful", "No, it leads to confusion", "I'm not sure"],
     responses: {
@@ -90,13 +108,13 @@ const philosophyChatSteps = [
     after: [
       { speaker: "System", text: "Plato entered the chat", className: "chat-notice" },
       { speaker: "Plato", text: "Absolutely, Socrates. Constant questioning guides us to deeper truths beyond appearances." },
-      { speaker: "Philosophy Student", text: "Plato, you talk about deeper truths or ideal realities—what you call 'Forms.' Are these ideal Forms really something beyond our everyday experiences?" }
+      { speaker: "Sage", text: "Plato, you talk about deeper truths or ideal realities—what you call 'Forms.' Are these ideal Forms really something beyond our everyday experiences?" }
     ]
   },
   {
     messages: [
       { speaker: "Plato", text: "Yes, indeed. I'm Plato, Socrates’ student. I believe true reality includes perfect, eternal Forms—ideal standards of concepts like Justice, Beauty, or Goodness. For instance, we never encounter a perfect circle, yet we all understand that perfect form." },
-      { speaker: "Philosophy Student", text: "Are these Forms real entities that exist beyond our world, or just useful ideas we've created?" }
+      { speaker: "Sage", text: "Are these Forms real entities that exist beyond our world, or just useful ideas we've created?" }
     ],
     choices: ["Yes, they're real entities", "No, they're just ideas", "I'm not sure"],
     responses: {
@@ -113,13 +131,13 @@ const philosophyChatSteps = [
     after: [
       { speaker: "System", text: "Aristotle entered the chat", className: "chat-notice" },
       { speaker: "Aristotle", text: "Plato's ideal Forms sound attractive—but isn't reality found in observable things around us rather than in abstract ideals?" },
-      { speaker: "Philosophy Student", text: "Aristotle, you seem skeptical about Plato’s Forms. Do you think we should rely entirely on observing nature to understand reality?" }
+      { speaker: "Sage", text: "Aristotle, you seem skeptical about Plato’s Forms. Do you think we should rely entirely on observing nature to understand reality?" }
     ]
   },
   {
     messages: [
       { speaker: "Aristotle", text: "Exactly! While Plato seeks abstract ideals, I think we must start with observing the real world. Reality is understood by seeing how things fulfill their natural purposes, or telos—for example, an acorn naturally becomes an oak." },
-      { speaker: "Philosophy Student", text: "Do you agree with Aristotle that observing nature is enough to understand all reality?" }
+      { speaker: "Sage", text: "Do you agree with Aristotle that observing nature is enough to understand all reality?" }
     ],
     choices: ["Yes, definitely", "No, not really", "I'm not sure"],
     responses: {
@@ -135,7 +153,7 @@ const philosophyChatSteps = [
     },
     after: [
       { speaker: "Plato", text: "Observation is indeed crucial, Aristotle. But without ideals guiding us, might our observations become aimless?" },
-      { speaker: "Philosophy Student", text: "This conversation really clarified some deep metaphysical ideas for me! Did it help you, too? Philosophy may seem abstract at first, but talking it through like this definitely makes it clearer. Let’s keep exploring!" }
+      { speaker: "Sage", text: "This conversation really clarified some deep metaphysical ideas for me! Did it help you, too? Philosophy may seem abstract at first, but talking it through like this definitely makes it clearer. Let’s keep exploring!" }
     ]
   }
 ];
@@ -150,7 +168,7 @@ const philosophyChatSteps = [
   let awaitingChoice = false;
   let userName = '';
   const speakerClasses = {
-    'Philosophy Student': 'speaker-student',
+    'Sage': 'speaker-student',
     'Thales': 'speaker-thales',
     'Heraclitus': 'speaker-heraclitus',
     'Socrates': 'speaker-socrates',
@@ -160,7 +178,7 @@ const philosophyChatSteps = [
 
   const speakerImages = {
     'You': '../assets/images/profile.png',
-    'Philosophy Student': '../assets/images/student.png',
+    'Sage': '../assets/images/student.png',
     'Thales': '../assets/images/thales.png',
     'Heraclitus': '../assets/images/heraclitus.png',
     'Socrates': '../assets/images/socrates.png',
@@ -238,6 +256,9 @@ const philosophyChatSteps = [
       for (const m of step.after) {
         await addMessage(m.speaker, m.text, m.className);
       }
+    }
+    if (step.endChoices && step.endChoices.includes(choice)) {
+      return;
     }
     stepIndex++;
     if (stepIndex < philosophyChatSteps.length) {
@@ -328,8 +349,9 @@ const philosophyChatSteps = [
   }
 
   document.addEventListener('DOMContentLoaded', async () => {
-    await addMessage('Philosophy Student', "Hey there! What's your name?");
+    await addMessage('Sage', "Hey there! What's your name?");
     await askForName();
+    await addMessage('Sage', `Good to meet you, ${userName}!`);
     showStep();
   });
 })();
