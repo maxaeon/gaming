@@ -611,6 +611,26 @@ button {
   text-decoration: none;
 }
 
+#course-sidebar a[data-course="introPhilosophy"] {
+  color: #9c27b0;
+}
+
+#course-sidebar a[data-course="criticalThinking"] {
+  color: #f44336;
+}
+
+#course-sidebar a[data-course="ethics"] {
+  color: #2196f3;
+}
+
+#course-sidebar a[data-course="logic"] {
+  color: #ffeb3b;
+}
+
+#course-sidebar a[data-course="writing"] {
+  color: #424242;
+}
+
 /* Hide sidebar visually but keep it in the DOM for screen readers */
 #course-sidebar.visually-hidden {
   opacity: 0;
