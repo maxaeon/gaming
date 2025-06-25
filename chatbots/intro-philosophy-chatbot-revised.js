@@ -153,6 +153,7 @@ const philosophyChatSteps = [
     },
     after: [
       { speaker: "Plato", text: "Observation is indeed crucial, Aristotle. But without ideals guiding us, might our observations become aimless?" },
+
       { speaker: "Sage", text: "This conversation really clarified some deep metaphysical ideas for me! Did it help you, too? Philosophy may seem abstract at first, but talking it through like this definitely makes it clearer." }
     ]
   },
@@ -191,6 +192,7 @@ const philosophyChatSteps = [
     after: [
       { speaker: "Sage", text: "Thanks for chatting about philosophy with me. Goodbye!" },
       { speaker: "System", text: "Chat closed", className: "chat-notice" }
+
     ]
   }
 ];

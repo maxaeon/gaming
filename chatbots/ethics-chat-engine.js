@@ -5,7 +5,7 @@
   const colorToggle = extras ? extras.querySelector('#color-toggle') : null;
   const emojiButtons = extras ? extras.querySelectorAll('.emoji-btn') : [];
   const bots = window.ethicalChatbots || {};
-  let current = 'Philosophy Student';
+  let current = 'Sage';
   let exchangeIndex = 0;
   let awaitingChoice = false;
   let userName = '';
@@ -16,7 +16,7 @@
     'St. Thomas Aquinas': 'speaker-aquinas',
     'Aristotle': 'speaker-aristotle',
     'Nel Noddings': 'speaker-noddings',
-    'Philosophy Student': 'speaker-student'
+    'Sage': 'speaker-student'
   };
 
   const speakerImages = {
@@ -26,7 +26,7 @@
     'St. Thomas Aquinas': '../assets/images/aquinas.png',
     'Aristotle': '../assets/images/aristotle.png',
     'Nel Noddings': '../assets/images/noddings.png',
-    'Philosophy Student': '../assets/images/student.png'
+    'Sage': '../assets/images/student.png'
   };
 
   const colorSchemes = ['speaker', 'blue', 'teal', 'purple'];
@@ -118,9 +118,9 @@
       await addMessage('System', `${current} added ${next} to the chat`, 'chat-notice');
       current = next;
       exchangeIndex = 0;
-      if (current === 'Philosophy Student') {
-        const finalText = bots['Philosophy Student'].finalAssessment(userName, alignmentScores);
-        await addMessage('Philosophy Student', finalText);
+      if (current === 'Sage') {
+        const finalText = bots['Sage'].finalAssessment(userName, alignmentScores);
+        await addMessage('Sage', finalText);
         controls.innerHTML = '';
         return;
       }
@@ -198,13 +198,14 @@
   }
 
   async function startConversation() {
-    await addMessage('Philosophy Student', "Hey there! What's your name?");
+    await addMessage('Sage', "Hey there! What's your name?");
     await askForName();
-    const student = bots['Philosophy Student'];
+    await addMessage('Sage', `Good to meet you, ${userName}!`);
+    const student = bots['Sage'];
     const greet = typeof student.greeting === 'function' ? student.greeting(userName) : student.greeting;
-    await addMessage('Philosophy Student', greet);
+    await addMessage('Sage', greet);
     if (student.introduceMill) {
-      await addMessage('Philosophy Student', student.introduceMill);
+      await addMessage('Sage', student.introduceMill);
     }
     current = 'John Stuart Mill';
     alignmentScores[current] = 0;
