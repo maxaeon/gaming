@@ -44,10 +44,10 @@ const case1Steps = [
     ],
     responses: {
       "Housekeeper’s statement vs. Beatrice’s statement about Alexander’s location.": [
-        { speaker: "Sherlock", text: "Not quite. Those could both be true." }
+        { speaker: "Sherlock", text: "Yes, those accounts clash about where Alexander was, though Charles's alibi issue seems more revealing." }
       ],
       "Charles’s alibi vs. neighbor’s observation.": [
-        { speaker: "Sherlock", text: "Correct. Charles's alibi conflicts with the neighbor's account." }
+        { speaker: "Sherlock", text: "Exactly. Charles's alibi conflicts with the neighbor's account." }
       ],
       "Alexander vs. Charles regarding study access.": [
         { speaker: "Sherlock", text: "Consider the evidence carefully." }
