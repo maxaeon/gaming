@@ -5,6 +5,21 @@ function shuffle(arr) {
   }
 }
 
+function looksLikePerson(answer) {
+  const words = answer.trim().split(/\s+/);
+  if (words.length === 0 || words.length > 4) return false;
+  return words.every(w => /^[A-Z][A-Za-z\u00C0-\u017F'\-]*$/.test(w));
+}
+
+function questionExpectsPerson(question, answer) {
+  if (/\bwho\b|which (philosopher|thinker|person)|\bwhose\b/i.test(question)) {
+    return true;
+  }
+  return looksLikePerson(answer);
+}
+
 if (typeof window !== 'undefined') {
   window.shuffle = shuffle;
+  window.looksLikePerson = looksLikePerson;
+  window.questionExpectsPerson = questionExpectsPerson;
 }

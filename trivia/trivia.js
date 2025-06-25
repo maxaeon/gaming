@@ -100,8 +100,15 @@ function buildChoices(question) {
   }
   const answers = currentTrivia.map(q => q.answer);
   const others = answers.filter(a => a !== question.answer);
-  shuffle(others);
-  const choices = others.slice(0, 3).concat(question.answer);
+  let filtered = others;
+  if (typeof looksLikePerson === 'function' && looksLikePerson(question.answer)) {
+    const names = others.filter(a => looksLikePerson(a));
+    if (names.length >= 3) {
+      filtered = names;
+    }
+  }
+  shuffle(filtered);
+  const choices = filtered.slice(0, 3).concat(question.answer);
   shuffle(choices);
   return choices;
 }
