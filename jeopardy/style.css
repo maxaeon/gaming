@@ -868,6 +868,21 @@ button {
   color: #fff;
 }
 
+.theme-blue {
+  background: #2196f3;
+  color: #fff;
+}
+
+.theme-teal {
+  background: #009688;
+  color: #fff;
+}
+
+.theme-purple {
+  background: #9c27b0;
+  color: #fff;
+}
+
 .chat-notice {
   color: #c0c0c0;
   font-style: italic;
