@@ -99,7 +99,7 @@ const case1Steps = [
   },
   {
     messages: [
-      { speaker: "Watson", text: "Before we continue, remember that when Holmes says 'deduction' he means it in a looser, Holmesian sense—different from what our philosophy professor calls a strict deduction." }
+      { speaker: "Watson", text: "Before we continue, remember that when Holmes says 'deduction' he means it in a looser, Holmesian sense—different from what your philosophy professor calls deduction." }
     ]
   },
   {
