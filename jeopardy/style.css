@@ -669,7 +669,7 @@ button {
 
 #quote-sidebar.collapsed,
 #keyterm-sidebar.collapsed {
-  right: -238px; /* shift further off-screen */
+  right: -253px; /* shift further off-screen */
   transform: translateY(-50%);
 }
 
@@ -681,7 +681,7 @@ button {
   }
 
   #quote-sidebar.collapsed {
-    right: -238px;
+    right: -253px;
     transform: translateY(-50%);
   }
 }
