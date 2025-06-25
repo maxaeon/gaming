@@ -1,6 +1,6 @@
 const defaultConcepts = [
   'Moral Dilemmas (where rules conflict)',
-  'Nazi-at-the-door scenario (Kant)',
+  'Murderer-at-the-door scenario (Kant)',
   'Doctrine of double effect (Aquinas)',
   'Importance of Consequences',
   'Empathy and Compassion',
@@ -125,7 +125,7 @@ function enableDrops() {
 const suggestedClustersHTML =
   '<strong>Cluster 1: Problems with Absolute Rules</strong><ul>' +
   '<li>Moral Dilemmas (where rules conflict)</li>' +
-  '<li>Nazi-at-the-door scenario (Kant)</li>' +
+  '<li>Murderer-at-the-door scenario (Kant)</li>' +
   '<li>Rigidity of Exceptionless Rules</li>' +
   '<li>Doctrine of double effect (Aquinas)</li></ul>' +
   '<strong>Cluster 2: Importance of Context and Consequences</strong><ul>' +
