@@ -236,6 +236,17 @@ const case2Steps = [
   },
   {
     messages: [
+      { speaker: "Watson", text: "Hidden Necklace: The maid later found the necklace tucked inside Lady Harper's writing desk." },
+      { speaker: "Sherlock", text: "Does this clue seem reliable?" }
+    ],
+    choices: ["Yes", "No"],
+    responses: {
+      "Yes": [ { speaker: "Sherlock", text: "Curious. If it was stolen, why hide it there?" } ],
+      "No": [ { speaker: "Sherlock", text: "We'll need to verify her account, but keep it in mind." } ]
+    }
+  },
+  {
+    messages: [
       { speaker: "Sherlock", text: "Keep those details in mind. Now let's test your deductions." }
     ]
   },
@@ -246,68 +257,71 @@ const case2Steps = [
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Which two statements directly contradict each other?" }
-    ],
-    choices: [
-      "Lucy's statement vs. Edward's claim about her location.",
-      "Edward's alibi vs. carriage sighting.",
-      "Tom vs. Edward regarding code access."
-    ],
-    responses: {
-      "Lucy's statement vs. Edward's claim about her location.": [
-        { speaker: "Sherlock", text: "Not quite. Both could be mistaken." }
-      ],
-      "Edward's alibi vs. carriage sighting.": [
-        { speaker: "Sherlock", text: "Correct. Edward's alibi conflicts with the carriage sighting." }
-      ],
-      "Tom vs. Edward regarding code access.": [
-        { speaker: "Sherlock", text: "Consider the evidence carefully." }
-      ]
-    }
-  },
-  {
-    messages: [
-      { speaker: "Sherlock", text: "Which piece of evidence most strongly implicates a suspect?" }
+      { speaker: "Sherlock", text: "Which clue suggests the necklace's disappearance may have been staged?" }
     ],
     choices: [
       "The guard seeing Tom outside.",
-      "The dispute over Lucy's whereabouts.",
-      "Edward's code access and contradictory alibi."
+      "Edward's carriage near the house.",
+      "The necklace turning up in Lady Harper's desk."
     ],
     responses: {
       "The guard seeing Tom outside.": [
-        { speaker: "Sherlock", text: "That doesn't tie Tom directly to the bedroom." }
+        { speaker: "Sherlock", text: "That only places Tom nearby." }
       ],
-      "The dispute over Lucy's whereabouts.": [
-        { speaker: "Sherlock", text: "Interesting, but not our strongest lead." }
+      "Edward's carriage near the house.": [
+        { speaker: "Sherlock", text: "Suspicious for Edward, yet it doesn't show the theft was faked." }
       ],
-      "Edward's code access and contradictory alibi.": [
-        { speaker: "Sherlock", text: "Exactly. Those facts point strongly toward Edward." }
+      "The necklace turning up in Lady Harper's desk.": [
+        { speaker: "Sherlock", text: "Precisely. Finding it there hints the theft was staged." }
       ]
     }
   },
   {
     messages: [
-      { speaker: "Sherlock", text: "Considering the evidence and contradictions, who is the most likely culprit?" }
+      { speaker: "Sherlock", text: "Which piece of evidence most strongly points to who staged the theft?" }
     ],
-    choices: ["Lucy", "Tom", "Edward Harper"],
+    choices: [
+      "Tom working outside.",
+      "Lucy and Edward's disagreement about her location.",
+      "Lady Harper's hidden necklace and recent insurance." 
+    ],
+    responses: {
+      "Tom working outside.": [
+        { speaker: "Sherlock", text: "That doesn't show he planned the disappearance." }
+      ],
+      "Lucy and Edward's disagreement about her location.": [
+        { speaker: "Sherlock", text: "Odd, but it doesn't explain the necklace turning up." }
+      ],
+      "Lady Harper's hidden necklace and recent insurance.": [
+        { speaker: "Sherlock", text: "Indeed. Those details strongly suggest Lady Harper staged the theft." }
+      ]
+    }
+  },
+  {
+    messages: [
+      { speaker: "Sherlock", text: "Considering the evidence and this new twist, who likely staged the theft?" }
+    ],
+    choices: ["Lucy", "Tom", "Lady Harper", "Edward Harper"],
     responses: {
       "Lucy": [
-        { speaker: "Sherlock", text: "Lucy seems suspicious, yet the evidence is thin." }
+        { speaker: "Sherlock", text: "Lucy's actions seem minor in comparison." }
       ],
       "Tom": [
-        { speaker: "Sherlock", text: "Tom was outside, but that doesn't link him to the theft." }
+        { speaker: "Sherlock", text: "Tom was outside but nothing ties him to a staged theft." }
+      ],
+      "Lady Harper": [
+        { speaker: "Sherlock", text: "Indeed. With the necklace hidden in her desk, she appears to have faked the crime." }
       ],
       "Edward Harper": [
-        { speaker: "Sherlock", text: "Indeed. The evidence against Edward is compelling." }
+        { speaker: "Sherlock", text: "Suspicious, but the hidden necklace points elsewhere." }
       ]
     },
     final: true,
-    culprit: "Edward Harper"
+    culprit: "Lady Harper"
   },
   {
     summary: true,
-    culprit: "Edward Harper",
+    culprit: "Lady Harper",
     messages: []
   }
 ];
