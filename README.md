@@ -41,7 +41,7 @@ Additional pages include:
 
 - `flashcards/flashcards.html` – study individual questions without the board
 - `trivia/trivia.html` – quick multiple-choice rounds
- - `sherlock-mystery/sherlock.html` – Sherlock Holmes Mystery mini-game
+- `sherlock-mystery/sherlock.html` – Sherlock Holmes Mystery mini-game
 - `argument-reconstruction/critical-thinking.html` – practice identifying missing premises
 - `argument-reconstruction/intro-philosophy.html` – analyze classic philosophical arguments
 - `chatbots/ethics-chat.html` – lightweight rotating chat with famous ethicists
@@ -65,7 +65,7 @@ Additional pages include:
   - `data/` – JavaScript files containing question objects for each topic
 - **flashcards/** – flashcard interface
 - **trivia/** – multiple-choice quiz game
- - **sherlock-mystery/** – detective logic exercises
+- **sherlock-mystery/** – detective logic exercises
 - **chatbots/** – lightweight chat pages
 - **writing/** – short activities for philosophical writing practice
 - **prover/** – interactive derivation practice
