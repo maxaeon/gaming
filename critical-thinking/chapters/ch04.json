@@ -1,0 +1,30 @@
+[
+  {
+    "id":"ct.ch04.defs.001","course":"critical-thinking","chapter":4,"section":"Lexical/Stipulative/Precising","topic":"Precising",
+    "type":"mc","stem":"Which is a precising definition?",
+    "options":[
+      "A bachelor is an unmarried adult male.",
+      "For campus safety policy, ‘vehicle’ includes scooters and e‑bikes.",
+      "‘Zog’ means a post violating policy.",
+      "‘Atom’ means indivisible particle (ancient)."
+    ],
+    "key":1,
+    "explanation":"Precising narrows a vague term for a specific context (e.g., policy).",
+    "source":"Bassham 7e, ch.4","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch04.persuasive.002","course":"critical-thinking","chapter":4,"section":"Persuasive","topic":"Persuasive def.",
+    "type":"mc","stem":"“Abortion is baby‑murder.” This is best classified as ____.",
+    "options":["lexical","stipulative","precising","persuasive"],
+    "key":3,
+    "explanation":"Loaded language used to sway attitudes rather than neutrally report meaning.",
+    "source":"Bassham 7e, ch.4","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch04.stipulative.003","course":"critical-thinking","chapter":4,"section":"Lexical/Stipulative/Precising","topic":"Stipulative",
+    "type":"flash","stem":"Define: stipulative definition.",
+    "options":null,"key":null,
+    "explanation":"Assigns a new meaning by fiat for convenience in a context.",
+    "source":"Bassham 7e, ch.4","difficulty":"easy"
+  }
+]

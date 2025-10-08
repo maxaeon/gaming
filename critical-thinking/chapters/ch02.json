@@ -1,0 +1,25 @@
+[
+  {
+    "id":"ct.ch02.types.001","course":"critical-thinking","chapter":2,"section":"Deduction & Induction","topic":"Type ID",
+    "type":"mc","stem":"“If the database is compromised, then credentials must be reset. The database is compromised; so credentials must be reset.”",
+    "options":["Inductive","Deductive"],
+    "key":1,
+    "explanation":"This aims for necessity via modus ponens, a deductive form.",
+    "source":"Bassham 7e, ch.2","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch02.strength.002","course":"critical-thinking","chapter":2,"section":"Validity & Strength","topic":"Strength vs validity",
+    "type":"mc","stem":"An inductive argument is strong when ____.",
+    "options":["it is impossible for true premises to make the conclusion false","true premises make the conclusion probably true","the conclusion is analytic","the conclusion follows by contradiction"],
+    "key":1,
+    "explanation":"Inductive strength concerns probability, not necessity.",
+    "source":"Bassham 7e, ch.2","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch02.cogency.003","course":"critical-thinking","chapter":2,"section":"Soundness & Cogency","topic":"Cogency",
+    "type":"flash","stem":"Define: cogent argument.",
+    "options":null,"key":null,
+    "explanation":"A strong inductive argument with true premises.",
+    "source":"Bassham 7e, ch.2","difficulty":"easy"
+  }
+]

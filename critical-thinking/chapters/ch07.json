@@ -1,0 +1,25 @@
+[
+  {
+    "id":"ct.ch07.equivocation.001","course":"critical-thinking","chapter":7,"section":"Equivocation","topic":"Ambiguity",
+    "type":"mc","stem":"Equivocation involves ____.",
+    "options":["changing the meaning of a key term mid‑argument","attacking the person","appeal to force","two wrongs make a right"],
+    "key":0,
+    "explanation":"The argument trades on a term used in two different senses.",
+    "source":"Bassham 7e, ch.7","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch07.amphiboly.002","course":"critical-thinking","chapter":7,"section":"Amphiboly","topic":"Syntax",
+    "type":"mc","stem":"Amphiboly arises from ____.",
+    "options":["semantic ambiguity in a word","syntactic ambiguity in a sentence","statistical noise","category mistake"],
+    "key":1,
+    "explanation":"The structure/grammar creates multiple readings.",
+    "source":"Bassham 7e, ch.7","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch07.composition.003","course":"critical-thinking","chapter":7,"section":"Ambiguity","topic":"Composition",
+    "type":"flash","stem":"Define: fallacy of composition.",
+    "options":null,"key":null,
+    "explanation":"Inferring that the whole has the properties of its parts.",
+    "source":"Bassham 7e, ch.7","difficulty":"easy"
+  }
+]

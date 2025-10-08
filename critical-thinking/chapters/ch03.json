@@ -1,0 +1,25 @@
+[
+  {
+    "id":"ct.ch03.validity.001","course":"critical-thinking","chapter":3,"section":"Validity & Soundness","topic":"Validity",
+    "type":"mc","stem":"Validity concerns ____.",
+    "options":["truth of the premises","truth of the conclusion","the form: impossible for true premises and false conclusion","statistical representativeness"],
+    "key":2,
+    "explanation":"Validity is a property of form: true premises cannot yield a false conclusion.",
+    "source":"Bassham 7e, ch.3","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch03.soundness.002","course":"critical-thinking","chapter":3,"section":"Validity & Soundness","topic":"Soundness",
+    "type":"flash","stem":"Define: sound argument.",
+    "options":null,"key":null,
+    "explanation":"A valid deductive argument with true premises.",
+    "source":"Bassham 7e, ch.3","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch03.form.003","course":"critical-thinking","chapter":3,"section":"Argument Forms","topic":"Modus tollens",
+    "type":"reconstruction","stem":"Complete: If P then Q; not Q; therefore ____.",
+    "options":["P","not P","Q","P or Q"],
+    "key":1,
+    "explanation":"Modus tollens: from ¬Q and (P→Q), infer ¬P.",
+    "source":"Bassham 7e, ch.3","difficulty":"easy"
+  }
+]
