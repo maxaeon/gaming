@@ -1,0 +1,12 @@
+{
+  "chapters": [
+    {"num": 1, "sections": ["Arguments & Nonarguments", "Statements", "Indicator Words"]},
+    {"num": 2, "sections": ["Deduction & Induction", "Validity & Strength", "Soundness & Cogency"]},
+    {"num": 3, "sections": ["Validity & Soundness", "Argument Forms", "Common Patterns"]},
+    {"num": 4, "sections": ["Language & Definitions", "Lexical/Stipulative/Precising", "Persuasive"]},
+    {"num": 5, "sections": ["Fallacies of Relevance", "Ad Hominem", "Straw Person"]},
+    {"num": 6, "sections": ["Weak Induction", "Hasty Generalization", "Post Hoc"]},
+    {"num": 7, "sections": ["Ambiguity", "Equivocation", "Amphiboly"]},
+    {"num": 8, "sections": ["Argument Structure", "Dependent vs Independent", "Diagramming"]}
+  ]
+}

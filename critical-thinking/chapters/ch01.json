@@ -1,0 +1,25 @@
+[
+  {
+    "id":"ct.ch01.args.001","course":"critical-thinking","chapter":1,"section":"Arguments & Nonarguments","topic":"Recognizing arguments",
+    "type":"mc","stem":"Which of the following is an argument (not mere description)?",
+    "options":["The sky was orange at dusk.","Because the highway was closed, traffic spilled onto local roads; therefore delays were inevitable.","What a beautiful day!","Please close the door."],
+    "key":1,
+    "explanation":"An argument offers premises in support of a conclusion; here, the closure is offered as a reason for delays.",
+    "source":"Bassham 7e, ch.1","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch01.statements.002","course":"critical-thinking","chapter":1,"section":"Statements","topic":"Statement",
+    "type":"flash","stem":"Define: statement (proposition).",
+    "options":null,"key":null,
+    "explanation":"A statement is a sentence that is either true or false (has a truth‑value).",
+    "source":"Bassham 7e, ch.1","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch01.indicators.003","course":"critical-thinking","chapter":1,"section":"Indicator Words","topic":"Conclusion indicators",
+    "type":"mc","stem":"Which word most commonly indicates a conclusion?",
+    "options":["because","since","therefore","given that"],
+    "key":2,
+    "explanation":"‘Therefore’ typically marks the conclusion; ‘because/since/given that’ often mark premises.",
+    "source":"Bassham 7e, ch.1","difficulty":"easy"
+  }
+]
