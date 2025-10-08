@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Writing a Philosophy Paper — Workshop</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:#fafafa;color:#111}
+  header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:12px 16px;z-index:1}
+  header h1{font-size:18px;margin:0}
+  main{max-width:1000px;margin:24px auto;padding:0 16px 80px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .full{grid-column:1/-1}
+  .card{background:#fff;border:1px solid #eee;border-radius:8px;padding:16px;margin-bottom:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .muted{color:#666}.small{font-size:12px}
+  textarea,input[type="text"]{width:100%;box-sizing:border-box;border:1px solid #ddd;border-radius:6px;padding:10px}
+  button{border:1px solid #ddd;border-radius:6px;background:#fff;padding:8px 10px;cursor:pointer}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+  .chip{border:1px solid #ddd;border-radius:999px;padding:4px 8px;cursor:pointer}
+  .rubric td,.rubric th{border:1px solid #eee;padding:6px 8px}
+  .rubric{border-collapse:collapse;width:100%}
+  .badge{display:inline-block;background:#f1f5f9;color:#334155;border:1px solid #e2e8f0;padding:2px 6px;border-radius:999px;font-size:12px}
+  .good{color:#0a7a3d}.warn{color:#b45309}
+</style>
+</head>
+<body>
+<header><h1>Writing a Philosophy Paper — Workshop</h1></header>
+<main>
+  <div class="card full">
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <label>Topic preset:
+        <select id="presetSel"></select>
+      </label>
+      <span id="presetSrc" class="muted small"></span>
+    </div>
+    <div id="snapshot" class="muted" style="margin-top:8px"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <strong>Thesis builder</strong>
+      <div class="chips" id="thesisChips"></div>
+      <textarea id="thesis" rows="3" placeholder="Draft a one‑sentence, arguable thesis..."></textarea>
+      <div class="small muted">Tip: Make it specific and falsifiable.</div>
+      <div style="margin-top:8px">
+        <button id="checkThesisBtn">Rubric check</button>
+        <span id="thesisStatus" class="small"></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <strong>Moves palette</strong> <span class="badge">distinguish / concede / restrict / generalize / case‑split / parity</span>
+      <div class="chips" id="moves"></div>
+      <textarea id="moveText" rows="3" placeholder="Insert a rhetorical move here, then paste into your draft..."></textarea>
+    </div>
+
+    <div class="card full">
+      <strong>Outline</strong>
+      <div class="chips" id="outlineChips"></div>
+      <textarea id="outline" rows="8" placeholder="I. Introduction (thesis)\nII. Argument 1 (premises → conclusion)\nIII. Objection (steelman)\nIV. Reply (targeted)\nV. Conclusion"></textarea>
+      <div style="margin-top:8px">
+        <button id="exportMdBtn">Export .md</button>
+        <span class="small muted">Autosaves locally.</span>
+      </div>
+    </div>
+
+    <div class="card full">
+      <strong>Rubric: Position Paper (1000–1500 words)</strong>
+      <table id="rubric" class="rubric"></table>
+    </div>
+
+    <div class="card full">
+      <strong>Quote integration checker</strong>
+      <textarea id="quoteBox" rows="4" placeholder="Paste a paragraph; long verbatim (>10 words) will be flagged."></textarea>
+      <div id="quoteMsg" class="small muted" style="margin-top:6px"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+const PRESET_FILES = ["euthyphro","singer_shallow_pond","frankfurt_cases","gettier"];
+const MOVES = [
+  {name:"Distinguish", text:"Distinguish X from Y where the argument trades on ambiguity."},
+  {name:"Concede", text:"Concede a controlled point to gain dialectical traction."},
+  {name:"Restrict", text:"Narrow the claim to avoid counterexample; add a qualifying clause."},
+  {name:"Generalize", text:"Strengthen by broadening a premise to a more plausible general form."},
+  {name:"Case‑split", text:"Consider exhaustive cases (A/B/…) and treat each briefly."},
+  {name:"Parity", text:"Offer a structurally parallel case to test a principle."}
+];
+const OUTLINE_TEMPLATES = [
+  {name:"Standard", text:"I. Introduction (motivate question; thesis)\nII. Argument 1 (premises → conclusion)\nIII. Objection (steelman)\nIV. Reply (targeted)\nV. Conclusion (upshot, limits)"},
+  {name:"Two‑objection", text:"I. Intro (thesis)\nII. Argument 1\nIII. Objection A + reply\nIV. Objection B + reply\nV. Conclusion"},
+  {name:"Case‑first", text:"I. Case description\nII. Principle stated/defended\nIII. Application to case\nIV. Objection + reply\nV. Conclusion"}
+];
+const Storage = { get(k){ try{return JSON.parse(localStorage.getItem(k)||"null");}catch{return null;} }, set(k,v){ localStorage.setItem(k, JSON.stringify(v)); } };
+async function loadJSON(p){ const r=await fetch(p); return r.ok? r.json(): null; }
+
+async function boot(){
+  const presets = {};
+  for(const p of PRESET_FILES){ presets[p] = await loadJSON(`./presets/${p}.json`); }
+  const sel = document.getElementById('presetSel');
+  sel.innerHTML = PRESET_FILES.map(p=>`<option value="${p}">${presets[p].title}</option>`).join('');
+  sel.onchange = ()=> applyPreset(presets[sel.value]);
+  applyPreset(presets[sel.value||PRESET_FILES[0]]);
+
+  document.getElementById('thesisChips').addEventListener('click', e=>{
+    if(e.target.classList.contains('chip')){ document.getElementById('thesis').value = e.target.dataset.t; autosave(); }
+  });
+
+  const mv = document.getElementById('moves');
+  mv.innerHTML = MOVES.map(m=>`<span class="chip" data-t="${m.text}">${m.name}</span>`).join('');
+  mv.addEventListener('click', e=>{
+    if(e.target.classList.contains('chip')){ document.getElementById('moveText').value = e.target.dataset.t; }
+  });
+
+  const oc = document.getElementById('outlineChips');
+  oc.innerHTML = OUTLINE_TEMPLATES.map(o=>`<span class="chip" data-t="${o.text}">${o.name}</span>`).join('');
+  oc.addEventListener('click', e=>{
+    if(e.target.classList.contains('chip')){ document.getElementById('outline').value = e.target.dataset.t; autosave(); }
+  });
+
+  const rubric = await loadJSON('./rubrics/position_paper.json'); renderRubric(rubric);
+
+  ['thesis','outline'].forEach(id=>{
+    const el = document.getElementById(id);
+    const saved = Storage.get('writing.'+id); if(saved) el.value = saved;
+    el.addEventListener('input', autosave);
+  });
+
+  document.getElementById('exportMdBtn').onclick = exportMd;
+  document.getElementById('checkThesisBtn').onclick = rubricCheck;
+  document.getElementById('quoteBox').addEventListener('input', quoteCheck);
+}
+function applyPreset(p){
+  document.getElementById('snapshot').textContent = p.snapshot || '';
+  document.getElementById('presetSrc').textContent = (p.sources||[]).join(' • ');
+  document.getElementById('thesisChips').innerHTML = (p.thesisExamples||[]).map(t=>`<span class="chip" data-t="${t}">Example</span>`).join('');
+}
+function renderRubric(r){
+  const tbl = document.getElementById('rubric');
+  const head = `<tr><th>Criterion</th>${r.criteria[0].levels.map((_,i)=>`<th>Level ${i+1}</th>`).join('')}</tr>`;
+  const rows = r.criteria.map(c=>`<tr><td>${c.name}</td>${c.levels.map(l=>`<td>${l}</td>`).join('')}</tr>`).join('');
+  tbl.innerHTML = head + rows;
+}
+function autosave(){ Storage.set('writing.thesis', document.getElementById('thesis').value); Storage.set('writing.outline', document.getElementById('outline').value); }
+function exportMd(){
+  const t = document.getElementById('thesis').value.trim();
+  const o = document.getElementById('outline').value.trim();
+  const md = `# Thesis\n\n${t}\n\n# Outline\n\n${o.replace(/\n/g,'\n\n')}\n`;
+  const blob = new Blob([md], {type:'text/markdown'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'philosophy-paper-outline.md'; a.click();
+}
+function rubricCheck(){
+  const thesis = document.getElementById('thesis').value.trim(); const status = document.getElementById('thesisStatus');
+  const tooLong = thesis.split(/\s+/).length > 45; const hasBecause = /\bbecause\b/i.test(thesis); const hasShould = /\bshould\b/i.test(thesis);
+  const ok = thesis.length>0 && thesis.length<300 && (hasBecause || hasShould);
+  status.innerHTML = ok ? '<span class="good">✓ Specific and arguable</span>' : '<span class="warn">Consider specificity and add a reason (“because …”) or a clear normative claim (“should …”).</span>';
+  if(tooLong) status.innerHTML += ' <span class="warn">(Consider brevity.)</span>';
+}
+function quoteCheck(){
+  const txt = document.getElementById('quoteBox').value.trim(); const words = txt.split(/\s+/);
+  const flagged = words.length >= 11; document.getElementById('quoteMsg').textContent = flagged ? 'Flag: >10 consecutive words pasted—consider paraphrase + citation.' : 'OK: brief quotation or paraphrase.';
+}
+window.addEventListener('DOMContentLoaded', boot);
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "id":"writing.preset.singer",
+  "title":"Singer’s Shallow Pond & Demandingness",
+  "snapshot":"If you can prevent something bad without sacrificing anything comparably important, you ought to do it.",
+  "thesisExamples":[
+    "Singer’s principle is plausible but over‑demanding; a moderate duty of aid captures our intuitions without collapse into supererogation.",
+    "Effective altruism should adopt a satisficing rather than maximizing standard."
+  ],
+  "objectionTemplates":[
+    "Demandingness: Maximizing morality erodes personal projects.",
+    "Epistemic: Uncertainty about the most effective causes undermines obligation strength."
+  ],
+  "replyIdeas":[
+    "A threshold duty preserves partiality while addressing severe need.",
+    "Robust charity evaluators mitigate epistemic worries."
+  ],
+  "sources":["Singer, 'Famine, Affluence, and Morality'"]
+}

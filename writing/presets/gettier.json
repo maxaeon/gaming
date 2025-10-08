@@ -1,0 +1,18 @@
+{
+  "id":"writing.preset.gettier",
+  "title":"Gettier & Knowledge",
+  "snapshot":"Do Gettier cases show that justified true belief is not sufficient for knowledge?",
+  "thesisExamples":[
+    "JTB fails; add a no‑defeater or safety condition to secure knowledge.",
+    "Knowledge requires non‑accidental connection to truth (e.g., sensitivity or safety)."
+  ],
+  "objectionTemplates":[
+    "Safety excludes too much (e.g., mathematical knowledge).",
+    "No‑defeater collapses into externalism we don’t want."
+  ],
+  "replyIdeas":[
+    "Refine modal conditions to avoid over‑exclusion.",
+    "Hybrid accounts preserve internalist intuitions with externalist stability."
+  ],
+  "sources":["Gettier, 1963"]
+}

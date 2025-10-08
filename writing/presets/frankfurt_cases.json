@@ -1,0 +1,18 @@
+{
+  "id":"writing.preset.frankfurt",
+  "title":"Frankfurt‑Style Cases & Alternate Possibilities",
+  "snapshot":"If a counterfactual intervener would ensure your choice, are you still responsible when you choose it on your own?",
+  "thesisExamples":[
+    "Frankfurt cases show responsibility without alternatives; what matters is reasons‑responsiveness, not access to ‘could have done otherwise’.",
+    "Blockers undermine the metaphysics of control, so Frankfurt cases fail to refute PAP."
+  ],
+  "objectionTemplates":[
+    "Flicker of freedom: some alternative remains (e.g., try to do otherwise).",
+    "Manipulation worries: hidden intervention undermines agency."
+  ],
+  "replyIdeas":[
+    "Refine PAP to reasons‑responsiveness; responsibility remains.",
+    "Differentiate counterfactual blockers from actual manipulation."
+  ],
+  "sources":["Frankfurt, 1969"]
+}
