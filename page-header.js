@@ -102,6 +102,76 @@ function updatePageHeader(courseKey) {
 
 window.updatePageHeader = updatePageHeader;
 
+function ensureOutcomesStyles() {
+  if (document.getElementById('outcome-style')) return;
+  const style = document.createElement('style');
+  style.id = 'outcome-style';
+  style.textContent = `
+    #outcomes.learning-outcomes {
+      margin-top: 0.5rem;
+      padding: 0.5rem 0;
+      font-size: 0.9em;
+      color: var(--outcome-text, #555);
+    }
+    #outcomes.learning-outcomes h2 {
+      font-size: 1em;
+      margin: 0 0 0.25rem;
+      color: inherit;
+      font-weight: 600;
+    }
+    #outcomes.learning-outcomes ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+    #outcomes.learning-outcomes li {
+      margin-bottom: 0.25rem;
+      line-height: 1.4;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function renderOutcomes() {
+  const container = document.querySelector('.container, main, body');
+  const heading = container ? container.querySelector('h1') : document.querySelector('h1');
+  if (!heading) return;
+  let section = document.getElementById('outcomes');
+  if (!section) {
+    section = document.createElement('section');
+    section.id = 'outcomes';
+    section.className = 'learning-outcomes';
+    section.setAttribute('aria-labelledby', 'outcomes-heading');
+    section.hidden = true;
+    section.innerHTML = '<h2 id="outcomes-heading">Learning outcomes</h2>';
+    heading.insertAdjacentElement('afterend', section);
+  }
+  const outcomes = Array.isArray(window.activityOutcomes) ? window.activityOutcomes : [];
+  const list = document.createElement('ul');
+  list.className = 'outcome-items';
+  outcomes.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    list.appendChild(li);
+  });
+  const existingList = section.querySelector('ul');
+  if (existingList) existingList.remove();
+  if (outcomes.length) {
+    section.appendChild(list);
+    section.hidden = false;
+    section.removeAttribute('aria-hidden');
+  } else {
+    section.hidden = true;
+    section.setAttribute('aria-hidden', 'true');
+  }
+}
+
+window.renderActivityOutcomes = function(outcomes) {
+  if (Array.isArray(outcomes)) {
+    window.activityOutcomes = outcomes;
+    renderOutcomes();
+  }
+};
+
 function addSkipLink() {
   const link = document.createElement('a');
   link.href = '#main';
@@ -126,12 +196,13 @@ function initPageHeader() {
   if (!courseKey && header) {
     courseKey = header.dataset.defaultCourse;
   }
-  const h1 = document.querySelector('.container h1');
   applyCourseColor(courseKey);
   updatePageHeader(courseKey);
 
   ensureMainId();
   addSkipLink();
+  ensureOutcomesStyles();
+  renderOutcomes();
 
   loadHelpModal();
   createCourseSidebar();
