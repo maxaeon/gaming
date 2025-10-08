@@ -1,0 +1,11 @@
+{
+  "id":"writing.rubric.position",
+  "title":"Position Paper (1000–1500 words)",
+  "criteria":[
+    {"name":"Thesis clarity","levels":["Absent/vague","Clear but narrow/hedged","Clear, specific, arguable"]},
+    {"name":"Argument structure","levels":["List-like","Some structure; gaps","Well-structured; premises support conclusion"]},
+    {"name":"Use of sources","levels":["Assertions only","Some citation; mis-integration","Accurate, well-integrated quotation/paraphrase"]},
+    {"name":"Objection & reply","levels":["Missing","Present but weak","Steelmaned objection with targeted reply"]},
+    {"name":"Style & mechanics","levels":["Frequent issues","Minor issues","Clear, concise, polished"]}
+  ]
+}

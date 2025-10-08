@@ -1,0 +1,18 @@
+{
+  "id":"writing.preset.euthyphro",
+  "title":"Divine Command & the Euthyphro Dilemma",
+  "snapshot":"Is the pious loved by the gods because it is pious, or is it pious because the gods love it?",
+  "thesisExamples":[
+    "Divine commands track moral facts rather than constitute them; hence pure DCT fails to explain moral authority.",
+    "Grounding morality in divine nature, not will, avoids arbitrariness while preserving authority."
+  ],
+  "objectionTemplates":[
+    "If moral authority is independent of God, divine sovereignty is undermined.",
+    "Pluralism: Rival conceptions of God yield conflicting commands."
+  ],
+  "replyIdeas":[
+    "A nature‑based view can avoid arbitrariness while retaining normativity.",
+    "Epistemic access via reason/revelation can underwrite knowledge of moral truths."
+  ],
+  "sources":["Plato, Euthyphro"]
+}
