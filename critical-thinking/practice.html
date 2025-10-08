@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Critical Thinking — Practice</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:#fafafa;color:#111}
+  header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:12px 16px;display:flex;gap:12px;align-items:center;z-index:1}
+  header h1{font-size:18px;margin:0 12px 0 0}
+  header .controls label{margin-right:12px}
+  main{max-width:900px;margin:24px auto;padding:0 16px 64px}
+  .card{background:#fff;border:1px solid #eee;border-radius:8px;padding:16px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .muted{color:#666}.small{font-size:12px}
+  .options{display:grid;gap:8px;margin:12px 0}
+  .options button{border:1px solid #ddd;border-radius:6px;padding:10px 12px;background:#fff;cursor:pointer;text-align:left}
+  .options button.correct{border-color:#12a150}
+  .options button.incorrect{border-color:#c62828}
+  .badge{display:inline-block;background:#f1f5f9;color:#334155;border:1px solid #e2e8f0;padding:2px 6px;border-radius:999px;font-size:12px;margin-left:6px}
+  .explanation{border-top:1px dashed #e5e7eb;margin-top:12px;padding-top:12px}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap}
+  .toolbar button{border:1px solid #ddd;background:#fff;border-radius:6px;padding:8px 10px;cursor:pointer}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>Critical Thinking</h1>
+  <div class="controls">
+    <label>Chapter:
+      <select id="chapSel"><option value="">All</option></select>
+    </label>
+    <button id="startBtn">Start Practice</button>
+  </div>
+</header>
+<main>
+  <div id="intro" class="card">
+    <strong>Practice mode</strong>
+    <p class="muted small">Filter by chapter and practice. Explanations show after you answer.</p>
+  </div>
+  <div id="stage" class="hidden"></div>
+</main>
+<script>
+const CT = {
+  items: [], chapters: [], state: {chapter:null, queue:[], index:0, score:0, wrong:[]},
+  async init(){
+    const idx = await fetch("./index.json").then(r=>r.json()).catch(()=>({chapters:[]}));
+    this.chapters = (idx.chapters||[]).map(c=>c.num).sort((a,b)=>a-b);
+    const sel = document.getElementById('chapSel');
+    sel.innerHTML = '<option value="">All</option>'+this.chapters.map(n=>`<option>${n}</option>`).join('');
+    sel.onchange = ()=>{ this.state.chapter = sel.value?parseInt(sel.value,10):null; };
+    const toLoad = this.chapters.length?this.chapters:[1];
+    const packs = await Promise.all(toLoad.map(n=>fetch(`./chapters/ch${String(n).padStart(2,'0')}.json`).then(r=>r.json()).catch(()=>[])));
+    this.items = packs.flat();
+    document.getElementById('startBtn').onclick = ()=> this.start();
+  },
+  start(){
+    const pool = this.items.filter(it=>!this.state.chapter || it.chapter===this.state.chapter);
+    if(pool.length===0){ alert('No items for the selected chapter yet.'); return; }
+    this.state.queue = this.shuffle(pool); this.state.index = 0; this.state.score = 0; this.state.wrong = [];
+    document.getElementById('intro').classList.add('hidden');
+    document.getElementById('stage').classList.remove('hidden');
+    this.render();
+  },
+  render(){
+    const it = this.state.queue[this.state.index]; if(!it){ return this.finish(); }
+    const stage = document.getElementById('stage');
+    stage.innerHTML = `
+      <div class="card">
+        <div class="row">
+          <div><strong>${it.stem}</strong> <span class="badge">Ch. ${it.chapter}${it.section?(' • '+it.section):''}</span></div>
+          <div class="small muted">${(it.type||'mc').toUpperCase()} • ${it.topic||''}</div>
+        </div>
+        ${this.body(it)}
+      </div>
+      <div class="toolbar">
+        <button id="prevBtn">Prev</button>
+        <button id="nextBtn">Next</button>
+        <span class="muted small">Source: ${it.source||'—'}</span>
+      </div>`;
+    document.getElementById('prevBtn').onclick=()=>{ if(this.state.index>0){ this.state.index--; this.render(); } };
+    document.getElementById('nextBtn').onclick=()=>{ this.state.index++; this.render(); };
+  },
+  body(it){
+    if(it.type==='flash'){
+      return `<div class="muted small">Flashcard</div>
+        <div style="margin-top:8px"><em>Tap to reveal</em></div>
+        <div class="explanation hidden" id="exp"><div>${it.explanation||''}</div></div>
+        <div class="toolbar" style="margin-top:8px"><button onclick="document.getElementById('exp').classList.remove('hidden')">Reveal</button></div>`;
+    }
+    const opts = (it.options||[]).map((opt,i)=>`<button onclick="CT.choose(${i})">${opt}</button>`).join('');
+    return `<div class="options">${opts}</div><div id="exp" class="explanation hidden"><div>${it.explanation||''}</div></div>`;
+  },
+  choose(i){
+    const it = this.state.queue[this.state.index];
+    const btns = Array.from(document.querySelectorAll('.options button'));
+    btns.forEach((b,idx)=>{
+      if(idx===it.key){ b.classList.add('correct'); }
+      if(idx===i && i!==it.key){ b.classList.add('incorrect'); this.state.wrong.push(it); }
+      b.disabled=true;
+    });
+    document.getElementById('exp').classList.remove('hidden');
+    if(i===it.key) this.state.score++;
+  },
+  finish(){ document.getElementById('stage').innerHTML = `<div class="card"><strong>Done.</strong> Score: ${this.state.score}/${this.state.queue.length}</div>`; },
+  shuffle(a){ const x=a.slice(); for(let i=x.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [x[i],x[j]]=[x[j],x[i]]; } return x; }
+};
+window.addEventListener('DOMContentLoaded', ()=>CT.init());
+</script>
+</body>
+</html>
