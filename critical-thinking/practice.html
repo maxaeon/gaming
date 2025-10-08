@@ -1,9 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Critical Thinking — Practice</title>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Critical Thinking — Practice / Exam / Cram</title>
 <style>
   body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:#fafafa;color:#111}
   header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:12px 16px;display:flex;gap:12px;align-items:center;z-index:1}
@@ -22,46 +21,82 @@
   .toolbar button{border:1px solid #ddd;background:#fff;border-radius:6px;padding:8px 10px;cursor:pointer}
   .row{display:flex;justify-content:space-between;align-items:center;gap:12px}
   .hidden{display:none}
+  .timer{font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
 <header>
   <h1>Critical Thinking</h1>
   <div class="controls">
-    <label>Chapter:
-      <select id="chapSel"><option value="">All</option></select>
+    <label>Chapter: <select id="chapSel"><option value="">All</option></select></label>
+    <label>Mode:
+      <select id="modeSel">
+        <option value="practice">Practice</option>
+        <option value="exam">Exam</option>
+        <option value="cram">Cram</option>
+      </select>
     </label>
-    <button id="startBtn">Start Practice</button>
+    <button id="startBtn">Start</button>
+    <span id="timer" class="timer muted small"></span>
   </div>
 </header>
 <main>
   <div id="intro" class="card">
-    <strong>Practice mode</strong>
-    <p class="muted small">Filter by chapter and practice. Explanations show after you answer.</p>
+    <strong>Practice / Exam / Cram</strong>
+    <p class="muted small">Practice shows explanations after each item. Exam hides explanations until you finish (default 30 Q / 35 min). Cram repeats missed items until you get them right once.</p>
   </div>
   <div id="stage" class="hidden"></div>
+  <div id="review" class="hidden"></div>
 </main>
 <script>
 const CT = {
-  items: [], chapters: [], state: {chapter:null, queue:[], index:0, score:0, wrong:[]},
+  items: [], chapters: [],
+  state:{mode:'practice', chapter:null, queue:[], index:0, score:0, wrong:[], startTs:0, timer:null, exam:{q:30, secs:35*60}},
   async init(){
     const idx = await fetch("./index.json").then(r=>r.json()).catch(()=>({chapters:[]}));
     this.chapters = (idx.chapters||[]).map(c=>c.num).sort((a,b)=>a-b);
-    const sel = document.getElementById('chapSel');
-    sel.innerHTML = '<option value="">All</option>'+this.chapters.map(n=>`<option>${n}</option>`).join('');
-    sel.onchange = ()=>{ this.state.chapter = sel.value?parseInt(sel.value,10):null; };
-    const toLoad = this.chapters.length?this.chapters:[1];
+    const ch = document.getElementById('chapSel');
+    ch.innerHTML = '<option value="">All</option>'+this.chapters.map(n=>`<option>${n}</option>`).join('');
+    ch.onchange = ()=>{ this.state.chapter = ch.value?parseInt(ch.value,10):null; };
+    document.getElementById('modeSel').onchange = (e)=>{ this.state.mode = e.target.value; };
+    document.getElementById('startBtn').onclick = ()=> this.start();
+    const toLoad = this.chapters.length?this.chapters:[1,2,3,4,5,6,7,8];
     const packs = await Promise.all(toLoad.map(n=>fetch(`./chapters/ch${String(n).padStart(2,'0')}.json`).then(r=>r.json()).catch(()=>[])));
     this.items = packs.flat();
-    document.getElementById('startBtn').onclick = ()=> this.start();
   },
   start(){
     const pool = this.items.filter(it=>!this.state.chapter || it.chapter===this.state.chapter);
-    if(pool.length===0){ alert('No items for the selected chapter yet.'); return; }
-    this.state.queue = this.shuffle(pool); this.state.index = 0; this.state.score = 0; this.state.wrong = [];
+    if(pool.length===0){ alert('No items for the selected chapter.'); return; }
+    if(this.state.mode==='exam'){
+      const qs = Math.min(this.state.exam.q, pool.length);
+      this.state.queue = CT.shuffle(pool).slice(0, qs);
+      this.state.score = 0; this.state.wrong = []; this.state.index=0; this.state.startTs=Date.now(); this.tick();
+    } else if(this.state.mode==='cram'){
+      const batch = Math.min(10, pool.length);
+      this.state.queue = CT.shuffle(pool).slice(0, batch);
+      this.state.score = 0; this.state.wrong = []; this.state.index=0; document.getElementById('timer').textContent='';
+      clearInterval(this.state.timer);
+    } else {
+      this.state.queue = CT.shuffle(pool);
+      this.state.score = 0; this.state.wrong = []; this.state.index=0; document.getElementById('timer').textContent='';
+      clearInterval(this.state.timer);
+    }
     document.getElementById('intro').classList.add('hidden');
+    document.getElementById('review').classList.add('hidden');
     document.getElementById('stage').classList.remove('hidden');
     this.render();
+  },
+  tick(){
+    clearInterval(this.state.timer);
+    if(this.state.mode!=='exam'){ document.getElementById('timer').textContent=''; return; }
+    const end = this.state.startTs + this.state.exam.secs*1000;
+    const update = ()=>{
+      const left = Math.max(0, Math.floor((end - Date.now())/1000));
+      const m = String(Math.floor(left/60)).padStart(2,'0'); const s = String(left%60).padStart(2,'0');
+      document.getElementById('timer').textContent = `⏱ ${m}:${s}`;
+      if(left<=0){ clearInterval(this.state.timer); CT.finishExam(); }
+    };
+    update(); this.state.timer = setInterval(update, 250);
   },
   render(){
     const it = this.state.queue[this.state.index]; if(!it){ return this.finish(); }
@@ -86,24 +121,44 @@ const CT = {
     if(it.type==='flash'){
       return `<div class="muted small">Flashcard</div>
         <div style="margin-top:8px"><em>Tap to reveal</em></div>
-        <div class="explanation hidden" id="exp"><div>${it.explanation||''}</div></div>
-        <div class="toolbar" style="margin-top:8px"><button onclick="document.getElementById('exp').classList.remove('hidden')">Reveal</button></div>`;
+        <div class="explanation ${this.state.mode==='exam'?'hidden':''}" id="exp"><div>${it.explanation||''}</div></div>
+        ${this.state.mode==='exam'?'':`<div class="toolbar" style="margin-top:8px"><button onclick="document.getElementById('exp').classList.remove('hidden')">Reveal</button></div>`}`;
     }
     const opts = (it.options||[]).map((opt,i)=>`<button onclick="CT.choose(${i})">${opt}</button>`).join('');
-    return `<div class="options">${opts}</div><div id="exp" class="explanation hidden"><div>${it.explanation||''}</div></div>`;
+    return `<div class="options">${opts}</div>
+      <div id="exp" class="explanation ${this.state.mode==='exam'?'hidden':''}"><div>${it.explanation||''}</div></div>`;
   },
   choose(i){
     const it = this.state.queue[this.state.index];
     const btns = Array.from(document.querySelectorAll('.options button'));
     btns.forEach((b,idx)=>{
       if(idx===it.key){ b.classList.add('correct'); }
-      if(idx===i && i!==it.key){ b.classList.add('incorrect'); this.state.wrong.push(it); }
+      if(idx===i && i!==it.key){ b.classList.add('incorrect'); if(this.state.mode==='cram'){ this.state.queue.push(it); } this.state.wrong.push(it); }
       b.disabled=true;
     });
-    document.getElementById('exp').classList.remove('hidden');
+    if(this.state.mode!=='exam'){ document.getElementById('exp').classList.remove('hidden'); }
     if(i===it.key) this.state.score++;
   },
-  finish(){ document.getElementById('stage').innerHTML = `<div class="card"><strong>Done.</strong> Score: ${this.state.score}/${this.state.queue.length}</div>`; },
+  finish(){
+    if(this.state.mode==='exam'){ return this.finishExam(); }
+    document.getElementById('stage').innerHTML = `<div class="card"><strong>Done.</strong> Score: ${this.state.score}/${this.state.queue.length}</div>`;
+  },
+  finishExam(){
+    const total = this.state.queue.length, right = this.state.score;
+    const pct = Math.round(100*right/Math.max(1,total));
+    const review = document.getElementById('review');
+    review.classList.remove('hidden');
+    review.innerHTML = `
+      <div class="card"><strong>Exam complete.</strong> Score: ${right}/${total} (${pct}%) <div class="muted small">Explanations below.</div></div>
+      ${this.state.queue.map(w=>`
+        <div class="card">
+          <div><strong>${w.stem}</strong> <span class="badge">Ch. ${w.chapter}${w.section?(' • '+w.section):''}</span></div>
+          <div class="explanation"><div>${w.explanation||''}</div><div class="muted small">Source: ${w.source||'—'}</div></div>
+        </div>`).join('')}
+    `;
+    document.getElementById('stage').classList.add('hidden');
+    document.getElementById('timer').textContent=''; clearInterval(this.state.timer);
+  },
   shuffle(a){ const x=a.slice(); for(let i=x.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [x[i],x[j]]=[x[j],x[i]]; } return x; }
 };
 window.addEventListener('DOMContentLoaded', ()=>CT.init());

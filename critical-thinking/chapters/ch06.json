@@ -1,0 +1,25 @@
+[
+  {
+    "id":"ct.ch06.hasty.001","course":"critical-thinking","chapter":6,"section":"Hasty Generalization","topic":"Sample size",
+    "type":"mc","stem":"A hasty generalization typically fails because ____.",
+    "options":["sample is too small or unrepresentative","premises are inconsistent","argument begs the question","terms are equivocal"],
+    "key":0,
+    "explanation":"Inductive generalization needs adequate, representative sampling.",
+    "source":"Bassham 7e, ch.6","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch06.posthoc.002","course":"critical-thinking","chapter":6,"section":"Post Hoc","topic":"Causal",
+    "type":"mc","stem":"Post hoc ergo propter hoc mistakes ____.",
+    "options":["temporal order for causal connection","necessity for sufficiency","probability for certainty","legality for morality"],
+    "key":0,
+    "explanation":"That B followed A doesn’t show A caused B.",
+    "source":"Bassham 7e, ch.6","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch06.weakanalogy.003","course":"critical-thinking","chapter":6,"section":"Weak Induction","topic":"Weak analogy",
+    "type":"flash","stem":"Define: weak analogy.",
+    "options":null,"key":null,
+    "explanation":"Drawing a conclusion from similarities that are too few or irrelevant to the property inferred.",
+    "source":"Bassham 7e, ch.6","difficulty":"easy"
+  }
+]

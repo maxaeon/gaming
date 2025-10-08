@@ -1,0 +1,25 @@
+[
+  {
+    "id":"ct.ch08.dependent.001","course":"critical-thinking","chapter":8,"section":"Dependent vs Independent","topic":"Linked premises",
+    "type":"mc","stem":"P1 and P2 each give weak support alone but strong support together for C. They are ____ reasons.",
+    "options":["independent","coincidental","linked (dependent)","irrelevant"],
+    "key":2,
+    "explanation":"Linked (dependent) premises function jointly to support the conclusion.",
+    "source":"Bassham 7e, ch.8","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch08.diagram.002","course":"critical-thinking","chapter":8,"section":"Argument Structure","topic":"Structure ID",
+    "type":"mc","stem":"Which best signals an independent reason?",
+    "options":["‘Together, these facts show that…’","‘Separately, either of the following supports…’","‘Only if both…’","‘Taken jointly…’"],
+    "key":1,
+    "explanation":"Language like ‘either’ or ‘separately’ suggests independent support.",
+    "source":"Bassham 7e, ch.8","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch08.diagram.003","course":"critical-thinking","chapter":8,"section":"Argument Structure","topic":"Support",
+    "type":"flash","stem":"Define: independent vs linked support (one sentence).",
+    "options":null,"key":null,
+    "explanation":"Independent: premises each support C on their own; linked: premises must be combined to support C.",
+    "source":"Bassham 7e, ch.8","difficulty":"easy"
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "id":"ct.ch05.adhominem.001","course":"critical-thinking","chapter":5,"section":"Fallacies of Relevance","topic":"Ad hominem (abusive)",
+    "type":"mc","stem":"Which best illustrates ad hominem (abusive)?",
+    "options":["He’s wrong because he profits from it.","Don’t listen; she’s an idiot.","We need more data before concluding.","This confuses correlation with causation."],
+    "key":1,
+    "explanation":"Abusive ad hominem attacks the person’s character rather than the claim.",
+    "source":"Bassham 7e, ch.5","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch05.straw.002","course":"critical-thinking","chapter":5,"section":"Fallacies of Relevance","topic":"Straw person",
+    "type":"mc","stem":"Straw person involves ____.",
+    "options":["attacking a weaker misrepresentation of an opponent’s view","appeal to unqualified authority","equivocating on a key term","citing a false dilemma"],
+    "key":0,
+    "explanation":"Distorts the target to an easier‑to‑refute version.",
+    "source":"Bassham 7e, ch.5","difficulty":"easy"
+  },
+  {
+    "id":"ct.ch05.redherring.003","course":"critical-thinking","chapter":5,"section":"Fallacies of Relevance","topic":"Red herring",
+    "type":"flash","stem":"Define: red herring.",
+    "options":null,"key":null,
+    "explanation":"Introducing an irrelevant issue to deflect from the point at hand.",
+    "source":"Bassham 7e, ch.5","difficulty":"easy"
+  }
+]
