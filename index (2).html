@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Venn Workbench — Dr. Max Parks</title>
+<link rel="icon" href="../favicon.png" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  body { font-family: 'Cormorant Garamond', serif; margin: 0; }
+  .font-display { font-family: 'Cormorant Garamond', serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .grain { position: relative; }
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.04) 1px, transparent 0);
+    background-size: 4px 4px;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body class="bg-stone-100 text-stone-900">
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useState } = React;
+
+// =====================================================================
+// VENN DIAGRAM WORKBENCH — test categorical syllogism validity
+// Diagram both premises on one set of circles; if the conclusion
+// already appears, the argument is valid.
+// =====================================================================
+
+const CX = 250;
+const CY = 240;
+const R = 115;
+const OFFSET = 70;
+
+const CIRCLES = {
+  A: { cx: CX - OFFSET, cy: CY - OFFSET / 1.5, r: R },
+  B: { cx: CX + OFFSET, cy: CY - OFFSET / 1.5, r: R },
+  C: { cx: CX, cy: CY + OFFSET, r: R },
+};
+
+const REGIONS = [
+  { id: "A_only", inCircles: ["A"], hit: { x: CX - 140, y: CY - 70 } },
+  { id: "B_only", inCircles: ["B"], hit: { x: CX + 140, y: CY - 70 } },
+  { id: "C_only", inCircles: ["C"], hit: { x: CX, y: CY + 160 } },
+  { id: "AB", inCircles: ["A", "B"], hit: { x: CX, y: CY - 85 } },
+  { id: "AC", inCircles: ["A", "C"], hit: { x: CX - 75, y: CY + 60 } },
+  { id: "BC", inCircles: ["B", "C"], hit: { x: CX + 75, y: CY + 60 } },
+  { id: "ABC", inCircles: ["A", "B", "C"], hit: { x: CX, y: CY + 15 } },
+  { id: "outside", inCircles: [], hit: { x: 40, y: 40 } },
+];
+
+const COLORS = [
+  { name: "ivory", value: "#fefce8" },
+  { name: "stone", value: "#f5f5f4" },
+  { name: "sky", value: "#e0f2fe" },
+  { name: "moss", value: "#ecfccb" },
+  { name: "rose", value: "#ffe4e6" },
+  { name: "lavender", value: "#ede9fe" },
+];
+
+const DEFAULT_LABELS = ["S", "P", "M"];
+
+function App() {
+  const [labels, setLabels] = useState([...DEFAULT_LABELS]);
+  const [shaded, setShaded] = useState({});
+  const [marks, setMarks] = useState([]);
+  const [fill, setFill] = useState(COLORS[0].value);
+  const [argumentText, setArgumentText] = useState("");
+
+  const toggleShade = (regionId) => {
+    setShaded(prev => ({ ...prev, [regionId]: !prev[regionId] }));
+  };
+
+  const toggleMark = (regionId, x, y) => {
+    const nearby = marks.findIndex(m => Math.hypot(m.x - x, m.y - y) < 22);
+    if (nearby >= 0) {
+      setMarks(marks.filter((_, k) => k !== nearby));
+    } else {
+      setMarks([...marks, { regionId, x, y }]);
+    }
+  };
+
+  const clearDiagram = () => {
+    setShaded({}); setMarks([]);
+  };
+
+  const handleClick = (e, regionId) => {
+    const svg = e.currentTarget.ownerSVGElement;
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX; pt.y = e.clientY;
+    const cursor = pt.matrixTransform(svg.getScreenCTM().inverse());
+    if (e.shiftKey) toggleMark(regionId, cursor.x, cursor.y);
+    else toggleShade(regionId);
+  };
+
+  return (
+    <div className="grain min-h-screen px-6 py-10 max-w-6xl mx-auto">
+      <header className="mb-8 text-center">
+        <div className="font-mono text-xs tracking-[0.3em] text-stone-500 mb-3">
+          CRITICAL THINKING — VISUAL TOOLS
+        </div>
+        <h1 className="font-display italic text-6xl mb-2">Venn Workbench</h1>
+        <div className="w-16 h-px bg-stone-400 mx-auto mb-4" />
+        <p className="font-display text-lg text-stone-700 max-w-2xl mx-auto leading-relaxed mb-2">
+          Diagram both premises of a categorical syllogism on the same set of circles.
+          If the conclusion appears automatically once both premises are drawn, the argument is valid.
+          If you'd have to add anything new to make the conclusion show up, it's invalid.
+        </p>
+        <p className="font-display italic text-base text-stone-600">by Dr. Max Parks</p>
+      </header>
+
+      <Procedure />
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <aside className="lg:col-span-1 space-y-6">
+          <div className="border border-stone-300 bg-stone-50 p-5">
+            <div className="font-mono text-[10px] tracking-[0.3em] text-stone-500 mb-2">THE ARGUMENT</div>
+            <textarea
+              value={argumentText}
+              onChange={(e) => setArgumentText(e.target.value)}
+              placeholder="Paste or type the syllogism you're testing here. e.g.,&#10;&#10;P1: All philosophers are skeptics.&#10;P2: Some skeptics are mystics.&#10;C: Some philosophers are mystics."
+              className="w-full h-44 p-3 font-display text-base bg-white border border-stone-300 focus:outline-none focus:border-stone-900 resize-none leading-relaxed"
+            />
+          </div>
+
+          <div className="border border-stone-300 bg-stone-50 p-5">
+            <div className="font-mono text-[10px] tracking-[0.3em] text-stone-500 mb-3">CIRCLE LABELS</div>
+            <div className="space-y-3">
+              {[0, 1, 2].map(i => (
+                <div key={i} className="flex items-center gap-3">
+                  <span className="font-display italic text-2xl text-stone-500 w-6 text-center">
+                    {["A", "B", "C"][i]}
+                  </span>
+                  <input type="text" value={labels[i]}
+                    onChange={(e) => {
+                      const newLabels = [...labels];
+                      newLabels[i] = e.target.value;
+                      setLabels(newLabels);
+                    }}
+                    maxLength={24}
+                    className="flex-1 px-3 py-2 font-display text-base bg-white border border-stone-300 focus:outline-none focus:border-stone-900" />
+                </div>
+              ))}
+            </div>
+            <div className="font-display italic text-sm text-stone-500 mt-3 leading-snug">
+              By convention, S = subject of conclusion, P = predicate of conclusion, M = middle term.
+            </div>
+          </div>
+
+          <div className="border border-stone-300 bg-stone-50 p-5">
+            <div className="font-mono text-[10px] tracking-[0.3em] text-stone-500 mb-3">UNSHADED FILL COLOR</div>
+            <div className="grid grid-cols-3 gap-2 mb-2">
+              {COLORS.map(c => (
+                <button key={c.value} onClick={() => setFill(c.value)}
+                  className={`h-10 border ${fill === c.value ? "border-stone-900 border-2" : "border-stone-300"}`}
+                  style={{ backgroundColor: c.value }} title={c.name} />
+              ))}
+            </div>
+          </div>
+
+          <button onClick={clearDiagram}
+            className="w-full font-mono text-xs tracking-[0.25em] border border-stone-400 py-3 hover:bg-stone-900 hover:text-stone-100 transition-colors">
+            CLEAR DIAGRAM
+          </button>
+        </aside>
+
+        <div className="lg:col-span-2">
+          <div className="border border-stone-300 bg-stone-50 p-5">
+            <div className="bg-white border border-stone-300">
+              <svg viewBox="0 0 500 500" className="w-full h-auto block select-none">
+                <defs>
+                  <pattern id="shadePattern" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+                    <rect width="8" height="8" fill="white" />
+                    <line x1="0" y1="0" x2="0" y2="8" stroke="#1c1917" strokeWidth="1.5" />
+                  </pattern>
+                </defs>
+
+                <rect x="0" y="0" width="500" height="500"
+                  fill={shaded["outside"] ? "url(#shadePattern)" : fill}
+                  onClick={(e) => handleClick(e, "outside")}
+                  style={{ cursor: "pointer" }} />
+
+                {["A", "B", "C"].map(k => (
+                  <circle key={k} cx={CIRCLES[k].cx} cy={CIRCLES[k].cy} r={CIRCLES[k].r}
+                    fill={fill} stroke="none" />
+                ))}
+
+                {REGIONS.filter(r => r.id !== "outside" && shaded[r.id]).map(region => (
+                  <RegionShade key={region.id} region={region} />
+                ))}
+
+                {["A", "B", "C"].map(k => (
+                  <circle key={`outline-${k}`} cx={CIRCLES[k].cx} cy={CIRCLES[k].cy} r={CIRCLES[k].r}
+                    fill="none" stroke="#1c1917" strokeWidth="2.5" />
+                ))}
+
+                {REGIONS.filter(r => r.id !== "outside").map(region => (
+                  <circle key={`hit-${region.id}`} cx={region.hit.x} cy={region.hit.y} r="26"
+                    fill="transparent" onClick={(e) => handleClick(e, region.id)}
+                    style={{ cursor: "pointer" }} />
+                ))}
+
+                <text x={CIRCLES.A.cx - 95} y={CIRCLES.A.cy - 95} textAnchor="middle"
+                  fontFamily="Cormorant Garamond, serif" fontSize="28" fontStyle="italic" fill="#1c1917">
+                  {labels[0]}
+                </text>
+                <text x={CIRCLES.B.cx + 95} y={CIRCLES.B.cy - 95} textAnchor="middle"
+                  fontFamily="Cormorant Garamond, serif" fontSize="28" fontStyle="italic" fill="#1c1917">
+                  {labels[1]}
+                </text>
+                <text x={CIRCLES.C.cx} y={CIRCLES.C.cy + CIRCLES.C.r + 30} textAnchor="middle"
+                  fontFamily="Cormorant Garamond, serif" fontSize="28" fontStyle="italic" fill="#1c1917">
+                  {labels[2]}
+                </text>
+
+                {marks.map((m, i) => (
+                  <text key={i} x={m.x} y={m.y + 10} textAnchor="middle"
+                    fontSize="34" fontWeight="bold" fill="#92400e"
+                    style={{ pointerEvents: "none", fontFamily: "JetBrains Mono, monospace" }}>×</text>
+                ))}
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <WorkedExample />
+    </div>
+  );
+}
+
+function Procedure() {
+  return (
+    <div className="border border-stone-300 bg-stone-50 p-6 mb-8 max-w-4xl mx-auto">
+      <div className="font-mono text-[10px] tracking-[0.3em] text-stone-500 mb-4">HOW TO TEST AN ARGUMENT</div>
+      <ol className="font-display text-base text-stone-800 leading-relaxed space-y-2 list-decimal list-inside">
+        <li>Label the three circles with the three terms of the syllogism.</li>
+        <li>
+          Diagram the <b>first premise</b>:
+          <span className="font-mono text-[11px] bg-stone-900 text-stone-100 px-2 py-0.5 mx-1 align-middle">CLICK</span>
+          a region to shade it (means "empty"), or
+          <span className="font-mono text-[11px] bg-amber-700 text-stone-100 px-2 py-0.5 mx-1 align-middle">SHIFT+CLICK</span>
+          to place an <b>×</b> (means "at least one thing exists here").
+        </li>
+        <li>Diagram the <b>second premise</b> on the <i>same</i> diagram, on top of the first.</li>
+        <li>
+          Now read the diagram. Ask: <i>does the conclusion show up automatically?</i> If yes, the argument is <b>valid</b>. If you'd have to add anything new to make the conclusion appear, the argument is <b>invalid</b>.
+        </li>
+      </ol>
+      <div className="font-display italic text-sm text-stone-600 mt-4 leading-snug border-t border-stone-200 pt-3">
+        Quick reference: "All A are B" means shade everything in A that's outside B. "No A are B" means shade the A∩B overlap. "Some A are B" means place an × in the A∩B overlap (on the boundary if the premise doesn't tell you which sub-region it belongs in). "Some A are not B" means place an × in A but outside B.
+      </div>
+    </div>
+  );
+}
+
+function RegionShade({ region }) {
+  const inside = region.inCircles;
+  const outside = ["A", "B", "C"].filter(c => !inside.includes(c));
+  const uid = region.id;
+  return (
+    <g>
+      <defs>
+        <mask id={`mask-${uid}`}>
+          <rect x="0" y="0" width="500" height="500" fill="white" />
+          {outside.map(c => (
+            <circle key={c} cx={CIRCLES[c].cx} cy={CIRCLES[c].cy} r={CIRCLES[c].r} fill="black" />
+          ))}
+        </mask>
+        {inside.slice(1).map((c, idx) => (
+          <clipPath key={c} id={`clip-${uid}-${idx}`}>
+            <circle cx={CIRCLES[c].cx} cy={CIRCLES[c].cy} r={CIRCLES[c].r} />
+          </clipPath>
+        ))}
+      </defs>
+      <g mask={`url(#mask-${uid})`}>
+        <NestedClippedHatch inside={inside} uid={uid} />
+      </g>
+    </g>
+  );
+}
+
+function NestedClippedHatch({ inside, uid }) {
+  const base = CIRCLES[inside[0]];
+  let element = <circle cx={base.cx} cy={base.cy} r={base.r} fill="url(#shadePattern)" />;
+  for (let i = 1; i < inside.length; i++) {
+    element = <g clipPath={`url(#clip-${uid}-${i - 1})`}>{element}</g>;
+  }
+  return element;
+}
+
+function WorkedExample() {
+  return (
+    <div className="border border-stone-300 bg-stone-50 p-6 mt-10 max-w-4xl mx-auto">
+      <div className="font-mono text-[10px] tracking-[0.3em] text-stone-500 mb-3">WORKED EXAMPLE</div>
+      <h3 className="font-display italic text-2xl mb-4 leading-snug">
+        "All philosophers are skeptics. Some skeptics are mystics. Therefore, some philosophers are mystics."
+      </h3>
+      <div className="font-display text-base text-stone-800 leading-relaxed space-y-3">
+        <p>Label your circles: <b>A = philosophers</b>, <b>B = mystics</b>, <b>C = skeptics</b>.</p>
+        <p><b>Diagram premise 1 — "All philosophers are skeptics":</b> No philosophers exist outside the skeptic circle. Click to shade the parts of A that lie outside C (the "A only" region and the "A∩B" region).</p>
+        <p><b>Diagram premise 2 — "Some skeptics are mystics":</b> At least one thing exists in the overlap of B and C. Shift-click to place an × in the B∩C overlap. Place it on the line between "B∩C" and "A∩B∩C" — the premise doesn't tell us which of those two sub-regions the X actually belongs in, so we straddle them.</p>
+        <p><b>Now read the diagram for the conclusion — "Some philosophers are mystics":</b> This would require an × that <i>must</i> be inside both A (philosophers) and B (mystics). But the × you placed for premise 2 sits on the boundary; it might be entirely outside A. Nothing in the diagram forces it into the A∩B region.</p>
+        <p className="border-l-4 border-amber-700 pl-4 mt-4 italic">
+          The premises do not force the conclusion. The argument is invalid.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

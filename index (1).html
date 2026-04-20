@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Argument Tribunal — Dr. Max Parks</title>
+<link rel="icon" href="../favicon.png" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  body { font-family: 'Cormorant Garamond', serif; margin: 0; }
+  .font-display { font-family: 'Cormorant Garamond', serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .grain { position: relative; }
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.04) 1px, transparent 0);
+    background-size: 4px 4px;
+    pointer-events: none;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.4s ease-out forwards; }
+</style>
+</head>
+<body class="bg-stone-100 text-stone-900">
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef } = React;
+
+// =====================================================================
+// CRITICAL THINKING GAME — three rounds for evaluating arguments
+// Designed for ~75-90 min, small teams competing for points, remote class
+// Plain-language explanations; no formal terminology required.
+// =====================================================================
+
+const ROUND_1 = [
+  { id: "d1", prompt: "All philosophers are skeptics. Some skeptics are mystics. Therefore, some philosophers are mystics.",
+    verdict: "invalid", structure: "The shared category trap",
+    explanation: "The word 'skeptics' shows up in both premises but only refers to SOME skeptics in each case. The philosopher-skeptics could be one group, and the mystic-skeptics a totally different group. They might never overlap. Compare: 'All cats are mammals; some mammals are dogs; therefore some cats are dogs.'" },
+  { id: "d2", prompt: "If the bill passes, taxes will rise. Taxes are rising. Therefore, the bill passed.",
+    verdict: "invalid", structure: "Running an 'if-then' backwards",
+    explanation: "The first premise says the bill is one way to make taxes rise — not the only way. Taxes could rise for many other reasons. The argument tries to run the 'if-then' backwards, which doesn't work. Pattern: 'If P, then Q. Q happened. Therefore P.' Classic flaw." },
+  { id: "d3", prompt: "If a policy is just, it treats relevantly similar cases alike. This policy does not treat relevantly similar cases alike. Therefore, this policy is not just.",
+    verdict: "valid", structure: "Denying the result",
+    explanation: "If a just policy must produce a certain result, and we DIDN'T get that result, then the policy can't be just. Whether the conclusion is true depends on whether the second premise is correct, but the reasoning is airtight." },
+  { id: "d4", prompt: "No dictators are friends of free speech. Some heads of state are friends of free speech. Therefore, some heads of state are not dictators.",
+    verdict: "valid", structure: "Ruling out membership",
+    explanation: "Dictators and free-speech-friends don't overlap at all. But some heads of state ARE in the free-speech-friends circle. Those particular heads of state therefore can't be dictators. Solid reasoning." },
+  { id: "d5", prompt: "If consciousness is purely physical, then a complete physical description leaves nothing out. A complete physical description leaves nothing out. Therefore, consciousness is purely physical.",
+    verdict: "invalid", structure: "Running an 'if-then' backwards (in fancy clothes)",
+    explanation: "Same flaw as the tax example, just dressed up in philosophical vocabulary. Affirming that the description works doesn't prove consciousness is physical — there could be other explanations. Don't let abstract language hide a familiar mistake." },
+  { id: "d6", prompt: "Either we accept the principle of sufficient reason or we abandon causal explanation. We will not abandon causal explanation. Therefore, we accept the principle of sufficient reason.",
+    verdict: "valid", structure: "Eliminating an option",
+    explanation: "Form is fine: 'A or B; not B; therefore A.' If you've genuinely got two options and rule one out, the other must be true. The interesting question is whether the original 'either/or' is really exhaustive — but that's a question about whether the premise is TRUE, not about whether the reasoning works." },
+  { id: "d7", prompt: "If a fetus is a person with full moral rights, then abortion is morally impermissible. A fetus is a person with full moral rights. Therefore, abortion is morally impermissible.",
+    verdict: "valid", structure: "Standard 'if-then' reasoning",
+    explanation: "The form is valid: 'If P, then Q. P. Therefore Q.' Whether the conclusion is actually true depends entirely on whether you accept both premises. People on different sides of the abortion debate disagree about premise two (and sometimes about premise one). Valid reasoning doesn't settle moral disputes; the work happens at the level of premises." },
+  { id: "d8", prompt: "If U.S. immigration policy is just, it treats people in similar circumstances alike regardless of country of origin. Current U.S. immigration policy does not treat people in similar circumstances alike regardless of country of origin. Therefore, current U.S. immigration policy is not just.",
+    verdict: "valid", structure: "Denying the result",
+    explanation: "Same valid form as the policy/justice question. To attack it, you'd have to challenge whether the first premise gives a correct standard of justice, or whether the second premise accurately describes current policy." },
+  { id: "d9", prompt: "If the U.S. government had faked the moon landing, then thousands of NASA engineers, contractors, and Soviet observers would have had to keep the secret for over 50 years. No credible insider has come forward in over 50 years with evidence of such a cover-up. Therefore, the U.S. government did not fake the moon landing.",
+    verdict: "valid", structure: "Denying the result",
+    explanation: "If a fake moon landing REQUIRES a massive ongoing cover-up, and we have no evidence of that cover-up after half a century, then the 'fake landing' explanation has a serious problem. Reasoning is valid. Students may want to argue with the second premise — that's the right discussion to have. But the FORM is solid." },
+];
+
+const ROUND_2 = [
+  { id: "i1", prompt: "A researcher polled 1,200 randomly selected likely voters across all 50 U.S. states using stratified sampling. 54% supported the candidate, with a margin of error of ±3%.",
+    conclusion: "The candidate is likely to win the popular vote.", strength: "strong",
+    explanation: "Big sample, randomly selected, drawn from the right population, with a real margin of error reported. The lead is bigger than the margin. This is what good polling evidence looks like." },
+  { id: "i2", prompt: "I have eaten at three Italian restaurants in this city and disliked all three.",
+    conclusion: "Italian food in this city is bad.", strength: "weak",
+    explanation: "Three restaurants is a tiny sample, probably not random (same neighborhood? same price range?), and the conclusion is sweeping. Jumping to a big conclusion from too little evidence — a hasty generalization." },
+  { id: "i3", prompt: "Every observed instance of water at sea-level pressure has boiled at 100°C. We have observed this across centuries, in countless locations, with no exceptions.",
+    conclusion: "The next sample of water at sea-level pressure will boil at 100°C.", strength: "strong",
+    explanation: "Huge, varied evidence base, gathered over a long time, with zero counterexamples and a known scientific mechanism. About as strong as 'we've always seen X, so we'll see X again' reasoning ever gets." },
+  { id: "i4", prompt: "Country A reduced its corporate tax rate and unemployment fell the next year.",
+    conclusion: "The tax cut caused unemployment to fall.", strength: "weak",
+    explanation: "Just because B happened after A doesn't mean A caused B. No comparison group, no control for other factors, only one data point. Correlation in a single case is poor evidence for causation." },
+  { id: "i5", prompt: "In a double-blind randomized controlled trial with 8,000 participants across 12 countries, the new medication reduced symptoms in 73% of cases compared to 22% on placebo, p<0.001.",
+    conclusion: "The medication is effective for treating this condition in the studied population.", strength: "strong",
+    explanation: "Gold standard methodology: large group, randomized, blinded, multi-site, big effect size, statistically significant. Inductive support for the conclusion (limited to the studied population) is very strong." },
+  { id: "i6", prompt: "My grandmother smoked a pack a day and lived to 95.",
+    conclusion: "Smoking is not significantly harmful to health.", strength: "weak",
+    explanation: "One person's experience versus mountains of population-level data. Outliers exist for almost everything. Anecdotal evidence can't overturn statistical evidence." },
+  { id: "i7", prompt: "A search of Mars has found organic molecules, methane fluctuations in the atmosphere, and ancient riverbeds — but no direct observation of any living organism, despite decades of robotic exploration.",
+    conclusion: "Microbial life currently exists on Mars.", strength: "weak",
+    explanation: "What we have are hints that life MIGHT be possible — building blocks, water history, atmospheric oddities. None of this is direct evidence that life is actually there now. A more cautious conclusion ('the conditions for microbial life may have existed') would be much better supported." },
+  { id: "i8", prompt: "No reputable scientist, geneticist, or political insider has ever produced verifiable evidence of shape-shifting reptilian humanoids running world governments. Every photograph, video, and 'leaked document' offered as proof has been shown to be misidentified, doctored, or fabricated. Multiple independent investigators across decades have found nothing.",
+    conclusion: "There are no shape-shifting lizard people secretly running world governments.", strength: "strong",
+    explanation: "When something would leave evidence if it were real, and no evidence has been found across many independent investigations over a long period, that's a real reason to think it isn't there. Sometimes called 'absence of evidence is evidence of absence' — true when you've genuinely looked hard." },
+  { id: "i9", prompt: "After the U.S. and Israel began strikes on Iranian targets in early 2026, oil prices rose.",
+    conclusion: "The strikes caused oil prices to rise.", strength: "weak",
+    explanation: "Same 'A then B, so A caused B' move from the tax-cut question. Oil prices respond to many things at once: shipping disruptions, OPEC decisions, currency moves, broader market expectations. The strikes might well have had an effect — but this argument doesn't establish it." },
+];
+
+const ROUND_3 = [
+  { id: "m1", prompt: "If a theory is unfalsifiable, it is not scientific. Astrology is unfalsifiable. Therefore, astrology is not scientific.",
+    type: "deductive", quality: "valid",
+    flaw: "None — the reasoning is solid. Whether the conclusion is true depends on whether you accept both premises.",
+    explanation: "Standard 'if-then' reasoning, used correctly. To push back, you'd have to argue either that unfalsifiability isn't really what disqualifies a theory from being scientific, or that astrology actually does make falsifiable predictions." },
+  { id: "m2", prompt: "Three students from that high school went on to win Rhodes Scholarships in the past decade. The school must offer an exceptional education.",
+    type: "inductive", quality: "weak",
+    flaw: "Tiny sample, no comparison rates, ignores who the school admits in the first place.",
+    explanation: "Three success stories tells us almost nothing on its own. We'd need to know: how many graduates total? What's the rate compared to similar schools? Were these students already exceptional when they arrived?" },
+  { id: "m3", prompt: "If determinism is true, no one is morally responsible. Some people are morally responsible. Therefore, determinism is false.",
+    type: "deductive", quality: "valid",
+    flaw: "None — the reasoning is valid. Both premises are heavily contested, which is why this is a live philosophical debate.",
+    explanation: "Solid reasoning. Compatibilists would reject premise one (they think determinism and responsibility can coexist). Hard determinists would reject premise two. The argument is valid; the disagreement is about premises." },
+  { id: "m4", prompt: "In a meta-analysis of 47 studies covering over 200,000 patients, regular exercise was associated with a 30% reduction in all-cause mortality, with consistent results across age, sex, and geography.",
+    type: "inductive", quality: "strong",
+    flaw: "None significant. Still need to be careful about going from association to causation, but the evidence is robust.",
+    explanation: "Drawing a general conclusion from a very large body of data. Meta-analysis combines many studies, the total sample is huge, and the pattern holds across subgroups. Strong evidence." },
+  { id: "m5", prompt: "Either we ban this technology entirely or we accept catastrophic societal collapse. We won't accept catastrophic collapse. So we must ban it entirely.",
+    type: "deductive", quality: "valid",
+    flaw: "The reasoning works, but the first premise sets up a false choice — almost no real situation has only two options.",
+    explanation: "Reasoning is valid: A or B; not B; therefore A. But the first premise gives us a fake either/or. Real options usually include regulation, partial restriction, monitoring, age limits. A great example of how an argument can be valid but still bad — the form works, but the premise is dishonest." },
+  { id: "m6", prompt: "Every swan observed in Europe for centuries was white. So all swans are white.",
+    type: "inductive", quality: "weak",
+    flaw: "The sample only covered one part of the world. Famously refuted by black swans in Australia.",
+    explanation: "Generalization from a sample that wasn't representative. The lesson: even a huge body of consistent evidence can be misleading if you've only looked in one place." },
+  { id: "m7", prompt: "If we don't deport everyone here illegally, the country will collapse. We won't deport everyone here illegally. Therefore, the country will collapse.",
+    type: "deductive", quality: "valid",
+    flaw: "Valid form, but the first premise is a wild exaggeration with no support — a scare-tactic premise dressed up in logical clothing.",
+    explanation: "The reasoning itself works. The real problem is premise one: 'the country will collapse' is a catastrophic claim, and the argument gives no reason to believe it. Valid form does not rescue a fearmongering premise. Common in propaganda — wrap a frightening claim in valid logic to make it look rigorous." },
+  { id: "m8", prompt: "I watched a YouTube video pointing out that the U.S. flag appears to wave in the moon landing footage, even though there's no atmosphere on the moon. So the moon landings were faked.",
+    type: "inductive", quality: "weak",
+    flaw: "Cherry-picked evidence, ignores the actual physical explanation, and treats one source as decisive against an enormous body of contrary evidence.",
+    explanation: "Several problems: (1) The flag appears to move because it was hung from a horizontal rod and was disturbed when planted — momentum still exists in vacuum. (2) One YouTube video weighed against thousands of independent lines of evidence. (3) The argument picks one anomaly and ignores everything else. This pattern shows up constantly in conspiracy reasoning." },
+  { id: "m9", prompt: "Several world leaders have been caught on camera with strange eye movements, awkward speech patterns, and odd posture. This is exactly what you'd expect if reptilian shape-shifters were impersonating them. So world leaders are probably reptilian shape-shifters.",
+    type: "inductive", quality: "weak",
+    flaw: "The 'evidence' is also predicted by countless ordinary explanations, and the theory is set up so nothing could ever count against it.",
+    explanation: "Two big problems. First, awkward speech, blinking, and weird posture are extremely well explained by ordinary things: stress, fatigue, neurological tics, bad lighting, public-speaking nerves. A good theory should predict things its rivals don't. Second, the theory tends to be unfalsifiable: any normal behavior gets re-interpreted as 'they're hiding it well.'" },
+  { id: "m10", prompt: "If there were ever liquid water on Mars, then microbial life could have existed there. There was once liquid water on Mars. Therefore, microbial life could have existed there.",
+    type: "deductive", quality: "valid",
+    flaw: "None — the reasoning is valid. Note the modest conclusion: 'could have existed,' not 'did exist.'",
+    explanation: "Standard 'if-then' reasoning done correctly. The conclusion is appropriately humble. A good example of an argument matching its conclusion to what the premises actually support." },
+];
+
+function romanize(n) {
+  return ({1:"I",2:"II",3:"III",4:"IV",5:"V",6:"VI",7:"VII",8:"VIII"})[n] || String(n);
+}
+
+function App() {
+  const [screen, setScreen] = useState("title");
+  const [teams, setTeams] = useState([]);
+  const [round, setRound] = useState(1);
+  const [questionIdx, setQuestionIdx] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+  const [secondsLeft, setSecondsLeft] = useState(120);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (timerRunning && secondsLeft > 0) {
+      intervalRef.current = setInterval(() => {
+        setSecondsLeft(s => Math.max(0, s - 1));
+      }, 1000);
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [timerRunning, secondsLeft]);
+
+  const currentSet = round === 1 ? ROUND_1 : round === 2 ? ROUND_2 : ROUND_3;
+  const currentQ = currentSet[questionIdx];
+
+  const startGame = (teamList) => {
+    setTeams(teamList.map(name => ({ name, score: 0 })));
+    setScreen("round");
+    setRound(1); setQuestionIdx(0); setRevealed(false);
+    setSecondsLeft(120); setTimerRunning(false);
+  };
+
+  const adjustScore = (i, delta) => {
+    setTeams(prev => prev.map((t, idx) =>
+      idx === i ? { ...t, score: Math.max(0, t.score + delta) } : t
+    ));
+  };
+
+  const nextQuestion = () => {
+    setRevealed(false);
+    setSecondsLeft(round === 3 ? 180 : 120);
+    setTimerRunning(false);
+    if (questionIdx + 1 < currentSet.length) {
+      setQuestionIdx(questionIdx + 1);
+    } else if (round < 3) {
+      setRound(round + 1); setQuestionIdx(0);
+    } else {
+      setScreen("results");
+    }
+  };
+
+  const prevQuestion = () => {
+    setRevealed(false); setTimerRunning(false);
+    if (questionIdx > 0) {
+      setQuestionIdx(questionIdx - 1);
+    } else if (round > 1) {
+      const prevSet = round === 2 ? ROUND_1 : ROUND_2;
+      setRound(round - 1); setQuestionIdx(prevSet.length - 1);
+    }
+  };
+
+  return (
+    <div className="min-h-screen w-full bg-stone-100 text-stone-900 font-serif">
+      {screen === "title" && <TitleScreen onStart={() => setScreen("setup")} />}
+      {screen === "setup" && <SetupScreen onStart={startGame} />}
+      {screen === "round" && (
+        <RoundScreen
+          round={round} questionIdx={questionIdx} totalInRound={currentSet.length}
+          question={currentQ} revealed={revealed} setRevealed={setRevealed}
+          secondsLeft={secondsLeft} timerRunning={timerRunning}
+          setTimerRunning={setTimerRunning}
+          resetTimer={() => { setSecondsLeft(round === 3 ? 180 : 120); setTimerRunning(false); }}
+          teams={teams} adjustScore={adjustScore}
+          onNext={nextQuestion} onPrev={prevQuestion}
+        />
+      )}
+      {screen === "results" && (
+        <ResultsScreen teams={teams} onRestart={() => {
+          setScreen("title"); setTeams([]); setRound(1); setQuestionIdx(0);
+        }} />
+      )}
+    </div>
+  );
+}
+
+function TitleScreen({ onStart }) {
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 grain">
+      <div className="max-w-2xl text-center fade-up">
+        <div className="font-mono text-xs tracking-[0.3em] text-stone-500 mb-6">
+          CRITICAL THINKING — CLASSROOM EDITION
+        </div>
+        <h1 className="font-display italic text-7xl md:text-8xl leading-none mb-2">The Argument</h1>
+        <h1 className="font-display text-7xl md:text-8xl leading-none mb-8">Tribunal</h1>
+        <div className="w-24 h-px bg-stone-400 mx-auto mb-8" />
+        <p className="font-display text-xl md:text-2xl text-stone-700 leading-relaxed mb-3">
+          A three-round contest in which teams judge arguments, rate evidence, and unmask hidden flaws.
+        </p>
+        <p className="font-display italic text-lg text-stone-600 mb-12">by Dr. Max Parks</p>
+        <div className="grid grid-cols-3 gap-4 mb-12 max-w-xl mx-auto">
+          <RoundCard num="I" name="Deduction Court" desc="Rule on validity" />
+          <RoundCard num="II" name="Confidence Bids" desc="Rate inductive strength" />
+          <RoundCard num="III" name="Mixed Battlefield" desc="Classify and evaluate" />
+        </div>
+        <button onClick={onStart}
+          className="font-mono text-xs tracking-[0.25em] bg-stone-900 text-stone-100 px-12 py-4 hover:bg-stone-700 transition-colors">
+          BEGIN ──→
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function RoundCard({ num, name, desc }) {
+  return (
+    <div className="border border-stone-300 p-4 bg-stone-50">
+      <div className="font-display italic text-3xl text-stone-400 mb-1">{num}</div>
+      <div className="font-display text-base font-semibold mb-1">{name}</div>
+      <div className="font-mono text-[10px] tracking-wider text-stone-500 uppercase">{desc}</div>
+    </div>
+  );
+}
+
+function SetupScreen({ onStart }) {
+  const [teamInput, setTeamInput] = useState("");
+  const [teamList, setTeamList] = useState([]);
+
+  const addTeam = () => {
+    const name = teamInput.trim();
+    if (name && !teamList.includes(name) && teamList.length < 8) {
+      setTeamList([...teamList, name]); setTeamInput("");
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 grain">
+      <div className="max-w-xl w-full fade-up">
+        <div className="font-mono text-xs tracking-[0.3em] text-stone-500 mb-4">STEP ONE — REGISTER COMPETITORS</div>
+        <h2 className="font-display italic text-5xl mb-8">Name your teams</h2>
+        <p className="font-display text-lg text-stone-700 mb-8 leading-relaxed">
+          Add 2–8 teams. Each team will deliberate together and submit one answer per question.
+          Names like "The Empiricists" or "Team Aristotle" tend to outperform "Group 1."
+        </p>
+        <div className="flex gap-2 mb-6">
+          <input type="text" value={teamInput}
+            onChange={(e) => setTeamInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && addTeam()}
+            placeholder="Team name..."
+            className="flex-1 px-4 py-3 border border-stone-400 bg-stone-50 font-display text-lg focus:outline-none focus:border-stone-900" />
+          <button onClick={addTeam}
+            className="font-mono text-xs tracking-wider bg-stone-900 text-stone-100 px-6 hover:bg-stone-700">ADD</button>
+        </div>
+        <div className="space-y-2 mb-8 min-h-[100px]">
+          {teamList.map((name, i) => (
+            <div key={name} className="flex items-center justify-between border border-stone-300 bg-stone-50 px-4 py-3 fade-up">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs text-stone-500">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-lg">{name}</span>
+              </div>
+              <button onClick={() => setTeamList(teamList.filter(t => t !== name))}
+                className="font-mono text-xs text-stone-500 hover:text-red-700">REMOVE</button>
+            </div>
+          ))}
+          {teamList.length === 0 && <div className="font-display italic text-stone-400 text-center py-8">No teams yet</div>}
+        </div>
+        <button onClick={() => onStart(teamList)} disabled={teamList.length < 2}
+          className="w-full font-mono text-xs tracking-[0.25em] bg-stone-900 text-stone-100 py-4 hover:bg-stone-700 transition-colors disabled:bg-stone-300 disabled:cursor-not-allowed">
+          START ROUND I ──→
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function RoundScreen(props) {
+  const { round, questionIdx, totalInRound, question, revealed, setRevealed,
+          secondsLeft, timerRunning, setTimerRunning, resetTimer, teams,
+          adjustScore, onNext, onPrev } = props;
+  const roundMeta = {
+    1: { title: "Deduction Court", subtitle: "Is this argument VALID or INVALID?",
+         instructions: "Treat the premises as true for the sake of testing the reasoning. A valid argument is one where, IF the premises were true, the conclusion would have to be true. Award 1 point for the correct verdict, plus 1 bonus point if the team can also explain WHY (what move makes the argument work or what move breaks it)." },
+    2: { title: "Confidence Bids", subtitle: "How STRONG is this inductive argument?",
+         instructions: "Each team rates the argument as STRONG or WEAK and bids 1, 2, or 3 points. Correct answer earns the bid; wrong answer loses the bid. Bidding tests calibration: how confident SHOULD you be?" },
+    3: { title: "Mixed Battlefield", subtitle: "Classify, evaluate, and identify the flaw (if any).",
+         instructions: "1 point for correctly classifying as DEDUCTIVE (the conclusion is supposed to follow with certainty) or INDUCTIVE (the conclusion is supposed to be probable). 1 point for correct evaluation (valid/invalid for deductive; strong/weak for inductive). 1 point for correctly identifying the flaw — or correctly noting that there isn't one." },
+  };
+  const meta = roundMeta[round];
+  const minutes = Math.floor(secondsLeft / 60);
+  const seconds = secondsLeft % 60;
+
+  return (
+    <div className="min-h-screen flex flex-col grain">
+      <header className="border-b border-stone-300 bg-stone-50 px-6 py-4 flex items-center justify-between">
+        <div>
+          <div className="font-mono text-xs tracking-[0.25em] text-stone-500">ROUND {romanize(round)} — {meta.title.toUpperCase()}</div>
+          <div className="font-display italic text-2xl">Question {questionIdx + 1} of {totalInRound}</div>
+        </div>
+        <div className="flex items-center gap-6">
+          <div className="text-right">
+            <div className="font-mono text-xs text-stone-500">TIMER</div>
+            <div className={`font-mono text-3xl ${secondsLeft < 30 ? "text-red-700" : "text-stone-900"}`}>
+              {minutes}:{String(seconds).padStart(2, "0")}
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <button onClick={() => setTimerRunning(!timerRunning)}
+              className="font-mono text-[10px] tracking-wider bg-stone-900 text-stone-100 px-3 py-1 hover:bg-stone-700">
+              {timerRunning ? "PAUSE" : "START"}
+            </button>
+            <button onClick={resetTimer}
+              className="font-mono text-[10px] tracking-wider border border-stone-400 px-3 py-1 hover:bg-stone-200">RESET</button>
+          </div>
+        </div>
+      </header>
+
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-0">
+        <main className="lg:col-span-2 p-8 lg:p-12 border-r border-stone-300 overflow-y-auto">
+          <div className="max-w-2xl">
+            <h1 className="font-display text-4xl md:text-5xl italic mb-2">{meta.title}</h1>
+            <p className="font-display text-xl text-stone-600 mb-6">{meta.subtitle}</p>
+            <details className="mb-8 border-l-2 border-stone-400 pl-4">
+              <summary className="font-mono text-xs tracking-wider text-stone-500 cursor-pointer hover:text-stone-900">SCORING RULES</summary>
+              <p className="font-display text-base text-stone-700 mt-2 leading-relaxed">{meta.instructions}</p>
+            </details>
+
+            <div className="border border-stone-400 bg-stone-50 p-8 mb-8 fade-up" key={question.id}>
+              <div className="font-mono text-[10px] tracking-[0.3em] text-stone-500 mb-3">THE ARGUMENT</div>
+              <p className="font-display text-2xl leading-relaxed text-stone-900">{question.prompt}</p>
+              {question.conclusion && (
+                <>
+                  <div className="font-mono text-[10px] tracking-[0.3em] text-stone-500 mt-6 mb-2">PROPOSED CONCLUSION</div>
+                  <p className="font-display italic text-xl text-stone-800">"{question.conclusion}"</p>
+                </>
+              )}
+            </div>
+
+            {!revealed ? (
+              <button onClick={() => setRevealed(true)}
+                className="font-mono text-xs tracking-[0.25em] bg-stone-900 text-stone-100 px-8 py-3 hover:bg-stone-700">
+                REVEAL ANSWER ──→
+              </button>
+            ) : (
+              <div className="border-l-4 border-amber-700 bg-amber-50 p-6 fade-up">
+                <div className="font-mono text-[10px] tracking-[0.3em] text-amber-800 mb-3">INSTRUCTOR REVEAL</div>
+                {round === 1 && (
+                  <>
+                    <div className="font-display text-3xl mb-2">
+                      <span className="italic">Verdict:</span>{" "}
+                      <span className="font-semibold uppercase">{question.verdict}</span>
+                    </div>
+                    <div className="font-display text-lg text-stone-700 mb-4">
+                      <span className="italic">What's going on:</span> {question.structure}
+                    </div>
+                  </>
+                )}
+                {round === 2 && (
+                  <div className="font-display text-3xl mb-4">
+                    <span className="italic">Strength:</span>{" "}
+                    <span className="font-semibold uppercase">{question.strength}</span>
+                  </div>
+                )}
+                {round === 3 && (
+                  <>
+                    <div className="font-display text-2xl mb-2">
+                      <span className="italic">Type:</span>{" "}
+                      <span className="font-semibold uppercase">{question.type}</span>
+                    </div>
+                    <div className="font-display text-2xl mb-2">
+                      <span className="italic">Quality:</span>{" "}
+                      <span className="font-semibold uppercase">{question.quality}</span>
+                    </div>
+                    <div className="font-display text-lg text-stone-700 mb-4">
+                      <span className="italic">Flaw:</span> {question.flaw}
+                    </div>
+                  </>
+                )}
+                <div className="border-t border-amber-200 pt-4 mt-4">
+                  <div className="font-mono text-[10px] tracking-wider text-amber-800 mb-2">DISCUSSION NOTES</div>
+                  <p className="font-display text-base leading-relaxed text-stone-800">{question.explanation}</p>
+                </div>
+              </div>
+            )}
+
+            <div className="flex justify-between mt-10">
+              <button onClick={onPrev} disabled={round === 1 && questionIdx === 0}
+                className="font-mono text-xs tracking-wider border border-stone-400 px-6 py-3 hover:bg-stone-200 disabled:opacity-30">
+                ←── PREVIOUS
+              </button>
+              <button onClick={onNext}
+                className="font-mono text-xs tracking-[0.25em] bg-stone-900 text-stone-100 px-8 py-3 hover:bg-stone-700">
+                {round === 3 && questionIdx + 1 === totalInRound ? "FINAL RESULTS ──→" : "NEXT QUESTION ──→"}
+              </button>
+            </div>
+          </div>
+        </main>
+
+        <aside className="bg-stone-200 p-6 lg:p-8 overflow-y-auto">
+          <div className="font-mono text-xs tracking-[0.3em] text-stone-600 mb-4">SCOREBOARD</div>
+          <div className="space-y-3">
+            {[...teams].map((t, i) => ({ ...t, originalIdx: i }))
+              .sort((a, b) => b.score - a.score)
+              .map((team, displayIdx) => (
+                <div key={team.name} className="border border-stone-400 bg-stone-50 p-3">
+                  <div className="flex items-baseline justify-between mb-2">
+                    <div className="flex items-baseline gap-2 min-w-0">
+                      <span className="font-mono text-xs text-stone-500">{String(displayIdx + 1).padStart(2, "0")}</span>
+                      <span className="font-display text-lg truncate">{team.name}</span>
+                    </div>
+                    <span className="font-display text-3xl font-semibold">{team.score}</span>
+                  </div>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, -1].map(delta => (
+                      <button key={delta} onClick={() => adjustScore(team.originalIdx, delta)}
+                        className="flex-1 font-mono text-xs py-1 border border-stone-400 hover:bg-stone-900 hover:text-stone-100 transition-colors">
+                        {delta > 0 ? `+${delta}` : `−${Math.abs(delta)}`}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+function ResultsScreen({ teams, onRestart }) {
+  const sorted = [...teams].sort((a, b) => b.score - a.score);
+  const winner = sorted[0];
+  const max = Math.max(...sorted.map(t => t.score), 1);
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 grain">
+      <div className="max-w-2xl w-full fade-up">
+        <div className="font-mono text-xs tracking-[0.3em] text-stone-500 mb-4 text-center">
+          THE ARGUMENT TRIBUNAL — FINAL JUDGMENT
+        </div>
+        <h1 className="font-display italic text-6xl text-center mb-2">Verdict</h1>
+        <div className="w-16 h-px bg-stone-400 mx-auto mb-10" />
+        <div className="text-center mb-12">
+          <div className="font-mono text-xs tracking-wider text-stone-500 mb-2">CHAMPION</div>
+          <div className="font-display text-5xl font-semibold mb-2">{winner.name}</div>
+          <div className="font-display italic text-2xl text-stone-600">{winner.score} points</div>
+        </div>
+        <div className="space-y-3 mb-12">
+          {sorted.map((team, i) => (
+            <div key={team.name} className="border-b border-stone-300 pb-3">
+              <div className="flex items-baseline justify-between mb-1">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-display italic text-2xl text-stone-400">{romanize(i + 1)}.</span>
+                  <span className="font-display text-xl">{team.name}</span>
+                </div>
+                <span className="font-display text-2xl font-semibold">{team.score}</span>
+              </div>
+              <div className="h-1 bg-stone-200">
+                <div className="h-1 bg-stone-900" style={{ width: `${(team.score / max) * 100}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <button onClick={onRestart}
+          className="w-full font-mono text-xs tracking-[0.25em] bg-stone-900 text-stone-100 py-4 hover:bg-stone-700">
+          NEW GAME ──→
+        </button>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
