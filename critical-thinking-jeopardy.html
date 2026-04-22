@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Critical Thinking Jeopardy — Prof. Parks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0a06;
+    --paper: #f5efe0;
+    --paper-warm: #ede4cf;
+    --accent: #8b2e1e;
+    --accent-soft: #b8664f;
+    --gold: #a88b3f;
+    --rule: #2a2620;
+    --shadow: rgba(13, 10, 6, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at top left, rgba(168, 139, 63, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 46, 30, 0.06), transparent 50%);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.04 0 0 0 0 0.02 0 0 0 0.15 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  h1 .amp {
+    font-weight: 400;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .subtitle {
+    margin-top: 1rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--rule);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .rule {
+    margin: 2rem auto;
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rule), transparent);
+    position: relative;
+  }
+
+  .rule::before {
+    content: "§";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--paper);
+    padding: 0 1rem;
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .cat {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 0.75rem;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    border: 2px solid var(--ink);
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 0 var(--gold);
+  }
+
+  .cell {
+    background: var(--paper-warm);
+    border: 2px solid var(--ink);
+    aspect-ratio: 1 / 0.75;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(1.3rem, 2.5vw, 2.2rem);
+    color: var(--accent);
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+    position: relative;
+    box-shadow: 3px 3px 0 var(--shadow);
+  }
+
+  .cell::before {
+    content: "$";
+    font-size: 0.65em;
+    vertical-align: super;
+    margin-right: 0.05em;
+    color: var(--gold);
+  }
+
+  .cell:hover:not(.done) {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--shadow);
+  }
+
+  .cell:hover:not(.done)::before { color: var(--gold); }
+
+  .cell.done {
+    background: transparent;
+    color: transparent;
+    cursor: default;
+    box-shadow: none;
+    border-style: dashed;
+    border-color: rgba(42, 38, 32, 0.3);
+  }
+
+  .cell.done::before { content: ""; }
+
+  /* Modal */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 10, 6, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+    padding: 2rem;
+  }
+
+  .modal-bg.open { display: flex; }
+
+  .modal {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    max-width: 780px;
+    width: 100%;
+    padding: 3rem;
+    position: relative;
+    box-shadow: 12px 12px 0 var(--accent);
+    animation: pop 0.3s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.85) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  .modal-cat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-value {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+
+  .modal-a {
+    padding: 1.5rem;
+    background: var(--paper-warm);
+    border-left: 4px solid var(--accent);
+    font-size: 1.1rem;
+    line-height: 1.55;
+    color: var(--rule);
+    display: none;
+  }
+
+  .modal-a.show { display: block; }
+
+  .modal-a .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  button {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.5rem;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  button:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  button.primary {
+    background: var(--accent);
+    color: var(--paper);
+    border-color: var(--accent);
+  }
+
+  button.primary:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .close-x {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rule);
+    opacity: 0.6;
+  }
+
+  .reset-btn {
+    display: block;
+    margin: 1.5rem auto 0;
+  }
+
+  @media (max-width: 768px) {
+    .wrap { padding: 1.5rem 1rem 3rem; }
+    .board { gap: 5px; }
+    .cat { font-size: 0.65rem; padding: 0.75rem 0.25rem; min-height: 70px; box-shadow: 2px 2px 0 var(--gold); }
+    .cell { font-size: 1rem; box-shadow: 2px 2px 0 var(--shadow); }
+    .modal { padding: 2rem 1.5rem; box-shadow: 6px 6px 0 var(--accent); }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Philosophy · Critical Thinking</div>
+    <h1>Reason <span class="amp">&amp;</span><br>Consequence</h1>
+    <p class="subtitle">A Jeopardy-style review of arguments, fallacies, and the ethics of contested questions.</p>
+    <div class="rule"></div>
+  </header>
+
+  <div class="board" id="board"></div>
+
+  <button class="reset-btn" onclick="resetBoard()">↺ Reset Board</button>
+
+  <footer>Prof. Parks · Critical Thinking</footer>
+</div>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <button class="close-x" onclick="closeModal()">×</button>
+    <div class="modal-cat" id="m-cat"></div>
+    <div class="modal-value" id="m-val"></div>
+    <div class="modal-q" id="m-q"></div>
+    <div class="modal-a" id="m-a">
+      <span class="label">Answer</span>
+      <div id="m-a-text"></div>
+    </div>
+    <div class="modal-actions">
+      <button onclick="showAnswer()" id="reveal-btn" class="primary">Reveal Answer</button>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const categories = [
+    {
+      name: "Logic & Argument Form",
+      questions: [
+        { v: 100, q: "A deductive argument whose premises, if true, would guarantee the truth of its conclusion.", a: "What is a <strong>valid</strong> argument?" },
+        { v: 200, q: "This is what we call a valid deductive argument whose premises are also actually true.", a: "What is a <strong>sound</strong> argument?" },
+        { v: 300, q: "Unlike deduction, this type of reasoning is evaluated on a spectrum — premises aim to make the conclusion probable, not certain.", a: "What is <strong>inductive</strong> reasoning?" },
+        { v: 400, q: "An inductive argument in which the premises, if true, make the conclusion probable AND whose premises are actually true.", a: "What is a <strong>cogent</strong> argument?" },
+        { v: 500, q: "In a categorical syllogism, this is the term that appears in both premises but NOT in the conclusion — the term that links the other two.", a: "What is the <strong>middle term</strong>?" }
+      ]
+    },
+    {
+      name: "Fallacies & Propaganda",
+      questions: [
+        { v: 100, q: "Attacking the person making the argument rather than the argument itself is this Latin-named fallacy.", a: "What is <strong>ad hominem</strong>?" },
+        { v: 200, q: "This fallacy distorts or exaggerates an opponent's position in order to knock it down more easily.", a: "What is the <strong>straw man</strong> fallacy?" },
+        { v: 300, q: "Assuming that one small step will inevitably lead to a chain of catastrophic outcomes without adequate evidence for those links.", a: "What is the <strong>slippery slope</strong> fallacy?" },
+        { v: 400, q: "A propaganda technique that urges people to accept a claim because \"everyone else\" already does.", a: "What is the <strong>bandwagon</strong> appeal (or ad populum)?" },
+        { v: 500, q: "According to the course framework, propaganda isn't just lying — it is communication designed to do THIS to an audience rather than reason with it.", a: "What is to <strong>manipulate</strong> (or bypass rational evaluation)?" }
+      ]
+    },
+    {
+      name: "Bodies, Consent & Abortion",
+      questions: [
+        { v: 100, q: "A person's ability to make decisions about what happens to their own body is often referred to by this two-word phrase.", a: "What is <strong>bodily autonomy</strong>?" },
+        { v: 200, q: "Judith Jarvis Thomson's famous thought experiment imagines you waking up connected to this ailing musician.", a: "Who is the <strong>violinist</strong>?" },
+        { v: 300, q: "For consent to be meaningful, philosophers typically argue it must be informed, voluntary, and given by someone with this capacity.", a: "What is the <strong>capacity (or competence) to consent</strong>?" },
+        { v: 400, q: "Don Marquis argues abortion is typically wrong because it deprives the fetus of this.", a: "What is a <strong>future like ours</strong> (a valuable future)?" },
+        { v: 500, q: "A common critique of \"personhood begins at conception\" arguments is that they conflate this biological fact with this moral status — name the distinction.", a: "What is the distinction between <strong>being human (biological) and being a person (moral)</strong>?" }
+      ]
+    },
+    {
+      name: "Power, Colonialism & the State",
+      questions: [
+        { v: 100, q: "Post-colonial theorists use this term for the persistence of colonial power structures even after formal political independence.", a: "What is <strong>neocolonialism</strong> (or coloniality)?" },
+        { v: 200, q: "Edward Said's influential book critiques Western representations of this region as exotic, backward, and in need of control.", a: "What is the <strong>Orient</strong> (from <em>Orientalism</em>)?" },
+        { v: 300, q: "Frantz Fanon argued that colonialism operates not only politically and economically but also through this psychological dimension.", a: "What is the <strong>internalization of inferiority</strong> (or psychological colonization)?" },
+        { v: 400, q: "The state's claim to a monopoly on the legitimate use of force was famously associated with this German sociologist.", a: "Who is <strong>Max Weber</strong>?" },
+        { v: 500, q: "An argument that justifies police brutality by appealing only to outcomes — \"it keeps people safe\" — commits to this broad ethical framework, which critics say ignores rights violations along the way.", a: "What is <strong>(act) consequentialism / utilitarianism</strong>?" }
+      ]
+    },
+    {
+      name: "Contemporary Ethics",
+      questions: [
+        { v: 100, q: "An argument against strict immigration restrictions often appeals to this basic moral idea — that the place of one's birth is morally arbitrary.", a: "What is <strong>moral arbitrariness of birthplace</strong> (or luck egalitarianism)?" },
+        { v: 200, q: "A common argument FOR stricter immigration policy appeals to this concept: a political community's right to decide who joins it.", a: "What is <strong>national self-determination</strong> (or sovereignty)?" },
+        { v: 300, q: "Critics of the \"few bad apples\" defense of police misconduct argue it commits this error by ignoring patterns and structures.", a: "What is <strong>individualizing (or ignoring) systemic/structural problems</strong>?" },
+        { v: 400, q: "In arguments about police use of force, this principle — drawn from just-war theory — says the force used must be no greater than what is needed.", a: "What is <strong>proportionality</strong>?" },
+        { v: 500, q: "This term refers to the claim that some harms fall more heavily on particular groups because of overlapping identities — a concept introduced by Kimberlé Crenshaw.", a: "What is <strong>intersectionality</strong>?" }
+      ]
+    },
+    {
+      name: "Spot the Move",
+      questions: [
+        { v: 100, q: "\"You can't trust her argument against the new policy — she's been complaining about everything all semester.\" Name the fallacy.", a: "What is <strong>ad hominem</strong>?" },
+        { v: 200, q: "\"If we allow any restrictions on speech, soon the government will ban all political criticism.\" Name the fallacy.", a: "What is a <strong>slippery slope</strong>?" },
+        { v: 300, q: "\"All officers are public servants. All public servants deserve trust. Therefore, all officers deserve trust.\" This is a categorical syllogism — is it valid?", a: "It is <strong>valid in form</strong> (though the premises can be challenged for soundness)." },
+        { v: 400, q: "\"90% of the students I surveyed in my philosophy class support the policy, so most people in the country do too.\" Identify the weakness in this inductive argument.", a: "What is a <strong>biased / unrepresentative sample</strong> (hasty generalization)?" },
+        { v: 500, q: "A politician says: \"My opponent wants open borders and no laws at all.\" The opponent actually supports reformed legal immigration. Name the move and explain why it's bad reasoning.", a: "What is a <strong>straw man</strong>? It misrepresents the position in order to attack a weaker version, so refuting it does not refute the real argument." }
+      ]
+    }
+  ];
+
+  const board = document.getElementById("board");
+
+  function renderBoard() {
+    board.innerHTML = "";
+    categories.forEach((cat, ci) => {
+      const header = document.createElement("div");
+      header.className = "cat";
+      header.textContent = cat.name;
+      header.style.gridColumn = (ci + 1);
+      header.style.gridRow = 1;
+      board.appendChild(header);
+    });
+    categories.forEach((cat, ci) => {
+      cat.questions.forEach((q, qi) => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.textContent = q.v;
+        cell.dataset.ci = ci;
+        cell.dataset.qi = qi;
+        cell.style.gridColumn = (ci + 1);
+        cell.style.gridRow = (qi + 2);
+        if (localStorage.getItem(`done-${ci}-${qi}`) === "1") {
+          cell.classList.add("done");
+        }
+        cell.onclick = () => openCell(ci, qi, cell);
+        board.appendChild(cell);
+      });
+    });
+  }
+
+  let currentCell = null;
+
+  function openCell(ci, qi, cellEl) {
+    if (cellEl.classList.contains("done")) return;
+    currentCell = cellEl;
+    const cat = categories[ci];
+    const item = cat.questions[qi];
+    document.getElementById("m-cat").textContent = cat.name;
+    document.getElementById("m-val").textContent = `$${item.v}`;
+    document.getElementById("m-q").textContent = item.q;
+    document.getElementById("m-a-text").innerHTML = item.a;
+    document.getElementById("m-a").classList.remove("show");
+    document.getElementById("reveal-btn").style.display = "inline-block";
+    document.getElementById("modal").classList.add("open");
+    cellEl.dataset.ci = ci;
+    cellEl.dataset.qi = qi;
+  }
+
+  function showAnswer() {
+    document.getElementById("m-a").classList.add("show");
+    document.getElementById("reveal-btn").style.display = "none";
+  }
+
+  function closeModal() {
+    document.getElementById("modal").classList.remove("open");
+    if (currentCell) {
+      currentCell.classList.add("done");
+      localStorage.setItem(`done-${currentCell.dataset.ci}-${currentCell.dataset.qi}`, "1");
+    }
+  }
+
+  function resetBoard() {
+    if (!confirm("Reset the entire board?")) return;
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith("done-")) localStorage.removeItem(k);
+    }
+    // run again because removing shifts indices
+    Object.keys(localStorage).filter(k => k.startsWith("done-")).forEach(k => localStorage.removeItem(k));
+    renderBoard();
+  }
+
+  document.getElementById("modal").addEventListener("click", (e) => {
+    if (e.target.id === "modal") closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+    if (e.key === " " && document.getElementById("modal").classList.contains("open")) {
+      e.preventDefault();
+      showAnswer();
+    }
+  });
+
+  renderBoard();
+</script>
+
+</body>
+</html>
