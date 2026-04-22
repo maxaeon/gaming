@@ -241,16 +241,26 @@
   }
 
   .modal-a {
-    padding: 1.5rem;
+    padding: 1.75rem;
     background: var(--paper-warm);
     border-left: 4px solid var(--accent);
     font-size: 1.1rem;
-    line-height: 1.55;
+    line-height: 1.65;
     color: var(--rule);
     display: none;
   }
 
   .modal-a.show { display: block; }
+
+  .modal-a em {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .modal-a strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
 
   .modal-a .label {
     font-family: 'JetBrains Mono', monospace;
@@ -345,7 +355,7 @@
   <header>
     <div class="eyebrow">Philosophy · Critical Thinking</div>
     <h1>Reason <span class="amp">&amp;</span><br>Consequence</h1>
-    <p class="subtitle">A Jeopardy-style review of arguments, fallacies, and the ethics of contested questions.</p>
+    <p class="subtitle">A game of prompts and reasoning — think through the question, then reveal one way to work it out.</p>
     <div class="rule"></div>
   </header>
 
@@ -363,7 +373,7 @@
     <div class="modal-value" id="m-val"></div>
     <div class="modal-q" id="m-q"></div>
     <div class="modal-a" id="m-a">
-      <span class="label">Answer</span>
+      <span class="label">One way to think about it</span>
       <div id="m-a-text"></div>
     </div>
     <div class="modal-actions">
@@ -376,63 +386,63 @@
 <script>
   const categories = [
     {
-      name: "Logic & Argument Form",
+      name: "Arguments & Reasoning",
       questions: [
-        { v: 100, q: "A deductive argument whose premises, if true, would guarantee the truth of its conclusion.", a: "What is a <strong>valid</strong> argument?" },
-        { v: 200, q: "This is what we call a valid deductive argument whose premises are also actually true.", a: "What is a <strong>sound</strong> argument?" },
-        { v: 300, q: "Unlike deduction, this type of reasoning is evaluated on a spectrum — premises aim to make the conclusion probable, not certain.", a: "What is <strong>inductive</strong> reasoning?" },
-        { v: 400, q: "An inductive argument in which the premises, if true, make the conclusion probable AND whose premises are actually true.", a: "What is a <strong>cogent</strong> argument?" },
-        { v: 500, q: "In a categorical syllogism, this is the term that appears in both premises but NOT in the conclusion — the term that links the other two.", a: "What is the <strong>middle term</strong>?" }
+        { v: 100, q: "If someone's argument is logically airtight — meaning the conclusion really does follow from the premises — does that mean their conclusion is true? Why or why not?", a: "Not necessarily. An argument can be <strong>valid</strong> (the conclusion follows logically from the premises) while still having false premises. A true conclusion requires both valid form AND true premises — what philosophers call a <strong>sound</strong> argument." },
+        { v: 200, q: "What's the difference between an argument that tries to guarantee its conclusion and one that only tries to make it probable?", a: "The first is <strong>deductive</strong> — if the premises are true, the conclusion MUST be true. The second is <strong>inductive</strong> — the premises give us reasons to think the conclusion is likely, but don't guarantee it. Scientific generalizations, predictions, and arguments from experience are usually inductive." },
+        { v: 300, q: "Why might a strong inductive argument still lead to a false conclusion?", a: "Because induction is about probability, not certainty. Even if the premises strongly support the conclusion, something unexpected could make it wrong. \"Every swan I've seen has been white, so all swans are white\" was a strong argument — until black swans were discovered. Strong inductive reasoning tells you what's <em>likely</em>, not what's guaranteed." },
+        { v: 400, q: "Someone says: \"All politicians lie. Senator Smith is a politician. So Senator Smith lies.\" Walk through whether this argument is valid, and whether it's sound.", a: "It's <strong>valid</strong> — if both premises were true, the conclusion would have to follow. But it's probably not <strong>sound</strong>, because the first premise (\"all politicians lie\") is a sweeping generalization that isn't actually supported. A good critical thinker distinguishes \"the logic works\" from \"the premises are true.\"" },
+        { v: 500, q: "Why does it matter whether we're clear on the difference between an argument's FORM and its CONTENT?", a: "Because bad reasoning can come from either place. A form can be broken (the conclusion doesn't actually follow) even if the premises are true, OR the form can work fine but the premises are false or unsupported. Mixing these up leads people to either dismiss good arguments or accept bad ones. Evaluating arguments means checking both separately." }
       ]
     },
     {
       name: "Fallacies & Propaganda",
       questions: [
-        { v: 100, q: "Attacking the person making the argument rather than the argument itself is this Latin-named fallacy.", a: "What is <strong>ad hominem</strong>?" },
-        { v: 200, q: "This fallacy distorts or exaggerates an opponent's position in order to knock it down more easily.", a: "What is the <strong>straw man</strong> fallacy?" },
-        { v: 300, q: "Assuming that one small step will inevitably lead to a chain of catastrophic outcomes without adequate evidence for those links.", a: "What is the <strong>slippery slope</strong> fallacy?" },
-        { v: 400, q: "A propaganda technique that urges people to accept a claim because \"everyone else\" already does.", a: "What is the <strong>bandwagon</strong> appeal (or ad populum)?" },
-        { v: 500, q: "According to the course framework, propaganda isn't just lying — it is communication designed to do THIS to an audience rather than reason with it.", a: "What is to <strong>manipulate</strong> (or bypass rational evaluation)?" }
+        { v: 100, q: "Your friend says, \"You can't trust anything Professor Jones says about climate policy — he drives a big SUV.\" What's wrong with this response?", a: "It attacks the person instead of engaging with the argument. Even if Professor Jones is a hypocrite, that has nothing to do with whether his argument is right or wrong. This is sometimes called an <strong>ad hominem</strong> move — it changes the subject from the claim to the claimant." },
+        { v: 200, q: "Before arguing against a position, what should a careful thinker do first — and why does it matter?", a: "They should make sure they've stated the other side's view <strong>accurately and charitably</strong>. If you argue against a weaker or distorted version of someone's view, you haven't actually refuted their real position. This is the problem with \"straw man\" reasoning: you knock down a fake version and think you've won." },
+        { v: 300, q: "\"If we let students use calculators, soon they won't know any math at all, and eventually nobody will be able to do basic arithmetic.\" What's missing from this reasoning?", a: "The argument assumes each step leads to the next without giving reasons. Every link in the chain (calculator use → no math knowledge → total arithmetic collapse) needs actual evidence. Without it, this is just a worst-case prediction dressed up as an argument — the kind of move often called a <strong>slippery slope</strong>." },
+        { v: 400, q: "What's the difference between persuading someone and manipulating them?", a: "Persuasion gives people reasons and lets them evaluate those reasons freely. Manipulation works around someone's rational judgment — through fear, flattery, emotional pressure, or misleading framing — to get them to a conclusion without really weighing it. Propaganda typically relies on manipulation, which is why it's considered harmful even when its conclusions happen to be true." },
+        { v: 500, q: "Why is \"everyone agrees with this\" a bad reason to believe something — even when it's true that everyone does?", a: "Because popularity isn't evidence of truth. Whole societies have agreed on things that turned out to be wrong (that the sun orbited the earth, that certain groups of people didn't deserve rights). The fact that many people believe something might be a reason to take it seriously, but it isn't itself a reason to think it's correct. You still have to look at the actual evidence." }
       ]
     },
     {
-      name: "Bodies, Consent & Abortion",
+      name: "Bodies & Consent",
       questions: [
-        { v: 100, q: "A person's ability to make decisions about what happens to their own body is often referred to by this two-word phrase.", a: "What is <strong>bodily autonomy</strong>?" },
-        { v: 200, q: "Even if we grant that a fetus has a right to life, this separate right of the pregnant person is what many philosophers argue still needs to be weighed against it.", a: "What is the <strong>right to bodily autonomy</strong> (the right to decide what happens inside one's own body)?" },
-        { v: 300, q: "For consent to be meaningful, philosophers typically argue it must be informed, voluntary, and given by someone with this capacity.", a: "What is the <strong>capacity (or competence) to consent</strong>?" },
-        { v: 400, q: "If someone argues \"abortion is wrong because all killing is wrong,\" a critical thinker should point out that this premise is too broad — it would also condemn these commonly accepted acts.", a: "What is <strong>self-defense, killing in war, or capital punishment</strong> (any widely accepted killing)?" },
-        { v: 500, q: "A common critique of \"personhood begins at conception\" arguments is that they conflate this biological fact with this moral status — name the distinction.", a: "What is the distinction between <strong>being human (biological) and being a person (moral)</strong>?" }
+        { v: 100, q: "Why do most people think it would be wrong to take someone's kidney without their permission, even if doing so would save another person's life?", a: "Because we generally believe people have the right to decide what happens to their own bodies. Even a very good outcome (saving a life) doesn't override that right without consent. This intuition — that your body isn't just a resource others can use for good purposes — sits at the heart of a lot of ethical reasoning about medicine, sex, and reproductive choice." },
+        { v: 200, q: "What has to be true for someone's \"yes\" to really count as consent?", a: "At minimum: the person needs to actually understand what they're agreeing to, they need to be choosing freely (not pressured, coerced, or manipulated), and they need to be in a state where they're capable of making the decision (not drunk, unconscious, too young, etc.). A \"yes\" that's uninformed, pressured, or given by someone who can't really choose isn't meaningful consent." },
+        { v: 300, q: "Someone argues: \"If a fetus is a person, then abortion is murder.\" Even if we grant the first part, why might the second part still not follow?", a: "Because \"being a person\" doesn't automatically mean \"no one can stop sustaining you with their body.\" We don't generally force people to donate blood, organs, or bone marrow to save others — even when those others are unquestionably persons. So even granting personhood, there's still a separate question about whether someone can be <em>required</em> to use their body to keep another being alive." },
+        { v: 400, q: "\"Abortion is wrong because killing is wrong.\" What's too quick about this argument?", a: "The premise \"killing is wrong\" is too broad. Most people accept that killing is permissible in at least some cases — self-defense, for instance, or in some views war or capital punishment. So the premise as stated would condemn things the speaker probably doesn't want to condemn. A better argument would specify what <em>kind</em> of killing is wrong and why." },
+        { v: 500, q: "Why do philosophers distinguish between being \"human\" and being a \"person\"? Isn't that the same thing?", a: "Not exactly. \"Human\" is a biological term — it refers to members of the species Homo sapiens, including things like cells, tissues, and embryos. \"Person\" is a moral term — it refers to beings with certain capacities (awareness, interests, relationships) that we think give them moral status. Keeping the two separate lets us ask a real question: does biological humanity <em>automatically</em> confer moral personhood, or are there other considerations? Different answers lead to very different ethical conclusions." }
       ]
     },
     {
-      name: "Power, Colonialism & the State",
+      name: "Power & the State",
       questions: [
-        { v: 100, q: "A country that gained political independence 50 years ago may still have its economy largely controlled by its former colonizer. A critical thinker would conclude that ending colonialism requires more than just changing THIS.", a: "What is the <strong>official political / legal status</strong> (formal independence alone is not enough)?" },
-        { v: 200, q: "When a powerful country portrays another culture as backward or \"in need of civilizing,\" this portrayal often serves to justify this kind of action toward them.", a: "What is <strong>intervention, control, or colonization</strong>?" },
-        { v: 300, q: "If a group is told over generations that they are inferior, some may come to believe it themselves. This shows that the harms of oppression aren't only physical or economic — they also operate on this level.", a: "What is the <strong>mental / psychological level</strong> (how people come to see themselves)?" },
-        { v: 400, q: "An argument defending a government action by saying \"it's legal, therefore it's right\" confuses these two separate categories.", a: "What is the distinction between <strong>legality and morality</strong> (what is lawful vs. what is ethical)?" },
-        { v: 500, q: "An argument that justifies police brutality by saying \"it produces better outcomes overall\" may be accused of ignoring THIS — something individuals have that shouldn't be overridden just because overriding it would benefit the majority.", a: "What are <strong>individual rights</strong> (rights that can't be sacrificed merely for aggregate benefit)?" }
+        { v: 100, q: "A country gained formal independence 50 years ago, but its economy is still largely controlled by its former colonizer. What does this suggest about what it means to \"end\" colonialism?", a: "That formal political independence isn't the whole story. Colonial power can continue through economic control, cultural influence, and institutional structures long after flags change. If we only measure freedom by official political status, we'll miss ongoing forms of domination that operate through different channels." },
+        { v: 200, q: "When a powerful country describes another as \"backward\" or \"in need of civilizing,\" what work is that description doing — beyond just being rude?", a: "It's setting up a justification for control. If the other country is portrayed as unable to govern itself, then intervention, occupation, or resource extraction can be framed as help rather than harm. The language doesn't just describe — it constructs the target as something that invites control, which makes the control seem natural or benevolent rather than aggressive." },
+        { v: 300, q: "If a group is told across generations that they're inferior, some members may come to believe it. What does this show about how oppression works?", a: "That it isn't only about laws, violence, or economics — it also shapes how people see themselves. If oppressed groups internalize negative messages, the effects of oppression continue even after external restrictions are lifted. This is why critical thinkers point out that equality isn't just about changing rules; it's about changing the ideas and images that people absorb about themselves and each other." },
+        { v: 400, q: "\"It's legal, so it's right.\" What's wrong with this way of thinking?", a: "It confuses two different questions. <strong>Legality</strong> is about what the law says; <strong>morality</strong> is about what's actually ethical. History gives us plenty of examples where the two came apart — slavery was legal, segregation was legal, denying women the vote was legal. If \"legal = right,\" we'd have no grounds to criticize unjust laws or work to change them. The two categories need to stay separate." },
+        { v: 500, q: "Someone defends police brutality by saying, \"It produces better outcomes overall — less crime, safer streets.\" Even if that were true, what's a serious problem with the argument?", a: "It treats individual people as tools for producing aggregate benefits. If \"better outcomes overall\" can justify violating someone's rights, then in principle almost anything done to an individual can be justified as long as enough others benefit. Most of us don't actually accept this — we think people have rights that can't simply be overridden by majority benefit. The outcomes-only argument ignores that constraint." }
       ]
     },
     {
-      name: "Contemporary Ethics",
+      name: "Contemporary Issues",
       questions: [
-        { v: 100, q: "Someone arguing for more open immigration policy might point out that no one chooses where they are born. This appeals to the idea that it's unfair to give people advantages or disadvantages based on something they had no control over — in other words, something that is morally THIS.", a: "What is <strong>arbitrary</strong> (or undeserved / a matter of luck)?" },
-        { v: 200, q: "A common argument FOR stricter immigration policy claims that a country, like a household, has the right to decide who gets to come in. Critics point out that this analogy breaks down because, unlike a household, a country contains THIS.", a: "What is <strong>millions of people with different views</strong> (a country is not one unified owner / it is not private property)?" },
-        { v: 300, q: "Critics of the \"it's just a few bad apples\" defense of police misconduct argue that if the same kind of misconduct keeps happening across many departments, the problem is probably not just individuals — it's THIS.", a: "What is the <strong>system (or structure / institution)</strong>?" },
-        { v: 400, q: "A reasonable principle in debates about police use of force holds that the amount of force used should be no greater than what's needed to handle the threat. In short, force should be THIS.", a: "What is <strong>proportional (to the threat)</strong>?" },
-        { v: 500, q: "A person might face unfair treatment not just because of their race, and not just because of their gender, but specifically because of the combination. This suggests that to understand discrimination, we can't just look at THIS.", a: "What is <strong>one category at a time</strong> (identities overlap and interact)?" }
+        { v: 100, q: "Someone argues for more open immigration by pointing out that nobody chooses where they're born. What moral idea is that appeal drawing on?", a: "The idea that it's unfair to give people major advantages or disadvantages based on things they had no control over. Where you're born is a matter of luck — you didn't earn it, you didn't choose it. If we wouldn't accept giving someone a worse life because of their eye color or height (things they also didn't choose), the argument goes, we should be suspicious of doing so based on birthplace." },
+        { v: 200, q: "A common argument FOR stricter immigration policy compares a country to a household: \"We get to decide who comes into our home.\" Where might this analogy break down?", a: "A home is owned by a small, unified group who all agreed to live together; a country is made up of millions of people with different views, who didn't all sign the same agreement. Also, nobody is born needing a specific house to survive, but people are born into countries and have deep connections to them. The analogy pushes us toward one answer by making a country sound simpler and more private than it actually is." },
+        { v: 300, q: "When police misconduct keeps happening across many different departments and cities, why is \"it's just a few bad apples\" an inadequate response?", a: "Because if the same problem shows up across many different places, the cause probably isn't just a few bad individuals — it's something about the structure: how officers are trained, what conduct gets rewarded or punished, what oversight exists, what cultural norms take hold. Focusing only on individual wrongdoers lets the underlying system off the hook, which is why the problem tends to persist." },
+        { v: 400, q: "What's a reasonable principle for judging whether a use of force by police was justified, even when some force was clearly needed?", a: "That the force should be <strong>no greater than what the situation required</strong>. If someone can be safely controlled without serious injury, using deadly force is excessive. This kind of \"fit between means and ends\" shows up across ethics — in self-defense, in military ethics, in discipline — and gives us a way to say \"yes, some force was warranted, but not <em>that much</em>.\"" },
+        { v: 500, q: "A person might face unfair treatment not because of their race alone, and not because of their gender alone, but because of the specific combination. What does this tell us about analyzing discrimination?", a: "That you can miss real patterns if you only look at one category at a time. A Black woman's experience of discrimination isn't always just \"what Black men face\" plus \"what white women face\" — sometimes it's specific to the overlap. If our analysis only examines single categories, we'll overlook forms of unfairness that only show up where categories meet." }
       ]
     },
     {
-      name: "Spot the Move",
+      name: "Spot the Reasoning",
       questions: [
-        { v: 100, q: "\"You can't trust her argument against the new policy — she's been complaining about everything all semester.\" Name the fallacy.", a: "What is <strong>ad hominem</strong>?" },
-        { v: 200, q: "\"If we allow any restrictions on speech, soon the government will ban all political criticism.\" Name the fallacy.", a: "What is a <strong>slippery slope</strong>?" },
-        { v: 300, q: "\"All officers are public servants. All public servants deserve trust. Therefore, all officers deserve trust.\" This is a categorical syllogism — is it valid?", a: "It is <strong>valid in form</strong> (though the premises can be challenged for soundness)." },
-        { v: 400, q: "\"90% of the students I surveyed in my philosophy class support the policy, so most people in the country do too.\" Identify the weakness in this inductive argument.", a: "What is a <strong>biased / unrepresentative sample</strong> (hasty generalization)?" },
-        { v: 500, q: "A politician says: \"My opponent wants open borders and no laws at all.\" The opponent actually supports reformed legal immigration. Name the move and explain why it's bad reasoning.", a: "What is a <strong>straw man</strong>? It misrepresents the position in order to attack a weaker version, so refuting it does not refute the real argument." }
+        { v: 100, q: "\"You can't trust her argument against the new policy — she's been complaining about everything all semester.\" What's wrong with this response, and what should the speaker do instead?", a: "The response attacks the person rather than engaging with her actual argument. Whether or not she complains often has no bearing on whether <em>this particular</em> argument is any good. A better response would address the argument itself: what are her reasons, and are those reasons any good?" },
+        { v: 200, q: "\"If we allow any restrictions on speech, soon the government will ban all political criticism.\" What would you ask the person making this argument?", a: "You'd ask them to show the actual chain of reasoning — why does \"any restriction\" lead to \"banning all criticism\"? What are the specific mechanisms that would make each step happen? Without those, the argument is just a worst-case prediction without support. Some restrictions on speech (fraud, threats, defamation) have existed for a long time without producing that outcome." },
+        { v: 300, q: "Consider: \"All officers are public servants. All public servants deserve trust. Therefore, all officers deserve trust.\" Does the conclusion follow from the premises? And is it actually a good argument?", a: "The conclusion <strong>does follow</strong> from the premises — if both premises were true, the conclusion would have to be true. But the second premise (\"all public servants deserve trust\") is very questionable. So the argument is logically well-formed but probably not sound. This is a good example of why \"the logic works\" isn't the same as \"the argument is good.\"" },
+        { v: 400, q: "\"I surveyed 30 students in my philosophy class, and 90% supported the new policy. So most people in the country support it.\" What's the problem?", a: "A philosophy class at one school isn't a representative sample of the country. Students in that class likely share age range, education level, geographic location, and probably some political leanings. Drawing conclusions about \"most people in the country\" from such a narrow, non-random sample is a classic overreach — the sample just can't support the claim being made." },
+        { v: 500, q: "A politician says: \"My opponent wants open borders and the abolition of all immigration law.\" The opponent actually supports reforming legal immigration pathways. What's happening, and why does it matter?", a: "The politician is arguing against a distorted version of the opponent's position rather than what the opponent actually said. This is a \"straw man\" move. It matters because even if the politician successfully refutes the distorted version, they haven't actually addressed the real argument. Audiences may walk away thinking the opponent has been refuted when the actual view hasn't even been engaged with." }
       ]
     }
   ];
