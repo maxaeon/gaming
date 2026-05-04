@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Critical Thinking Review — Lecture 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0a06;
+    --paper: #f5efe0;
+    --paper-warm: #ede4cf;
+    --accent: #8b2e1e;
+    --accent-soft: #b8664f;
+    --gold: #a88b3f;
+    --rule: #2a2620;
+    --shadow: rgba(13, 10, 6, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at top left, rgba(168, 139, 63, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 46, 30, 0.06), transparent 50%);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.04 0 0 0 0 0.02 0 0 0 0.15 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  /* ========== HEADER ========== */
+  header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .subtitle {
+    margin-top: 1rem;
+    font-size: 1.15rem;
+    color: var(--rule);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .meta {
+    margin-top: 1.25rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rule);
+    opacity: 0.7;
+  }
+
+  /* ========== NAV ========== */
+  .nav {
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    margin: 0 -2rem 3rem;
+    padding: 1rem 2rem;
+    z-index: 50;
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .nav a {
+    color: var(--rule);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav a:hover { color: var(--accent); }
+  .nav .num { color: var(--gold); margin-right: 0.4em; }
+
+  /* ========== SECTIONS ========== */
+  section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 5rem;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+    line-height: 1.15;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .timestamp {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ========== CONTENT ========== */
+  p {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    margin-bottom: 1.1rem;
+    color: var(--rule);
+  }
+
+  p strong { color: var(--ink); font-weight: 600; }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--ink);
+  }
+
+  /* ========== CONCEPT CARD ========== */
+  .concept {
+    background: var(--paper-warm);
+    border-left: 4px solid var(--accent);
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+  }
+
+  .concept-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .concept p { font-size: 1.05rem; margin-bottom: 0.5rem; }
+  .concept p:last-child { margin-bottom: 0; }
+
+  /* ========== EXERCISE BLOCK ========== */
+  .exercise {
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 1.75rem;
+    margin: 2rem 0;
+    box-shadow: 5px 5px 0 var(--shadow);
+  }
+
+  .exercise-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .exercise h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--ink);
+  }
+
+  .exercise p { font-size: 1.05rem; margin-bottom: 0.75rem; }
+
+  .exercise .specimen {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--ink);
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    background: var(--paper-warm);
+    border-left: 3px solid var(--rule);
+  }
+
+  .exercise .source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--rule);
+    opacity: 0.7;
+    margin-top: 0.25rem;
+  }
+
+  /* ========== REVEAL ========== */
+  .reveal-block { margin-top: 1rem; }
+
+  .reveal-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.1rem;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .reveal-btn:hover { background: var(--ink); color: var(--paper); }
+  .reveal-btn.open { background: var(--ink); color: var(--paper); }
+
+  .reveal-content {
+    display: none;
+    margin-top: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--paper-warm);
+    border-left: 3px solid var(--gold);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--rule);
+    animation: slideDown 0.25s ease-out;
+  }
+
+  .reveal-content.open { display: block; }
+  .reveal-content strong { color: var(--ink); }
+  .reveal-content em { font-style: italic; color: var(--ink); }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== TIMER ========== */
+  .timer-block {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    box-shadow: 5px 5px 0 var(--accent);
+  }
+
+  .timer-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 0.25rem 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .timer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--paper-warm);
+  }
+
+  .timer-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .timer-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.95rem;
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid var(--paper);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .timer-btn:hover { background: var(--paper); color: var(--ink); }
+  .timer-btn.primary { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+  /* ========== DISTINCTION GRID ========== */
+  .distinction {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .distinction > div {
+    border: 2px solid var(--ink);
+    padding: 1.25rem;
+    background: var(--paper);
+  }
+
+  .distinction h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .distinction p { font-size: 1rem; margin-bottom: 0.5rem; }
+  .distinction p:last-child { margin-bottom: 0; }
+
+  .distinction em {
+    font-style: italic;
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--rule);
+    opacity: 0.85;
+    font-size: 0.95rem;
+  }
+
+  /* ========== HOMEWORK ========== */
+  .homework {
+    border: 3px double var(--ink);
+    padding: 1.75rem;
+    margin: 2rem 0;
+    background: var(--paper-warm);
+  }
+
+  .homework-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .homework h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.75rem;
+    color: var(--ink);
+  }
+
+  .homework p { font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.75rem; }
+
+  /* ========== FOOTER ========== */
+  footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rule);
+    opacity: 0.6;
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 700px) {
+    .wrap { padding: 1.5rem 1.25rem 3rem; }
+    .nav { margin: 0 -1.25rem 2rem; padding: 0.75rem 1.25rem; gap: 0.6rem; }
+    .nav a { font-size: 0.6rem; }
+    .distinction { grid-template-columns: 1fr; }
+    .timer-display { font-size: 2.5rem; }
+    .exercise { padding: 1.25rem; box-shadow: 3px 3px 0 var(--shadow); }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Critical Thinking · Lecture 1 of 2</div>
+    <h1>Critical Thinking: A Review</h1>
+    <p class="subtitle">A walk through what we've covered this semester, with stops to apply each idea to something happening in the real world right now.</p>
+    <div class="meta">75 minutes · Synchronous Remote</div>
+  </header>
+
+  <nav class="nav">
+    <a href="#open"><span class="num">01</span>Opening</a>
+    <a href="#truth"><span class="num">02</span>Truth</a>
+    <a href="#claims"><span class="num">03</span>Claims</a>
+    <a href="#arguments"><span class="num">04</span>Arguments</a>
+    <a href="#science"><span class="num">05</span>Science</a>
+    <a href="#normative"><span class="num">06</span>Normative</a>
+    <a href="#real"><span class="num">07</span>Real World</a>
+    <a href="#close"><span class="num">08</span>Close</a>
+  </nav>
+
+  <!-- ========== 01 OPENING ========== -->
+  <section id="open">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Opening</h2>
+      <span class="timestamp">5 min</span>
+    </div>
+
+    <p>Today we're going to take stock of what we've learned this semester — but not as a quiz review. We'll walk through the main ideas one at a time, and at each stop we'll try them out on something real. By the end, the question I want you to be able to answer is: <strong>what does critical thinking actually let me do that I couldn't do before?</strong></p>
+
+    <p>The plan: we'll move through truth, claims, arguments, science vs. pseudoscience, and normative claims. At each section there's a short exercise. We'll discuss in the chat or on mic. Then in the last stretch we'll apply the whole toolkit to current events — real things that happened this year.</p>
+
+    <p>Wednesday's class is the last one. There'll be a creative exercise and a reflection. So today is the heavy lifting; Wednesday is more open-ended.</p>
+  </section>
+
+  <!-- ========== 02 TRUTH ========== -->
+  <section id="truth">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>What is truth?</h2>
+      <span class="timestamp">8 min</span>
+    </div>
+
+    <p>We started the semester with a question that sounds simple and isn't: what does it mean for something to be <em>true</em>? The most common working answer was the <strong>correspondence view</strong> — a statement is true when it matches the way the world actually is.</p>
+
+    <div class="concept">
+      <div class="concept-label">The core move</div>
+      <p>Truth is not the same as <em>belief</em>. People can sincerely believe things that aren't true. People can also be told something so often that they feel it must be true. Critical thinking starts with the discipline of asking <strong>"is this actually the case?"</strong> separately from <strong>"do people accept it?"</strong></p>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-label">Try it</div>
+      <h4>The viral Venezuela video</h4>
+      <p>In January 2026, after U.S. military operations led to Maduro's removal, AI-generated videos showing Venezuelans crying tears of joy and thanking Trump went viral. Millions of views across TikTok, Instagram, and X. One was reposted by the president. Some of the videos were entirely AI-generated. Others were old footage of celebrations from completely different countries (Panama City, Buenos Aires) being passed off as Venezuela.</p>
+      <p class="specimen">"Look at the Venezuelan people celebrating their freedom!"</p>
+      <p class="source">Caption pattern common across the viral posts</p>
+      <p>Discussion question: many of the people sharing this content sincerely believed it was real footage from Venezuela. <strong>Did their belief make any of it true?</strong> What does this tell us about the relationship between belief and truth?</p>
+
+      <div class="reveal-block">
+        <button class="reveal-btn" onclick="toggleReveal(this)">Reveal one analysis</button>
+        <div class="reveal-content">
+          <p style="margin-bottom: 0.5rem;">Belief and truth are independent. Millions of sincere believers can all be wrong about the same thing at the same time. The videos either depict real Venezuelan celebrations or they don't — that fact doesn't depend on how many people accepted them as real.</p>
+          <p style="margin-bottom: 0;">This is the foundational move of critical thinking. Without the truth/belief distinction, there's no way to even <em>ask</em> whether something is misinformation. You can only describe what's circulating.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 03 CLAIMS ========== -->
+  <section id="claims">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>What is a claim?</h2>
+      <span class="timestamp">10 min</span>
+    </div>
+
+    <p>A <strong>claim</strong> is a statement that asserts something is the case. It's the basic unit of an argument. Claims can be true or false; they can be supported well or badly; they can be specific or vague.</p>
+
+    <p>Two distinctions we made this semester are especially worth keeping in your toolkit:</p>
+
+    <div class="distinction">
+      <div>
+        <h4>Descriptive vs. Normative</h4>
+        <p>A descriptive claim says how things <em>are</em>. A normative claim says how things <em>ought</em> to be.</p>
+        <em>"Most teens use TikTok daily" vs. "Teens shouldn't be on TikTok daily."</em>
+      </div>
+      <div>
+        <h4>Vague vs. Precise</h4>
+        <p>A vague claim resists evaluation because it's unclear what would count as evidence for or against it.</p>
+        <em>"This product supports wellness" vs. "This product reduces inflammation markers by 30%."</em>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-label">Try it</div>
+      <h4>The dissolving pacemaker</h4>
+      <p>In 2021, researchers presented preliminary findings about a small implantable pacemaker that could dissolve in the body after use. Three news outlets covered it with these headlines (real examples):</p>
+      <p class="specimen">"Coming Soon: An Implanted Pacemaker That Dissolves Away After Use"</p>
+      <p class="specimen">"Tiny pacemaker harmlessly dissolves in body"</p>
+      <p class="specimen">"The First Dissolving Pacemaker"</p>
+      <p class="source">Three real news headlines, covering the same study</p>
+      <p>The study was preliminary, the device had been tested on rats and small animal hearts, and clinical use in humans was years away if it would happen at all.</p>
+      <p>Discussion: walk through what each headline is <em>claiming</em>. Which words are doing manipulative work? What would a more honest headline look like? Why does this matter for someone who reads the headline but not the article?</p>
+
+      <div class="reveal-block">
+        <button class="reveal-btn" onclick="toggleReveal(this)">Reveal one analysis</button>
+        <div class="reveal-content">
+          <p style="margin-bottom: 0.5rem;"><strong>"Coming soon"</strong> implies imminence the research did not support. <strong>"Harmlessly dissolves in body"</strong> trades on the reader assuming "human body" — the studies were not in humans. <strong>"The First"</strong> implies a finished product, not an early-stage prototype.</p>
+          <p style="margin-bottom: 0;">This is also a reminder of why precision matters. The original research probably said something like "in early animal studies, an experimental device successfully dissolved over X weeks." That's a defensible claim. None of the three headlines are.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 04 ARGUMENTS ========== -->
+  <section id="arguments">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>What is an argument?</h2>
+      <span class="timestamp">14 min</span>
+    </div>
+
+    <p>An <strong>argument</strong> is one or more claims (the premises) offered in support of another claim (the conclusion). Two questions get you most of the way through any argument you encounter:</p>
+
+    <ol style="margin: 0.5rem 0 1.5rem 1.5rem; font-size: 1.1rem; line-height: 1.7; color: var(--rule);">
+      <li><strong>Does the conclusion follow from the premises?</strong> (the structure)</li>
+      <li><strong>Are the premises actually true?</strong> (the content)</li>
+    </ol>
+
+    <p>You can have a logically clean argument with false premises. You can have true premises that don't actually support the conclusion. Critical thinking means checking both, separately.</p>
+
+    <div class="distinction">
+      <div>
+        <h4>Deductive</h4>
+        <p>Premises aim to <em>guarantee</em> the conclusion. If they're true and the structure is right, the conclusion must be true.</p>
+        <em>Evaluated as valid/invalid, sound/unsound.</em>
+      </div>
+      <div>
+        <h4>Inductive</h4>
+        <p>Premises aim to make the conclusion <em>probable</em>. The argument can be strong even when the conclusion turns out wrong.</p>
+        <em>Evaluated as strong/weak, cogent/uncogent.</em>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-label">Try it</div>
+      <h4>The vaccine headline that reached 20% of Facebook</h4>
+      <p>The Chicago Tribune ran a real headline: <em>"A Healthy Doctor Died Two Weeks After Getting a COVID Vaccine; CDC Is Investigating Why."</em> MIT Sloan researchers found that this single headline reached more than 20% of Facebook's U.S. user base — more than six times the views of all flagged misinformation combined. Researchers measured that exposure to such headlines made people 2.3 percentage points less likely to get vaccinated.</p>
+      <p class="specimen">"A Healthy Doctor Died Two Weeks After Getting a COVID Vaccine; CDC Is Investigating Why."</p>
+      <p class="source">Real headline, Chicago Tribune (factually accurate, but enormously misleading)</p>
+      <p>Note: nothing in the headline is false. The doctor existed. He died. He had received the vaccine. The CDC did look into it. <strong>But what argument is the headline making?</strong> What are the implied premises? Is it deductive or inductive? Does the conclusion (that the vaccine is dangerous) follow?</p>
+
+      <div class="reveal-block">
+        <button class="reveal-btn" onclick="toggleReveal(this)">Reveal one analysis</button>
+        <div class="reveal-content">
+          <p style="margin-bottom: 0.5rem;">The implicit argument: <em>(P1) Healthy doctor got vaccine. (P2) Healthy doctor died two weeks later. (P3) CDC is investigating. (Implied conclusion) The vaccine likely caused the death.</em></p>
+          <p style="margin-bottom: 0.5rem;">This is an <strong>inductive</strong> argument that's deeply weak. Two events being close in time doesn't make one the cause of the other (this is the classic post hoc fallacy). Millions of people received the vaccine; some would die in any two-week window for unrelated reasons. The headline implies a causal claim it cannot support.</p>
+          <p style="margin-bottom: 0;">This is also a useful illustration of why "fact check it" isn't enough. Every individual claim in the headline checks out. The manipulation is in the <em>structure</em> of the argument the headline asks readers to make in their heads.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Common ways arguments fail</h3>
+    <p>Quick review of the moves we've practiced spotting:</p>
+
+    <ul style="margin: 0 0 1rem 1.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--rule);">
+      <li><strong>Ad hominem</strong> — attacking the arguer instead of the argument</li>
+      <li><strong>Straw man</strong> — distorting the opposing view to make it easier to attack</li>
+      <li><strong>Slippery slope</strong> — predicting a chain of catastrophic consequences without showing each link</li>
+      <li><strong>False dilemma</strong> — framing the situation as if there are only two options</li>
+      <li><strong>Bandwagon</strong> — using popularity as evidence of truth</li>
+      <li><strong>Appeal to fear</strong> — moving the audience by emphasizing what they could lose</li>
+      <li><strong>Loaded language</strong> — words that smuggle conclusions before any reasoning happens</li>
+      <li><strong>Hasty generalization</strong> — drawing a broad conclusion from a small or biased sample</li>
+    </ul>
+  </section>
+
+  <!-- ========== 05 SCIENCE ========== -->
+  <section id="science">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>Science vs. pseudoscience</h2>
+      <span class="timestamp">12 min</span>
+    </div>
+
+    <p>One of the most useful distinctions we worked on this semester. The line isn't <em>"this person has a degree and that one doesn't."</em> It's about <strong>method</strong>: how the claims are formed, how they handle counterevidence, and what would change the holder's mind.</p>
+
+    <div class="distinction">
+      <div>
+        <h4>Science</h4>
+        <p>Makes specific, testable claims. Welcomes attempts to disprove them. Updates when evidence changes. Acknowledges uncertainty. Cites research that can be checked. Distinguishes association from causation.</p>
+      </div>
+      <div>
+        <h4>Pseudoscience</h4>
+        <p>Makes vague or unfalsifiable claims. Reframes counterevidence as part of the conspiracy. Doesn't update. Projects confidence beyond what the evidence supports. Cites authorities by feel. Confuses correlation with causation.</p>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-label">Try it</div>
+      <h4>"Detoxes" and "parasites"</h4>
+      <p>In early 2025, during the LA wildfires, wellness influencers spread content telling viewers their bodies were full of parasites and toxins from the smoke, and that specific supplements would clear them out. A quote from one influencer being countered by NPR-covered fact-checkers:</p>
+      <p class="specimen">"Big Pharma is keeping you sick to take your money — but also — give me your money and take my supplements indefinitely."</p>
+      <p class="source">Mallory DeMille, summarizing a contradiction common in wellness content (NPR, Feb 2025)</p>
+      <p>Public-health scientist Jess Steier: <em>"99% of what I'm doing now is putting out fires started by these wellness influencers."</em> Dietitian Jessica Knurick: <em>"Pseudoscience often sounds convincing because it starts with something true and then strips away the context."</em></p>
+      <p>Discussion: pick one wellness claim you've actually seen in your feed — could be about supplements, "toxins," "natural immunity," whatever. Run it through the science/pseudoscience checklist above. Which boxes does it tick?</p>
+
+      <div class="reveal-block">
+        <button class="reveal-btn" onclick="toggleReveal(this)">Reveal one analysis</button>
+        <div class="reveal-content">
+          <p style="margin-bottom: 0.5rem;">Knurick's quote is the diagnostic gold. Most pseudoscience starts with something real — chronic disease is increasing, the food system has problems, the medical system is imperfect — and then strips away the context that would let you reason about it carefully.</p>
+          <p style="margin-bottom: 0.5rem;">The "Big Pharma is keeping you sick" line is also worth dissecting because it's <strong>self-sealing</strong>: any evidence against the influencer's claim becomes evidence FOR the conspiracy ("of course the studies say that, they're paid for by Pharma"). Self-sealing arguments are a hallmark of pseudoscience because they cannot be tested.</p>
+          <p style="margin-bottom: 0;">A real scientific claim has to be the kind of thing that could, in principle, be shown to be wrong.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 06 NORMATIVE ========== -->
+  <section id="normative">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2>Normative claims</h2>
+      <span class="timestamp">10 min</span>
+    </div>
+
+    <p>A <strong>normative claim</strong> is a claim about what <em>should</em> be done — how we ought to act, what's right or wrong, what's just or unjust. These claims can't be settled the way descriptive claims can. You can't run an experiment to determine whether abortion is permissible, or whether colonialism was wrong, or whether police use of force was justified.</p>
+
+    <p>But that doesn't mean anything goes. Normative claims still have to be <em>argued for</em>. Critical thinking on normative questions means checking:</p>
+
+    <ul style="margin: 0.5rem 0 1.5rem 1.5rem; font-size: 1.05rem; line-height: 1.7; color: var(--rule);">
+      <li>Are the descriptive claims it depends on actually true?</li>
+      <li>Are the principles being used applied consistently across cases?</li>
+      <li>Is the strongest version of the opposing view being engaged with, or a straw version?</li>
+      <li>Is the language smuggling in conclusions through loaded terms?</li>
+      <li>Is the argument changing the subject (e.g., to the speaker's character) instead of engaging?</li>
+    </ul>
+
+    <div class="exercise">
+      <div class="exercise-label">Try it</div>
+      <h4>An argument from this fall's news cycle</h4>
+      <p>Consider a real argument in circulation about immigration enforcement. Stripped down to its bones, one common form goes:</p>
+      <p class="specimen">"They broke the law to get here. Breaking the law has consequences. Therefore, deportation is justified."</p>
+      <p class="source">A common form of the argument, paraphrased</p>
+      <p>Discussion: this is structurally an argument. Is it valid? Sound? What descriptive claims does it depend on? What normative principle is it relying on? Is that principle applied consistently in other contexts? What would the strongest counterargument be?</p>
+
+      <div class="reveal-block">
+        <button class="reveal-btn" onclick="toggleReveal(this)">Reveal one analysis</button>
+        <div class="reveal-content">
+          <p style="margin-bottom: 0.5rem;">The argument is roughly valid in form. The interesting questions are at the premises. <strong>"They broke the law"</strong> is descriptively contested — many people in the country are here legally, awaiting hearings, or in ambiguous status. <strong>"Breaking the law has consequences"</strong> is true but radically underspecified — we accept many different consequences for many different lawbreakings, and we don't typically think the consequences should be the harshest possible regardless of context.</p>
+          <p style="margin-bottom: 0.5rem;">The normative principle ("lawbreaking justifies the harshest available consequence") isn't usually applied consistently. We don't deport citizens for tax fraud, even though tax fraud is a more serious crime than crossing a border without authorization.</p>
+          <p style="margin-bottom: 0;">A critical thinker isn't required to oppose deportation to notice these things. The point is: <em>this</em> argument as stated has structural problems regardless of which side you land on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 07 REAL WORLD ========== -->
+  <section id="real">
+    <div class="section-head">
+      <span class="section-num">07</span>
+      <h2>Putting it all together: real-world specimens</h2>
+      <span class="timestamp">12 min</span>
+    </div>
+
+    <p>Now everything at once. We'll look at two specimens from this year and apply the full toolkit: what's the claim, what's the evidence, is it descriptive or normative, what reasoning move is happening, and what would a careful person notice.</p>
+
+    <p>Use the chat as we go. Don't worry about being exhaustive — pick one thing to flag for each.</p>
+
+    <div class="exercise">
+      <div class="exercise-label">Specimen 1 · Recent</div>
+      <h4>The fake SNAP videos that fooled Fox News</h4>
+      <p>During the 2025 government shutdown, AI-generated videos went viral showing women complaining about losing their SNAP (food stamp) benefits. The videos were entirely synthetic — the women weren't real, the situations weren't real. One video was reported as genuine by Fox News in an article they later had to remove.</p>
+      <p class="specimen">A fully AI-generated woman speaking emotionally to camera about her family going hungry because her SNAP benefits were cut.</p>
+      <p class="source">Real example documented by CNBC, January 2026</p>
+      <p>Apply the toolkit. What's the claim? What's the implicit argument? What about this made it spread fast? What does it tell us about the current information environment? Why is this <em>especially</em> dangerous when an outlet like Fox News confirms it?</p>
+
+      <div class="reveal-block">
+        <button class="reveal-btn" onclick="toggleReveal(this)">Reveal one analysis</button>
+        <div class="reveal-content">
+          <p style="margin-bottom: 0.5rem;">The implicit argument: <em>(P1) Real people are suffering. (P2) Their suffering is caused by policy X. (Conclusion) Policy X is wrong / the people responsible for X should be condemned.</em> The form might even be valid — but P1 is false. The "real people" don't exist.</p>
+          <p style="margin-bottom: 0.5rem;">Why it spread: it's emotionally evocative, it confirms what people already believe about the situation, and it doesn't require any technical knowledge to "verify" — viewers feel they can see it.</p>
+          <p style="margin-bottom: 0;">Why Fox News picking it up matters: when a major outlet confirms fake content, it gives the content the credibility of journalistic verification. People who'd be skeptical of a random TikTok aren't skeptical of "Fox News reported." This is also why it cuts both ways politically — every outlet across the spectrum has been fooled by AI-generated content this year.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-label">Specimen 2 · Recent</div>
+      <h4>The viral "before and after" wellness post</h4>
+      <p>An influencer posts two photos side by side: their face six months ago (looking tired, dim lighting, no makeup) and their face today (glowing skin, good lighting, light makeup). The caption claims it's the result of cutting "seed oils" and taking a specific supplement they sell. The post has 200,000 likes and a 15% off discount code in the bio.</p>
+      <p class="specimen">"6 months ago: exhausted, brain fog, terrible skin. Today: I feel ALIVE. The only thing that changed? I cut seed oils and started taking [Supplement]. Don't let Big Food keep you sick. 15% off with code GLOW."</p>
+      <p class="source">A composite, but representative of common posts on Instagram and TikTok this year</p>
+      <p>Apply the toolkit. What's the descriptive claim? What's the normative claim? What's the argument? Where does it go wrong as evidence? What about the "Big Food" framing?</p>
+
+      <div class="reveal-block">
+        <button class="reveal-btn" onclick="toggleReveal(this)">Reveal one analysis</button>
+        <div class="reveal-content">
+          <p style="margin-bottom: 0.5rem;"><strong>The descriptive claim:</strong> the supplement and seed-oil avoidance caused the visible change. <strong>The normative claim:</strong> you should do the same and buy the supplement. <strong>The argument:</strong> a single anecdote ("I did X, Y happened, X caused Y").</p>
+          <p style="margin-bottom: 0.5rem;">Where it fails as evidence: <em>n=1</em>; no control; no measurement; the "before" and "after" photos are styled and lit completely differently; six months is enough time for many other variables to change; correlation is not causation. A scientific claim about seed oils would require controlled studies on humans with measured outcomes — none of which is here.</p>
+          <p style="margin-bottom: 0;">The "Big Food" framing is doing the same self-sealing work as "Big Pharma" — it preemptively explains away any counterevidence as part of a conspiracy, which means no evidence could change the influencer's mind. That's a sign you're not in the realm of testable claims anymore.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timer-block">
+      <div class="timer-label">Discussion Timer</div>
+      <div class="timer-display" id="timer1">12:00</div>
+      <div class="timer-controls">
+        <button class="timer-btn primary" onclick="startTimer('timer1', 12*60)">Start 12:00</button>
+        <button class="timer-btn" onclick="startTimer('timer1', 8*60)">8:00</button>
+        <button class="timer-btn" onclick="pauseTimer('timer1')">Pause</button>
+        <button class="timer-btn" onclick="resetTimer('timer1', 12*60)">Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 08 CLOSE ========== -->
+  <section id="close">
+    <div class="section-head">
+      <span class="section-num">08</span>
+      <h2>Closing &amp; assignment for Wednesday</h2>
+      <span class="timestamp">4 min</span>
+    </div>
+
+    <p>The point of this whole semester wasn't to memorize fallacy names. It was to give you a habit of mind: pause, ask what's being claimed, ask what's supporting it, ask whether the support actually fits. That habit works on news, on ads, on AI-generated content, on what people you know say to you, on what you say to yourself.</p>
+
+    <p>You won't always be right. None of us are. But you'll be wrong more deliberately, and you'll be persuadable by better reasons rather than by better packaging.</p>
+
+    <div class="homework">
+      <div class="homework-label">For Wednesday's class</div>
+      <h3>Bring one specimen.</h3>
+      <p>Between now and Wednesday, find <strong>one piece of communication in the wild</strong> that you think is doing manipulative or misleading work. It can be from anywhere — social media, a news headline, an ad, a politician's statement, an AI-generated post, a wellness influencer, a family group chat. Save the screenshot or link.</p>
+      <p>You don't need to write anything formal. Just bring it. We'll be using these on Wednesday.</p>
+    </div>
+
+    <p style="text-align: center; font-style: italic; color: var(--rule); margin-top: 2rem;">See you Wednesday.</p>
+  </section>
+
+  <footer>Prof. Parks · Critical Thinking · Lecture 1 of 2</footer>
+</div>
+
+<script>
+  function toggleReveal(btn) {
+    const content = btn.nextElementSibling;
+    btn.classList.toggle('open');
+    content.classList.toggle('open');
+    btn.textContent = content.classList.contains('open') ? 'Hide' : 'Reveal one analysis';
+  }
+
+  // ========== TIMERS ==========
+  const timerStates = {};
+
+  function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  function startTimer(id, seconds) {
+    if (timerStates[id]?.interval) clearInterval(timerStates[id].interval);
+    timerStates[id] = { remaining: seconds, interval: null };
+    document.getElementById(id).textContent = formatTime(seconds);
+    timerStates[id].interval = setInterval(() => {
+      timerStates[id].remaining--;
+      const el = document.getElementById(id);
+      if (timerStates[id].remaining <= 0) {
+        clearInterval(timerStates[id].interval);
+        el.textContent = "0:00";
+        el.style.color = "#b8664f";
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.frequency.value = 660;
+          gain.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+          osc.start();
+          osc.stop(ctx.currentTime + 1.2);
+        } catch (e) {}
+        return;
+      }
+      el.textContent = formatTime(timerStates[id].remaining);
+      el.style.color = timerStates[id].remaining <= 60 ? "#b8664f" : "";
+    }, 1000);
+  }
+
+  function pauseTimer(id) {
+    if (timerStates[id]?.interval) {
+      clearInterval(timerStates[id].interval);
+      timerStates[id].interval = null;
+    }
+  }
+
+  function resetTimer(id, seconds) {
+    pauseTimer(id);
+    document.getElementById(id).textContent = formatTime(seconds);
+    document.getElementById(id).style.color = "";
+  }
+</script>
+
+</body>
+</html>
