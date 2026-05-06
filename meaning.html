@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Critical Thinking: Last Class</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0a06;
+    --paper: #f5efe0;
+    --paper-warm: #ede4cf;
+    --accent: #8b2e1e;
+    --accent-soft: #b8664f;
+    --gold: #a88b3f;
+    --rule: #2a2620;
+    --shadow: rgba(13, 10, 6, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ========== SLIDE CONTAINER ========== */
+  .slide-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    pointer-events: none;
+    overflow-y: auto;
+    background-image:
+      radial-gradient(ellipse at top left, rgba(168, 139, 63, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(139, 46, 30, 0.06), transparent 50%);
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .slide.previous {
+    transform: translateX(-30px);
+  }
+
+  /* ========== TYPOGRAPHY ========== */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  h1.italic { font-style: italic; }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  h2.italic { font-style: italic; }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    line-height: 1.55;
+    color: var(--rule);
+    margin-bottom: 1.1rem;
+    max-width: 880px;
+  }
+
+  p strong { color: var(--ink); font-weight: 600; }
+  p em { font-style: italic; color: var(--ink); }
+
+  .lead {
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.4;
+    max-width: 900px;
+  }
+
+  .small {
+    font-size: 1rem;
+    color: var(--rule);
+    opacity: 0.8;
+  }
+
+  /* ========== TITLE SLIDE ========== */
+  .slide.title {
+    background: var(--paper);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide.title h1 {
+    font-style: italic;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+  }
+
+  .slide.title .subtitle {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: var(--rule);
+    font-style: italic;
+    margin-top: 1rem;
+    max-width: 600px;
+  }
+
+  /* ========== SECTION BREAKS (DARK) ========== */
+  .slide.dark {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide.dark h1, .slide.dark h2 { color: var(--paper); }
+  .slide.dark .eyebrow { color: var(--gold); }
+  .slide.dark p { color: var(--paper-warm); }
+  .slide.dark p strong { color: var(--paper); }
+  .slide.dark p em { color: var(--paper); }
+
+  /* ========== TWO-COLUMN ========== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+    align-items: start;
+  }
+
+  .col-card {
+    border: 2px solid var(--ink);
+    padding: 1.75rem 2rem;
+    background: var(--paper-warm);
+  }
+
+  .col-card.dark {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .col-card.dark h3 { color: var(--gold); }
+  .col-card.dark p { color: var(--paper-warm); }
+  .col-card.dark p strong { color: var(--paper); }
+  .col-card.dark p em { color: var(--paper); }
+
+  .col-card h3 {
+    font-size: 1.7rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .col-card .definition {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .col-card .examples {
+    font-size: 1rem;
+    color: var(--rule);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .col-card.dark .examples { color: var(--paper-warm); }
+
+  /* ========== POLL / EXERCISE BOXES ========== */
+  .exercise {
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 1.75rem 2rem;
+    margin-top: 1.5rem;
+    box-shadow: 6px 6px 0 var(--shadow);
+  }
+
+  .exercise-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .exercise h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .exercise p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .item {
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    padding: 0.75rem 1rem;
+    font-size: 1.05rem;
+    color: var(--ink);
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ========== QUOTE STYLE ========== */
+  .quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.35;
+    color: var(--ink);
+    max-width: 850px;
+    padding-left: 2rem;
+    border-left: 4px solid var(--accent);
+    margin: 1.5rem 0;
+  }
+
+  .slide.dark .quote { color: var(--paper); border-left-color: var(--gold); }
+
+  .quote-attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rule);
+    margin-top: 1rem;
+    opacity: 0.7;
+  }
+
+  /* ========== INVENTORY (TWO COLUMN PROMPT) ========== */
+  .inventory {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .inv-col {
+    border: 2px solid var(--ink);
+    padding: 1.5rem;
+    background: var(--paper);
+  }
+
+  .inv-col h3 {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .inv-col .prompt {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--rule);
+    margin-bottom: 0.75rem;
+  }
+
+  .inv-col textarea {
+    width: 100%;
+    min-height: 140px;
+    border: 1px dashed var(--rule);
+    background: var(--paper-warm);
+    padding: 0.75rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    resize: vertical;
+    outline: none;
+  }
+
+  .inv-col textarea:focus { border-color: var(--accent); }
+
+  /* ========== NUMBERED LIST ========== */
+  .numbered {
+    list-style: none;
+    counter-reset: numbered;
+    margin: 1.5rem 0;
+  }
+
+  .numbered li {
+    counter-increment: numbered;
+    position: relative;
+    padding-left: 3.5rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--rule);
+    max-width: 850px;
+  }
+
+  .numbered li::before {
+    content: counter(numbered);
+    position: absolute;
+    left: 0;
+    top: -0.2rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .numbered li strong { color: var(--ink); }
+
+  /* ========== NAVIGATION ========== */
+  .nav-controls {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    z-index: 100;
+    background: rgba(13, 10, 6, 0.85);
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+    border: 1px solid var(--gold);
+    backdrop-filter: blur(6px);
+  }
+
+  .nav-btn {
+    background: transparent;
+    border: 1px solid var(--paper);
+    color: var(--paper);
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .nav-btn:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .slide-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--paper);
+    padding: 0 0.75rem;
+    min-width: 4rem;
+    text-align: center;
+  }
+
+  /* ========== PROGRESS BAR ========== */
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+    z-index: 99;
+  }
+
+  /* ========== HINT ========== */
+  .hint {
+    position: fixed;
+    top: 1rem;
+    right: 1.25rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: rgba(13, 10, 6, 0.5);
+    text-transform: uppercase;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .slide.dark ~ .hint { color: rgba(245, 239, 224, 0.5); }
+
+  /* ========== TIMER (for slides that need it) ========== */
+  .timer-inline {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1rem 1.5rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    box-shadow: 5px 5px 0 var(--accent);
+    display: inline-block;
+  }
+
+  .timer-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    margin: 0.25rem 0;
+  }
+
+  .timer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--paper-warm);
+    text-transform: uppercase;
+  }
+
+  .timer-controls {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  .timer-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.7rem;
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid var(--paper);
+    cursor: pointer;
+  }
+
+  .timer-btn.primary { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+  .timer-btn:hover:not(.primary) { background: var(--paper); color: var(--ink); }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 768px) {
+    .slide { padding: 2rem 1.5rem; }
+    .two-col, .inventory { grid-template-columns: 1fr; gap: 1rem; }
+    .col-card { padding: 1.25rem; }
+    .exercise { padding: 1.25rem; }
+    .quote { padding-left: 1rem; }
+    .numbered li { padding-left: 2.5rem; font-size: 1.05rem; }
+    .numbered li::before { font-size: 1.6rem; }
+    .nav-controls { bottom: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="hint">← → to navigate</div>
+
+<div class="slide-container" id="slides">
+
+  <!-- ========== SLIDE 1: TITLE ========== -->
+  <section class="slide title active">
+    <div class="eyebrow">Critical Thinking · Last Class</div>
+    <h1>What's worth<br>your time?</h1>
+    <p class="subtitle">A conversation about what we value, why we value it, and whether we're spending our lives the way we mean to.</p>
+  </section>
+
+  <!-- ========== SLIDE 2: WELCOME ========== -->
+  <section class="slide">
+    <h2 class="italic">Today is different.</h2>
+    <p>All semester we've been turning the tools of critical thinking on the world — on news, on ads, on arguments people make about politics and ethics.</p>
+    <p>Today we turn those tools <strong>on ourselves</strong>.</p>
+    <p>We're going to ask one of the oldest questions there is: <em>what makes a life worth living?</em> We'll work our way up to it carefully — starting with how we figure out what we actually value, then looking at whether the paths we're on are taking us where we want to go, and finally asking the big question directly.</p>
+    <p class="small">No tests. No homework. Just thinking.</p>
+  </section>
+
+  <!-- ========== SLIDE 3: SECTION BREAK - TWO KINDS OF VALUE ========== -->
+  <section class="slide dark">
+    <div class="eyebrow">Part One</div>
+    <h1 class="italic">Two kinds<br>of value.</h1>
+  </section>
+
+  <!-- ========== SLIDE 4: DEFINING THE TWO ========== -->
+  <section class="slide">
+    <h2>Things we value come in two flavors.</h2>
+    <p>This is one of the most useful distinctions in all of philosophy, and it costs nothing to learn.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h3>Intrinsic value</h3>
+        <p class="definition">Something is <strong>intrinsically valuable</strong> when you want it for its own sake. The thing itself is the point.</p>
+        <p class="examples">Friendship. Laughter. A great meal. Feeling at peace. Loving someone. Being good at something you care about.</p>
+      </div>
+      <div class="col-card dark">
+        <h3>Instrumental value</h3>
+        <p class="definition">Something is <strong>instrumentally valuable</strong> when you want it because it gets you something else. It's a means to an end.</p>
+        <p class="examples">Money. A bus ticket. Studying for a test. A job you don't love but that pays the bills.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 5: MOST THINGS ARE BOTH ========== -->
+  <section class="slide">
+    <h2 class="italic">Most things are both.</h2>
+    <p>Pure cases are rare. Most of what we pursue has <strong>some of each</strong>.</p>
+    <p>Take exercise. It's instrumentally valuable — it makes you healthier, lets you do other things you enjoy. But for some people, it's also intrinsically valuable — they actually love the feeling of running or lifting, and they'd do it even without the health benefits.</p>
+    <p>Or take a college class. Maybe you're taking it because you need it for graduation (instrumental). Maybe you're also genuinely interested in the subject (intrinsic). Maybe both at once.</p>
+    <p>This is why the distinction matters: if you don't notice which kind of value something has for you, it's easy to spend years pursuing things you only ever wanted as a means to something else — without ever stopping to ask what the something else is.</p>
+  </section>
+
+  <!-- ========== SLIDE 6: QUICK POLL ========== -->
+  <section class="slide">
+    <h2>Quick warm-up.</h2>
+    <p>Drop your answer in the chat. For each item, is it <em>mostly intrinsic</em>, <em>mostly instrumental</em>, or <em>both</em>?</p>
+
+    <div class="item-list">
+      <div class="item">Money</div>
+      <div class="item">A best friend</div>
+      <div class="item">Sleep</div>
+      <div class="item">A college degree</div>
+      <div class="item">Sex</div>
+      <div class="item">A paycheck</div>
+      <div class="item">Art</div>
+      <div class="item">Eating vegetables</div>
+      <div class="item">A vacation</div>
+    </div>
+
+    <p class="small" style="margin-top: 1.5rem;">There aren't always right answers. Sometimes it depends on the person. That's part of the point.</p>
+  </section>
+
+  <!-- ========== SLIDE 7: SECTION BREAK - THOUGHT EXPERIMENT ========== -->
+  <section class="slide dark">
+    <div class="eyebrow">Part Two</div>
+    <h1 class="italic">A thought<br>experiment.</h1>
+  </section>
+
+  <!-- ========== SLIDE 8: THE MCDONALDS THOUGHT EXPERIMENT ========== -->
+  <section class="slide">
+    <h2>Imagine someone says…</h2>
+    <div class="quote">"I just want to work at McDonald's for the rest of my life."</div>
+    <p>Most people, when they hear this, immediately put it in a box. Some hear it as a joke. Some hear it as low ambition. Some hear it as something to be talked out of.</p>
+    <p>Let's resist all of that for a second. Let's actually take the statement seriously and ask: <strong>could this be a good plan?</strong></p>
+    <p>The answer is: <em>it depends entirely on what the person actually values</em>. Which is the whole point.</p>
+  </section>
+
+  <!-- ========== SLIDE 9: THE CHARITABLE READING ========== -->
+  <section class="slide">
+    <h3>Reading 1: This could be meaningful.</h3>
+
+    <p>Here are some real reasons someone might mean this seriously, and mean it well:</p>
+
+    <ul class="numbered">
+      <li>It lets them <strong>feed their family</strong> reliably. The work is steady. The schedule is predictable. They know what their life looks like Monday through Friday.</li>
+      <li>They <strong>genuinely enjoy the work</strong>. There are people who love the rhythm of fast-paced kitchens, the team dynamic, the small moments of helping a customer.</li>
+      <li>They want to <strong>own a franchise someday</strong>. McDonald's actually has a famous training program — Hamburger University — and people who complete it can run their own location and build real wealth over time.</li>
+      <li>They've decided their <strong>identity isn't built around their job</strong>. The job is instrumental. What they actually care about is their family, their hobbies, their faith, their friends. The job pays for the life.</li>
+    </ul>
+  </section>
+
+  <!-- ========== SLIDE 10: THE LESS CHARITABLE READING ========== -->
+  <section class="slide">
+    <h3>Reading 2: This might not be the best path.</h3>
+
+    <p>And here are some real reasons someone might say this and be making a worse decision than they realize:</p>
+
+    <ul class="numbered">
+      <li>They want stability and a paycheck — but there are <strong>other paths</strong> to stability that pay better, are easier on the body, or open more doors over time.</li>
+      <li>They want to feed their family — but the wages might not actually do that, especially long-term, and they haven't compared.</li>
+      <li>They're <strong>defaulting</strong> to it. Not choosing it. They haven't really thought about what they want; they've just landed somewhere and stopped asking.</li>
+      <li>They're saying it as a way of <strong>letting themselves off the hook</strong> from harder questions about what they actually care about.</li>
+    </ul>
+  </section>
+
+  <!-- ========== SLIDE 11: THE POINT ========== -->
+  <section class="slide dark">
+    <h2 class="italic">The point isn't<br>which reading is right.</h2>
+    <p>The point is that <strong>you can't tell from the outside</strong>. You can only tell by asking what the person actually values, and whether the path they're on is a good way to get there.</p>
+    <p>And that's exactly the question worth asking about <em>your own</em> life.</p>
+  </section>
+
+  <!-- ========== SLIDE 12: SECTION BREAK - THE INVENTORY ========== -->
+  <section class="slide dark">
+    <div class="eyebrow">Part Three</div>
+    <h1 class="italic">Your turn.</h1>
+  </section>
+
+  <!-- ========== SLIDE 13: PERSONAL INVENTORY ========== -->
+  <section class="slide">
+    <h2>Take a few minutes.</h2>
+    <p>Don't overthink this. There are no wrong answers, and nobody but you sees what you write here.</p>
+
+    <div class="inventory">
+      <div class="inv-col">
+        <h3>What do you find intrinsically valuable?</h3>
+        <p class="prompt">Things that feel worth doing for their own sake. Things you'd still want to do even if they led to nothing else.</p>
+        <textarea placeholder="e.g., spending time with my brother, drawing, the feeling of being good at something..."></textarea>
+      </div>
+
+      <div class="inv-col">
+        <h3>What do you value instrumentally?</h3>
+        <p class="prompt">Things you pursue because of what they let you do or have. Means to an end. Tools, not destinations.</p>
+        <textarea placeholder="e.g., money, a degree, having a car..."></textarea>
+      </div>
+    </div>
+
+    <div class="timer-inline" style="margin-top: 1.5rem;">
+      <div class="timer-label">Quiet thinking time</div>
+      <div class="timer-display" id="timer1">5:00</div>
+      <div class="timer-controls">
+        <button class="timer-btn primary" onclick="startTimer('timer1', 5*60)">Start 5:00</button>
+        <button class="timer-btn" onclick="pauseTimer('timer1')">Pause</button>
+        <button class="timer-btn" onclick="resetTimer('timer1', 5*60)">Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 14: THE HARD QUESTION ========== -->
+  <section class="slide">
+    <h2 class="italic">Now the harder question.</h2>
+    <p>Look at your two columns.</p>
+    <p>Are you spending your time in proportion to what you actually said matters to you?</p>
+    <p>Most of us aren't. Most of us spend a <strong>lot</strong> of our hours on instrumental things — the means — and very little on the ends those means were supposed to be serving.</p>
+    <p>That's not a moral failing. It's just easy to lose track. The job becomes the point. The grade becomes the point. The money becomes the point. And somewhere along the way, the thing the job and the grade and the money were <em>for</em> gets quietly forgotten.</p>
+    <p class="small">This is the part of the lesson that takes the longest to actually use. But it's the part that matters most.</p>
+  </section>
+
+  <!-- ========== SLIDE 15: BREAKOUT PROMPT ========== -->
+  <section class="slide">
+    <h2>Small group time.</h2>
+    <p>You'll be sent to a breakout room with 2–3 other people. You don't have to share anything you wrote. But pick one of these to talk about together:</p>
+
+    <ul class="numbered">
+      <li>Is there something in your <strong>instrumental</strong> column that you've started treating as if it were the point itself?</li>
+      <li>Is there something in your <strong>intrinsic</strong> column that you don't actually make time for? Why not?</li>
+      <li>If you imagine your life one year from now, what's something <em>small</em> that you wish were true about it?</li>
+    </ul>
+
+    <div class="timer-inline">
+      <div class="timer-label">Breakout time</div>
+      <div class="timer-display" id="timer2">10:00</div>
+      <div class="timer-controls">
+        <button class="timer-btn primary" onclick="startTimer('timer2', 10*60)">Start 10:00</button>
+        <button class="timer-btn" onclick="pauseTimer('timer2')">Pause</button>
+        <button class="timer-btn" onclick="resetTimer('timer2', 10*60)">Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 16: SECTION BREAK - THE PATHS ========== -->
+  <section class="slide dark">
+    <div class="eyebrow">Part Four</div>
+    <h1 class="italic">Are you on<br>a good path?</h1>
+  </section>
+
+  <!-- ========== SLIDE 17: THE TWO QUESTIONS ========== -->
+  <section class="slide">
+    <h2>Two separate questions.</h2>
+    <p>Once you've figured out what you actually value, there's a second question: <strong>is the path you're on a good way to get there?</strong></p>
+
+    <p>These are different questions, and people mix them up all the time.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h3>Question 1</h3>
+        <p class="definition"><strong>What do I want?</strong></p>
+        <p class="examples">What's intrinsically valuable to me? What kind of life do I want to be living?</p>
+      </div>
+      <div class="col-card">
+        <h3>Question 2</h3>
+        <p class="definition"><strong>Is this the best way to get it?</strong></p>
+        <p class="examples">Of all the paths I could take toward what I want, is this one any good? Are there easier paths? Better paths? Paths I haven't considered?</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 1.5rem;">Both questions need to be asked. Asking only the first leaves you knowing what you want but not how to get there. Asking only the second leaves you optimizing a path toward something you never chose.</p>
+  </section>
+
+  <!-- ========== SLIDE 18: BACK TO MCDONALDS ========== -->
+  <section class="slide">
+    <h2>Back to our example.</h2>
+    <div class="quote">"I just want to work at McDonald's for the rest of my life."</div>
+
+    <p>If the goal is <strong>"support my family,"</strong> McDonald's is one path. There are also trades, community college, the military, online certifications. Each has tradeoffs. The question isn't whether McDonald's is "good enough" — it's whether it's actually the best path <em>for this specific person and goal</em>.</p>
+
+    <p>If the goal is <strong>"have a creative outlet,"</strong> McDonald's probably isn't it. Neither, by the way, is an unpaid internship someone took because they thought they should.</p>
+
+    <p>If the goal is <strong>"own my own business someday,"</strong> the franchise path is real and serious. But so are many others, and someone choosing this path should at least know what those others look like.</p>
+
+    <p class="lead" style="margin-top: 1.5rem;">A path is only good <em>relative to a goal</em>. You can't evaluate it without one.</p>
+  </section>
+
+  <!-- ========== SLIDE 19: THE POINT (AGAIN) ========== -->
+  <section class="slide">
+    <h2 class="italic">The takeaway, in one line:</h2>
+    <p class="lead" style="margin-top: 1rem;">Decide what's worth your time on purpose, instead of by accident.</p>
+    <p style="margin-top: 1.5rem;">That's it. That's the whole skill. Most people drift into a path and only later figure out whether it's where they wanted to go. You don't have to.</p>
+    <p>You can ask the questions now. You can ask them again next year. You can ask them every time something big in your life changes.</p>
+    <p>The questions are simple. The answers will change as you do. That's normal.</p>
+  </section>
+
+  <!-- ========== SLIDE 20: SECTION BREAK - THE BIG QUESTION ========== -->
+  <section class="slide dark">
+    <div class="eyebrow">Part Five</div>
+    <h1 class="italic">The big<br>question.</h1>
+  </section>
+
+  <!-- ========== SLIDE 21: WE'VE BEEN CIRCLING THIS ========== -->
+  <section class="slide">
+    <h2 class="italic">We've been circling this question.</h2>
+    <p>I told you at the start of class that we'd work our way up to the big question. Here we are.</p>
+    <p>Notice that we couldn't just <em>open</em> with it. "What is the meaning of life?" is too big to answer cold. You have to come at it through smaller, more tractable questions first — what do I value, why do I value it, am I spending my time on the right things — and only then is the big question something you can actually engage with rather than just panic at.</p>
+    <p>That's how careful thinking works on hard questions. You break them into pieces you can hold.</p>
+    <p>Now let's look at the big question directly.</p>
+  </section>
+
+  <!-- ========== SLIDE 22: WHAT PEOPLE HAVE SAID ========== -->
+  <section class="slide">
+    <h2>What is the meaning of life?</h2>
+    <p>People have been arguing about this for thousands of years. Here are some of the most common answers, in plain language:</p>
+
+    <ul class="numbered">
+      <li><strong>It's about happiness.</strong> The point is to feel good, to enjoy your life, to experience pleasure and avoid suffering. The catch: shallow versions of this can be self-defeating. People who chase pleasure directly often don't find it.</li>
+      <li><strong>It's about flourishing.</strong> A good life isn't just feeling good — it's being good at <em>being a person</em>. Developing your abilities, building real relationships, doing things you can be proud of. Even when it's hard.</li>
+      <li><strong>It's about connection.</strong> Meaning comes from other people. From loving and being loved. From being part of something — a family, a community, a tradition.</li>
+      <li><strong>It's about contribution.</strong> Meaning comes from making something better than you found it. A garden. A kid. A piece of art. A neighborhood.</li>
+      <li><strong>It's about something bigger.</strong> For many people, meaning comes from faith, or from a sense of being part of something larger than themselves.</li>
+      <li><strong>It's whatever you decide.</strong> There's no cosmic answer written in the stars. You make your life mean something by what you choose to care about.</li>
+    </ul>
+  </section>
+
+  <!-- ========== SLIDE 23: NO RIGHT ANSWER, BUT ========== -->
+  <section class="slide">
+    <h2 class="italic">There's no exam answer here.</h2>
+    <p>You don't have to pick one. Most people, if they're honest, pull from several of these at once.</p>
+    <p>But here's what's worth noticing: <strong>each of these answers points to a different way of spending your time</strong>. If your answer is mostly "connection," and you're spending most of your hours alone on your phone, something's off. If your answer is mostly "contribution," and you're not making anything, something's off. If your answer is mostly "flourishing," and you're not getting any better at anything, something's off.</p>
+    <p>The point isn't that there's a right answer to the meaning of life. The point is that <em>your</em> answer — whatever it is — has consequences for how you'd want to live. And critical thinking is the tool that lets you check whether your life and your answer are actually pointing the same direction.</p>
+  </section>
+
+  <!-- ========== SLIDE 24: SECTION BREAK - CLOSING ========== -->
+  <section class="slide dark">
+    <div class="eyebrow">Part Six</div>
+    <h1 class="italic">One last thing.</h1>
+  </section>
+
+  <!-- ========== SLIDE 25: ONE LAST QUESTION ========== -->
+  <section class="slide">
+    <h2>Before we end.</h2>
+    <p>I want to ask you one question and let you think about it on your own time. You don't have to answer in chat. You don't have to tell anyone.</p>
+
+    <div class="quote" style="margin-top: 2rem;">What's one thing you find intrinsically valuable that you want to give more of your time to in the next year?</div>
+
+    <p style="margin-top: 1.5rem;">Just one thing. Doesn't have to be big. Could be: <em>read more</em>. Could be: <em>call my grandmother</em>. Could be: <em>spend less time on my phone before bed</em>. Could be: <em>actually learn that thing I keep saying I want to learn</em>.</p>
+
+    <p>If you want to share, share. If you want to keep it to yourself, that's fine too.</p>
+  </section>
+
+  <!-- ========== SLIDE 26: THANK YOU ========== -->
+  <section class="slide title">
+    <div class="eyebrow">End of semester</div>
+    <h1>Thank you for thinking<br>with me.</h1>
+    <p class="subtitle">The arguments aren't going to stop coming at you. But you've gotten better at noticing what they're actually doing — including the ones you make to yourself.<br><br>Have a good summer.</p>
+  </section>
+
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" id="prev" onclick="prevSlide()" aria-label="Previous slide">‹</button>
+  <span class="slide-counter" id="counter">1 / 22</span>
+  <button class="nav-btn" id="next" onclick="nextSlide()" aria-label="Next slide">›</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  function show(idx) {
+    slides.forEach((s, i) => {
+      s.classList.remove('active', 'previous');
+      if (i === idx) s.classList.add('active');
+      else if (i < idx) s.classList.add('previous');
+    });
+    document.getElementById('counter').textContent = `${idx + 1} / ${total}`;
+    document.getElementById('progress').style.width = `${((idx + 1) / total) * 100}%`;
+    document.getElementById('prev').disabled = idx === 0;
+    document.getElementById('next').disabled = idx === total - 1;
+  }
+
+  function nextSlide() {
+    if (current < total - 1) {
+      current++;
+      show(current);
+    }
+  }
+
+  function prevSlide() {
+    if (current > 0) {
+      current--;
+      show(current);
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      nextSlide();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      prevSlide();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      current = 0;
+      show(current);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      current = total - 1;
+      show(current);
+    }
+  });
+
+  show(0);
+
+  // ========== TIMERS ==========
+  const timerStates = {};
+
+  function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  function startTimer(id, seconds) {
+    if (timerStates[id]?.interval) clearInterval(timerStates[id].interval);
+    timerStates[id] = { remaining: seconds, interval: null };
+    document.getElementById(id).textContent = formatTime(seconds);
+    timerStates[id].interval = setInterval(() => {
+      timerStates[id].remaining--;
+      const el = document.getElementById(id);
+      if (timerStates[id].remaining <= 0) {
+        clearInterval(timerStates[id].interval);
+        el.textContent = "0:00";
+        el.style.color = "#b8664f";
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.frequency.value = 660;
+          gain.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+          osc.start();
+          osc.stop(ctx.currentTime + 1.2);
+        } catch (e) {}
+        return;
+      }
+      el.textContent = formatTime(timerStates[id].remaining);
+      el.style.color = timerStates[id].remaining <= 60 ? "#b8664f" : "";
+    }, 1000);
+  }
+
+  function pauseTimer(id) {
+    if (timerStates[id]?.interval) {
+      clearInterval(timerStates[id].interval);
+      timerStates[id].interval = null;
+    }
+  }
+
+  function resetTimer(id, seconds) {
+    pauseTimer(id);
+    document.getElementById(id).textContent = formatTime(seconds);
+    document.getElementById(id).style.color = "";
+  }
+</script>
+
+</body>
+</html>
