@@ -1,6 +1,6 @@
 const steps = [
-  'Welcome! Select any course to see its activities.',
-  'Use the sidebar to quickly jump between courses.',
+  'Welcome! Select a course to see its activities.',
+  'Use the sidebar to move between courses.',
   'Each activity includes a short description of what you\'ll do.'
 ];
 let stepIndex = 0;
