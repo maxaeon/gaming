@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HUM 1020 Final Review</title>
+<meta name="description" content="A stage-by-stage review game for the HUM 1020 final exam.">
+<style>
+  :root{
+    --base:#F5F3FA; --surface:#FFFFFF; --ink:#23213A; --muted:#6E6A85; --line:#DCD8EA;
+    --primary:#6C5CD9; --primary-ink:#FFFFFF; --second:#1B7F86;
+    --good:#2A7F4F; --good-bg:#E6F4EC; --bad:#B3402F; --bad-bg:#FBE9E5; --focus:#1B7F86;
+  }
+  html[data-theme="dark"]{
+    --base:#15142A; --surface:#1F1D36; --ink:#ECEAF6; --muted:#A9A5C2; --line:#34314F;
+    --primary:#B0A4FF; --primary-ink:#15142A; --second:#6ED0D6;
+    --good:#7FD6A1; --good-bg:#1D3A2B; --bad:#F59B8C; --bad-bg:#46231D; --focus:#6ED0D6;
+  }
+  @media (prefers-color-scheme: dark){
+    html:not([data-theme="light"]){
+      --base:#15142A; --surface:#1F1D36; --ink:#ECEAF6; --muted:#A9A5C2; --line:#34314F;
+      --primary:#B0A4FF; --primary-ink:#15142A; --second:#6ED0D6;
+      --good:#7FD6A1; --good-bg:#1D3A2B; --bad:#F59B8C; --bad-bg:#46231D; --focus:#6ED0D6;
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--base);color:var(--ink)}
+  body{font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:0 20px 60px}
+  .serif{font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--surface);color:var(--ink);padding:8px 12px;border:2px solid var(--focus)}
+  .skip:focus{left:8px}
+  .wrap{max-width:720px;margin:0 auto}
+  header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0 8px;border-bottom:1px solid var(--line)}
+  .kicker{color:var(--second);font-weight:600;font-size:15px}
+  h1{font-size:30px;line-height:1.15;margin:26px 0 8px;font-weight:600}
+  h2{font-size:22px;line-height:1.25;margin:28px 0 8px;font-weight:600}
+  p{margin:0 0 14px}
+  .muted{color:var(--muted)}
+  button{font:inherit;cursor:pointer;border-radius:8px}
+  button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  .toggle{background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:6px 12px;font-size:14px}
+  .primary{background:var(--primary);color:var(--primary-ink);border:0;padding:12px 20px;font-weight:600;font-size:17px}
+  .quiet{background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:10px 16px}
+  .stages{display:grid;gap:10px;margin:14px 0 22px}
+  .stage{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:12px 14px}
+  .stage:hover{border-color:var(--primary)}
+  .stage .num{display:inline-block;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);text-align:center;line-height:26px;font-size:14px;color:var(--muted)}
+  .stage.done .num{background:var(--good);border-color:var(--good);color:var(--good-bg)}
+  .stage .status{font-size:13px;color:var(--muted)}
+  .stage.done .status{color:var(--good);font-weight:600}
+  .progress{color:var(--muted);font-size:15px;margin:26px 0 6px}
+  .bar{height:4px;background:var(--line);border-radius:2px;margin:0 0 22px;overflow:hidden}
+  .bar > div{height:100%;background:var(--primary);width:0}
+  .question{font-size:23px;line-height:1.35;margin:0 0 20px}
+  .options{display:grid;gap:10px;margin:0 0 18px}
+  .opt{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:12px 14px;line-height:1.45}
+  .opt .key{display:inline-block;width:26px;height:26px;border-radius:50%;border:1px solid var(--line);text-align:center;line-height:24px;font-size:14px;color:var(--muted)}
+  .opt:hover:not([disabled]){border-color:var(--primary)}
+  .opt[disabled]{cursor:default}
+  .opt.right{border-color:var(--good);background:var(--good-bg)}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+  .feedback{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--surface);margin:0 0 18px}
+  .feedback strong{display:block;margin-bottom:6px}
+  .feedback.right strong{color:var(--good)}
+  .feedback.wrong strong{color:var(--bad)}
+  .hidden{display:none}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .banner{border:2px solid var(--good);background:var(--good-bg);border-radius:10px;padding:22px 20px;margin:20px 0}
+  .banner h2{margin:0 0 6px;color:var(--good)}
+  .banner.fail{border-color:var(--line);background:var(--surface)}
+  .banner.fail h2{color:var(--ink)}
+  .big{font-size:44px;line-height:1;margin:0 0 10px}
+  .missed{border-top:1px solid var(--line);padding:14px 0}
+  .missed .q{font-weight:600;margin:0 0 6px}
+  footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:14px}
+  @media (max-width:520px){.question{font-size:20px} h1{font-size:26px}}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the review</a>
+<div class="wrap">
+  <header>
+    <div class="kicker">HUM 1020 · Final review</div>
+    <button class="toggle" id="themeToggle" type="button" aria-pressed="false">Dark mode</button>
+  </header>
+
+  <main id="main">
+    <section id="startView">
+      <h1 class="serif">HUM 1020 Final Review</h1>
+      <p>This review covers the whole course, one stage per topic. Each stage asks five questions from the slides and the readings, with an explanation after every answer. A stage is complete when your group gets at least four of the five right. Completed stages are marked on this screen. Nothing is recorded, and you can replay any stage.</p>
+      <div id="allDone" class="banner hidden"><h2>All stages complete</h2><p>Your group has finished every stage. Show this screen to your instructor.</p></div>
+      <div class="stages" id="stageList" role="list"></div>
+      <div class="row">
+        <button class="quiet" id="resetBtn" type="button">Clear completed stages</button>
+      </div>
+    </section>
+
+    <section id="quizView" class="hidden">
+      <div class="progress" id="progress"></div>
+      <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
+      <p class="question serif" id="question"></p>
+      <div class="options" id="options"></div>
+      <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+      <div class="row">
+        <button class="primary hidden" id="nextBtn" type="button">Next question</button>
+        <button class="quiet" id="quitBtn" type="button">Back to stages</button>
+        <span class="muted" id="hint">Press 1 to 4 to answer.</span>
+      </div>
+    </section>
+
+    <section id="endView" class="hidden">
+      <div id="resultBanner" class="banner"><div class="big" id="scoreLine"></div><h2 id="resultHead"></h2><p id="resultNote"></p></div>
+      <div class="row">
+        <button class="primary" id="againBtn" type="button">Play this stage again</button>
+        <button class="quiet" id="backBtn" type="button">Back to stages</button>
+      </div>
+      <h2 class="serif" id="missedHead">Questions you missed</h2>
+      <div id="missedList"></div>
+    </section>
+  </main>
+
+  <footer>Every question here comes from the course slides, readings, and answer documents. If a question seems to disagree with the answer document, the answer document wins, and you should say so in class.</footer>
+</div>
+
+<script>
+(function(){
+  var DATA = {"course": "HUM 1020", "title": "HUM 1020 Final Review", "intro": "This review covers the whole course, one stage per topic. Each stage asks five questions from the slides and the readings, with an explanation after every answer. A stage is complete when your group gets at least four of the five right. Completed stages are marked on this screen. Nothing is recorded, and you can replay any stage.", "stages": [{"title": "Claims, arguments, and fallacies", "qs": [{"q": "\"Pineapple belongs on pizza.\" In the terms used in this course, this claim is", "o": ["objective.", "subjective.", "a claim whose truth depends on a culture.", "not a claim at all."], "a": 1, "n": "Its truth depends on the attitude of the person making it. An objective claim is true or false regardless of anyone's attitude."}, {"q": "A valid argument with a false premise is", "o": ["sound.", "valid but unsound.", "invalid.", "strong."], "a": 1, "n": "Validity is about the connection between premises and conclusion. Soundness adds that the premises are actually true."}, {"q": "\"You can't trust his argument about the budget, he drives a terrible car.\" This is", "o": ["a straw man.", "an ad hominem.", "an appeal to ignorance.", "a false dilemma."], "a": 1, "n": "The reply attacks the person rather than the argument. People with terrible cars can make good budget arguments."}, {"q": "\"Either we ban all phones in class or we accept that no one will learn anything.\" This is", "o": ["a false dilemma.", "a hasty generalization.", "equivocation.", "an appeal to authority."], "a": 0, "n": "Two options are presented as the only ones when there are many others, such as limiting phones during certain activities."}, {"q": "Confirmation bias is", "o": ["a formal fallacy.", "the tendency to notice and remember evidence that supports what you already believe.", "trusting experts too much.", "the belief that the first number you hear is correct."], "a": 1, "n": "A bias is a pattern in how we process information rather than a mistake in an argument, which is why knowing about it does not by itself remove it."}]}, {"title": "Ancient Greece, The Clouds, and Socrates", "qs": [{"q": "Which groups could not speak or vote in the Athenian assembly?", "o": ["Women, enslaved people, and foreign residents.", "Anyone under forty.", "Farmers.", "Soldiers."], "a": 0, "n": "Athenian democracy was limited to adult male citizens. This is why figures such as Aspasia and Diotima survive only through men's writings."}, {"q": "In The Clouds, the character Strepsiades goes to Socrates's school because he wants to", "o": ["learn astronomy.", "learn to argue his way out of paying his debts.", "become a priest.", "join the army."], "a": 1, "n": "Aristophanes uses the debts to make Socrates look like a sophist who teaches the weaker argument to beat the stronger. Socrates answers this picture at his trial."}, {"q": "In the Apology, Socrates says he is wiser than others only because", "o": ["he has read more books.", "he knows that he does not know, while others think they know what they do not.", "the gods told him the answers.", "he is older."], "a": 1, "n": "This is his explanation of the oracle's claim that no one was wiser than Socrates, and it is the starting point of the examined life."}, {"q": "Socrates refuses Euthyphro's first answer because", "o": ["it gives an example of a pious act rather than saying what piety is.", "it is too short.", "it mentions the gods.", "Euthyphro is a priest."], "a": 0, "n": "Socrates wants the one thing all pious acts share, so that it could be used to judge new cases. An example cannot do that job."}, {"q": "Socrates says \"the unexamined life is not worth living\"", "o": ["in a letter to Plato.", "at his trial, when explaining why he will not stop questioning people even to save his life.", "in The Clouds.", "on his deathbed."], "a": 1, "n": "The line is from the Apology. He says it when the jury offers him a way out if he will give up philosophy."}]}, {"title": "Ancient objects and sacred places", "qs": [{"q": "When we asked what an ancient object \"claims,\" we meant", "o": ["its price.", "what the object says about its makers, their gods, their power, or their dead, to anyone who looks at it.", "who owns it now.", "its weight."], "a": 1, "n": "A temple, a statue, or a burial mound makes a claim even to people who cannot read, which is why the fourth question matters."}, {"q": "In Republic Book X, Plato says a painter's picture of a bed is", "o": ["the truest kind of bed.", "an imitation of an appearance, two removes from the real form of a bed.", "as good as a carpenter's bed.", "a sacred object."], "a": 1, "n": "The form of the bed is real, the carpenter's bed imitates it, and the painting imitates the carpenter's bed. That is Plato's worry about art."}, {"q": "Pausanias's description of the statue of Zeus at Olympia was used in class to show", "o": ["how a sacred object was experienced by someone who stood in front of it.", "that statues are not art.", "that Zeus was a historical person.", "how to build a temple."], "a": 0, "n": "Pausanias was a traveler reporting what he saw, which lets us ask the four questions of an object that no longer exists."}, {"q": "Mount Elizabeth Mound in Jensen Beach was built", "o": ["by Spanish settlers.", "by Native people about four thousand years ago as a burial and ceremonial mound.", "as a lighthouse base.", "in the twentieth century."], "a": 1, "n": "The mansion on top came much later. The mound is one of the local sites the course used to ask what sacred places claim and what it means to build on them."}, {"q": "The Windover site near Titusville is known for", "o": ["a Spanish shipwreck.", "burials in a peat pond from around seven thousand years ago, with remarkable preservation.", "a Civil War fort.", "a Seminole village."], "a": 1, "n": "Windover is one of the Treasure Coast and Florida sites from the sacred places week, and it shows how old human burial practices in Florida are."}]}, {"title": "Beauty", "qs": [{"q": "Hippias's first answer to \"what is beauty?\" was", "o": ["a definition in one sentence.", "a beautiful maiden, which Socrates rejects as an example rather than a definition.", "that beauty does not exist.", "that beauty is usefulness."], "a": 1, "n": "Hippias goes on to offer gold and a long, honored life, and Socrates refuses each for the same reason."}, {"q": "Hume's standard of taste comes from", "o": ["majority vote.", "the agreement over time of judges with practice, comparison, delicacy, and freedom from prejudice.", "the opinion of the artist.", "the price of the work."], "a": 1, "n": "Hume starts from the claim that beauty is in the mind and still argues that some judgments are better than others."}, {"q": "In this course, saying the standard for beauty is \"cultural\" means", "o": ["each person's reaction settles it.", "the shared taste of a community settles it.", "something in the thing itself settles it.", "no one can judge."], "a": 1, "n": "The three positions were subjective, cultural, and objective, and the friend-who-feels-nothing test shows which one a person actually holds."}, {"q": "Hume would say that a person with a bad cold who tastes nothing in a fine meal is", "o": ["right that the meal is bland.", "a poor judge in that moment, because a defect in the organ of taste is not a verdict about the dish.", "the best judge.", "irrelevant to the question."], "a": 1, "n": "This is Hume's point that sentiments are all real but not all equally good guides. Practice and health of the organ matter."}, {"q": "Socrates tries out the idea that the beautiful is the beneficial and finds trouble with it because", "o": ["useful things are never beautiful.", "if beauty were usefulness, a well-made tool would be beautiful and a useless but lovely thing would not.", "Hippias agrees too quickly.", "the gods disagree."], "a": 1, "n": "This is why a paper that calls something beautiful because of what it does for you has to say whether that is beauty or goodness."}]}, {"title": "Applied ethics", "qs": [{"q": "\"Is it wrong to use AI to write a paper?\" is a question in", "o": ["metaethics.", "normative ethics.", "applied ethics.", "aesthetics."], "a": 2, "n": "Applied ethics asks about particular issues. Normative ethics asks for general theories, and metaethics asks what moral claims are."}, {"q": "A utilitarian decides whether a policy is right by asking", "o": ["whether it follows a rule.", "whether its consequences produce more happiness than the alternatives for everyone affected.", "whether a virtuous person would support it.", "whether it is traditional."], "a": 1, "n": "Everyone affected counts equally, which is both the appeal of the view and the source of its hardest objections."}, {"q": "Kant's test for a rule is", "o": ["whether it makes you happy.", "whether you could will everyone to follow it, and whether it treats people as ends rather than merely as means.", "whether it is legal.", "whether your parents taught it."], "a": 1, "n": "These are the two formulations of the categorical imperative that the course used."}, {"q": "Virtue ethics asks, about a choice,", "o": ["what would a person of good character do?", "what maximizes happiness?", "what does the law say?", "what is cheapest?"], "a": 0, "n": "The focus is on character and habit rather than on a rule or an outcome."}, {"q": "Two people agree that stealing is wrong but disagree about whether a particular act was stealing. Their disagreement is", "o": ["about a moral principle.", "about a fact of the case.", "about metaethics.", "impossible."], "a": 1, "n": "Many applied debates turn on the factual premise rather than the moral one, which is why the course asked you to find which premise is actually in dispute."}]}, {"title": "The self", "qs": [{"q": "The body criterion of personal identity says you are the same person over time because", "o": ["you have the same memories.", "you have the same living body, continuous through time.", "you have the same soul.", "you have the same name."], "a": 1, "n": "The hardest cases for it are gradual replacement of cells and thought experiments about brain transplants."}, {"q": "In The Importance of Being Earnest, Jack is \"Ernest in town and Jack in the country.\" The course used this to illustrate", "o": ["Victorian fashion.", "the performed self, with different fronts for different audiences.", "the body criterion.", "the Ship of Theseus."], "a": 1, "n": "Wilde's double life is a comic version of Goffman's front stage and back stage."}, {"q": "Goffman's back stage is", "o": ["the part of a theater behind the curtain.", "the setting where the performance for others is off and preparation for it happens.", "a kind of lie.", "the self you show at work."], "a": 1, "n": "Everyone has a back stage. The question the course asked was whether the back stage self is more real than the front stage one."}, {"q": "The Renaissance portrait in which a figure of color had been painted over was used to show that", "o": ["old paintings fade.", "a portrait makes a claim about who matters, and painting someone out is part of that claim.", "the Renaissance had no portraits.", "conservators ruin paintings."], "a": 1, "n": "What is removed from a picture tells you as much about its makers and owners as what is kept."}, {"q": "If every plank of a ship is replaced one at a time, the Ship of Theseus puzzle asks", "o": ["who paid for the planks.", "whether it is still the same ship, and what makes anything the same thing through change.", "whether ships can sink.", "whether Theseus was a sailor."], "a": 1, "n": "The puzzle gets harder if the old planks are reassembled into a second ship, and it applies to people as well as objects."}]}, {"title": "Death and meaning", "qs": [{"q": "Epicurus argued that we should not fear death because", "o": ["the soul survives it.", "there is no one left to experience it, so it cannot be bad for the person who dies.", "it is quick.", "everyone fears it."], "a": 1, "n": "The argument assumes that something can only be bad for you if you experience it. The objection asks whether missing out on a future can be bad without being felt."}, {"q": "In the Apology, Socrates says death is either", "o": ["a punishment or a reward.", "a dreamless sleep or a journey to another place, and neither is to be feared.", "quick or slow.", "the end or a mystery no one can speak of."], "a": 1, "n": "He gives this reasoning after the jury sentences him, to explain why he faces death calmly."}, {"q": "Zhuangzi stopped mourning his wife because he came to see her death as", "o": ["a punishment.", "one more transformation in a series, like the turning of the seasons.", "an illusion.", "a victory."], "a": 1, "n": "A friend found him singing and drumming on a pot. His view is that grieving as though death were unnatural misunderstands what happened."}, {"q": "Which of these was discussed as a possible animal response to death?", "o": ["Elephants returning to and touching the bones of dead elephants.", "Fish swimming in schools.", "Birds building nests.", "Ants farming fungus."], "a": 0, "n": "Elephants, chimpanzees, and some birds show behavior around their dead that raises the question of whether grief is only human."}, {"q": "Someone who fears death mainly because of leaving loved ones behind would find Epicurus's argument", "o": ["fully satisfying.", "beside the point, because the argument addresses harm to the dead person, not the loss to others.", "offensive.", "proof that fear is irrational."], "a": 1, "n": "Epicurus's argument is about whether death is bad for the one who dies. Fears about other people need a different answer."}]}, {"title": "Holidays and traditions", "qs": [{"q": "A holiday that most people believe is centuries old but that was actually created in the last hundred years is an example of", "o": ["civil religion.", "an invented tradition.", "liminality.", "kin work."], "a": 1, "n": "Invented traditions present themselves as ancient to give people a sense of continuity. Many familiar holiday customs are younger than they look."}, {"q": "Thanksgiving and the Fourth of July were discussed as examples of", "o": ["religious holidays only.", "civil religion, shared national rituals and symbols that work the way a religion does.", "invented foods.", "private family customs."], "a": 1, "n": "Civil religion explains why a national holiday can feel sacred to people with no religion in common."}, {"q": "A graduation ceremony, with its procession in, waiting period, and procession out, follows the pattern of", "o": ["a rite of passage: separation, transition, and incorporation.", "a gift exchange.", "an invented tradition.", "kin work."], "a": 0, "n": "The middle stage, when a person has left one status and not yet entered the next, is called liminality."}, {"q": "The obligation to give a gift back is part of the idea that", "o": ["gifts are free.", "a gift creates obligations to give, to receive, and to return, which bind people together.", "gifts should be expensive.", "only family can give gifts."], "a": 1, "n": "This is why refusing a gift, or failing to return one, can damage a relationship."}, {"q": "\"Kin work\" refers to", "o": ["farm labor.", "the often invisible labor, usually done by women, of keeping family ties alive through cards, calls, visits, and holidays.", "office work.", "childcare only."], "a": 1, "n": "The course asked who does the work that makes a holiday happen, and what that work says about the holiday's purpose."}]}, {"title": "A brief history of the universe", "qs": [{"q": "The universe began about", "o": ["6,000 years ago.", "13.8 billion years ago.", "4.5 million years ago.", "100 trillion years ago."], "a": 1, "n": "The Big Bang is dated to about 13.8 billion years ago."}, {"q": "The Earth formed about", "o": ["4.5 billion years ago.", "4.5 million years ago.", "13.8 billion years ago.", "300,000 years ago."], "a": 0, "n": "The Earth is roughly a third the age of the universe."}, {"q": "Homo sapiens appeared roughly", "o": ["300,000 years ago.", "3,000 years ago.", "30 million years ago.", "3 billion years ago."], "a": 0, "n": "Anatomically modern humans appear in the fossil record around 300,000 years ago in Africa."}, {"q": "Farming began roughly", "o": ["10,000 years ago.", "100 years ago.", "1 million years ago.", "500 years ago."], "a": 0, "n": "Agriculture appears in several places around 10,000 years ago, which is recent compared with how long humans have existed."}, {"q": "Writing is roughly", "o": ["5,000 years old.", "50,000 years old.", "500 years old.", "5 million years old."], "a": 0, "n": "Writing appears about 5,000 years ago, which means almost all of human existence happened before anything was written down."}]}]};
+  var PASS = 4;
+  var KEY = "hum1020-final";
+  var $ = function(id){ return document.getElementById(id); };
+  var state = { stage: -1, queue: [], index: 0, correct: 0, missed: [], answered: false };
+
+  // Theme
+  var root = document.documentElement;
+  function isDark(){ var t = root.getAttribute("data-theme"); return t === "dark" || (t !== "light" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches); }
+  function applyTheme(t){ if (t === "dark" || t === "light") root.setAttribute("data-theme", t); else root.removeAttribute("data-theme"); $("themeToggle").textContent = isDark() ? "Light mode" : "Dark mode"; $("themeToggle").setAttribute("aria-pressed", isDark() ? "true" : "false"); }
+  var savedTheme = null; try { savedTheme = localStorage.getItem(KEY + "-theme"); } catch (e) {}
+  applyTheme(savedTheme);
+  $("themeToggle").addEventListener("click", function(){ var next = isDark() ? "light" : "dark"; applyTheme(next); try { localStorage.setItem(KEY + "-theme", next); } catch (e) {} });
+
+  // Completed stages (per browser, best effort)
+  function loadDone(){ try { var v = JSON.parse(localStorage.getItem(KEY + "-done") || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+  var done = loadDone();
+  function saveDone(){ try { localStorage.setItem(KEY + "-done", JSON.stringify(done)); } catch (e) {} }
+
+  function shuffle(arr){ var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function show(id){ ["startView","quizView","endView"].forEach(function(v){ $(v).classList.toggle("hidden", v !== id); }); }
+
+  function renderStages(){
+    var box = $("stageList"); box.innerHTML = "";
+    DATA.stages.forEach(function(s, i){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "stage" + (done.indexOf(i) >= 0 ? " done" : ""); b.setAttribute("role", "listitem");
+      b.innerHTML = '<span class="num" aria-hidden="true"></span><span class="title"></span><span class="status"></span>';
+      b.querySelector(".num").textContent = done.indexOf(i) >= 0 ? "✓" : String(i + 1);
+      b.querySelector(".title").textContent = s.title;
+      b.querySelector(".status").textContent = done.indexOf(i) >= 0 ? "Complete" : s.qs.length + " questions";
+      b.setAttribute("aria-label", "Stage " + (i + 1) + ", " + s.title + (done.indexOf(i) >= 0 ? ", complete" : ""));
+      b.addEventListener("click", function(){ startStage(i); });
+      box.appendChild(b);
+    });
+    $("allDone").classList.toggle("hidden", done.length < DATA.stages.length);
+  }
+
+  function startStage(i){
+    var s = DATA.stages[i];
+    var queue = shuffle(s.qs).map(function(item){ var order = shuffle([0,1,2,3]); return { q: item.q, opts: order.map(function(k){ return item.o[k]; }), answer: order.indexOf(item.a), note: item.n }; });
+    state = { stage: i, queue: queue, index: 0, correct: 0, missed: [], answered: false };
+    show("quizView"); renderQuestion(); $("question").setAttribute("tabindex", "-1"); $("question").focus();
+  }
+
+  function renderQuestion(){
+    var item = state.queue[state.index]; var s = DATA.stages[state.stage];
+    state.answered = false;
+    $("progress").textContent = "Stage " + (state.stage + 1) + ", " + s.title + ". Question " + (state.index + 1) + " of " + state.queue.length + ".";
+    $("barFill").style.width = Math.round((state.index / state.queue.length) * 100) + "%";
+    $("question").textContent = item.q;
+    var box = $("options"); box.innerHTML = "";
+    item.opts.forEach(function(text, k){
+      var b = document.createElement("button"); b.type = "button"; b.className = "opt";
+      b.innerHTML = '<span class="key" aria-hidden="true">' + (k + 1) + '</span><span></span>';
+      b.lastChild.textContent = text; b.setAttribute("aria-label", "Option " + (k + 1) + ". " + text);
+      b.addEventListener("click", function(){ answer(k); }); box.appendChild(b);
+    });
+    $("feedback").className = "feedback hidden"; $("feedback").innerHTML = "";
+    $("nextBtn").classList.add("hidden");
+    $("nextBtn").textContent = state.index === state.queue.length - 1 ? "See the stage result" : "Next question";
+    $("hint").textContent = "Press 1 to 4 to answer.";
+  }
+
+  function answer(k){
+    if (state.answered) return; state.answered = true;
+    var item = state.queue[state.index];
+    $("options").querySelectorAll(".opt").forEach(function(b, j){ b.disabled = true; if (j === item.answer) b.classList.add("right"); else if (j === k) b.classList.add("wrong"); });
+    var right = k === item.answer; if (right) state.correct += 1; else state.missed.push(item);
+    var fb = $("feedback"); fb.className = "feedback " + (right ? "right" : "wrong"); fb.innerHTML = "";
+    var strong = document.createElement("strong"); strong.textContent = right ? "Correct." : "Not this one. The answer is: " + item.opts[item.answer];
+    var span = document.createElement("span"); span.textContent = item.note; fb.appendChild(strong); fb.appendChild(span);
+    $("nextBtn").classList.remove("hidden"); $("hint").textContent = "Press Enter for the next question."; $("nextBtn").focus();
+  }
+
+  function next(){ if (!state.answered) return; if (state.index < state.queue.length - 1) { state.index += 1; renderQuestion(); $("question").focus(); } else finish(); }
+
+  function finish(){
+    var total = state.queue.length, c = state.correct, passed = c >= PASS;
+    if (passed && done.indexOf(state.stage) < 0) { done.push(state.stage); saveDone(); }
+    show("endView");
+    $("scoreLine").textContent = c + " of " + total;
+    $("resultBanner").className = "banner" + (passed ? "" : " fail");
+    $("resultHead").textContent = passed ? "Stage complete: " + DATA.stages[state.stage].title : "Not yet: " + DATA.stages[state.stage].title;
+    $("resultNote").textContent = passed ? "Show this screen to your instructor, then go back to the stage list to pick the next one." : "A stage is complete at " + PASS + " of " + total + ". Read the explanations below, then play the stage again. The questions will come in a new order.";
+    var list = $("missedList"); list.innerHTML = "";
+    if (!state.missed.length) $("missedHead").classList.add("hidden");
+    else { $("missedHead").classList.remove("hidden"); state.missed.forEach(function(m){ var d = document.createElement("div"); d.className = "missed"; var q = document.createElement("p"); q.className = "q"; q.textContent = m.q; var a = document.createElement("p"); a.textContent = "Answer: " + m.opts[m.answer]; var n = document.createElement("p"); n.className = "muted"; n.textContent = m.note; d.appendChild(q); d.appendChild(a); d.appendChild(n); list.appendChild(d); }); }
+    $("scoreLine").setAttribute("tabindex", "-1"); $("scoreLine").focus();
+  }
+
+  $("nextBtn").addEventListener("click", next);
+  $("quitBtn").addEventListener("click", function(){ renderStages(); show("startView"); });
+  $("againBtn").addEventListener("click", function(){ startStage(state.stage); });
+  $("backBtn").addEventListener("click", function(){ renderStages(); show("startView"); });
+  $("resetBtn").addEventListener("click", function(){ done = []; saveDone(); renderStages(); });
+
+  document.addEventListener("keydown", function(e){
+    if ($("quizView").classList.contains("hidden")) return;
+    if (e.key >= "1" && e.key <= "4" && !state.answered) { var btns = $("options").querySelectorAll(".opt"); var k = parseInt(e.key, 10) - 1; if (btns[k]) { e.preventDefault(); btns[k].click(); } }
+    else if (e.key === "Enter" && state.answered && document.activeElement !== $("nextBtn")) { e.preventDefault(); next(); }
+  });
+
+  renderStages();
+})();
+</script>
+</body>
+</html>
