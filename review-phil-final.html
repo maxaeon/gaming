@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHI 1010 Final Review</title>
+<meta name="description" content="A stage-by-stage review game for the PHI 1010 final exam.">
+<style>
+  :root{
+    --base:#F5F3FA; --surface:#FFFFFF; --ink:#23213A; --muted:#6E6A85; --line:#DCD8EA;
+    --primary:#6C5CD9; --primary-ink:#FFFFFF; --second:#1B7F86;
+    --good:#2A7F4F; --good-bg:#E6F4EC; --bad:#B3402F; --bad-bg:#FBE9E5; --focus:#1B7F86;
+  }
+  html[data-theme="dark"]{
+    --base:#15142A; --surface:#1F1D36; --ink:#ECEAF6; --muted:#A9A5C2; --line:#34314F;
+    --primary:#B0A4FF; --primary-ink:#15142A; --second:#6ED0D6;
+    --good:#7FD6A1; --good-bg:#1D3A2B; --bad:#F59B8C; --bad-bg:#46231D; --focus:#6ED0D6;
+  }
+  @media (prefers-color-scheme: dark){
+    html:not([data-theme="light"]){
+      --base:#15142A; --surface:#1F1D36; --ink:#ECEAF6; --muted:#A9A5C2; --line:#34314F;
+      --primary:#B0A4FF; --primary-ink:#15142A; --second:#6ED0D6;
+      --good:#7FD6A1; --good-bg:#1D3A2B; --bad:#F59B8C; --bad-bg:#46231D; --focus:#6ED0D6;
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--base);color:var(--ink)}
+  body{font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:0 20px 60px}
+  .serif{font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--surface);color:var(--ink);padding:8px 12px;border:2px solid var(--focus)}
+  .skip:focus{left:8px}
+  .wrap{max-width:720px;margin:0 auto}
+  header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0 8px;border-bottom:1px solid var(--line)}
+  .kicker{color:var(--second);font-weight:600;font-size:15px}
+  h1{font-size:30px;line-height:1.15;margin:26px 0 8px;font-weight:600}
+  h2{font-size:22px;line-height:1.25;margin:28px 0 8px;font-weight:600}
+  p{margin:0 0 14px}
+  .muted{color:var(--muted)}
+  button{font:inherit;cursor:pointer;border-radius:8px}
+  button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  .toggle{background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:6px 12px;font-size:14px}
+  .primary{background:var(--primary);color:var(--primary-ink);border:0;padding:12px 20px;font-weight:600;font-size:17px}
+  .quiet{background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:10px 16px}
+  .stages{display:grid;gap:10px;margin:14px 0 22px}
+  .stage{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:12px 14px}
+  .stage:hover{border-color:var(--primary)}
+  .stage .num{display:inline-block;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);text-align:center;line-height:26px;font-size:14px;color:var(--muted)}
+  .stage.done .num{background:var(--good);border-color:var(--good);color:var(--good-bg)}
+  .stage .status{font-size:13px;color:var(--muted)}
+  .stage.done .status{color:var(--good);font-weight:600}
+  .progress{color:var(--muted);font-size:15px;margin:26px 0 6px}
+  .bar{height:4px;background:var(--line);border-radius:2px;margin:0 0 22px;overflow:hidden}
+  .bar > div{height:100%;background:var(--primary);width:0}
+  .question{font-size:23px;line-height:1.35;margin:0 0 20px}
+  .options{display:grid;gap:10px;margin:0 0 18px}
+  .opt{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:12px 14px;line-height:1.45}
+  .opt .key{display:inline-block;width:26px;height:26px;border-radius:50%;border:1px solid var(--line);text-align:center;line-height:24px;font-size:14px;color:var(--muted)}
+  .opt:hover:not([disabled]){border-color:var(--primary)}
+  .opt[disabled]{cursor:default}
+  .opt.right{border-color:var(--good);background:var(--good-bg)}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+  .feedback{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--surface);margin:0 0 18px}
+  .feedback strong{display:block;margin-bottom:6px}
+  .feedback.right strong{color:var(--good)}
+  .feedback.wrong strong{color:var(--bad)}
+  .hidden{display:none}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .banner{border:2px solid var(--good);background:var(--good-bg);border-radius:10px;padding:22px 20px;margin:20px 0}
+  .banner h2{margin:0 0 6px;color:var(--good)}
+  .banner.fail{border-color:var(--line);background:var(--surface)}
+  .banner.fail h2{color:var(--ink)}
+  .big{font-size:44px;line-height:1;margin:0 0 10px}
+  .missed{border-top:1px solid var(--line);padding:14px 0}
+  .missed .q{font-weight:600;margin:0 0 6px}
+  footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:14px}
+  @media (max-width:520px){.question{font-size:20px} h1{font-size:26px}}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the review</a>
+<div class="wrap">
+  <header>
+    <div class="kicker">PHI 1010 · Final review</div>
+    <button class="toggle" id="themeToggle" type="button" aria-pressed="false">Dark mode</button>
+  </header>
+
+  <main id="main">
+    <section id="startView">
+      <h1 class="serif">PHI 1010 Final Review</h1>
+      <p>This review covers the whole course, one stage per module. Each stage asks five questions from the slides, the readings, and the answer documents, with an explanation after every answer. A stage is complete when your group gets at least four of the five right. Completed stages are marked on this screen. Nothing is recorded, and you can replay any stage.</p>
+      <div id="allDone" class="banner hidden"><h2>All stages complete</h2><p>Your group has finished every stage. Show this screen to your instructor.</p></div>
+      <div class="stages" id="stageList" role="list"></div>
+      <div class="row">
+        <button class="quiet" id="resetBtn" type="button">Clear completed stages</button>
+      </div>
+    </section>
+
+    <section id="quizView" class="hidden">
+      <div class="progress" id="progress"></div>
+      <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
+      <p class="question serif" id="question"></p>
+      <div class="options" id="options"></div>
+      <div class="feedback hidden" id="feedback" aria-live="polite"></div>
+      <div class="row">
+        <button class="primary hidden" id="nextBtn" type="button">Next question</button>
+        <button class="quiet" id="quitBtn" type="button">Back to stages</button>
+        <span class="muted" id="hint">Press 1 to 4 to answer.</span>
+      </div>
+    </section>
+
+    <section id="endView" class="hidden">
+      <div id="resultBanner" class="banner"><div class="big" id="scoreLine"></div><h2 id="resultHead"></h2><p id="resultNote"></p></div>
+      <div class="row">
+        <button class="primary" id="againBtn" type="button">Play this stage again</button>
+        <button class="quiet" id="backBtn" type="button">Back to stages</button>
+      </div>
+      <h2 class="serif" id="missedHead">Questions you missed</h2>
+      <div id="missedList"></div>
+    </section>
+  </main>
+
+  <footer>Every question here comes from the course slides, readings, and answer documents. If a question seems to disagree with the answer document, the answer document wins, and you should say so in class.</footer>
+</div>
+
+<script>
+(function(){
+  var DATA = {"course": "PHI 1010", "title": "PHI 1010 Final Review", "intro": "This review covers the whole course, one stage per module. Each stage asks five questions from the slides, the readings, and the answer documents, with an explanation after every answer. A stage is complete when your group gets at least four of the five right. Completed stages are marked on this screen. Nothing is recorded, and you can replay any stage.", "stages": [{"title": "Arguments and fallacies", "qs": [{"q": "\"If it rains, the game is cancelled. The game is cancelled. So it rained.\" This argument is", "o": ["valid and sound.", "invalid, because the game could have been cancelled for another reason.", "inductive and strong.", "valid but with a false premise."], "a": 1, "n": "Both premises can be true while the conclusion is false, so the form is invalid. The game might have been cancelled for lightning or a lack of referees."}, {"q": "An inductive argument is strong when", "o": ["its conclusion is guaranteed by the premises.", "its premises make its conclusion probable.", "it has more than two premises.", "most people accept it."], "a": 1, "n": "Inductive arguments aim at probability rather than certainty. Even a strong one leaves open the possibility that the conclusion is false."}, {"q": "\"Everyone I know loves this show, so everyone in Florida must love it.\" This is", "o": ["a hasty generalization.", "a straw man.", "begging the question.", "an ad hominem."], "a": 0, "n": "A small, unrepresentative sample is used to support a claim about a huge group."}, {"q": "\"My opponent wants a bigger park budget, so she wants to bankrupt the city.\" This is", "o": ["an appeal to ignorance.", "a false dilemma.", "a straw man.", "a slippery slope."], "a": 2, "n": "The real position, a bigger park budget, is replaced by a more extreme one, bankrupting the city, which is then attacked instead."}, {"q": "\"No one has proved that ghosts don't exist, so they must exist.\" This is", "o": ["an appeal to ignorance.", "a hasty generalization.", "equivocation.", "an appeal to authority."], "a": 0, "n": "A lack of evidence against a claim is treated as evidence for it. The absence of proof either way leaves the question open."}]}, {"title": "Ancient Greece and the Presocratics", "qs": [{"q": "Parmenides argued that", "o": ["everything is made of fire.", "change is impossible, and the senses deceive us when they show it.", "the gods control the weather.", "number is the basis of all things."], "a": 1, "n": "His argument was that what is cannot come from what is not, so nothing can come into being and change is an illusion. Zeno's paradoxes were written to defend him."}, {"q": "Democritus explained the world in terms of", "o": ["water.", "four roots: earth, air, fire, and water.", "atoms moving in empty space.", "a divine mind."], "a": 2, "n": "Allowing empty space let unchanging atoms rearrange, which was his answer to Parmenides. The four roots belong to Empedocles and the divine mind to Anaxagoras."}, {"q": "Socrates distrusted the Sophists mainly because", "o": ["they were foreigners.", "they taught the skill of winning arguments, often for pay, and winning is not the same as being right.", "they refused to use arguments at all.", "they charged too little."], "a": 1, "n": "The Sophists sold persuasion. Socrates spent his life on being right, which is why he treated their skill as dangerous."}, {"q": "Xenophanes said that if horses could draw, they would draw gods that look like horses. His point was that", "o": ["horses are sacred.", "people picture the gods in their own image, which is a reason to doubt those pictures.", "only Greeks know the true gods.", "art is more important than religion."], "a": 1, "n": "Different peoples picture the gods to look like themselves. Xenophanes drew the conclusion that the pictures tell us about the painters."}, {"q": "What condition in the Greek city-states helped philosophy get started, according to the lecture?", "o": ["A powerful priestly class controlled teaching.", "Citizens argued and voted in public assemblies, so giving reasons mattered.", "A single empire outlawed public debate.", "Written scripture answered every question."], "a": 1, "n": "Where decisions are made by persuading fellow citizens, arguments become worth studying, and Greece had no priestly class with authority over such questions."}]}, {"title": "Socrates, Plato, and Aristotle", "qs": [{"q": "The elenchus is", "o": ["Socrates's method of questioning, which tests a definition against cases until it breaks or holds.", "a Greek poem.", "the Athenian court.", "Plato's theory of forms."], "a": 0, "n": "Socrates draws out a definition and then finds a case it cannot handle, which forces a revision or an admission of ignorance."}, {"q": "In the Euthyphro, the dilemma Socrates poses is whether", "o": ["Euthyphro should prosecute his father.", "the pious is loved by the gods because it is pious, or is pious because the gods love it.", "the gods exist.", "piety is a kind of justice."], "a": 1, "n": "If the gods love it because it is pious, piety is independent of their will. If it is pious because they love it, piety looks arbitrary. The dilemma returns in the ethics module as a question about God and morality."}, {"q": "In the allegory of the cave, the prisoner who returns from outside", "o": ["is welcomed as a hero.", "is laughed at, and would be killed if the prisoners could reach him, for saying the shadows are not real.", "forgets everything he saw.", "becomes the ruler immediately."], "a": 1, "n": "Plato is describing what happened to Socrates. Telling people that what they take for reality is a shadow is dangerous."}, {"q": "Aristotle's main break with Plato was that Aristotle held that", "o": ["nothing exists.", "the forms of things exist in the things themselves, with no separate realm of forms.", "change is impossible.", "logic is useless."], "a": 1, "n": "For Aristotle you learn what a horse is by studying horses, which is why his method looks like science and Plato's looks like mathematics."}, {"q": "The efficient cause of a wooden table is", "o": ["the wood.", "the shape of a table.", "the carpenter's work.", "eating dinner on it."], "a": 2, "n": "The efficient cause is what brought the thing about. The wood is the material cause, the shape the formal cause, and dinner the final cause."}]}, {"title": "Arguments about God and the problem of evil", "qs": [{"q": "Gaunilo's reply to Anselm imagines", "o": ["a perfect island, to show that Anselm's reasoning would prove too much.", "a watch found on a heath.", "a wager on God's existence.", "a fawn dying in a forest fire."], "a": 0, "n": "If Anselm's argument worked, it would also prove the existence of a perfect island, and no such island exists."}, {"q": "Paley's watch argument claims that", "o": ["a watch found on a heath implies a watchmaker, and living things show even more design than a watch.", "watches prove that time is real.", "God is a kind of clock.", "nature is random."], "a": 0, "n": "This is the design argument. Hume objected that the analogy is weak, and Darwin later offered another explanation of apparent design."}, {"q": "Pascal's wager is an argument about", "o": ["whether believing in God is a reasonable bet, given what you stand to gain or lose.", "whether God is good.", "the age of the universe.", "whether evil exists."], "a": 0, "n": "Pascal argues from outcomes rather than from evidence. The many-gods objection asks which God the wager tells you to bet on."}, {"q": "The free will defense answers the logical problem of evil by showing that", "o": ["evil does not exist.", "God and evil are consistent, because even an all-powerful God might not be able to create free creatures who never do wrong.", "God is not all-powerful.", "all evil is punishment."], "a": 1, "n": "A defense only has to show consistency, which is enough against a logical problem. Mackie conceded the point. The evidential problem is a different matter."}, {"q": "Rowe's example of a fawn dying slowly in a forest fire is meant to show that", "o": ["God started the fire.", "apparently pointless suffering is evidence against God's existence, even if it is not a proof.", "evil is impossible.", "fawns are not real."], "a": 1, "n": "This is the evidential problem of evil. Skeptical theism replies that we are in no position to know the suffering is pointless."}]}, {"title": "The mind-body problem", "qs": [{"q": "The standard objection to behaviorism is that", "o": ["behavior does not exist.", "a person trained never to show pain would still hurt, so pain is not the same thing as pain behavior.", "only humans behave.", "brains are not physical."], "a": 1, "n": "If pain can occur without the behavior and the behavior without the pain, the two cannot be identical."}, {"q": "The octopus, whose nervous system is organized very differently from ours, is a problem for", "o": ["the identity theory, because its pain would not be one particular human brain state.", "substance dualism.", "the Turing test.", "panpsychism."], "a": 0, "n": "This is multiple realizability. If pain can run on different hardware, it cannot be identical to one specific neural process. Functionalism was built to handle this."}, {"q": "Nagel's point about the bat is that", "o": ["bats are not conscious.", "experience has a subjective character that an objective scientific description leaves out.", "we can easily imagine being a bat.", "bats are smarter than dogs."], "a": 1, "n": "We could learn everything about echolocation and still not know what perceiving that way is like from the inside."}, {"q": "The ability reply to Mary's room says that when Mary sees red for the first time she", "o": ["learns a new fact that physics left out.", "gains new abilities, such as recognizing and imagining red, but learns no new fact.", "learns nothing at all.", "loses her color vision."], "a": 1, "n": "Jackson's original argument says she learns a new fact and physicalism is incomplete. The ability reply is the main answer, and both sides have serious defenders."}, {"q": "Searle's Chinese Room is meant to show that", "o": ["producing correct outputs by following rules is not the same as understanding them.", "no one can learn Chinese.", "computers cannot do arithmetic.", "the Turing test cannot be passed."], "a": 0, "n": "Syntax is not semantics. The systems reply says the whole room understands, and the robot reply says a body and sensors could make the difference. Searle rejects both."}]}, {"title": "Free will", "qs": [{"q": "Libertarianism about free will claims that", "o": ["some of our choices are not fully determined by prior causes.", "all choices are random.", "free will is an illusion.", "the government should be small."], "a": 0, "n": "Libertarians hold that the experience of choosing is evidence of real alternatives. Their cost is explaining how an undetermined choice is still the agent's own rather than random."}, {"q": "For a compatibilist, you act unfreely when", "o": ["your action has any cause at all.", "you are forced or constrained, such as at gunpoint, rather than acting from your own desires.", "you have not thought about the action.", "someone else approves of the action."], "a": 1, "n": "Compatibilists separate causation from constraint. A caused action can be free, but a coerced one is not."}, {"q": "On Frankfurt's view, the willing addict is free because", "o": ["he could have done otherwise.", "he endorses his desire for the drug at a second-order level, wanting to want it.", "addiction is not real.", "he takes less of the drug."], "a": 1, "n": "Frankfurt argues that what matters is whether your will is the one you want to have, not whether you could have done otherwise."}, {"q": "A hard determinist is most likely to say that punishment should aim at", "o": ["giving people what they deserve.", "reform and protection rather than retribution, since no one could have done otherwise.", "nothing, since punishment is always wrong.", "revenge."], "a": 1, "n": "If no one could have done otherwise, desert looks hard to justify, but reforming people and protecting others still makes sense."}, {"q": "Which of these is the libertarian idea of agent causation?", "o": ["Every event is caused by a prior event.", "The agent, as a person, can start a new chain of events without being caused to do so.", "Agents are illusions.", "Causes are always physical."], "a": 1, "n": "Reid's idea is that persons are a special kind of cause. Critics say this names the mystery rather than solving it."}]}, {"title": "Ethics", "qs": [{"q": "Which of these is a normative ethics question?", "o": ["Are moral claims true at all?", "What makes an action right or wrong in general?", "Should this hospital allow this treatment?", "Is beauty subjective?"], "a": 1, "n": "Normative ethics asks for general theories of right action. Metaethics asks what moral claims are, and applied ethics asks about particular issues."}, {"q": "Mill's test for whether one pleasure is higher than another is", "o": ["which one lasts longer.", "the preference of people who have experienced both.", "which one costs more.", "which one is older."], "a": 1, "n": "The objection is that people who have experienced both often prefer the lower pleasure. Mill's reply is that they prefer it from weakness, not judgment."}, {"q": "In Kant's murderer-at-the-door case, Kant's own view was that", "o": ["lying to the murderer is required.", "lying is wrong even to a murderer asking where your friend is hiding.", "lying is fine if it works.", "you should say nothing."], "a": 1, "n": "This is the standard objection to Kant's view. Many Kantians think the theory can be revised to permit the lie, but Kant himself did not."}, {"q": "For Aristotle, courage is the mean between", "o": ["kindness and cruelty.", "cowardice and recklessness.", "wealth and poverty.", "pride and shame."], "a": 1, "n": "A virtue sits between a vice of deficiency and a vice of excess, and it is acquired by practice rather than by being told about it."}, {"q": "Hume's is-ought problem is the point that", "o": ["you cannot derive a claim about what ought to be done from claims about what is the case alone.", "morality comes from God.", "facts do not exist.", "feelings are always wrong."], "a": 0, "n": "A moral conclusion needs a moral premise somewhere. This is why an applied ethics argument pairs a principle with a factual claim."}]}, {"title": "Knowledge", "qs": [{"q": "Descartes's dream argument claims that", "o": ["dreams are more real than waking life.", "the senses cannot rule out that you are dreaming right now, because every test you run is part of the experience being tested.", "no one dreams.", "dreams come from God."], "a": 1, "n": "This is why Descartes looked for something that survived even the possibility of dreaming or deception, and found the cogito."}, {"q": "Locke's idea that the mind begins as a blank slate is a version of", "o": ["rationalism.", "empiricism.", "dualism.", "determinism."], "a": 1, "n": "Empiricists hold that knowledge comes from experience. Rationalists like Descartes hold that some knowledge comes from reason alone."}, {"q": "Berkeley's claim \"to be is to be perceived\" means that", "o": ["nothing exists.", "objects exist only as perceived by some mind.", "the senses are unreliable.", "God does not exist."], "a": 1, "n": "Berkeley thought this was hard to refute, since every attempt to imagine an unperceived object is itself a perception."}, {"q": "Hume's problem of induction is that", "o": ["we cannot justify the assumption that the future will resemble the past without using that very assumption.", "deduction is impossible.", "mathematics is uncertain.", "nothing ever repeats."], "a": 0, "n": "Every argument for induction appeals to past success, which is itself inductive. Hume concluded that habit, not reason, is doing the work."}, {"q": "Reliabilism was proposed partly as a response to Gettier because it says knowledge is", "o": ["any true belief.", "true belief produced by a process that reliably produces truth, which a stopped clock is not.", "belief that feels certain.", "belief most people share."], "a": 1, "n": "A stopped clock is not a reliable process, so the reliabilist can say the belief it produces is not knowledge even when it happens to be true."}]}, {"title": "Existentialism", "qs": [{"q": "Camus calls it \"philosophical suicide\" when someone", "o": ["gives up on life.", "escapes the absurd by leaping into a belief that the universe does make sense after all.", "refuses to read philosophy.", "pushes a boulder."], "a": 1, "n": "Camus thought the honest response to the absurd was to keep living without false hope. He filed Kierkegaard's leap under philosophical suicide."}, {"q": "The waiter in the cafe is an example of bad faith because", "o": ["he is rude to customers.", "he plays the role of waiter as if he had no choice but to be one, denying his own freedom.", "he lies about the menu.", "he quits his job."], "a": 1, "n": "Bad faith is pretending to yourself that you are a fixed thing rather than a free person who keeps choosing."}, {"q": "The absurd, for Camus, arises from", "o": ["the universe being evil.", "the clash between our demand that life make sense and a universe that gives no answer.", "bad luck.", "religion."], "a": 1, "n": "Neither we nor the universe is absurd on its own. The absurd is the relationship between the two."}, {"q": "The existentialist idea of anguish refers to", "o": ["fear of death only.", "the weight of realizing that your choices are yours and you cannot hand responsibility for them to anyone else.", "sadness about the past.", "anger at society."], "a": 1, "n": "If existence precedes essence, nothing outside you settles what you should do, and that freedom is felt as anguish."}, {"q": "Camus says we must imagine Sisyphus happy because", "o": ["the gods will free him.", "the struggle itself toward the heights is enough to fill a heart, and he faces his fate with open eyes.", "he enjoys exercise.", "he does not understand his situation."], "a": 1, "n": "The key is lucidity. Sisyphus knows the boulder will roll back, and he goes down to get it anyway without pretending otherwise."}]}, {"title": "Eastern traditions", "qs": [{"q": "Karma, as presented in the module, is the idea that", "o": ["fate is random.", "actions have consequences that carry across lives.", "only gods act.", "nothing matters."], "a": 1, "n": "Karma links the cycle of rebirth to what a person does, which is why it is a moral idea as well as a metaphysical one."}, {"q": "Moksha, in the Upanishads, is", "o": ["a kind of prayer.", "liberation from the cycle of birth, death, and rebirth.", "a sacred mountain.", "a form of government."], "a": 1, "n": "Realizing that Atman is Brahman is the knowledge that frees a person from samsara."}, {"q": "The second of the Four Noble Truths says that the cause of suffering is", "o": ["other people.", "craving, or attachment.", "the body.", "bad luck."], "a": 1, "n": "The structure is a diagnosis. Suffering is the condition, craving is the cause, the end of craving is the cure, and the path is the treatment."}, {"q": "Confucius's li refers to", "o": ["ritual propriety, the right way of doing things in each role and relationship.", "the emperor's army.", "a type of poem.", "the afterlife."], "a": 0, "n": "Ren is the inner virtue of humaneness and li is its outward practice. Confucius thought the two shape each other."}, {"q": "The Buddhist teaching of no-self is closest to which Western idea from this course?", "o": ["Descartes's thinking substance.", "Hume's idea that the self is a bundle of perceptions with no owner.", "Plato's forms.", "Anselm's greatest conceivable being."], "a": 1, "n": "Both deny a permanent unchanging self behind experience. The Ship of Theseus raises the same question for objects."}]}]};
+  var PASS = 4;
+  var KEY = "phi1010-final";
+  var $ = function(id){ return document.getElementById(id); };
+  var state = { stage: -1, queue: [], index: 0, correct: 0, missed: [], answered: false };
+
+  // Theme
+  var root = document.documentElement;
+  function isDark(){ var t = root.getAttribute("data-theme"); return t === "dark" || (t !== "light" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches); }
+  function applyTheme(t){ if (t === "dark" || t === "light") root.setAttribute("data-theme", t); else root.removeAttribute("data-theme"); $("themeToggle").textContent = isDark() ? "Light mode" : "Dark mode"; $("themeToggle").setAttribute("aria-pressed", isDark() ? "true" : "false"); }
+  var savedTheme = null; try { savedTheme = localStorage.getItem(KEY + "-theme"); } catch (e) {}
+  applyTheme(savedTheme);
+  $("themeToggle").addEventListener("click", function(){ var next = isDark() ? "light" : "dark"; applyTheme(next); try { localStorage.setItem(KEY + "-theme", next); } catch (e) {} });
+
+  // Completed stages (per browser, best effort)
+  function loadDone(){ try { var v = JSON.parse(localStorage.getItem(KEY + "-done") || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+  var done = loadDone();
+  function saveDone(){ try { localStorage.setItem(KEY + "-done", JSON.stringify(done)); } catch (e) {} }
+
+  function shuffle(arr){ var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function show(id){ ["startView","quizView","endView"].forEach(function(v){ $(v).classList.toggle("hidden", v !== id); }); }
+
+  function renderStages(){
+    var box = $("stageList"); box.innerHTML = "";
+    DATA.stages.forEach(function(s, i){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "stage" + (done.indexOf(i) >= 0 ? " done" : ""); b.setAttribute("role", "listitem");
+      b.innerHTML = '<span class="num" aria-hidden="true"></span><span class="title"></span><span class="status"></span>';
+      b.querySelector(".num").textContent = done.indexOf(i) >= 0 ? "✓" : String(i + 1);
+      b.querySelector(".title").textContent = s.title;
+      b.querySelector(".status").textContent = done.indexOf(i) >= 0 ? "Complete" : s.qs.length + " questions";
+      b.setAttribute("aria-label", "Stage " + (i + 1) + ", " + s.title + (done.indexOf(i) >= 0 ? ", complete" : ""));
+      b.addEventListener("click", function(){ startStage(i); });
+      box.appendChild(b);
+    });
+    $("allDone").classList.toggle("hidden", done.length < DATA.stages.length);
+  }
+
+  function startStage(i){
+    var s = DATA.stages[i];
+    var queue = shuffle(s.qs).map(function(item){ var order = shuffle([0,1,2,3]); return { q: item.q, opts: order.map(function(k){ return item.o[k]; }), answer: order.indexOf(item.a), note: item.n }; });
+    state = { stage: i, queue: queue, index: 0, correct: 0, missed: [], answered: false };
+    show("quizView"); renderQuestion(); $("question").setAttribute("tabindex", "-1"); $("question").focus();
+  }
+
+  function renderQuestion(){
+    var item = state.queue[state.index]; var s = DATA.stages[state.stage];
+    state.answered = false;
+    $("progress").textContent = "Stage " + (state.stage + 1) + ", " + s.title + ". Question " + (state.index + 1) + " of " + state.queue.length + ".";
+    $("barFill").style.width = Math.round((state.index / state.queue.length) * 100) + "%";
+    $("question").textContent = item.q;
+    var box = $("options"); box.innerHTML = "";
+    item.opts.forEach(function(text, k){
+      var b = document.createElement("button"); b.type = "button"; b.className = "opt";
+      b.innerHTML = '<span class="key" aria-hidden="true">' + (k + 1) + '</span><span></span>';
+      b.lastChild.textContent = text; b.setAttribute("aria-label", "Option " + (k + 1) + ". " + text);
+      b.addEventListener("click", function(){ answer(k); }); box.appendChild(b);
+    });
+    $("feedback").className = "feedback hidden"; $("feedback").innerHTML = "";
+    $("nextBtn").classList.add("hidden");
+    $("nextBtn").textContent = state.index === state.queue.length - 1 ? "See the stage result" : "Next question";
+    $("hint").textContent = "Press 1 to 4 to answer.";
+  }
+
+  function answer(k){
+    if (state.answered) return; state.answered = true;
+    var item = state.queue[state.index];
+    $("options").querySelectorAll(".opt").forEach(function(b, j){ b.disabled = true; if (j === item.answer) b.classList.add("right"); else if (j === k) b.classList.add("wrong"); });
+    var right = k === item.answer; if (right) state.correct += 1; else state.missed.push(item);
+    var fb = $("feedback"); fb.className = "feedback " + (right ? "right" : "wrong"); fb.innerHTML = "";
+    var strong = document.createElement("strong"); strong.textContent = right ? "Correct." : "Not this one. The answer is: " + item.opts[item.answer];
+    var span = document.createElement("span"); span.textContent = item.note; fb.appendChild(strong); fb.appendChild(span);
+    $("nextBtn").classList.remove("hidden"); $("hint").textContent = "Press Enter for the next question."; $("nextBtn").focus();
+  }
+
+  function next(){ if (!state.answered) return; if (state.index < state.queue.length - 1) { state.index += 1; renderQuestion(); $("question").focus(); } else finish(); }
+
+  function finish(){
+    var total = state.queue.length, c = state.correct, passed = c >= PASS;
+    if (passed && done.indexOf(state.stage) < 0) { done.push(state.stage); saveDone(); }
+    show("endView");
+    $("scoreLine").textContent = c + " of " + total;
+    $("resultBanner").className = "banner" + (passed ? "" : " fail");
+    $("resultHead").textContent = passed ? "Stage complete: " + DATA.stages[state.stage].title : "Not yet: " + DATA.stages[state.stage].title;
+    $("resultNote").textContent = passed ? "Show this screen to your instructor, then go back to the stage list to pick the next one." : "A stage is complete at " + PASS + " of " + total + ". Read the explanations below, then play the stage again. The questions will come in a new order.";
+    var list = $("missedList"); list.innerHTML = "";
+    if (!state.missed.length) $("missedHead").classList.add("hidden");
+    else { $("missedHead").classList.remove("hidden"); state.missed.forEach(function(m){ var d = document.createElement("div"); d.className = "missed"; var q = document.createElement("p"); q.className = "q"; q.textContent = m.q; var a = document.createElement("p"); a.textContent = "Answer: " + m.opts[m.answer]; var n = document.createElement("p"); n.className = "muted"; n.textContent = m.note; d.appendChild(q); d.appendChild(a); d.appendChild(n); list.appendChild(d); }); }
+    $("scoreLine").setAttribute("tabindex", "-1"); $("scoreLine").focus();
+  }
+
+  $("nextBtn").addEventListener("click", next);
+  $("quitBtn").addEventListener("click", function(){ renderStages(); show("startView"); });
+  $("againBtn").addEventListener("click", function(){ startStage(state.stage); });
+  $("backBtn").addEventListener("click", function(){ renderStages(); show("startView"); });
+  $("resetBtn").addEventListener("click", function(){ done = []; saveDone(); renderStages(); });
+
+  document.addEventListener("keydown", function(e){
+    if ($("quizView").classList.contains("hidden")) return;
+    if (e.key >= "1" && e.key <= "4" && !state.answered) { var btns = $("options").querySelectorAll(".opt"); var k = parseInt(e.key, 10) - 1; if (btns[k]) { e.preventDefault(); btns[k].click(); } }
+    else if (e.key === "Enter" && state.answered && document.activeElement !== $("nextBtn")) { e.preventDefault(); next(); }
+  });
+
+  renderStages();
+})();
+</script>
+</body>
+</html>
